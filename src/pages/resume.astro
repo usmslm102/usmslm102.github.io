@@ -6,6 +6,7 @@ import { SITE_TITLE } from '../consts';
 
 const PDF_URL = '/Resumes_Usama_12yrs.pdf';
 const EMBED_PDF_URL = `${PDF_URL}#zoom=90&navpanes=0`;
+const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 ---
 
 <!doctype html>
@@ -25,12 +26,22 @@ const EMBED_PDF_URL = `${PDF_URL}#zoom=90&navpanes=0`;
 			</section>
 
 			<section class="viewer" aria-label="Resume PDF preview">
-				<object data={EMBED_PDF_URL} type="application/pdf" class="pdf-frame">
-					<p>
-						Your browser does not support inline PDF preview.
-						<a href={PDF_URL} target="_blank" rel="noreferrer">Open resume PDF in a new tab</a>.
-					</p>
-				</object>
+				<div class="desktop-viewer">
+					<object data={EMBED_PDF_URL} type="application/pdf" class="pdf-frame pdf-frame-desktop">
+						<p>
+							Your browser does not support inline PDF preview.
+							<a href={PDF_URL} target="_blank" rel="noreferrer">Open resume PDF in a new tab</a>.
+						</p>
+					</object>
+				</div>
+				<div class="mobile-viewer">
+					<object data={EMBED_PDF_URL_MOBILE} type="application/pdf" class="pdf-frame pdf-frame-mobile">
+						<p>
+							Your browser does not support inline PDF preview.
+							<a href={PDF_URL} target="_blank" rel="noreferrer">Open resume PDF in a new tab</a>.
+						</p>
+					</object>
+				</div>
 			</section>
 		</main>
 		<Footer />
@@ -79,10 +90,38 @@ const EMBED_PDF_URL = `${PDF_URL}#zoom=90&navpanes=0`;
 		min-height: 640px;
 	}
 
+	.desktop-viewer {
+		display: block;
+	}
+
+	.mobile-viewer {
+		display: none;
+	}
+
+	.pdf-frame-mobile {
+		display: none;
+	}
+
 	@media (max-width: 720px) {
+		.desktop-viewer {
+			display: none !important;
+		}
+
+		.mobile-viewer {
+			display: block !important;
+		}
+
+		.pdf-frame-desktop {
+			display: none !important;
+		}
+
+		.pdf-frame-mobile {
+			display: block !important;
+		}
+
 		.pdf-frame {
-			height: 70vh;
-			min-height: 480px;
+			height: 75vh;
+			min-height: 520px;
 		}
 	}
 </style>
