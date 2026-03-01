@@ -38,7 +38,7 @@ const posts = (await getCollection('blog')).sort(
 			}
 			li {
 				width: 100%;
-				border-bottom: 1px solid rgb(var(--gray-light));
+				border-bottom: 2px solid rgb(var(--black));
 				padding-bottom: 1.5rem;
 			}
 			.post {
@@ -47,7 +47,7 @@ const posts = (await getCollection('blog')).sort(
 			.post.with-image {
 				display: grid;
 				grid-template-columns: 240px 1fr;
-				gap: 1rem;
+				gap: 1.5rem;
 				align-items: start;
 			}
 			.content {
@@ -57,7 +57,9 @@ const posts = (await getCollection('blog')).sort(
 			.post img {
 				width: 100%;
 				height: auto;
-				border-radius: 6px;
+				border-radius: 0;
+				border: 1px solid rgb(var(--black));
+				filter: grayscale(20%) contrast(1.1);
 			}
 			.title {
 				margin: 0;
@@ -70,17 +72,21 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.date {
 				margin: 0 0 0.35rem;
-				color: rgb(var(--gray));
-				font-size: 0.9rem;
+				color: rgb(var(--black));
+				font-size: 0.85rem;
+				font-family: var(--font-mono);
+				font-weight: 700;
 			}
 			.description {
 				margin: 0.5rem 0 0;
 				max-width: 65ch;
+				color: rgb(var(--black));
 			}
-			.post a {
+			.post span {
 				text-decoration: none;
 			}
 			.title a:hover {
+				background-color: transparent;
 				color: var(--accent);
 			}
 			@media (max-width: 720px) {
