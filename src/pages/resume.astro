@@ -1,0 +1,88 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+const PDF_URL = '/Resumes_Usama_12yrs.pdf';
+const EMBED_PDF_URL = `${PDF_URL}#zoom=90&navpanes=0`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Resume | ${SITE_TITLE}`} description="Resume of Usama Ansari in PDF format." />
+	</head>
+	<body>
+		<Header />
+		<main class="resume-page">
+			<section class="intro">
+				<h1>Resume</h1>
+				<p>
+					View the latest PDF resume below or download a copy.
+				</p>
+				<a class="download-btn" href={PDF_URL} download>Download PDF</a>
+			</section>
+
+			<section class="viewer" aria-label="Resume PDF preview">
+				<object data={EMBED_PDF_URL} type="application/pdf" class="pdf-frame">
+					<p>
+						Your browser does not support inline PDF preview.
+						<a href={PDF_URL} target="_blank" rel="noreferrer">Open resume PDF in a new tab</a>.
+					</p>
+				</object>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.resume-page {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.intro p {
+		margin-bottom: 1rem;
+		max-width: 70ch;
+	}
+
+	.download-btn {
+		display: inline-block;
+		padding: 0.65rem 1rem;
+		border: 1px solid rgb(var(--black));
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		font-size: 0.85rem;
+		text-decoration: none;
+		color: rgb(var(--black));
+		background: var(--surface);
+	}
+
+	.download-btn:hover {
+		background: rgb(var(--black));
+		color: var(--surface);
+	}
+
+	.viewer {
+		border: 1px solid rgb(var(--gray-light));
+		background: #f8f7f4;
+		padding: 0.5rem;
+	}
+
+	.pdf-frame {
+		display: block;
+		width: 100%;
+		height: 78vh;
+		min-height: 640px;
+	}
+
+	@media (max-width: 720px) {
+		.pdf-frame {
+			height: 70vh;
+			min-height: 480px;
+		}
+	}
+</style>
