@@ -3,6 +3,54 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_TITLE } from '../consts';
+
+const sections = [
+	{
+		id: 'hardware',
+		num: '01',
+		title: 'Hardware',
+		items: [
+			{ label: 'Mac Mini M4', badge: 'DAILY DRIVER' },
+			{ label: 'External monitor — coding + docs side-by-side', badge: null },
+		{ label: 'AirPods Pro 2', badge: 'ESSENTIAL' },
+		],
+	},
+	{
+		id: 'editor',
+		num: '02',
+		title: 'Editor & Terminal',
+		items: [
+			{ label: 'Visual Studio Code', badge: 'DAILY DRIVER' },
+			{ label: 'GitHub Copilot — AI-assisted coding workflow', badge: 'PREFERRED' },
+			{ label: 'Ghostty — terminal emulator', badge: 'DAILY DRIVER' },
+		{ label: 'OpenCode — terminal AI coding assistant', badge: 'OCCASIONAL' },
+			{ label: 'Git + GitHub CLI for PR and release workflows', badge: null },
+		{ label: 'GitHub Copilot CLI — AI in the terminal', badge: 'PREFERRED' },
+		],
+	},
+	{
+		id: 'stack',
+		num: '03',
+		title: 'Engineering Stack',
+		items: [
+			{ label: 'TypeScript & Node.js — web and tooling', badge: 'PREFERRED' },
+			{ label: '.NET / C# — backend and platform engineering', badge: null },
+			{ label: 'Docker — local parity and service orchestration', badge: 'ESSENTIAL' },
+			{ label: 'Azure — cloud-native architecture and deployment', badge: null },
+		],
+	},
+	{
+		id: 'apps',
+		num: '04',
+		title: 'Daily Apps',
+		items: [
+			{ label: 'Raycast — launcher, snippets, and productivity shortcuts', badge: 'FAVOURITE' },
+			{ label: 'Google Chrome', badge: 'DAILY DRIVER' },
+			{ label: 'ChatGPT — AI assistant for research and drafting', badge: 'DAILY DRIVER' },
+			{ label: 'WhatsApp', badge: null },
+		],
+	},
+];
 ---
 
 <!doctype html>
@@ -13,76 +61,57 @@ import { SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main class="uses-page">
-			<section class="intro">
+
+			<div class="manifest-header">
+				<div class="manifest-meta">
+					<span class="manifest-label">SYSTEM_MANIFEST.txt</span>
+					<span class="manifest-label">REV&nbsp;2026.03</span>
+					<span class="manifest-label">AUTHOR: USAMA ANSARI</span>
+				</div>
 				<h1>Uses</h1>
-				<p>
-					A living list of the software, apps, and Mac setup I use for engineering work, writing, and daily
-					focus.
+				<p class="tagline">
+					A living inventory of the software, hardware, and principles that power my engineering work, writing,
+					and daily focus. Updated when something changes.
 				</p>
-				<p class="updated">Last updated: March 2026</p>
-			</section>
+			</div>
 
-			<section class="grid">
-				<article class="card">
-					<h2>Hardware</h2>
-					<ul>
-						<li>MacBook Pro (Apple Silicon)</li>
-						<li>External monitor setup for coding + docs side-by-side</li>
-						<li>Mechanical keyboard + ergonomic mouse</li>
-						<li>Noise-canceling headphones for deep work</li>
-					</ul>
-				</article>
+			<div class="manifest-body">
 
-				<article class="card">
-					<h2>Code Editor and Terminal</h2>
-					<ul>
-						<li>Visual Studio Code</li>
-						<li>GitHub Copilot + AI-assisted coding workflow</li>
-						<li>iTerm2 + zsh shell</li>
-						<li>Git + GitHub CLI for PR and release workflows</li>
-					</ul>
-				</article>
+				<nav class="manifest-toc" aria-label="Page sections">
+					<p class="toc-heading">// Contents</p>
+					{sections.map((s) => (
+						<a href={`#${s.id}`} class="toc-link">
+							<span class="toc-num">{s.num}</span>
+							<span>{s.title}</span>
+						</a>
+					))}
+				</nav>
 
-				<article class="card">
-					<h2>Engineering Stack</h2>
-					<ul>
-						<li>TypeScript and Node.js for web and tooling</li>
-						<li>.NET / C# for backend and platform engineering</li>
-						<li>Docker for local parity and service orchestration</li>
-						<li>Azure for cloud-native architecture and deployment</li>
-					</ul>
-				</article>
+				<div class="manifest-sections">
+					{sections.map((s) => (
+						<section class="manifest-section" id={s.id}>
+							<div class="section-label">
+								<span class="section-num">{s.num}</span>
+								<h2 class="section-title">{s.title}</h2>
+							</div>
+							<ul class="item-list">
+								{s.items.map((item) => (
+									<li class="item">
+										<span class="item-arrow">→</span>
+										<span class="item-label">{item.label}</span>
+										{item.badge && (
+											<span class:list={['badge', `badge--${item.badge.toLowerCase().replace(/\s/g, '-')}`]}>
+												{item.badge}
+											</span>
+										)}
+									</li>
+								))}
+							</ul>
+						</section>
+					))}
+				</div>
 
-				<article class="card">
-					<h2>Daily Apps</h2>
-					<ul>
-						<li>Notion for notes and project docs</li>
-						<li>Obsidian for personal knowledge capture</li>
-						<li>Raycast for launcher and productivity shortcuts</li>
-						<li>Calendar + task blocks for focused execution</li>
-					</ul>
-				</article>
-
-				<article class="card">
-					<h2>Design and Writing</h2>
-					<ul>
-						<li>Figma for flows and quick visual ideas</li>
-						<li>Markdown-first writing workflow</li>
-						<li>Grammarly for final pass on clarity</li>
-						<li>Screen captures for technical walkthroughs</li>
-					</ul>
-				</article>
-
-				<article class="card">
-					<h2>Mac Setup Principles</h2>
-					<ul>
-						<li>Minimal dock and menu bar (only essentials)</li>
-						<li>Project-based folder structure for clean context</li>
-						<li>Automation for repetitive tasks and snippets</li>
-						<li>Separate profiles/spaces for deep work vs meetings</li>
-					</ul>
-				</article>
-			</section>
+			</div>
 		</main>
 		<Footer />
 	</body>
@@ -90,44 +119,292 @@ import { SITE_TITLE } from '../consts';
 
 <style>
 	.uses-page {
-		display: grid;
-		gap: 2rem;
+		width: 100%;
+		box-sizing: border-box;
+		max-width: 960px;
+		padding-bottom: 5rem;
+		overflow-x: hidden;
 	}
-	.intro p {
-		max-width: 70ch;
+
+	/* ── Manifest Header ── */
+	.manifest-header {
+		border-bottom: 2px solid rgb(var(--black));
+		padding-bottom: 2rem;
+		margin-bottom: 3rem;
 	}
-	.updated {
-		color: rgb(var(--gray));
-		font-size: 0.95rem;
+	.manifest-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		margin-bottom: 1.5rem;
 	}
-	.grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1rem;
+	.manifest-label {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: rgb(var(--black));
+		background: rgb(var(--black));
+		color: var(--surface);
+		padding: 0.2rem 0.5rem;
 	}
-	.card {
-		border: 1px solid rgb(var(--gray-light));
-		border-radius: 8px;
-		padding: 1rem;
-		background: #f8f7f4;
-	}
-	.card h2 {
-		font-size: 1.25rem;
+	.manifest-header h1 {
+		font-size: clamp(4rem, 10vw, 7rem);
 		margin-bottom: 0.5rem;
+		line-height: 0.9;
 	}
-	.card ul {
+	.tagline {
+		max-width: 60ch;
+		font-family: var(--font-mono);
+		font-size: 0.9rem;
+		color: rgb(var(--gray));
 		margin: 0;
-		padding-left: 1.1rem;
 	}
-	.card li {
-		margin-bottom: 0.4rem;
+
+	/* ── Body Layout ── */
+	.manifest-body {
+		display: grid;
+		grid-template-columns: 180px 1fr;
+		gap: 3rem;
+		align-items: start;
+		min-width: 0;
 	}
+
+	/* ── TOC Sidebar ── */
+	.manifest-toc {
+		position: sticky;
+		top: 5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+		border: 1.5px solid rgb(var(--black));
+		padding: 1rem;
+	}
+	.toc-heading {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin: 0 0 0.75rem;
+		border-bottom: 1.5px solid rgb(var(--black));
+		padding-bottom: 0.5rem;
+	}
+	.toc-link {
+		display: flex;
+		align-items: baseline;
+		gap: 0.5rem;
+		padding: 0.3rem 0;
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		text-decoration: none;
+		color: rgb(var(--black));
+		text-transform: uppercase;
+		font-weight: 700;
+		border-bottom: 1px solid transparent;
+		transition: all 0.15s ease;
+	}
+	.toc-link:hover {
+		background: transparent;
+		color: var(--accent);
+	}
+	.toc-num {
+		color: var(--accent);
+		flex-shrink: 0;
+	}
+
+	/* ── Sections ── */
+	.manifest-sections {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		min-width: 0;
+		overflow: hidden;
+	}
+	.manifest-section {
+		border-bottom: 1.5px solid rgb(var(--black));
+		padding: 2.5rem 0;
+	}
+	.manifest-section:first-child {
+		padding-top: 0;
+	}
+	.section-label {
+		display: flex;
+		align-items: baseline;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+	}
+	.section-num {
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		font-weight: 700;
+		color: var(--accent);
+		flex-shrink: 0;
+	}
+	.section-title {
+		font-family: var(--font-serif);
+		font-size: clamp(2rem, 4vw, 2.8rem);
+		font-weight: 400;
+		letter-spacing: -0.02em;
+		margin: 0;
+		line-height: 1;
+	}
+
+	/* ── Items ── */
+	.item-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+	.item {
+		display: flex;
+		align-items: baseline;
+		gap: 0.75rem;
+		padding: 0.65rem 0;
+		border-top: 1px solid rgb(var(--gray-light));
+		font-family: var(--font-mono);
+		font-size: 0.88rem;
+	}
+	.item-arrow {
+		color: rgb(var(--gray));
+		flex-shrink: 0;
+		font-size: 0.75rem;
+	}
+	.item-label {
+		flex: 1;
+		min-width: 0;
+		word-break: break-word;
+		overflow-wrap: anywhere;
+	}
+	.badge {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		padding: 0.15rem 0.4rem;
+		white-space: nowrap;
+		flex-shrink: 0;
+		border: 1.5px solid rgb(var(--black));
+		color: rgb(var(--black));
+	}
+	.badge--daily-driver {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+	.badge--favourite {
+		background: var(--accent);
+		color: var(--surface);
+		border-color: var(--accent);
+	}
+	.badge--essential {
+		background: rgb(var(--black));
+		color: var(--surface);
+		border-color: rgb(var(--black));
+	}
+	.badge--preferred {
+		border-color: rgb(var(--black));
+		color: rgb(var(--black));
+	}
+	.badge--rule {
+		background: var(--accent);
+		color: var(--surface);
+		border-color: var(--accent);
+	}
+	.badge--occasional {
+		border-color: rgb(var(--gray));
+		color: rgb(var(--gray));
+	}
+
+	/* ── Responsive ── */
 	@media (max-width: 720px) {
-		.grid {
-			grid-template-columns: 1fr;
+		html, body {
+			overflow-x: hidden;
+			max-width: 100%;
 		}
-		.card {
-			padding: 0.9rem;
+		.manifest-header {
+			margin-bottom: 2rem;
+			padding-bottom: 1.5rem;
+		}
+		.uses-page {
+			padding-left: 0.6rem;
+			padding-right: 0.6rem;
+		}
+		.manifest-meta {
+			gap: 0.5rem;
+			margin-bottom: 1rem;
+		}
+		.manifest-label {
+			font-size: 0.65rem;
+			padding: 0.15rem 0.4rem;
+		}
+		.manifest-header h1 {
+			font-size: clamp(2.5rem, 12vw, 4rem);
+			word-break: break-word;
+		}
+		.tagline {
+			font-size: 0.8rem;
+		}
+
+		.manifest-body {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+			width: 100%;
+			max-width: 100%;
+		}
+
+		/* Collapse TOC to a horizontal scroll strip */
+		.manifest-toc {
+			position: static;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			overflow-x: auto;
+			overflow-y: hidden;
+			-webkit-overflow-scrolling: touch;
+			max-width: 100%;
+			width: 100%;
+			min-width: 0;
+			box-sizing: border-box;
+			gap: 0;
+			padding: 0.75rem;
+		}
+		.toc-heading {
+			display: none;
+		}
+		.toc-link {
+			flex-shrink: 0;
+			padding: 0.3rem 0.75rem;
+			border-bottom: none;
+			border-right: 1px solid rgb(var(--black));
+			font-size: 0.72rem;
+		}
+		.toc-link:last-child {
+			border-right: none;
+		}
+
+		.manifest-section {
+			padding: 1.75rem 0;
+		}
+		.section-title {
+			font-size: clamp(1.6rem, 6vw, 2rem);
+		}
+		.section-label {
+			margin-bottom: 1rem;
+		}
+
+		/* Stack badge below label on very narrow screens */
+		.item {
+			flex-wrap: wrap;
+			gap: 0.4rem 0.75rem;
+			font-size: 0.82rem;
+		}
+		.badge {
+			font-size: 0.6rem;
+			padding: 0.1rem 0.3rem;
 		}
 	}
 </style>
