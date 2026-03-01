@@ -32,6 +32,27 @@ const latestPosts = (await getCollection('blog'))
 				</div>
 			</section>
 
+			<section class="about-dossier" aria-label="About Me">
+				<div class="dossier-grid">
+					<div class="dossier-block">
+						<h3>Current Status</h3>
+						<p>Engineering systems, writing about the process, and building robust web architectures.</p>
+					</div>
+					<div class="dossier-block">
+						<h3>Core Stack</h3>
+						<ul class="mono-list">
+							<li>TypeScript / Node.js</li>
+							<li>React / Astro</li>
+							<li>Docker / Azure CI/CD</li>
+						</ul>
+					</div>
+					<div class="dossier-block">
+						<h3>Philosophy</h3>
+						<p>Build durable tools. Write clear documentation. Keep the web fast and weird.</p>
+					</div>
+				</div>
+			</section>
+
 			<section class="latest">
 				<div class="section-head">
 					<h2>Latest writing</h2>
@@ -63,15 +84,21 @@ const latestPosts = (await getCollection('blog'))
 		gap: 3rem;
 	}
 	.hero h1 {
-		font-size: clamp(2.1rem, 5vw, 3.4rem);
+		font-size: clamp(3rem, 7vw, 4.5rem);
 		margin-bottom: 0.75rem;
+		letter-spacing: -0.02em;
 	}
 	.eyebrow {
 		font-size: 0.85rem;
 		text-transform: uppercase;
 		letter-spacing: 0.08em;
-		color: rgb(var(--gray));
+		color: rgb(var(--black));
+		font-family: var(--font-mono);
+		font-weight: 700;
 		margin-bottom: 1rem;
+		border-bottom: 1.5px solid rgb(var(--black));
+		display: inline-block;
+		padding-bottom: 0.2rem;
 	}
 	.hero p {
 		max-width: 65ch;
@@ -80,37 +107,108 @@ const latestPosts = (await getCollection('blog'))
 		display: flex;
 		gap: 1rem;
 		margin-top: 1.5rem;
+		font-family: var(--font-mono);
+		text-transform: uppercase;
+		font-size: 0.85rem;
+		font-weight: 700;
 	}
 	.actions a {
-		border: 1px solid rgb(var(--gray-light));
-		padding: 0.5rem 0.85rem;
+		border: 1.5px solid rgb(var(--black));
+		padding: 0.5rem 1rem;
 		text-decoration: none;
+		color: rgb(var(--black));
+		transition: all 0.2s ease;
+	}
+	.actions a:hover {
+		background: rgb(var(--black));
+		color: var(--surface);
 	}
 	.section-head {
 		display: flex;
 		align-items: baseline;
 		justify-content: space-between;
 		gap: 1rem;
-		margin-bottom: 1rem;
+		margin-bottom: 1.5rem;
+		border-bottom: 2px solid rgb(var(--black));
+		padding-bottom: 0.5rem;
+	}
+	.section-head h2 {
+		margin: 0;
+	}
+	.section-head a {
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-transform: uppercase;
 	}
 	.latest ul {
 		list-style: none;
 		padding: 0;
 		margin: 0;
 		display: grid;
-		gap: 1.25rem;
+		gap: 1.5rem;
 	}
 	.latest li {
-		border-bottom: 1px solid rgb(var(--gray-light));
-		padding-bottom: 1rem;
+		border: 1.5px solid rgb(var(--black));
+		padding: 1.5rem;
+		background: var(--surface);
+		transition: transform 0.2s ease;
+	}
+	.latest li:hover {
+		transform: translateY(-2px);
+		box-shadow: 4px 4px 0 rgb(var(--black));
 	}
 	.latest h3 {
-		margin: 0.25rem 0;
-		font-size: 1.35rem;
+		margin: 0.5rem 0;
+		font-size: 1.85rem;
+	}
+	.latest h3 a {
+		text-decoration: none;
+	}
+	.latest h3 a:hover {
+		background: transparent;
+		color: var(--accent);
 	}
 	.meta {
 		margin: 0;
-		color: rgb(var(--gray));
-		font-size: 0.9rem;
+		color: rgb(var(--black));
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		border-bottom: 1.5px solid rgb(var(--black));
+		display: inline-block;
+		padding-bottom: 0.25rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.about-dossier { 
+		margin: 4rem 0; 
+	}
+	.dossier-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 1.5px; /* Creates inner borders */
+		background: rgb(var(--black)); /* Color of borders */
+		border: 1.5px solid rgb(var(--black)); /* Outer border */
+	}
+	.dossier-block {
+		padding: 1.5rem;
+		background: var(--surface); /* Item background */
+	}
+	.dossier-block h3 {
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		border-bottom: 1.5px solid rgb(var(--black));
+		padding-bottom: 0.5rem;
+		margin-bottom: 1rem;
+	}
+	.mono-list { 
+		list-style: square; 
+		padding-left: 1.25rem; 
+		margin: 0;
 	}
 </style>

@@ -6,9 +6,13 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & { id?: string };
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, id } = Astro.props;
+
+// Construct the URL logically
+const githubRepoPath = "https://github.com/usmslm102/usmslm102.github.io/edit/master/src/content/blog";
+const editUrl = id ? `${githubRepoPath}/${id}` : null;
 ---
 
 <html lang="en">
@@ -28,27 +32,38 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.back {
 				display: inline-block;
 				margin-bottom: 1.5rem;
-				font-size: 0.95rem;
+				font-size: 0.85rem;
 				text-decoration: none;
+				font-family: var(--font-mono);
+				font-weight: 700;
+				text-transform: uppercase;
+				border: 1.5px solid rgb(var(--black));
+				padding: 0.35rem 0.75rem;
+				transition: all 0.2s ease;
+			}
+			.back:hover {
+				background: rgb(var(--black));
+				color: var(--surface);
 			}
 			.hero-image {
 				width: 100%;
 				margin-bottom: 2rem;
 			}
 			.hero-image img {
-				border-radius: 8px;
+				border-radius: 0;
+				border: 1px solid rgb(var(--black));
 			}
 			.prose {
 				width: 100%;
 				max-width: 66ch;
 				margin: 0 auto;
 				padding: 0 0 3rem;
-				color: rgb(var(--gray-dark));
+				color: rgb(var(--black));
 			}
 			.title {
 				margin-bottom: 1.5rem;
 				padding-bottom: 1rem;
-				border-bottom: 1px solid rgb(var(--gray-light));
+				border-bottom: 2px solid rgb(var(--black));
 			}
 			.title h1 {
 				margin: 0 0 0.5rem;
@@ -56,12 +71,36 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.description {
 				margin: 0;
-				color: rgb(var(--gray));
+				color: rgb(var(--black));
+			}
+			.meta-bar {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				border-bottom: 1.5px solid rgb(var(--black));
+				padding-bottom: 0.75rem;
+				margin-bottom: 1.5rem;
+				font-family: var(--font-mono);
+				font-size: 0.85rem;
+				text-transform: uppercase;
 			}
 			.date {
-				margin-bottom: 0.75rem;
-				color: rgb(var(--gray));
-				font-size: 0.95rem;
+				color: rgb(var(--black));
+			}
+			.date p {
+				margin: 0;
+			}
+			.github-edit-btn {
+				color: rgb(var(--black));
+				text-decoration: none;
+				background: var(--surface);
+				font-weight: 700;
+				transition: all 0.2s ease;
+				padding: 0.15rem 0;
+			}
+			.github-edit-btn:hover {
+				color: var(--surface);
+				background: var(--accent);
 			}
 			.last-updated-on {
 				font-style: italic;
@@ -77,15 +116,22 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				<a class="back" href="/blog">&larr; All posts</a>
 				<article>
 					<div class="title">
-						<div class="date">
-							<p><FormattedDate date={pubDate} /></p>
-							{
-								updatedDate && (
-									<p class="last-updated-on">
-										Updated <FormattedDate date={updatedDate} />
-									</p>
-								)
-							}
+						<div class="meta-bar">
+							<div class="date">
+								<p><FormattedDate date={pubDate} /></p>
+								{
+									updatedDate && (
+										<p class="last-updated-on">
+											Updated <FormattedDate date={updatedDate} />
+										</p>
+									)
+								}
+							</div>
+							{editUrl && (
+								<a href={editUrl} class="github-edit-btn" target="_blank" rel="noopener noreferrer">
+									[ Edit File on GitHub ] &#8599;
+								</a>
+							)}
 						</div>
 						<h1>{title}</h1>
 						<p class="description">{description}</p>

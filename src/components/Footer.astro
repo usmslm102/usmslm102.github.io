@@ -13,18 +13,24 @@ const year = new Date().getFullYear();
 <style>
 	footer {
 		padding: 3rem 1rem;
-		background: #f7f6f3;
-		color: rgb(var(--gray));
+		background: var(--surface);
+		color: rgb(var(--black));
 		text-align: center;
-		border-top: 1px solid rgb(var(--gray-light));
+		border-top: 2px solid rgb(var(--black));
+		font-family: var(--font-mono);
 	}
 	p {
 		margin: 0.35rem 0;
-		font-size: 0.95rem;
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		font-weight: 700;
 	}
 	.social-links {
 		display: flex;
 		justify-content: center;
-		gap: 0.8rem;
+		gap: 1rem;
+	}
+	.social-links a {
+		font-weight: 700;
 	}
 </style>
