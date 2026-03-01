@@ -1,0 +1,82 @@
+---
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header>
+	<nav aria-label="Primary">
+		<a class="brand" href="/">{SITE_TITLE}</a>
+		<div class="internal-links">
+			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/blog">Blog</HeaderLink>
+			<HeaderLink href="/about">About</HeaderLink>
+			<HeaderLink href="/uses">Uses</HeaderLink>
+			<HeaderLink href="/contact">Contact</HeaderLink>
+		</div>
+		<div class="social-links">
+			<a href="https://github.com/usmslm102" target="_blank" rel="noreferrer">GitHub</a>
+			<a href="https://www.linkedin.com/in/usamaansari/" target="_blank" rel="noreferrer">LinkedIn</a>
+		</div>
+	</nav>
+</header>
+<style>
+	header {
+		margin: 0;
+		padding: 0 1.5rem;
+		background: rgba(255, 255, 255, 0.95);
+		border-bottom: 1px solid rgb(var(--gray-light));
+		backdrop-filter: blur(6px);
+	}
+	.brand {
+		margin: 0;
+		font-size: 0.95rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		text-decoration: none;
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		min-height: 4rem;
+		margin: 0 auto;
+		max-width: 1100px;
+	}
+	.internal-links {
+		display: flex;
+		gap: 0.35rem;
+	}
+	nav a {
+		padding: 0.4rem 0.6rem;
+		color: rgb(var(--black));
+		text-decoration: none;
+	}
+	nav a.active {
+		border-bottom-color: transparent;
+		color: var(--accent);
+	}
+	.social-links {
+		display: flex;
+		gap: 0.2rem;
+		font-size: 0.95rem;
+	}
+	@media (max-width: 720px) {
+		header {
+			padding: 0 1rem;
+		}
+		nav {
+			flex-wrap: wrap;
+			padding: 0.75rem 0;
+		}
+		.internal-links {
+			order: 3;
+			width: 100%;
+			justify-content: center;
+		}
+		.social-links {
+			margin-left: auto;
+		}
+	}
+</style>

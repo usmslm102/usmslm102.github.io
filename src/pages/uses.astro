@@ -1,0 +1,133 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Uses | ${SITE_TITLE}`} description="Software, apps, and Mac setup used by Usama Ansari." />
+	</head>
+	<body>
+		<Header />
+		<main class="uses-page">
+			<section class="intro">
+				<h1>Uses</h1>
+				<p>
+					A living list of the software, apps, and Mac setup I use for engineering work, writing, and daily
+					focus.
+				</p>
+				<p class="updated">Last updated: March 2026</p>
+			</section>
+
+			<section class="grid">
+				<article class="card">
+					<h2>Hardware</h2>
+					<ul>
+						<li>MacBook Pro (Apple Silicon)</li>
+						<li>External monitor setup for coding + docs side-by-side</li>
+						<li>Mechanical keyboard + ergonomic mouse</li>
+						<li>Noise-canceling headphones for deep work</li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h2>Code Editor and Terminal</h2>
+					<ul>
+						<li>Visual Studio Code</li>
+						<li>GitHub Copilot + AI-assisted coding workflow</li>
+						<li>iTerm2 + zsh shell</li>
+						<li>Git + GitHub CLI for PR and release workflows</li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h2>Engineering Stack</h2>
+					<ul>
+						<li>TypeScript and Node.js for web and tooling</li>
+						<li>.NET / C# for backend and platform engineering</li>
+						<li>Docker for local parity and service orchestration</li>
+						<li>Azure for cloud-native architecture and deployment</li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h2>Daily Apps</h2>
+					<ul>
+						<li>Notion for notes and project docs</li>
+						<li>Obsidian for personal knowledge capture</li>
+						<li>Raycast for launcher and productivity shortcuts</li>
+						<li>Calendar + task blocks for focused execution</li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h2>Design and Writing</h2>
+					<ul>
+						<li>Figma for flows and quick visual ideas</li>
+						<li>Markdown-first writing workflow</li>
+						<li>Grammarly for final pass on clarity</li>
+						<li>Screen captures for technical walkthroughs</li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h2>Mac Setup Principles</h2>
+					<ul>
+						<li>Minimal dock and menu bar (only essentials)</li>
+						<li>Project-based folder structure for clean context</li>
+						<li>Automation for repetitive tasks and snippets</li>
+						<li>Separate profiles/spaces for deep work vs meetings</li>
+					</ul>
+				</article>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.uses-page {
+		display: grid;
+		gap: 2rem;
+	}
+	.intro p {
+		max-width: 70ch;
+	}
+	.updated {
+		color: rgb(var(--gray));
+		font-size: 0.95rem;
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	.card {
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		padding: 1rem;
+		background: #f8f7f4;
+	}
+	.card h2 {
+		font-size: 1.25rem;
+		margin-bottom: 0.5rem;
+	}
+	.card ul {
+		margin: 0;
+		padding-left: 1.1rem;
+	}
+	.card li {
+		margin-bottom: 0.4rem;
+	}
+	@media (max-width: 720px) {
+		.grid {
+			grid-template-columns: 1fr;
+		}
+		.card {
+			padding: 0.9rem;
+		}
+	}
+</style>

@@ -1,0 +1,30 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+	<p>&copy; {year} Usama Ansari. All rights reserved.</p>
+	<p class="social-links">
+		<a href="https://www.linkedin.com/in/usamaansari/" target="_blank" rel="noreferrer">LinkedIn</a>
+		<a href="https://github.com/usmslm102" target="_blank" rel="noreferrer">GitHub</a>
+		<a href="https://x.com/usmslm102" target="_blank" rel="noreferrer">X</a>
+	</p>
+</footer>
+<style>
+	footer {
+		padding: 3rem 1rem;
+		background: #f7f6f3;
+		color: rgb(var(--gray));
+		text-align: center;
+		border-top: 1px solid rgb(var(--gray-light));
+	}
+	p {
+		margin: 0.35rem 0;
+		font-size: 0.95rem;
+	}
+	.social-links {
+		display: flex;
+		justify-content: center;
+		gap: 0.8rem;
+	}
+</style>
