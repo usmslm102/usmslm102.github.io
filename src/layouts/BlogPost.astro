@@ -11,8 +11,8 @@ type Props = CollectionEntry<'blog'>['data'] & { id?: string };
 const { title, description, pubDate, updatedDate, heroImage, id } = Astro.props;
 
 // Construct the URL logically
-const githubRepoPath = "https://github.com/usmslm102/usmslm102.github.io/edit/master/src/content/blog";
-const editUrl = id ? `${githubRepoPath}/${id}` : null;
+const githubRepoPath = "https://github.com/usmslm102/usmslm102.github.io/blob/master/src/content/blog";
+const editUrl = id ? `${githubRepoPath}/${id}.md` : null;
 ---
 
 <html lang="en">
