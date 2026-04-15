@@ -101,11 +101,6 @@ const latestPosts = (await getCollection('blog'))
 	</body>
 </html>
 <style>
-	:root {
-		--ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-		--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-	}
-
 	.home {
 		display: grid;
 		gap: 3rem;
@@ -116,18 +111,6 @@ const latestPosts = (await getCollection('blog'))
 		letter-spacing: -0.02em;
 		color: color-mix(in oklch, var(--accent-dark) 70%, rgb(var(--black)));
 		line-height: 1.05;
-	}
-	.eyebrow {
-		font-size: 0.85rem;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: rgb(var(--black));
-		font-family: var(--font-mono);
-		font-weight: 700;
-		margin-bottom: 1rem;
-		border-bottom: 1.5px solid rgb(var(--black));
-		display: inline-block;
-		padding-bottom: 0.2rem;
 	}
 	.hero p {
 		max-width: 56ch;
