@@ -130,7 +130,7 @@ const sections = [
 
 	/* ── Manifest Header ── */
 	.manifest-header {
-		border-bottom: 2px solid rgb(var(--black));
+		border-bottom: 2px solid color-mix(in oklch, var(--accent) 45%, var(--ink-blue));
 		padding-bottom: 2rem;
 		margin-bottom: 3rem;
 	}
@@ -146,10 +146,17 @@ const sections = [
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		color: rgb(var(--black));
-		background: rgb(var(--black));
-		color: var(--surface);
+		color: oklch(0.2 0.04 34);
+		background: color-mix(in oklch, var(--accent-soft) 72%, white);
 		padding: 0.2rem 0.5rem;
+	}
+	.manifest-label:nth-child(2) {
+		background: color-mix(in oklch, var(--ink-blue-soft) 75%, white);
+		color: var(--ink-blue);
+	}
+	.manifest-label:nth-child(3) {
+		background: color-mix(in oklch, var(--accent) 88%, white);
+		color: oklch(0.22 0.04 34);
 	}
 	.manifest-header h1 {
 		font-size: clamp(4rem, 10vw, 7rem);
@@ -180,7 +187,8 @@ const sections = [
 		display: flex;
 		flex-direction: column;
 		gap: 0.1rem;
-		border: 1.5px solid rgb(var(--black));
+		border: 1.5px solid color-mix(in oklch, var(--ink-blue) 42%, rgb(var(--black)));
+		background: color-mix(in oklch, var(--ink-blue-soft) 60%, var(--surface));
 		padding: 1rem;
 		transition:
 			transform 260ms var(--ease-out-quart),
@@ -189,7 +197,7 @@ const sections = [
 	}
 	.manifest-toc:hover {
 		transform: translateY(-2px);
-		box-shadow: 4px 4px 0 rgb(var(--black));
+		box-shadow: 4px 4px 0 color-mix(in oklch, var(--ink-blue) 54%, rgb(var(--black)));
 	}
 	.toc-heading {
 		font-family: var(--font-mono);
@@ -198,7 +206,7 @@ const sections = [
 		text-transform: uppercase;
 		letter-spacing: 0.08em;
 		margin: 0 0 0.75rem;
-		border-bottom: 1.5px solid rgb(var(--black));
+		border-bottom: 1.5px solid color-mix(in oklch, var(--ink-blue) 35%, rgb(var(--black)));
 		padding-bottom: 0.5rem;
 	}
 	.toc-link {
@@ -236,7 +244,7 @@ const sections = [
 		overflow: hidden;
 	}
 	.manifest-section {
-		border-bottom: 1.5px solid rgb(var(--black));
+		border-bottom: 1.5px solid color-mix(in oklch, var(--ink-blue) 34%, rgb(var(--black)));
 		padding: 2.5rem 0;
 	}
 	.manifest-section:first-child {
@@ -288,7 +296,7 @@ const sections = [
 	}
 	.item:hover {
 		transform: translateX(3px);
-		background: #f8f7f4;
+		background: color-mix(in oklch, var(--accent-soft) 50%, white);
 	}
 	.item-arrow {
 		color: rgb(var(--gray));
@@ -310,26 +318,27 @@ const sections = [
 		padding: 0.15rem 0.4rem;
 		white-space: nowrap;
 		flex-shrink: 0;
-		border: 1.5px solid rgb(var(--black));
-		color: rgb(var(--black));
+		border: 1.5px solid color-mix(in oklch, var(--ink-blue) 50%, rgb(var(--black)));
+		color: color-mix(in oklch, var(--ink-blue) 70%, rgb(var(--black)));
 	}
 	.badge--daily-driver {
-		border-color: var(--accent);
-		color: var(--accent);
+		background: color-mix(in oklch, var(--ink-blue) 88%, white);
+		border-color: var(--ink-blue);
+		color: oklch(0.24 0.03 248);
 	}
 	.badge--favourite {
 		background: var(--accent);
-		color: var(--surface);
+		color: oklch(0.22 0.04 34);
 		border-color: var(--accent);
 	}
 	.badge--essential {
-		background: rgb(var(--black));
-		color: var(--surface);
-		border-color: rgb(var(--black));
+		background: color-mix(in oklch, var(--success) 90%, white);
+		color: oklch(0.26 0.05 156);
+		border-color: var(--success);
 	}
 	.badge--preferred {
-		border-color: rgb(var(--black));
-		color: rgb(var(--black));
+		border-color: color-mix(in oklch, var(--accent-dark) 55%, rgb(var(--black)));
+		color: color-mix(in oklch, var(--accent-dark) 70%, rgb(var(--black)));
 	}
 	.badge--rule {
 		background: var(--accent);

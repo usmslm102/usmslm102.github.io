@@ -23,6 +23,8 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.blog-intro {
 				margin-bottom: 2rem;
+				padding-bottom: 0.8rem;
+				border-bottom: 2px solid color-mix(in oklch, var(--accent) 45%, var(--ink-blue));
 			}
 			.blog-intro h1 {
 				margin-bottom: 0.5rem;
@@ -39,16 +41,20 @@ const posts = (await getCollection('blog')).sort(
 			}
 			li {
 				width: 100%;
-				border-bottom: 2px solid rgb(var(--black));
+				border-bottom: 2px solid color-mix(in oklch, var(--ink-blue) 35%, rgb(var(--black)));
 				padding-bottom: 1.5rem;
 				transition:
 					transform 260ms var(--ease-out-quart),
 					box-shadow 260ms var(--ease-out-quart);
 				will-change: transform;
+				background: color-mix(in oklch, var(--surface) 85%, var(--ink-blue-soft));
+			}
+			li:nth-child(odd) {
+				background: color-mix(in oklch, var(--surface) 84%, var(--accent-soft));
 			}
 			li:hover {
 				transform: translateY(-3px);
-				box-shadow: 4px 4px 0 rgb(var(--black));
+				box-shadow: 4px 4px 0 color-mix(in oklch, var(--ink-blue) 56%, rgb(var(--black)));
 			}
 			.post {
 				display: block;
@@ -67,8 +73,8 @@ const posts = (await getCollection('blog')).sort(
 				width: 100%;
 				height: auto;
 				border-radius: 0;
-				border: 1px solid rgb(var(--black));
-				filter: grayscale(20%) contrast(1.1);
+				border: 1px solid color-mix(in oklch, var(--ink-blue) 34%, rgb(var(--black)));
+				filter: grayscale(8%) contrast(1.06);
 				transition: transform 260ms var(--ease-out-quart);
 				will-change: transform;
 			}
@@ -86,7 +92,7 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.date {
 				margin: 0 0 0.35rem;
-				color: rgb(var(--black));
+				color: var(--ink-blue);
 				font-size: 0.85rem;
 				font-family: var(--font-mono);
 				font-weight: 700;
@@ -97,8 +103,8 @@ const posts = (await getCollection('blog')).sort(
 			.fresh-pill {
 				display: inline-flex;
 				align-items: center;
-				border: 1.5px solid var(--accent);
-				color: var(--accent);
+				border: 1.5px solid var(--success);
+				color: var(--success);
 				font-size: 0.62rem;
 				font-weight: 700;
 				letter-spacing: 0.08em;
@@ -110,7 +116,7 @@ const posts = (await getCollection('blog')).sort(
 			.description {
 				margin: 0.5rem 0 0;
 				max-width: 65ch;
-				color: rgb(var(--black));
+				color: rgb(var(--gray-dark));
 			}
 			.post span {
 				text-decoration: none;

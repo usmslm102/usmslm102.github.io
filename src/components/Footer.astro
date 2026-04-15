@@ -13,10 +13,14 @@ const year = new Date().getFullYear();
 <style>
 	footer {
 		padding: 3rem 1rem;
-		background: var(--surface);
+		background: linear-gradient(
+			180deg,
+			color-mix(in oklch, var(--surface-alt) 86%, var(--accent-soft)),
+			var(--surface)
+		);
 		color: rgb(var(--black));
 		text-align: center;
-		border-top: 2px solid rgb(var(--black));
+		border-top: 2px solid color-mix(in oklch, var(--ink-blue) 22%, var(--surface));
 		font-family: var(--font-mono);
 	}
 	p {
@@ -32,5 +36,18 @@ const year = new Date().getFullYear();
 	}
 	.social-links a {
 		font-weight: 700;
+		padding: 0.2rem 0.45rem;
+		border: 1px solid color-mix(in oklch, var(--ink-blue) 36%, white);
+		background: color-mix(in oklch, var(--ink-blue-soft) 65%, white);
+		text-decoration: none;
+		transition:
+			background-color 180ms var(--ease-out-quart),
+			color 180ms var(--ease-out-quart),
+			transform 180ms var(--ease-out-quart);
+	}
+	.social-links a:hover {
+		background: var(--accent);
+		color: oklch(0.23 0.04 36);
+		transform: translateY(-1px);
 	}
 </style>

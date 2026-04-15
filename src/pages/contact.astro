@@ -77,9 +77,9 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 
 <style>
 	.contact-shell {
-		border: 1.5px solid rgb(var(--black));
+		border: 1.5px solid color-mix(in oklch, var(--ink-blue) 42%, rgb(var(--black)));
 		padding: 1.5rem;
-		background: var(--surface);
+		background: color-mix(in oklch, var(--accent-soft) 52%, var(--surface));
 		max-width: 68ch;
 		transition:
 			transform 260ms var(--ease-out-quart),
@@ -88,7 +88,7 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 	}
 	.contact-shell:hover {
 		transform: translateY(-3px);
-		box-shadow: 4px 4px 0 rgb(var(--black));
+		box-shadow: 4px 4px 0 color-mix(in oklch, var(--accent-dark) 55%, rgb(var(--black)));
 	}
 	.contact-shell a {
 		transition:
@@ -102,9 +102,9 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 		margin-top: 1rem;
 	}
 	.copy-email-btn {
-		border: 1.5px solid rgb(var(--black));
-		background: var(--surface);
-		color: rgb(var(--black));
+		border: 1.5px solid var(--accent-dark);
+		background: var(--accent);
+		color: oklch(0.22 0.04 36);
 		font: inherit;
 		text-transform: uppercase;
 		font-size: 0.8rem;
@@ -119,10 +119,10 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 			box-shadow 180ms var(--ease-out-quart);
 	}
 	.copy-email-btn:hover {
-		background: rgb(var(--black));
-		color: var(--surface);
+		background: color-mix(in oklch, var(--accent) 84%, white);
+		color: oklch(0.2 0.04 34);
 		transform: translateY(-2px);
-		box-shadow: 3px 3px 0 rgb(var(--black));
+		box-shadow: 3px 3px 0 color-mix(in oklch, var(--accent-dark) 62%, rgb(var(--black)));
 	}
 	.copy-email-btn:active,
 	.copy-email-btn.copied {
@@ -137,10 +137,10 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 		min-height: 1.2em;
 	}
 	.copy-feedback[data-state='success'] {
-		color: var(--accent);
+		color: var(--success);
 	}
 	.copy-feedback[data-state='error'] {
-		color: rgb(var(--black));
+		color: var(--danger);
 	}
 
 	@media (prefers-reduced-motion: reduce) {

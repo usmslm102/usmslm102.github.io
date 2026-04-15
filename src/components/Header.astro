@@ -24,10 +24,23 @@ import HeaderLink from './HeaderLink.astro';
 	header {
 		margin: 0;
 		padding: 0 1.5rem;
-		background: rgba(244, 244, 240, 0.95); /* matches --surface */
-		border-bottom: 2px solid rgb(var(--black));
+		background: linear-gradient(
+			180deg,
+			color-mix(in oklch, var(--surface) 92%, var(--accent-soft)),
+			color-mix(in oklch, var(--surface) 94%, var(--ink-blue-soft))
+		);
+		border-bottom: 2px solid color-mix(in oklch, var(--ink-blue) 18%, var(--surface));
 		backdrop-filter: blur(6px);
 		font-family: var(--font-mono);
+		position: relative;
+	}
+	header::after {
+		content: '';
+		position: absolute;
+		inset: auto 0 -2px;
+		height: 2px;
+		background: linear-gradient(90deg, var(--accent), var(--ink-blue));
+		opacity: 0.68;
 	}
 	.brand {
 		margin: 0;
@@ -62,19 +75,27 @@ import HeaderLink from './HeaderLink.astro';
 		font-weight: 700;
 		text-transform: uppercase;
 		font-size: 0.85rem;
+		transition:
+			background-color 180ms var(--ease-out-quart),
+			color 180ms var(--ease-out-quart),
+			box-shadow 180ms var(--ease-out-quart);
 	}
 	nav a.active {
-		border-bottom: 2px solid rgb(var(--black));
-		color: rgb(var(--black));
+		border-bottom: 2px solid var(--accent);
+		color: var(--accent-dark);
 	}
 	nav a:hover {
-		background-color: rgb(var(--black));
-		color: var(--surface);
+		background-color: color-mix(in oklch, var(--accent-soft) 70%, white);
+		color: rgb(var(--black));
+		box-shadow: inset 0 -2px 0 color-mix(in oklch, var(--ink-blue) 38%, white);
 	}
 	.social-links {
 		display: flex;
 		gap: 0.2rem;
 		font-size: 0.85rem;
+	}
+	.social-links a {
+		color: var(--ink-blue);
 	}
 	@media (max-width: 720px) {
 		header {

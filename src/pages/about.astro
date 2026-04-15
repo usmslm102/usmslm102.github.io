@@ -115,7 +115,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		list-style: none;
 		margin: 0;
 		padding: 0 0 0 1rem;
-		border-left: 1px solid rgb(var(--gray-light));
+		border-left: 1px solid color-mix(in oklch, var(--ink-blue) 28%, rgb(var(--gray-light)));
 		display: grid;
 		gap: 1.75rem;
 	}
@@ -133,16 +133,22 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		border-radius: 50%;
 		background: var(--accent);
 	}
+	.timeline-item:nth-child(2)::before {
+		background: var(--ink-blue);
+	}
+	.timeline-item:nth-child(3)::before {
+		background: var(--success);
+	}
 	.period {
 		font-size: 0.9rem;
-		color: rgb(var(--gray));
+		color: color-mix(in oklch, var(--ink-blue) 75%, rgb(var(--gray)));
 		margin-bottom: 0.45rem;
 		text-transform: uppercase;
 		letter-spacing: 0.04em;
 	}
 	.card {
-		background: #f8f7f4;
-		border: 1px solid rgb(var(--gray-light));
+		background: color-mix(in oklch, var(--ink-blue-soft) 60%, var(--surface));
+		border: 1px solid color-mix(in oklch, var(--ink-blue) 28%, rgb(var(--gray-light)));
 		border-radius: 8px;
 		padding: 1rem 1rem 0.75rem;
 		transition:
@@ -151,18 +157,22 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 			border-color 260ms var(--ease-out-quart);
 		will-change: transform;
 	}
+	.timeline-item:nth-child(odd) .card {
+		background: color-mix(in oklch, var(--accent-soft) 58%, var(--surface));
+	}
 	.timeline-item:hover .card {
 		transform: translateY(-3px);
-		box-shadow: 4px 4px 0 rgb(var(--black));
-		border-color: rgb(var(--black));
+		box-shadow: 4px 4px 0 color-mix(in oklch, var(--accent-dark) 55%, rgb(var(--black)));
+		border-color: color-mix(in oklch, var(--accent) 45%, rgb(var(--black)));
 	}
 	.card h3 {
 		margin-bottom: 0.25rem;
 		font-size: 1.3rem;
+		color: color-mix(in oklch, var(--accent-dark) 70%, rgb(var(--black)));
 	}
 	.meta {
 		margin-bottom: 0.75rem;
-		color: rgb(var(--gray));
+		color: color-mix(in oklch, var(--ink-blue) 60%, rgb(var(--gray)));
 		font-size: 0.95rem;
 	}
 	.card ul {

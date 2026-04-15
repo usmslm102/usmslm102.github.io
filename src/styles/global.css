@@ -1,17 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
 :root {
-  --accent: #FF3F00;
-  --accent-dark: #CC3200;
-  --black: 17, 17, 17;
-  --gray: 102, 102, 102;
-  --gray-light: 204, 204, 204;
-  --gray-dark: 34, 34, 34;
-  --surface: #F4F4F0;
-  
+  --accent: oklch(0.67 0.21 37);
+  --accent-dark: oklch(0.58 0.19 36);
+  --accent-soft: oklch(0.93 0.04 42);
+  --ink-blue: oklch(0.5 0.09 245);
+  --ink-blue-soft: oklch(0.94 0.015 248);
+  --success: oklch(0.64 0.14 154);
+  --danger: oklch(0.58 0.18 26);
+  --black: 24, 21, 20;
+  --gray: 104, 96, 92;
+  --gray-light: 209, 198, 190;
+  --gray-dark: 50, 44, 40;
+  --surface: oklch(0.97 0.007 78);
+  --surface-alt: oklch(0.95 0.013 74);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
   --font-serif: 'Instrument Serif', Georgia, serif;
   --font-mono: 'Space Mono', ui-monospace, SFMono-Regular, monospace;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
 * {
   box-sizing: border-box;
@@ -22,12 +30,20 @@ body {
   margin: 0;
   padding: 0;
   text-align: left;
-  background: var(--surface);
+  background:
+    radial-gradient(circle at 8% 0%, color-mix(in oklch, var(--accent-soft) 75%, transparent), transparent 40%),
+    radial-gradient(circle at 95% 20%, color-mix(in oklch, var(--ink-blue-soft) 90%, transparent), transparent 38%),
+    var(--surface);
   word-wrap: break-word;
   overflow-wrap: break-word;
   color: rgb(var(--black));
   font-size: 16px;
   line-height: 1.6;
+}
+
+::selection {
+  background: color-mix(in oklch, var(--accent) 30%, white);
+  color: rgb(var(--black));
 }
 
 main {
@@ -69,17 +85,22 @@ b {
 }
 
 a {
-  color: rgb(var(--black));
+  color: var(--ink-blue);
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
   text-underline-offset: 4px;
-  text-decoration-color: rgb(var(--black));
+  text-decoration-color: color-mix(in oklch, var(--ink-blue) 70%, white);
 }
 
 a:hover {
-  background-color: var(--accent);
-  color: var(--surface);
+  background-color: color-mix(in oklch, var(--accent) 90%, white);
+  color: oklch(0.22 0.04 34);
   text-decoration-color: var(--accent);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--ink-blue);
+  outline-offset: 2px;
 }
 
 p {
@@ -122,7 +143,7 @@ img {
 
 code {
   padding: 0.1rem 0.35rem;
-  background-color: rgb(var(--gray-light));
+  background-color: color-mix(in oklch, var(--ink-blue-soft) 75%, white);
   border-radius: 0;
   font-size: 0.92em;
 }
@@ -130,20 +151,21 @@ code {
 pre {
   padding: 1.1rem;
   border-radius: 0;
-  border: 1px solid rgb(var(--black));
-  background: #1A1A1A !important;
+  border: 1px solid color-mix(in oklch, var(--ink-blue) 45%, black);
+  background: oklch(0.22 0.03 250) !important;
   overflow: auto;
 }
 
 pre > code {
   all: unset;
   background-color: transparent;
-  color: #fff;
+  color: oklch(0.95 0.01 95);
 }
 
 blockquote {
-  border-left: 3px solid var(--accent);
-  padding: 0 0 0 1rem;
+  border: 1px solid color-mix(in oklch, var(--accent) 48%, white);
+  background: color-mix(in oklch, var(--accent-soft) 72%, white);
+  padding: 1rem;
   margin: 0;
   color: rgb(var(--gray-dark));
   font-style: italic;
@@ -151,7 +173,7 @@ blockquote {
 
 hr {
   border: none;
-  border-top: 1px solid rgb(var(--black));
+  border-top: 1px solid color-mix(in oklch, var(--ink-blue) 25%, var(--surface));
   margin: 2rem 0;
 }
 

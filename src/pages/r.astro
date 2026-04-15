@@ -82,14 +82,14 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 	.download-btn {
 		display: inline-block;
 		padding: 0.65rem 1rem;
-		border: 1px solid rgb(var(--black));
+		border: 1px solid var(--accent-dark);
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.03em;
 		font-size: 0.85rem;
 		text-decoration: none;
-		color: rgb(var(--black));
-		background: var(--surface);
+		color: oklch(0.23 0.04 34);
+		background: color-mix(in oklch, var(--accent) 92%, white);
 		transition:
 			transform 220ms var(--ease-out-quart),
 			background-color 220ms var(--ease-out-quart),
@@ -110,19 +110,19 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		min-height: 1.2em;
 	}
 	.download-feedback[data-state='active'] {
-		color: var(--accent);
+		color: var(--success);
 	}
 
 	.download-btn:hover {
-		background: rgb(var(--black));
-		color: var(--surface);
+		background: color-mix(in oklch, var(--accent) 84%, white);
+		color: oklch(0.19 0.04 34);
 		transform: translateY(-2px) scale(1.02);
-		box-shadow: 3px 3px 0 rgb(var(--black));
+		box-shadow: 3px 3px 0 color-mix(in oklch, var(--accent-dark) 60%, rgb(var(--black)));
 	}
 
 	.viewer {
-		border: 1px solid rgb(var(--gray-light));
-		background: #f8f7f4;
+		border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, rgb(var(--gray-light)));
+		background: color-mix(in oklch, var(--ink-blue-soft) 58%, var(--surface));
 		padding: 0.5rem;
 		transition:
 			transform 260ms var(--ease-out-quart),
@@ -131,7 +131,7 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 	}
 	.viewer:hover {
 		transform: translateY(-2px);
-		box-shadow: 4px 4px 0 rgb(var(--black));
+		box-shadow: 4px 4px 0 color-mix(in oklch, var(--ink-blue) 58%, rgb(var(--black)));
 	}
 
 	.pdf-frame {

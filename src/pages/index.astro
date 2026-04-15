@@ -114,6 +114,7 @@ const latestPosts = (await getCollection('blog'))
 		font-size: clamp(3rem, 7vw, 4.5rem);
 		margin-bottom: 0.75rem;
 		letter-spacing: -0.02em;
+		color: color-mix(in oklch, var(--accent-dark) 70%, rgb(var(--black)));
 	}
 	.eyebrow {
 		font-size: 0.85rem;
@@ -140,10 +141,11 @@ const latestPosts = (await getCollection('blog'))
 		font-weight: 700;
 	}
 	.actions a {
-		border: 1.5px solid rgb(var(--black));
+		border: 1.5px solid color-mix(in oklch, var(--ink-blue) 34%, rgb(var(--black)));
 		padding: 0.5rem 1rem;
 		text-decoration: none;
 		color: rgb(var(--black));
+		background: color-mix(in oklch, var(--ink-blue-soft) 62%, var(--surface));
 		transition:
 			transform 220ms var(--ease-out-quart),
 			background-color 220ms var(--ease-out-quart),
@@ -151,11 +153,16 @@ const latestPosts = (await getCollection('blog'))
 			box-shadow 220ms var(--ease-out-quart);
 		will-change: transform;
 	}
+	.actions a:first-child {
+		background: var(--accent);
+		border-color: var(--accent-dark);
+		color: oklch(0.22 0.04 36);
+	}
 	.actions a:hover {
-		background: rgb(var(--black));
-		color: var(--surface);
+		background: color-mix(in oklch, var(--accent) 82%, white);
+		color: oklch(0.2 0.04 34);
 		transform: translateY(-2px) scale(1.02);
-		box-shadow: 3px 3px 0 rgb(var(--black));
+		box-shadow: 3px 3px 0 color-mix(in oklch, var(--accent-dark) 65%, rgb(var(--black)));
 	}
 	.actions a:active {
 		transform: translateY(0) scale(0.98);
@@ -167,7 +174,7 @@ const latestPosts = (await getCollection('blog'))
 		justify-content: space-between;
 		gap: 1rem;
 		margin-bottom: 1.5rem;
-		border-bottom: 2px solid rgb(var(--black));
+		border-bottom: 2px solid color-mix(in oklch, var(--ink-blue) 45%, rgb(var(--black)));
 		padding-bottom: 0.5rem;
 	}
 	.section-head h2 {
@@ -178,6 +185,7 @@ const latestPosts = (await getCollection('blog'))
 		font-size: 0.85rem;
 		font-weight: 700;
 		text-transform: uppercase;
+		color: var(--ink-blue);
 	}
 	.latest ul {
 		list-style: none;
@@ -187,17 +195,20 @@ const latestPosts = (await getCollection('blog'))
 		gap: 1.5rem;
 	}
 	.latest li {
-		border: 1.5px solid rgb(var(--black));
+		border: 1.5px solid color-mix(in oklch, var(--ink-blue) 30%, rgb(var(--black)));
 		padding: 1.5rem;
-		background: var(--surface);
+		background: color-mix(in oklch, var(--ink-blue-soft) 66%, var(--surface));
 		transition:
 			transform 260ms var(--ease-out-quart),
 			box-shadow 260ms var(--ease-out-quart);
 		will-change: transform;
 	}
+	.latest li:nth-child(odd) {
+		background: color-mix(in oklch, var(--accent-soft) 60%, var(--surface));
+	}
 	.latest li:hover {
 		transform: translateY(-4px);
-		box-shadow: 4px 4px 0 rgb(var(--black));
+		box-shadow: 4px 4px 0 color-mix(in oklch, var(--ink-blue) 58%, rgb(var(--black)));
 	}
 	.latest h3 {
 		margin: 0.5rem 0;
@@ -217,7 +228,7 @@ const latestPosts = (await getCollection('blog'))
 		font-size: 0.85rem;
 		font-weight: 700;
 		text-transform: uppercase;
-		border-bottom: 1.5px solid rgb(var(--black));
+		border-bottom: 1.5px solid color-mix(in oklch, var(--accent) 70%, rgb(var(--black)));
 		display: inline-block;
 		padding-bottom: 0.25rem;
 		margin-bottom: 0.5rem;
@@ -230,20 +241,26 @@ const latestPosts = (await getCollection('blog'))
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 		gap: 1.5px; /* Creates inner borders */
-		background: rgb(var(--black)); /* Color of borders */
-		border: 1.5px solid rgb(var(--black)); /* Outer border */
+		background: color-mix(in oklch, var(--accent) 35%, var(--ink-blue)); /* Color of borders */
+		border: 1.5px solid color-mix(in oklch, var(--ink-blue) 55%, rgb(var(--black))); /* Outer border */
 	}
 	.dossier-block {
 		padding: 1.5rem;
-		background: var(--surface); /* Item background */
+		background: color-mix(in oklch, var(--ink-blue-soft) 55%, var(--surface)); /* Item background */
 		transition:
 			transform 260ms var(--ease-out-quart),
 			box-shadow 260ms var(--ease-out-quart);
 		will-change: transform;
 	}
+	.dossier-block:nth-child(2) {
+		background: color-mix(in oklch, var(--accent-soft) 64%, var(--surface));
+	}
+	.dossier-block:nth-child(3) {
+		background: color-mix(in oklch, var(--ink-blue-soft) 72%, var(--surface));
+	}
 	.dossier-block:hover {
 		transform: translateY(-3px);
-		box-shadow: 3px 3px 0 rgb(var(--black));
+		box-shadow: 3px 3px 0 color-mix(in oklch, var(--accent-dark) 55%, rgb(var(--black)));
 	}
 	.dossier-block h3 {
 		font-family: var(--font-mono);
@@ -251,7 +268,7 @@ const latestPosts = (await getCollection('blog'))
 		font-size: 0.85rem;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
-		border-bottom: 1.5px solid rgb(var(--black));
+		border-bottom: 1.5px solid color-mix(in oklch, var(--ink-blue) 52%, rgb(var(--black)));
 		padding-bottom: 0.5rem;
 		margin-bottom: 1rem;
 	}
@@ -259,6 +276,9 @@ const latestPosts = (await getCollection('blog'))
 		list-style: square; 
 		padding-left: 1.25rem; 
 		margin: 0;
+	}
+	.mono-list li::marker {
+		color: var(--accent);
 	}
 
 	html.motion-ready .hero [data-reveal='hero'] {
