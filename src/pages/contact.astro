@@ -86,6 +86,11 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 			box-shadow 260ms var(--ease-out-quart);
 		will-change: transform;
 	}
+	.contact-shell p {
+		max-width: 62ch;
+		font-size: 1.04rem;
+		line-height: 1.72;
+	}
 	.contact-shell:hover {
 		transform: translateY(-3px);
 		box-shadow: 4px 4px 0 color-mix(in oklch, var(--accent-dark) 55%, rgb(var(--black)));
@@ -108,9 +113,9 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 		color: oklch(0.22 0.04 36);
 		font: inherit;
 		text-transform: uppercase;
-		font-size: 0.8rem;
-		font-weight: 700;
-		letter-spacing: 0.03em;
+		font-size: 0.76rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
 		padding: 0.45rem 0.7rem;
 		min-height: 2.75rem;
 		cursor: pointer;
@@ -136,10 +141,10 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 		outline-offset: 2px;
 	}
 	.copy-feedback {
-		font-size: 0.78rem;
+		font-size: 0.72rem;
 		font-family: var(--font-mono);
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		letter-spacing: 0.06em;
 		min-height: 1.2em;
 	}
 	.copy-feedback[data-state='success'] {

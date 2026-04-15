@@ -31,6 +31,8 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.blog-intro p {
 				max-width: 60ch;
+				font-size: 1.05rem;
+				line-height: 1.7;
 			}
 			ul {
 				display: grid;
@@ -83,8 +85,8 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.title {
 				margin: 0;
-				line-height: 1.25;
-				font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+				line-height: 1.14;
+				font-size: clamp(1.4rem, 2.4vw, 1.95rem);
 			}
 			.title a {
 				overflow-wrap: anywhere;
@@ -93,9 +95,12 @@ const posts = (await getCollection('blog')).sort(
 			.date {
 				margin: 0 0 0.35rem;
 				color: var(--ink-blue);
-				font-size: 0.85rem;
+				font-size: 0.76rem;
 				font-family: var(--font-mono);
-				font-weight: 700;
+				font-weight: 600;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				font-variant-numeric: tabular-nums;
 				display: flex;
 				align-items: center;
 				gap: 0.55rem;
@@ -117,6 +122,7 @@ const posts = (await getCollection('blog')).sort(
 				margin: 0.5rem 0 0;
 				max-width: 65ch;
 				color: rgb(var(--gray-dark));
+				line-height: 1.72;
 			}
 			.post span {
 				text-decoration: none;

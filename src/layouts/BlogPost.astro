@@ -32,11 +32,12 @@ const editUrl = id ? `${githubRepoPath}/${id}.md` : null;
 			.back {
 				display: inline-block;
 				margin-bottom: 1.5rem;
-				font-size: 0.85rem;
+				font-size: 0.76rem;
 				text-decoration: none;
 				font-family: var(--font-mono);
-				font-weight: 700;
+				font-weight: 600;
 				text-transform: uppercase;
+				letter-spacing: 0.06em;
 				border: 1.5px solid rgb(var(--black));
 				padding: 0.35rem 0.75rem;
 				transition: all 0.2s ease;
@@ -55,10 +56,11 @@ const editUrl = id ? `${githubRepoPath}/${id}.md` : null;
 			}
 			.prose {
 				width: 100%;
-				max-width: 66ch;
+				max-width: 68ch;
 				margin: 0 auto;
 				padding: 0 0 3rem;
 				color: rgb(var(--black));
+				line-height: 1.72;
 			}
 			.title {
 				margin-bottom: 1.5rem;
@@ -67,11 +69,15 @@ const editUrl = id ? `${githubRepoPath}/${id}.md` : null;
 			}
 			.title h1 {
 				margin: 0 0 0.5rem;
-				line-height: 1.15;
+				font-size: clamp(2.1rem, 5vw, 3.25rem);
+				line-height: 1.08;
 			}
 			.description {
 				margin: 0;
-				color: rgb(var(--black));
+				max-width: 60ch;
+				font-size: 1.08rem;
+				line-height: 1.7;
+				color: rgb(var(--gray-dark));
 			}
 			.meta-bar {
 				display: flex;
@@ -81,8 +87,10 @@ const editUrl = id ? `${githubRepoPath}/${id}.md` : null;
 				padding-bottom: 0.75rem;
 				margin-bottom: 1.5rem;
 				font-family: var(--font-mono);
-				font-size: 0.85rem;
+				font-size: 0.74rem;
+				letter-spacing: 0.06em;
 				text-transform: uppercase;
+				font-variant-numeric: tabular-nums;
 			}
 			.date {
 				color: rgb(var(--black));
@@ -94,7 +102,10 @@ const editUrl = id ? `${githubRepoPath}/${id}.md` : null;
 				color: rgb(var(--black));
 				text-decoration: none;
 				background: var(--surface);
-				font-weight: 700;
+				font-weight: 600;
+				font-size: 0.72rem;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
 				transition: all 0.2s ease;
 				padding: 0.15rem 0;
 			}
@@ -105,6 +116,10 @@ const editUrl = id ? `${githubRepoPath}/${id}.md` : null;
 			.last-updated-on {
 				font-style: italic;
 				margin-top: 0.2rem;
+			}
+			.prose :where(h2, h3) {
+				line-height: 1.14;
+				margin-top: 2.25rem;
 			}
 		</style>
 	</head>

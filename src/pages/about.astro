@@ -110,6 +110,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	}
 	.intro p {
 		max-width: 72ch;
+		line-height: 1.72;
+	}
+	section > h2 {
+		margin-bottom: 1rem;
 	}
 	.timeline {
 		list-style: none;
@@ -140,11 +144,12 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		background: var(--success);
 	}
 	.period {
-		font-size: 0.9rem;
+		font-size: 0.76rem;
 		color: color-mix(in oklch, var(--ink-blue) 75%, rgb(var(--gray)));
 		margin-bottom: 0.45rem;
 		text-transform: uppercase;
-		letter-spacing: 0.04em;
+		letter-spacing: 0.06em;
+		font-variant-numeric: tabular-nums;
 	}
 	.card {
 		background: color-mix(in oklch, var(--ink-blue-soft) 60%, var(--surface));
@@ -166,18 +171,20 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		border-color: color-mix(in oklch, var(--accent) 45%, rgb(var(--black)));
 	}
 	.card h3 {
-		margin-bottom: 0.25rem;
-		font-size: 1.3rem;
+		margin-bottom: 0.35rem;
+		font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+		line-height: 1.15;
 		color: color-mix(in oklch, var(--accent-dark) 70%, rgb(var(--black)));
 	}
 	.meta {
 		margin-bottom: 0.75rem;
 		color: color-mix(in oklch, var(--ink-blue) 60%, rgb(var(--gray)));
-		font-size: 0.95rem;
+		font-size: 0.88rem;
 	}
 	.card ul {
 		margin: 0;
 		padding-left: 1.1rem;
+		line-height: 1.72;
 	}
 
 	@media (prefers-reduced-motion: reduce) {

@@ -165,8 +165,9 @@ const sections = [
 	}
 	.tagline {
 		max-width: 60ch;
-		font-family: var(--font-mono);
-		font-size: 0.9rem;
+		font-family: var(--font-body);
+		font-size: 1rem;
+		line-height: 1.7;
 		color: color-mix(in oklch, var(--ink-blue) 55%, rgb(var(--gray-dark)));
 		margin: 0;
 	}
@@ -270,7 +271,7 @@ const sections = [
 		font-weight: 400;
 		letter-spacing: -0.02em;
 		margin: 0;
-		line-height: 1;
+		line-height: 1.08;
 	}
 
 	/* ── Items ── */
@@ -288,8 +289,9 @@ const sections = [
 		gap: 0.75rem;
 		padding: 0.65rem 0;
 		border-top: 1px solid rgb(var(--gray-light));
-		font-family: var(--font-mono);
-		font-size: 0.88rem;
+		font-family: var(--font-body);
+		font-size: 0.98rem;
+		line-height: 1.62;
 		transition:
 			transform 200ms var(--ease-out-quart),
 			background-color 200ms var(--ease-out-quart);
@@ -312,10 +314,10 @@ const sections = [
 	}
 	.badge {
 		font-family: var(--font-mono);
-		font-size: 0.65rem;
-		font-weight: 700;
+		font-size: 0.63rem;
+		font-weight: 600;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.06em;
 		padding: 0.15rem 0.4rem;
 		white-space: nowrap;
 		flex-shrink: 0;
