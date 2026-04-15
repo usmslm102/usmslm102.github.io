@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import RouteMotion from '../components/RouteMotion.astro';
 import { SITE_TITLE } from '../consts';
 
 const sections = [
@@ -62,7 +63,7 @@ const sections = [
 		<Header />
 		<main class="uses-page">
 
-			<div class="manifest-header">
+			<div class="manifest-header" data-route-reveal style="--stagger: 0;">
 				<div class="manifest-meta">
 					<span class="manifest-label">SYSTEM_MANIFEST.txt</span>
 					<span class="manifest-label">REV&nbsp;2026.03</span>
@@ -77,7 +78,7 @@ const sections = [
 
 			<div class="manifest-body">
 
-				<nav class="manifest-toc" aria-label="Page sections">
+				<nav class="manifest-toc" aria-label="Page sections" data-route-reveal style="--stagger: 1;">
 					<p class="toc-heading">// Contents</p>
 					{sections.map((s) => (
 						<a href={`#${s.id}`} class="toc-link">
@@ -88,8 +89,8 @@ const sections = [
 				</nav>
 
 				<div class="manifest-sections">
-					{sections.map((s) => (
-						<section class="manifest-section" id={s.id}>
+					{sections.map((s, index) => (
+						<section class="manifest-section" id={s.id} data-route-reveal style={`--stagger: ${index + 2};`}>
 							<div class="section-label">
 								<span class="section-num">{s.num}</span>
 								<h2 class="section-title">{s.title}</h2>
@@ -113,6 +114,7 @@ const sections = [
 
 			</div>
 		</main>
+		<RouteMotion />
 		<Footer />
 	</body>
 </html>
@@ -180,6 +182,14 @@ const sections = [
 		gap: 0.1rem;
 		border: 1.5px solid rgb(var(--black));
 		padding: 1rem;
+		transition:
+			transform 260ms var(--ease-out-quart),
+			box-shadow 260ms var(--ease-out-quart);
+		will-change: transform;
+	}
+	.manifest-toc:hover {
+		transform: translateY(-2px);
+		box-shadow: 4px 4px 0 rgb(var(--black));
 	}
 	.toc-heading {
 		font-family: var(--font-mono);
@@ -203,11 +213,14 @@ const sections = [
 		text-transform: uppercase;
 		font-weight: 700;
 		border-bottom: 1px solid transparent;
-		transition: all 0.15s ease;
+		transition:
+			color 200ms var(--ease-out-quart),
+			transform 200ms var(--ease-out-quart);
 	}
 	.toc-link:hover {
 		background: transparent;
 		color: var(--accent);
+		transform: translateX(2px);
 	}
 	.toc-num {
 		color: var(--accent);
@@ -268,6 +281,14 @@ const sections = [
 		border-top: 1px solid rgb(var(--gray-light));
 		font-family: var(--font-mono);
 		font-size: 0.88rem;
+		transition:
+			transform 200ms var(--ease-out-quart),
+			background-color 200ms var(--ease-out-quart);
+		will-change: transform;
+	}
+	.item:hover {
+		transform: translateX(3px);
+		background: #f8f7f4;
 	}
 	.item-arrow {
 		color: rgb(var(--gray));
@@ -405,6 +426,22 @@ const sections = [
 		.badge {
 			font-size: 0.6rem;
 			padding: 0.1rem 0.3rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.manifest-toc,
+		.toc-link,
+		.item {
+			transition: none;
+			will-change: auto;
+		}
+		.manifest-toc:hover,
+		.toc-link:hover,
+		.item:hover {
+			transform: none;
+			box-shadow: none;
+			background: transparent;
 		}
 	}
 </style>

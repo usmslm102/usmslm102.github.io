@@ -5,6 +5,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
+import RouteMotion from '../../components/RouteMotion.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
@@ -40,6 +41,14 @@ const posts = (await getCollection('blog')).sort(
 				width: 100%;
 				border-bottom: 2px solid rgb(var(--black));
 				padding-bottom: 1.5rem;
+				transition:
+					transform 260ms var(--ease-out-quart),
+					box-shadow 260ms var(--ease-out-quart);
+				will-change: transform;
+			}
+			li:hover {
+				transform: translateY(-3px);
+				box-shadow: 4px 4px 0 rgb(var(--black));
 			}
 			.post {
 				display: block;
@@ -60,6 +69,11 @@ const posts = (await getCollection('blog')).sort(
 				border-radius: 0;
 				border: 1px solid rgb(var(--black));
 				filter: grayscale(20%) contrast(1.1);
+				transition: transform 260ms var(--ease-out-quart);
+				will-change: transform;
+			}
+			.post.with-image:hover img {
+				transform: scale(1.01);
 			}
 			.title {
 				margin: 0;
@@ -76,6 +90,22 @@ const posts = (await getCollection('blog')).sort(
 				font-size: 0.85rem;
 				font-family: var(--font-mono);
 				font-weight: 700;
+				display: flex;
+				align-items: center;
+				gap: 0.55rem;
+			}
+			.fresh-pill {
+				display: inline-flex;
+				align-items: center;
+				border: 1.5px solid var(--accent);
+				color: var(--accent);
+				font-size: 0.62rem;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				padding: 0.08rem 0.35rem;
+				line-height: 1.3;
+				animation: fresh-pop 760ms var(--ease-out-expo) 120ms both;
 			}
 			.description {
 				margin: 0.5rem 0 0;
@@ -111,20 +141,45 @@ const posts = (await getCollection('blog')).sort(
 					line-height: 1.65;
 				}
 			}
+			@media (prefers-reduced-motion: reduce) {
+				li,
+				.post img {
+					transition: none;
+					will-change: auto;
+				}
+				.fresh-pill {
+					animation: none;
+				}
+				li:hover,
+				.post.with-image:hover img {
+					transform: none;
+					box-shadow: none;
+				}
+			}
+			@keyframes fresh-pop {
+				from {
+					opacity: 0;
+					transform: translateY(4px) scale(0.96);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0) scale(1);
+				}
+			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
 			<section class="blog-intro">
-				<h1>Blog</h1>
+				<h1 data-route-reveal style="--stagger: 0;">Blog</h1>
 				<p>Essays, notes, and practical lessons from shipping products.</p>
 			</section>
 			<section>
 				<ul>
 					{
-						posts.map((post) => (
-							<li>
+						posts.map((post, index) => (
+							<li data-route-reveal style={`--stagger: ${index + 1};`}>
 								<article class:list={['post', { 'with-image': !!post.data.heroImage }]}>
 									{post.data.heroImage && (
 										<a href={`/blog/${post.id}/`}>
@@ -134,6 +189,7 @@ const posts = (await getCollection('blog')).sort(
 									<div class="content">
 										<p class="date">
 											<FormattedDate date={post.data.pubDate} />
+											{index === 0 && <span class="fresh-pill">Latest</span>}
 										</p>
 										<h2 class="title">
 											<a href={`/blog/${post.id}/`}>{post.data.title}</a>
@@ -147,6 +203,7 @@ const posts = (await getCollection('blog')).sort(
 				</ul>
 			</section>
 		</main>
+		<RouteMotion />
 		<Footer />
 	</body>
 </html>

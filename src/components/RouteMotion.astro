@@ -1,0 +1,60 @@
+<script is:inline>
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	if (!prefersReducedMotion) {
+		document.documentElement.classList.add('route-motion-ready');
+		const revealElements = document.querySelectorAll('[data-route-reveal]');
+		if ('IntersectionObserver' in window) {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('route-in-view');
+							observer.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.2, rootMargin: '0px 0px -10% 0px' },
+			);
+			revealElements.forEach((element) => observer.observe(element));
+		} else {
+			revealElements.forEach((element) => element.classList.add('route-in-view'));
+		}
+	}
+</script>
+
+<style is:global>
+	:root {
+		--ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+		--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	html.route-motion-ready [data-route-reveal] {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+
+	html.route-motion-ready [data-route-reveal].route-in-view {
+		animation: route-reveal 520ms var(--ease-out-quart) forwards;
+		animation-delay: calc(var(--stagger, 0) * 90ms);
+	}
+
+	@keyframes route-reveal {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html.route-motion-ready [data-route-reveal],
+		html.route-motion-ready [data-route-reveal].route-in-view {
+			opacity: 1;
+			transform: none;
+			animation: none;
+		}
+	}
+</style>

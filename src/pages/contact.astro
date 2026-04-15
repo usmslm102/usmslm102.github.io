@@ -2,7 +2,8 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_TITLE } from '../consts';
+import RouteMotion from '../components/RouteMotion.astro';
+import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 ---
 
 <!doctype html>
@@ -13,16 +14,151 @@ import { SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main class="page">
-			<h1>Contact</h1>
-			<p>
-				You can connect on
-				<a href="https://www.linkedin.com/in/usamaansari/" target="_blank" rel="noreferrer">LinkedIn</a>
-				,
-				<a href="https://github.com/usmslm102" target="_blank" rel="noreferrer">GitHub</a>
-				, and
-				<a href="https://x.com/usmslm102" target="_blank" rel="noreferrer">X</a>.
-			</p>
+			<section class="contact-shell" data-route-reveal style="--stagger: 0;">
+				<h1>Contact</h1>
+				<p>
+					You can connect on
+					<a href="https://www.linkedin.com/in/usamaansari/" target="_blank" rel="noreferrer">LinkedIn</a>
+					,
+					<a href="https://github.com/usmslm102" target="_blank" rel="noreferrer">GitHub</a>
+					, and
+					<a href="https://x.com/usmslm102" target="_blank" rel="noreferrer">X</a>.
+				</p>
+				<div class="contact-actions">
+					<button class="copy-email-btn" type="button" data-copy-email data-email={CONTACT_EMAIL}>
+						Copy email
+					</button>
+					<span class="copy-feedback" data-copy-feedback aria-live="polite"></span>
+				</div>
+			</section>
 		</main>
+		<script is:inline>
+			const copyButton = document.querySelector('[data-copy-email]');
+			const copyFeedback = document.querySelector('[data-copy-feedback]');
+			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			const feedbackMessages = ['Copied. Thanks for reaching out.', 'Copied. Looking forward to connecting.'];
+			const setFeedback = (message, success) => {
+				if (!copyFeedback) return;
+				copyFeedback.textContent = message;
+				copyFeedback.dataset.state = success ? 'success' : 'error';
+				window.setTimeout(() => {
+					copyFeedback.textContent = '';
+					delete copyFeedback.dataset.state;
+				}, 2200);
+			};
+
+			copyButton?.addEventListener('click', async () => {
+				const email = copyButton.getAttribute('data-email');
+				if (!email || !copyFeedback) return;
+
+				if (!navigator.clipboard || !window.isSecureContext) {
+					setFeedback(`Copy is unavailable here. Email me at ${email}.`, false);
+					return;
+				}
+
+				try {
+					await navigator.clipboard.writeText(email);
+					copyButton.classList.add('copied');
+					setFeedback(feedbackMessages[Math.floor(Math.random() * feedbackMessages.length)], true);
+					if (!prefersReducedMotion) {
+						window.setTimeout(() => copyButton.classList.remove('copied'), 260);
+					} else {
+						copyButton.classList.remove('copied');
+					}
+				} catch {
+					setFeedback(`Could not copy right now. Email me at ${email}.`, false);
+				}
+			});
+		</script>
+		<RouteMotion />
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.contact-shell {
+		border: 1.5px solid rgb(var(--black));
+		padding: 1.5rem;
+		background: var(--surface);
+		max-width: 68ch;
+		transition:
+			transform 260ms var(--ease-out-quart),
+			box-shadow 260ms var(--ease-out-quart);
+		will-change: transform;
+	}
+	.contact-shell:hover {
+		transform: translateY(-3px);
+		box-shadow: 4px 4px 0 rgb(var(--black));
+	}
+	.contact-shell a {
+		transition:
+			color 220ms var(--ease-out-quart),
+			background-color 220ms var(--ease-out-quart);
+	}
+	.contact-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-top: 1rem;
+	}
+	.copy-email-btn {
+		border: 1.5px solid rgb(var(--black));
+		background: var(--surface);
+		color: rgb(var(--black));
+		font: inherit;
+		text-transform: uppercase;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.03em;
+		padding: 0.45rem 0.7rem;
+		cursor: pointer;
+		transition:
+			transform 180ms var(--ease-out-quart),
+			background-color 180ms var(--ease-out-quart),
+			color 180ms var(--ease-out-quart),
+			box-shadow 180ms var(--ease-out-quart);
+	}
+	.copy-email-btn:hover {
+		background: rgb(var(--black));
+		color: var(--surface);
+		transform: translateY(-2px);
+		box-shadow: 3px 3px 0 rgb(var(--black));
+	}
+	.copy-email-btn:active,
+	.copy-email-btn.copied {
+		transform: translateY(1px) scale(0.98);
+		box-shadow: none;
+	}
+	.copy-feedback {
+		font-size: 0.78rem;
+		font-family: var(--font-mono);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		min-height: 1.2em;
+	}
+	.copy-feedback[data-state='success'] {
+		color: var(--accent);
+	}
+	.copy-feedback[data-state='error'] {
+		color: rgb(var(--black));
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.contact-shell,
+		.contact-shell a,
+		.copy-email-btn {
+			transition: none;
+			will-change: auto;
+		}
+		.contact-shell:hover {
+			transform: none;
+			box-shadow: none;
+		}
+		.copy-email-btn:hover,
+		.copy-email-btn:active,
+		.copy-email-btn.copied {
+			transform: none;
+			box-shadow: none;
+		}
+	}
+</style>

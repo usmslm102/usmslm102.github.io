@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import RouteMotion from '../components/RouteMotion.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
@@ -13,7 +14,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main class="about-page">
-			<section class="intro">
+			<section class="intro" data-route-reveal style="--stagger: 0;">
 				<h1>About</h1>
 				<p>
 					I am Usama Ansari, a Senior Software Engineer with 12.3+ years of experience designing and
@@ -25,10 +26,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				</p>
 			</section>
 
-			<section>
+			<section data-route-reveal style="--stagger: 1;">
 				<h2>Career Timeline</h2>
 				<ol class="timeline">
-					<li class="timeline-item">
+					<li class="timeline-item" data-route-reveal style="--stagger: 2;">
 						<div class="period">May 2016 - Present</div>
 						<div class="card">
 							<h3>Microsoft - Software Engineer 2</h3>
@@ -70,7 +71,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 						</div>
 					</li>
 
-					<li class="timeline-item">
+					<li class="timeline-item" data-route-reveal style="--stagger: 3;">
 						<div class="period">Nov 2013 - Apr 2016</div>
 						<div class="card">
 							<h3>Capgemini - Software Engineer</h3>
@@ -88,7 +89,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 						</div>
 					</li>
 
-					<li class="timeline-item">
+					<li class="timeline-item" data-route-reveal style="--stagger: 4;">
 						<div class="period">Jul 2013</div>
 						<div class="card">
 							<h3>Bachelor of Science in Information Technology</h3>
@@ -98,6 +99,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				</ol>
 			</section>
 		</main>
+		<RouteMotion />
 		<Footer />
 	</body>
 </html>
@@ -143,6 +145,16 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		border: 1px solid rgb(var(--gray-light));
 		border-radius: 8px;
 		padding: 1rem 1rem 0.75rem;
+		transition:
+			transform 260ms var(--ease-out-quart),
+			box-shadow 260ms var(--ease-out-quart),
+			border-color 260ms var(--ease-out-quart);
+		will-change: transform;
+	}
+	.timeline-item:hover .card {
+		transform: translateY(-3px);
+		box-shadow: 4px 4px 0 rgb(var(--black));
+		border-color: rgb(var(--black));
 	}
 	.card h3 {
 		margin-bottom: 0.25rem;
@@ -156,5 +168,16 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	.card ul {
 		margin: 0;
 		padding-left: 1.1rem;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.card {
+			transition: none;
+			will-change: auto;
+		}
+		.timeline-item:hover .card {
+			transform: none;
+			box-shadow: none;
+		}
 	}
 </style>

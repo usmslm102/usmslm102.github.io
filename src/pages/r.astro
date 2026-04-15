@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import RouteMotion from '../components/RouteMotion.astro';
 import { SITE_TITLE } from '../consts';
 
 const PDF_URL = '/Resumes_Usama_12yrs.pdf';
@@ -17,15 +18,18 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 	<body>
 		<Header />
 		<main class="resume-page">
-			<section class="intro">
+			<section class="intro" data-route-reveal style="--stagger: 0;">
 				<h1>Resume</h1>
 				<p>
 					View the latest PDF resume below or download a copy.
 				</p>
-				<a class="download-btn" href={PDF_URL} download>Download PDF</a>
+				<div class="download-actions">
+					<a class="download-btn" href={PDF_URL} download data-resume-download>Download PDF</a>
+					<span class="download-feedback" data-download-feedback aria-live="polite"></span>
+				</div>
 			</section>
 
-			<section class="viewer" aria-label="Resume PDF preview">
+			<section class="viewer" aria-label="Resume PDF preview" data-route-reveal style="--stagger: 1;">
 				<div class="desktop-viewer">
 					<object data={EMBED_PDF_URL} type="application/pdf" class="pdf-frame pdf-frame-desktop">
 						<p>
@@ -44,6 +48,22 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 				</div>
 			</section>
 		</main>
+		<script is:inline>
+			const downloadButton = document.querySelector('[data-resume-download]');
+			const downloadFeedback = document.querySelector('[data-download-feedback]');
+			const notices = ['Download started.', 'Resume on the way.'];
+
+			downloadButton?.addEventListener('click', () => {
+				if (!downloadFeedback) return;
+				downloadFeedback.textContent = notices[Math.floor(Math.random() * notices.length)];
+				downloadFeedback.dataset.state = 'active';
+				window.setTimeout(() => {
+					downloadFeedback.textContent = '';
+					delete downloadFeedback.dataset.state;
+				}, 1800);
+			});
+		</script>
+		<RouteMotion />
 		<Footer />
 	</body>
 </html>
@@ -70,17 +90,48 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		text-decoration: none;
 		color: rgb(var(--black));
 		background: var(--surface);
+		transition:
+			transform 220ms var(--ease-out-quart),
+			background-color 220ms var(--ease-out-quart),
+			color 220ms var(--ease-out-quart),
+			box-shadow 220ms var(--ease-out-quart);
+		will-change: transform;
+	}
+	.download-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+	.download-feedback {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		min-height: 1.2em;
+	}
+	.download-feedback[data-state='active'] {
+		color: var(--accent);
 	}
 
 	.download-btn:hover {
 		background: rgb(var(--black));
 		color: var(--surface);
+		transform: translateY(-2px) scale(1.02);
+		box-shadow: 3px 3px 0 rgb(var(--black));
 	}
 
 	.viewer {
 		border: 1px solid rgb(var(--gray-light));
 		background: #f8f7f4;
 		padding: 0.5rem;
+		transition:
+			transform 260ms var(--ease-out-quart),
+			box-shadow 260ms var(--ease-out-quart);
+		will-change: transform;
+	}
+	.viewer:hover {
+		transform: translateY(-2px);
+		box-shadow: 4px 4px 0 rgb(var(--black));
 	}
 
 	.pdf-frame {
@@ -103,6 +154,11 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 	}
 
 	@media (max-width: 720px) {
+		.download-actions {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.5rem;
+		}
 		.desktop-viewer {
 			display: none !important;
 		}
@@ -122,6 +178,19 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		.pdf-frame {
 			height: 75vh;
 			min-height: 520px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.download-btn,
+		.viewer {
+			transition: none;
+			will-change: auto;
+		}
+		.download-btn:hover,
+		.viewer:hover {
+			transform: none;
+			box-shadow: none;
 		}
 	}
 </style>

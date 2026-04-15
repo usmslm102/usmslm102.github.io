@@ -20,24 +20,24 @@ const latestPosts = (await getCollection('blog'))
 		<Header />
 		<main class="home">
 			<section class="hero">
-				<h1>Hi, I’m Usama.</h1>
-				<p>
+				<h1 data-reveal="hero" style="--hero-order: 0;">Hi, I’m Usama.</h1>
+				<p data-reveal="hero" style="--hero-order: 1;">
 					I write about engineering, product thinking, and lessons learned while building things on the
 					internet.
 				</p>
-				<div class="actions">
+				<div class="actions" data-reveal="hero" style="--hero-order: 2;">
 					<a href="/blog">Read the blog</a>
 					<a href="/contact">Get in touch</a>
 				</div>
 			</section>
 
-			<section class="about-dossier" aria-label="About Me">
+			<section class="about-dossier" aria-label="About Me" data-reveal>
 				<div class="dossier-grid">
-					<div class="dossier-block">
+					<div class="dossier-block" data-reveal style="--stagger: 0;">
 						<h3>Current Status</h3>
 						<p>Engineering systems, writing about the process, and building robust web architectures.</p>
 					</div>
-					<div class="dossier-block">
+					<div class="dossier-block" data-reveal style="--stagger: 1;">
 						<h3>Core Stack</h3>
 						<ul class="mono-list">
 							<li>TypeScript / Node.js</li>
@@ -45,22 +45,22 @@ const latestPosts = (await getCollection('blog'))
 							<li>Docker / Azure CI/CD</li>
 						</ul>
 					</div>
-					<div class="dossier-block">
+					<div class="dossier-block" data-reveal style="--stagger: 2;">
 						<h3>Philosophy</h3>
 						<p>Build durable tools. Write clear documentation. Keep the web fast and weird.</p>
 					</div>
 				</div>
 			</section>
 
-			<section class="latest">
-				<div class="section-head">
+			<section class="latest" data-reveal>
+				<div class="section-head" data-reveal>
 					<h2>Latest writing</h2>
 					<a href="/blog">View all posts</a>
 				</div>
 				<ul>
 					{
-						latestPosts.map((post) => (
-							<li>
+						latestPosts.map((post, index) => (
+							<li class="latest-item" data-reveal style={`--stagger: ${index};`}>
 								<p class="meta">
 									<FormattedDate date={post.data.pubDate} />
 								</p>
@@ -74,10 +74,38 @@ const latestPosts = (await getCollection('blog'))
 				</ul>
 			</section>
 		</main>
+		<script is:inline>
+			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (!prefersReducedMotion) {
+				document.documentElement.classList.add('motion-ready');
+				const revealElements = document.querySelectorAll('[data-reveal]:not([data-reveal="hero"])');
+				if ('IntersectionObserver' in window) {
+					const observer = new IntersectionObserver(
+						(entries) => {
+							entries.forEach((entry) => {
+								if (entry.isIntersecting) {
+									entry.target.classList.add('in-view');
+									observer.unobserve(entry.target);
+								}
+							});
+						},
+						{ threshold: 0.2, rootMargin: '0px 0px -10% 0px' },
+					);
+					revealElements.forEach((element) => observer.observe(element));
+				} else {
+					revealElements.forEach((element) => element.classList.add('in-view'));
+				}
+			}
+		</script>
 		<Footer />
 	</body>
 </html>
 <style>
+	:root {
+		--ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+		--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
 	.home {
 		display: grid;
 		gap: 3rem;
@@ -116,11 +144,22 @@ const latestPosts = (await getCollection('blog'))
 		padding: 0.5rem 1rem;
 		text-decoration: none;
 		color: rgb(var(--black));
-		transition: all 0.2s ease;
+		transition:
+			transform 220ms var(--ease-out-quart),
+			background-color 220ms var(--ease-out-quart),
+			color 220ms var(--ease-out-quart),
+			box-shadow 220ms var(--ease-out-quart);
+		will-change: transform;
 	}
 	.actions a:hover {
 		background: rgb(var(--black));
 		color: var(--surface);
+		transform: translateY(-2px) scale(1.02);
+		box-shadow: 3px 3px 0 rgb(var(--black));
+	}
+	.actions a:active {
+		transform: translateY(0) scale(0.98);
+		transition-duration: 120ms;
 	}
 	.section-head {
 		display: flex;
@@ -151,10 +190,13 @@ const latestPosts = (await getCollection('blog'))
 		border: 1.5px solid rgb(var(--black));
 		padding: 1.5rem;
 		background: var(--surface);
-		transition: transform 0.2s ease;
+		transition:
+			transform 260ms var(--ease-out-quart),
+			box-shadow 260ms var(--ease-out-quart);
+		will-change: transform;
 	}
 	.latest li:hover {
-		transform: translateY(-2px);
+		transform: translateY(-4px);
 		box-shadow: 4px 4px 0 rgb(var(--black));
 	}
 	.latest h3 {
@@ -194,6 +236,14 @@ const latestPosts = (await getCollection('blog'))
 	.dossier-block {
 		padding: 1.5rem;
 		background: var(--surface); /* Item background */
+		transition:
+			transform 260ms var(--ease-out-quart),
+			box-shadow 260ms var(--ease-out-quart);
+		will-change: transform;
+	}
+	.dossier-block:hover {
+		transform: translateY(-3px);
+		box-shadow: 3px 3px 0 rgb(var(--black));
 	}
 	.dossier-block h3 {
 		font-family: var(--font-mono);
@@ -209,5 +259,59 @@ const latestPosts = (await getCollection('blog'))
 		list-style: square; 
 		padding-left: 1.25rem; 
 		margin: 0;
+	}
+
+	html.motion-ready .hero [data-reveal='hero'] {
+		opacity: 0;
+		animation: hero-reveal 700ms var(--ease-out-expo) forwards;
+		animation-delay: calc(var(--hero-order, 0) * 120ms + 80ms);
+	}
+	html.motion-ready [data-reveal]:not([data-reveal='hero']) {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+	html.motion-ready [data-reveal].in-view {
+		animation: section-reveal 520ms var(--ease-out-quart) forwards;
+		animation-delay: calc(var(--stagger, 0) * 90ms);
+	}
+
+	@keyframes hero-reveal {
+		from {
+			opacity: 0;
+			transform: translateY(16px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes section-reveal {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.actions a,
+		.latest li,
+		.dossier-block {
+			transition: none;
+			transform: none;
+			box-shadow: none;
+			will-change: auto;
+		}
+		html.motion-ready .hero [data-reveal='hero'],
+		html.motion-ready [data-reveal]:not([data-reveal='hero']),
+		html.motion-ready [data-reveal].in-view {
+			opacity: 1;
+			transform: none;
+			animation: none;
+		}
 	}
 </style>
