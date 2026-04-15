@@ -28,7 +28,7 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 					<button class="copy-email-btn" type="button" data-copy-email data-email={CONTACT_EMAIL}>
 						Copy email
 					</button>
-					<span class="copy-feedback" data-copy-feedback aria-live="polite"></span>
+					<span class="copy-feedback" data-copy-feedback aria-live="polite" role="status"></span>
 				</div>
 			</section>
 		</main>
@@ -98,6 +98,7 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 	.contact-actions {
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 		gap: 0.75rem;
 		margin-top: 1rem;
 	}
@@ -111,6 +112,7 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 		font-weight: 700;
 		letter-spacing: 0.03em;
 		padding: 0.45rem 0.7rem;
+		min-height: 2.75rem;
 		cursor: pointer;
 		transition:
 			transform 180ms var(--ease-out-quart),
@@ -128,6 +130,10 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 	.copy-email-btn.copied {
 		transform: translateY(1px) scale(0.98);
 		box-shadow: none;
+	}
+	.copy-email-btn:focus-visible {
+		outline: 2px solid var(--ink-blue);
+		outline-offset: 2px;
 	}
 	.copy-feedback {
 		font-size: 0.78rem;

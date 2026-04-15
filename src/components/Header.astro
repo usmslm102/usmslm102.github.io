@@ -69,7 +69,11 @@ import HeaderLink from './HeaderLink.astro';
 		gap: 0.35rem;
 	}
 	nav a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 		padding: 0.4rem 0.6rem;
+		min-height: 2.75rem;
 		color: rgb(var(--black));
 		text-decoration: none;
 		font-weight: 700;
@@ -96,6 +100,7 @@ import HeaderLink from './HeaderLink.astro';
 	}
 	.social-links a {
 		color: var(--ink-blue);
+		min-width: 2.75rem;
 	}
 	@media (max-width: 720px) {
 		header {
@@ -109,6 +114,7 @@ import HeaderLink from './HeaderLink.astro';
 			order: 3;
 			width: 100%;
 			justify-content: center;
+			flex-wrap: wrap;
 		}
 		.social-links {
 			margin-left: auto;

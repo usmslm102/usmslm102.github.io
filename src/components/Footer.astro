@@ -33,10 +33,16 @@ const year = new Date().getFullYear();
 		display: flex;
 		justify-content: center;
 		gap: 1rem;
+		flex-wrap: wrap;
 	}
 	.social-links a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 		font-weight: 700;
 		padding: 0.2rem 0.45rem;
+		min-height: 2.75rem;
+		min-width: 2.75rem;
 		border: 1px solid color-mix(in oklch, var(--ink-blue) 36%, white);
 		background: color-mix(in oklch, var(--ink-blue-soft) 65%, white);
 		text-decoration: none;
@@ -49,5 +55,8 @@ const year = new Date().getFullYear();
 		background: var(--accent);
 		color: oklch(0.23 0.04 36);
 		transform: translateY(-1px);
+	}
+	.social-links a:active {
+		transform: translateY(0);
 	}
 </style>

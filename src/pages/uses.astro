@@ -167,7 +167,7 @@ const sections = [
 		max-width: 60ch;
 		font-family: var(--font-mono);
 		font-size: 0.9rem;
-		color: rgb(var(--gray));
+		color: color-mix(in oklch, var(--ink-blue) 55%, rgb(var(--gray-dark)));
 		margin: 0;
 	}
 
@@ -214,6 +214,7 @@ const sections = [
 		align-items: baseline;
 		gap: 0.5rem;
 		padding: 0.3rem 0;
+		min-height: 2.5rem;
 		font-family: var(--font-mono);
 		font-size: 0.78rem;
 		text-decoration: none;
