@@ -246,3 +246,16 @@ hr {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* Shared interaction and accessibility baseline. */
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:8rem}
+body{background:var(--surface)}
+button{font-family:var(--font-ui)}
+:root{--surface:oklch(.977 .009 85);--surface-alt:oklch(.95 .012 85);--accent:oklch(.58 .17 35);--accent-dark:oklch(.47 .15 35);--accent-soft:oklch(.93 .025 250);--ink-blue:oklch(.4 .09 258);--ink-blue-soft:oklch(.95 .016 255)}
+a:hover{background-color:var(--accent-soft);color:var(--ink-blue)}
+.skip-link{position:fixed;top:-100px;left:1rem;z-index:100;background:var(--surface);padding:1rem}.skip-link:focus{top:1rem}
+footer p{margin-inline:auto}
+.prose{min-width:0}.prose img{filter:none}.prose pre{max-width:100%}.prose table{display:block;overflow-x:auto}.prose :where(h2,h3,h4){scroll-margin-top:8rem}
+@media(max-width:720px){main{max-width:calc(100% - 2rem)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}a:hover,li:hover{transform:none!important}}

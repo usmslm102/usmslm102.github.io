@@ -6,7 +6,7 @@ pubDate: "2019-12-09"
 
 >Visual Studio Code is an **open source** cross-platform code editor developed by Microsoft which runs on Windows, Mac, and Linux.
 
-######Top Features:
+###### Top Features:
 1. Cross-platform runs everywhere
 2. Free and Open Source
 3. Very Lightweight (Believe me it's fast ⚡)
@@ -15,13 +15,13 @@ pubDate: "2019-12-09"
 6. Built-in Git Support ❤
 7. Highly customization (thousands of great extensions)
 
-######Where to get?
+###### Where to get?
 You can download VS code from **https://code.visualstudio.com/**
 The source code is hosted on **[GitHub](https://github.com/Microsoft/vscode)**
 
 VS code has thousands of great extensions built by communities and individual developers. You can explore all extensions at **[Visual Studio Marketplace](https://marketplace.visualstudio.com/vscode)**
 
-#####Below are my favorite extensions:
+##### Below are my favorite extensions:
 
 >**[Settings Sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)**
 
@@ -91,7 +91,7 @@ If you ever co-authored any document either in google docs or Microsoft word the
 This is really cool I would encourage you to give it a shot you will ❤ it. It even works with Visual Studio.
 **[VS Live Share](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare)**
 <hr/>
-###Themes
+### Themes
 
 I told you VS code is highly customizable code editor and we have tons of Themes in VS code marketplace [Themes](https://marketplace.visualstudio.com/search?target=VSCode&category=Themes&sortBy=Downloads) section. Below are my two favorite themes.
 

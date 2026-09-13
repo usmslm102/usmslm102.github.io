@@ -17,181 +17,22 @@ const posts = (await getCollection('blog')).sort(
 <html lang="en">
 	<head>
 		<BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				max-width: 980px;
-			}
-			.blog-intro {
-				margin-bottom: 2rem;
-				padding-bottom: 0.8rem;
-				border-bottom: 2px solid color-mix(in oklch, var(--accent) 45%, var(--ink-blue));
-			}
-			.blog-intro h1 {
-				margin-bottom: 0.5rem;
-			}
-			.blog-intro p {
-				max-width: 60ch;
-				font-size: 1.05rem;
-				line-height: 1.7;
-			}
-			ul {
-				display: grid;
-				gap: 1.5rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			li {
-				width: 100%;
-				border-bottom: 2px solid color-mix(in oklch, var(--ink-blue) 35%, rgb(var(--black)));
-				padding-bottom: 1.5rem;
-				transition:
-					transform 260ms var(--ease-out-quart),
-					box-shadow 260ms var(--ease-out-quart);
-				will-change: transform;
-				background: color-mix(in oklch, var(--surface) 85%, var(--ink-blue-soft));
-			}
-			li:nth-child(odd) {
-				background: color-mix(in oklch, var(--surface) 84%, var(--accent-soft));
-			}
-			li:hover {
-				transform: translateY(-3px);
-				box-shadow: 4px 4px 0 color-mix(in oklch, var(--ink-blue) 56%, rgb(var(--black)));
-			}
-			.post {
-				display: block;
-			}
-			.post.with-image {
-				display: grid;
-				grid-template-columns: 240px 1fr;
-				gap: 1.5rem;
-				align-items: start;
-			}
-			.content {
-				width: 100%;
-				max-width: 72ch;
-			}
-			.post img {
-				width: 100%;
-				height: auto;
-				border-radius: 0;
-				border: 1px solid color-mix(in oklch, var(--ink-blue) 34%, rgb(var(--black)));
-				filter: grayscale(8%) contrast(1.06);
-				transition: transform 260ms var(--ease-out-quart);
-				will-change: transform;
-			}
-			.post.with-image:hover img {
-				transform: scale(1.01);
-			}
-			.title {
-				margin: 0;
-				line-height: 1.14;
-				font-size: clamp(1.4rem, 2.4vw, 1.95rem);
-			}
-			.title a {
-				overflow-wrap: anywhere;
-				word-break: normal;
-			}
-			.date {
-				margin: 0 0 0.35rem;
-				color: var(--ink-blue);
-				font-size: 0.76rem;
-				font-family: var(--font-mono);
-				font-weight: 600;
-				letter-spacing: 0.06em;
-				text-transform: uppercase;
-				font-variant-numeric: tabular-nums;
-				display: flex;
-				align-items: center;
-				gap: 0.55rem;
-			}
-			.fresh-pill {
-				display: inline-flex;
-				align-items: center;
-				border: 1.5px solid var(--success);
-				color: var(--success);
-				font-size: 0.62rem;
-				font-weight: 700;
-				letter-spacing: 0.08em;
-				text-transform: uppercase;
-				padding: 0.08rem 0.35rem;
-				line-height: 1.3;
-				animation: fresh-pop 760ms var(--ease-out-expo) 120ms both;
-			}
-			.description {
-				margin: 0.5rem 0 0;
-				max-width: 65ch;
-				color: rgb(var(--gray-dark));
-				line-height: 1.72;
-			}
-			.post span {
-				text-decoration: none;
-			}
-			.title a:hover {
-				background-color: transparent;
-				color: var(--accent);
-			}
-			@media (max-width: 720px) {
-				main {
-					max-width: calc(100% - 1rem);
-				}
-				ul {
-					gap: 1.2rem;
-				}
-				li {
-					padding-bottom: 1.2rem;
-				}
-				.post.with-image {
-					grid-template-columns: 1fr;
-				}
-				.title {
-					font-size: 1.45rem;
-				}
-				.description {
-					max-width: 100%;
-					font-size: 1rem;
-					line-height: 1.65;
-				}
-			}
-			@media (prefers-reduced-motion: reduce) {
-				li,
-				.post img {
-					transition: none;
-					will-change: auto;
-				}
-				.fresh-pill {
-					animation: none;
-				}
-				li:hover,
-				.post.with-image:hover img {
-					transform: none;
-					box-shadow: none;
-				}
-			}
-			@keyframes fresh-pop {
-				from {
-					opacity: 0;
-					transform: translateY(4px) scale(0.96);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0) scale(1);
-				}
-			}
-		</style>
+
 	</head>
 	<body>
 		<Header />
-		<main>
+		<main id="main-content" tabindex="-1">
 			<section class="blog-intro">
-				<h1 data-route-reveal style="--stagger: 0;">Blog</h1>
+				<p class="eyebrow">THE NOTEBOOK</p><h1 data-route-reveal style="--stagger: 0;">Notes from the build.</h1>
 				<p>Essays, notes, and practical lessons from shipping products.</p>
 			</section>
-			<section>
-				<ul>
+			<section aria-label="Blog posts">
+                <div class="search-tools" hidden><label for="post-search">Find something worth reading<input id="post-search" type="search" placeholder="Search Docker, Git, VS Code…" /></label><p id="search-count" role="status">4 posts</p></div>
+                <p id="no-results" hidden>No matching posts. Try another topic or clear your search.</p>
+                <ul>
 					{
 						posts.map((post, index) => (
-							<li data-route-reveal style={`--stagger: ${index + 1};`}>
+							<li data-post data-search={`${post.data.title} ${post.data.description} ${post.body ?? ''}`.toLowerCase()} data-route-reveal style={`--stagger: ${index + 1};`}>
 								<article class:list={['post', { 'with-image': !!post.data.heroImage }]}>
 									{post.data.heroImage && (
 										<a href={`/blog/${post.id}/`}>
@@ -219,3 +60,231 @@ const posts = (await getCollection('blog')).sort(
 		<Footer />
 	</body>
 </html>
+
+<script>
+const search = document.querySelector<HTMLInputElement>('#post-search')!;
+document.querySelector<HTMLElement>('.search-tools')!.hidden = false;
+const posts = Array.from(document.querySelectorAll<HTMLElement>('[data-post]'));
+const filter = () => { const words = search.value.toLowerCase().trim().split(/\s+/).filter(Boolean); let count = 0; posts.forEach(post => { post.hidden = !words.every(word => post.dataset.search!.includes(word)); if (!post.hidden)
+    count++; }); document.querySelector('#search-count')!.textContent = `${count} ${count === 1 ? 'post' : 'posts'}`; document.querySelector<HTMLElement>('#no-results')!.hidden = count !== 0; };
+search.addEventListener('input', filter);
+filter();
+</script>
+
+
+<style>
+	main {
+		max-width: 980px;
+	}
+	.blog-intro {
+		margin-bottom: 2rem;
+		padding-bottom: 0.8rem;
+		border-bottom: 2px solid color-mix(in oklch, var(--accent) 45%, var(--ink-blue));
+	}
+	.blog-intro h1 {
+		margin-bottom: 0.5rem;
+	}
+	.blog-intro p {
+		max-width: 60ch;
+		font-size: 1.05rem;
+		line-height: 1.7;
+	}
+	ul {
+		display: grid;
+		gap: 1.5rem;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		width: 100%;
+		border-bottom: 2px solid color-mix(in oklch, var(--ink-blue) 35%, rgb(var(--black)));
+		padding-bottom: 1.5rem;
+		transition: transform 260ms var(--ease-out-quart),
+					box-shadow 260ms var(--ease-out-quart);
+		will-change: transform;
+		background: color-mix(in oklch, var(--surface) 85%, var(--ink-blue-soft));
+	}
+	li:nth-child(odd) {
+		background: color-mix(in oklch, var(--surface) 84%, var(--accent-soft));
+	}
+	li:hover {
+		transform: translateY(-3px);
+		box-shadow: 4px 4px 0 color-mix(in oklch, var(--ink-blue) 56%, rgb(var(--black)));
+	}
+	.post {
+		display: block;
+	}
+	.post.with-image {
+		display: grid;
+		grid-template-columns: 240px 1fr;
+		gap: 1.5rem;
+		align-items: start;
+	}
+	.content {
+		width: 100%;
+		max-width: 72ch;
+	}
+	.post img {
+		width: 100%;
+		height: auto;
+		border-radius: 0;
+		border: 1px solid color-mix(in oklch, var(--ink-blue) 34%, rgb(var(--black)));
+		filter: grayscale(8%) contrast(1.06);
+		transition: transform 260ms var(--ease-out-quart);
+		will-change: transform;
+	}
+	.post.with-image:hover img {
+		transform: scale(1.01);
+	}
+	.title {
+		margin: 0;
+		line-height: 1.14;
+		font-size: clamp(1.4rem, 2.4vw, 1.95rem);
+	}
+	.title a {
+		overflow-wrap: anywhere;
+		word-break: normal;
+	}
+	.date {
+		margin: 0 0 0.35rem;
+		color: var(--ink-blue);
+		font-size: 0.76rem;
+		font-family: var(--font-mono);
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		font-variant-numeric: tabular-nums;
+		display: flex;
+		align-items: center;
+		gap: 0.55rem;
+	}
+	.fresh-pill {
+		display: inline-flex;
+		align-items: center;
+		border: 1.5px solid var(--success);
+		color: var(--success);
+		font-size: 0.62rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		padding: 0.08rem 0.35rem;
+		line-height: 1.3;
+		animation: fresh-pop 760ms var(--ease-out-expo) 120ms both;
+	}
+	.description {
+		margin: 0.5rem 0 0;
+		max-width: 65ch;
+		color: rgb(var(--gray-dark));
+		line-height: 1.72;
+	}
+	.post span {
+		text-decoration: none;
+	}
+	.title a:hover {
+		background-color: transparent;
+		color: var(--accent);
+	}
+	@media (max-width: 720px) {
+		main {
+			max-width: calc(100% - 1rem);
+		}
+		ul {
+			gap: 1.2rem;
+		}
+		li {
+			padding-bottom: 1.2rem;
+		}
+		.post.with-image {
+			grid-template-columns: 1fr;
+		}
+		.title {
+			font-size: 1.45rem;
+		}
+		.description {
+			max-width: 100%;
+			font-size: 1rem;
+			line-height: 1.65;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		li,
+				.post img {
+			transition: none;
+			will-change: auto;
+		}
+		.fresh-pill {
+			animation: none;
+		}
+		li:hover,
+				.post.with-image:hover img {
+			transform: none;
+			box-shadow: none;
+		}
+	}
+	@keyframes fresh-pop {
+		from {
+			opacity: 0;
+			transform: translateY(4px) scale(0.96);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+	main {
+		width: 1000px;
+		padding-top: 4rem
+	}
+	.blog-intro h1 {
+		font-size: clamp(3.4rem,7vw,5.7rem)
+	}
+	.eyebrow {
+		font-size: .65rem!important;
+		letter-spacing: .15em;
+		color: var(--ink-blue)
+	}
+	.search-tools {
+		display: flex;
+		justify-content: space-between;
+		align-items: end;
+		gap: 1rem;
+		margin: 2rem 0 3rem
+	}
+	.search-tools label {
+		display: grid;
+		gap: .7rem;
+		font-size: .75rem;
+		flex: 1;
+		max-width: 600px
+	}
+	.search-tools input {
+		padding: .9rem 1rem;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 4px;
+		width: 100%
+	}
+	.search-tools p {
+		font-size: .7rem;
+		white-space: nowrap
+	}
+	li,li:nth-child(odd) {
+		background: transparent
+	}
+	li:hover {
+		box-shadow: none;
+		transform: translateX(4px)
+	}
+	.title a {
+		text-decoration: none
+	}
+	.content {
+		padding: .5rem 0
+	}
+	.fresh-pill {
+		color: var(--ink-blue);
+		border-color: var(--ink-blue)
+	}
+
+
+</style>

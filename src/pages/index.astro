@@ -4,6 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import Orbit from '../components/Orbit.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 const latestPosts = (await getCollection('blog'))
@@ -18,18 +19,17 @@ const latestPosts = (await getCollection('blog'))
 	</head>
 	<body>
 		<Header />
-		<main class="home">
-			<section class="hero">
-				<h1 data-reveal="hero" style="--hero-order: 0;">Hi, I’m Usama.</h1>
-				<p data-reveal="hero" style="--hero-order: 1;">
-					I write about engineering, product thinking, and lessons learned while building things on the
-					internet.
-				</p>
-				<div class="actions" data-reveal="hero" style="--hero-order: 2;">
-					<a href="/blog">Read the blog</a>
-					<a href="/contact">Get in touch</a>
-				</div>
-			</section>
+		<main id="main-content" tabindex="-1" class="home">
+            <section class="hero">
+                <div class="hero-copy">
+                    <p class="eyebrow" data-reveal="hero" style="--hero-order:0">ENGINEER. WRITER. CURIOUS HUMAN.</p>
+                    <h1 data-reveal="hero" style="--hero-order:1">Hi, I’m Usama.<br /><em>I make things<br />that work.</em></h1>
+                    <p data-reveal="hero" style="--hero-order:2">I build systems for the web and write about what I learn along the way. A space for engineering, experiments, and the occasional rabbit hole.</p>
+                    <div class="actions" data-reveal="hero" style="--hero-order:3"><a href="/blog">Explore the writing ↗</a><a href="/about">A little about me →</a></div>
+                </div>
+                <Orbit />
+            </section>
+            <div class="home-index"><span>INDEPENDENT THINKING. DURABLE SOFTWARE.</span><a href="#writing">SCROLL TO EXPLORE ↓</a></div>
 
 			<section class="about-dossier" aria-label="About Me" data-reveal>
 				<div class="dossier-grid">
@@ -52,7 +52,7 @@ const latestPosts = (await getCollection('blog'))
 				</div>
 			</section>
 
-			<section class="latest" data-reveal>
+			<section class="latest" id="writing" data-reveal>
 				<div class="section-head" data-reveal>
 					<h2>Latest writing</h2>
 					<a href="/blog">View all posts</a>
@@ -73,7 +73,8 @@ const latestPosts = (await getCollection('blog'))
 					}
 				</ul>
 			</section>
-		</main>
+            <a class="uses-teaser" href="/uses"><span class="eyebrow">BEHIND THE SCENES / 02</span><span class="teaser-title">Good tools.<br /><em>Better headspace.</em></span><span>Step inside my setup ↗</span></a>
+        </main>
 		<script is:inline>
 			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 			if (!prefersReducedMotion) {
@@ -89,7 +90,7 @@ const latestPosts = (await getCollection('blog'))
 								}
 							});
 						},
-						{ threshold: 0.2, rootMargin: '0px 0px -10% 0px' },
+						{ threshold: 0, rootMargin: '0px 0px -24px 0px' },
 					);
 					revealElements.forEach((element) => observer.observe(element));
 				} else {
@@ -100,6 +101,10 @@ const latestPosts = (await getCollection('blog'))
 		<Footer />
 	</body>
 </html>
+
+
+
+
 <style>
 	.home {
 		display: grid;
@@ -133,8 +138,7 @@ const latestPosts = (await getCollection('blog'))
 		text-decoration: none;
 		color: rgb(var(--black));
 		background: color-mix(in oklch, var(--ink-blue-soft) 62%, var(--surface));
-		transition:
-			transform 220ms var(--ease-out-quart),
+		transition: transform 220ms var(--ease-out-quart),
 			background-color 220ms var(--ease-out-quart),
 			color 220ms var(--ease-out-quart),
 			box-shadow 220ms var(--ease-out-quart);
@@ -186,8 +190,7 @@ const latestPosts = (await getCollection('blog'))
 		border: 1.5px solid color-mix(in oklch, var(--ink-blue) 30%, rgb(var(--black)));
 		padding: 1.5rem;
 		background: color-mix(in oklch, var(--ink-blue-soft) 66%, var(--surface));
-		transition:
-			transform 260ms var(--ease-out-quart),
+		transition: transform 260ms var(--ease-out-quart),
 			box-shadow 260ms var(--ease-out-quart);
 		will-change: transform;
 	}
@@ -224,22 +227,24 @@ const latestPosts = (await getCollection('blog'))
 		padding-bottom: 0.25rem;
 		margin-bottom: 0.5rem;
 	}
-
-	.about-dossier { 
-		margin: 4rem 0; 
+	.about-dossier {
+		margin: 4rem 0;
 	}
 	.dossier-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-		gap: 1.5px; /* Creates inner borders */
-		background: color-mix(in oklch, var(--accent) 35%, var(--ink-blue)); /* Color of borders */
-		border: 1.5px solid color-mix(in oklch, var(--ink-blue) 55%, rgb(var(--black))); /* Outer border */
+		gap: 1.5px;
+		/* Creates inner borders */
+		background: color-mix(in oklch, var(--accent) 35%, var(--ink-blue));
+		/* Color of borders */
+		border: 1.5px solid color-mix(in oklch, var(--ink-blue) 55%, rgb(var(--black)));
+		/* Outer border */
 	}
 	.dossier-block {
 		padding: 1.5rem;
-		background: color-mix(in oklch, var(--ink-blue-soft) 55%, var(--surface)); /* Item background */
-		transition:
-			transform 260ms var(--ease-out-quart),
+		background: color-mix(in oklch, var(--ink-blue-soft) 55%, var(--surface));
+		/* Item background */
+		transition: transform 260ms var(--ease-out-quart),
 			box-shadow 260ms var(--ease-out-quart);
 		will-change: transform;
 	}
@@ -263,16 +268,15 @@ const latestPosts = (await getCollection('blog'))
 		padding-bottom: 0.5rem;
 		margin-bottom: 1rem;
 	}
-	.mono-list { 
-		list-style: square; 
-		padding-left: 1.25rem; 
+	.mono-list {
+		list-style: square;
+		padding-left: 1.25rem;
 		margin: 0;
 		line-height: 1.68;
 	}
 	.mono-list li::marker {
 		color: var(--accent);
 	}
-
 	html.motion-ready .hero [data-reveal='hero'] {
 		opacity: 0;
 		animation: hero-reveal 700ms var(--ease-out-expo) forwards;
@@ -286,7 +290,6 @@ const latestPosts = (await getCollection('blog'))
 		animation: section-reveal 520ms var(--ease-out-quart) forwards;
 		animation-delay: calc(var(--stagger, 0) * 90ms);
 	}
-
 	@keyframes hero-reveal {
 		from {
 			opacity: 0;
@@ -297,7 +300,6 @@ const latestPosts = (await getCollection('blog'))
 			transform: translateY(0);
 		}
 	}
-
 	@keyframes section-reveal {
 		from {
 			opacity: 0;
@@ -308,7 +310,6 @@ const latestPosts = (await getCollection('blog'))
 			transform: translateY(0);
 		}
 	}
-
 	@media (prefers-reduced-motion: reduce) {
 		.actions a,
 		.latest li,
@@ -326,4 +327,176 @@ const latestPosts = (await getCollection('blog'))
 			animation: none;
 		}
 	}
+	.home {
+		width: 1120px;
+		gap: 2rem;
+		padding-top: 4.5rem
+	}
+	.hero {
+		display: grid;
+		grid-template-columns: 1.2fr 1fr;
+		gap: 4rem;
+		align-items: center
+	}
+	.hero h1 {
+		font-size: clamp(3.5rem,6.8vw,6rem);
+		line-height: .99;
+		letter-spacing: -.04em;
+		color: rgb(var(--black));
+		margin: 1.3rem 0 1.7rem
+	}
+	.hero h1 em {
+		font-weight: 400;
+		color: var(--ink-blue)
+	}
+	.hero p {
+		font-size: 1rem;
+		max-width: 43ch
+	}
+	.hero .eyebrow {
+		font-size: .65rem;
+		letter-spacing: .15em;
+		font-weight: 700
+	}
+	.actions {
+		flex-wrap: wrap;
+		font-size: .68rem
+	}
+	.actions a {
+		border-radius: 30px;
+		padding: .8rem 1.2rem
+	}
+	.actions a:first-child {
+		background: var(--ink-blue);
+		color: var(--surface)
+	}
+	.actions a:hover {
+		box-shadow: none
+	}
+	.home-index {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		padding: 2.5rem 0 1rem;
+		font-size: .62rem;
+		letter-spacing: .1em
+	}
+	.home-index a {
+		text-decoration: none
+	}
+	.about-dossier {
+		margin: 2rem 0 3rem
+	}
+	.dossier-grid {
+		background: transparent;
+		border: 0;
+		gap: 3rem
+	}
+	.dossier-block,.dossier-block:nth-child(2),.dossier-block:nth-child(3) {
+		background: transparent;
+		padding: 0
+	}
+	.dossier-block:hover {
+		transform: none;
+		box-shadow: none
+	}
+	.dossier-block h3 {
+		border-bottom: 1px solid rgb(var(--gray-light));
+		font-size: .66rem
+	}
+	.dossier-block p,.mono-list {
+		font-size: .9rem
+	}
+	.latest li,.latest li:nth-child(odd) {
+		background: transparent;
+		border: 0;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		padding: 1.5rem 0
+	}
+	.latest li:hover {
+		box-shadow: none;
+		transform: translateX(5px)
+	}
+	.latest h3 {
+		max-width: 30ch;
+		font-size: clamp(1.7rem,3vw,2.7rem)
+	}
+	.latest li p:not(.meta) {
+		font-size: .9rem
+	}
+	.meta {
+		font-size: .65rem;
+		border: 0;
+		color: var(--ink-blue)
+	}
+	.section-head {
+		border-bottom: 1px solid rgb(var(--black))
+	}
+	.uses-teaser {
+		display: grid;
+		gap: 1.5rem;
+		background: var(--ink-blue);
+		color: var(--surface);
+		padding: 3rem;
+		margin-top: 3rem;
+		text-decoration: none;
+		position: relative;
+		overflow: hidden
+	}
+	.uses-teaser:after {
+		content: '↗';
+		position: absolute;
+		right: 3rem;
+		top: 2rem;
+		font-size: 8rem;
+		transition: transform 400ms var(--ease-out-quart)
+	}
+	.uses-teaser:hover {
+		background: var(--ink-blue);
+		color: var(--surface)
+	}
+	.uses-teaser:hover:after {
+		transform: translate(8px,-8px)
+	}
+	.teaser-title {
+		font: clamp(2.5rem,5vw,4rem)/1.05 var(--font-display)
+	}
+	.uses-teaser .eyebrow {
+		font-size: .65rem;
+		letter-spacing: .12em
+	}
+	@media(max-width:760px) {
+		.home {
+			padding-top: 2.5rem
+		}
+		.hero {
+			grid-template-columns: 1fr;
+			gap: 2rem
+		}
+		.hero h1 {
+			font-size: clamp(3.5rem,12vw,5.5rem)
+		}
+		.hero :global(.orbit-art) {
+			max-width: 460px;
+			width: 100%;
+			margin: auto
+		}
+		.home-index {
+			font-size: .55rem
+		}
+		.dossier-grid {
+			gap: 2rem
+		}
+		.uses-teaser {
+			padding: 2rem
+		}
+		.uses-teaser:after {
+			font-size: 4rem;
+			right: 1rem;
+			top: 3rem
+		}
+	}
+
+
 </style>

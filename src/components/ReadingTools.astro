@@ -1,0 +1,101 @@
+<div class="reading-progress" aria-hidden="true"></div>
+<aside class="reading-tools" hidden aria-label="Reading tools"><span class="reading-time"></span><button class="copy-link" type="button">Copy article link ↗</button><span class="copy-status" role="status"></span><details><summary>On this page</summary><nav aria-label="Article sections"></nav></details></aside>
+<script>
+const prose = document.querySelector<HTMLElement>('.prose');
+if (prose) {
+    const tools = document.querySelector<HTMLElement>('.reading-tools')!;
+    tools.hidden = false;
+    tools.querySelector('.reading-time')!.textContent = `${Math.max(1, Math.ceil((prose.textContent || '').trim().split(/\s+/).length / 220))} min read`;
+    const headings = prose.querySelectorAll<HTMLHeadingElement>('h1,h2,h3,h4,h5,h6');
+    const nav = tools.querySelector('nav')!;
+    headings.forEach((heading, index) => { if (!heading.id)
+        heading.id = `section-${index}`; const a = document.createElement('a'); a.href = `#${heading.id}`; a.textContent = heading.textContent; nav.append(a); });
+    if (!headings.length)
+        tools.querySelector('details')!.hidden = true;
+    tools.querySelector('button')!.addEventListener('click', async () => { const status = tools.querySelector('.copy-status')!; try {
+        await navigator.clipboard.writeText(location.href);
+        status.textContent = 'Link copied';
+    }
+    catch {
+        status.textContent = 'Copy the URL from your address bar.';
+    } });
+    prose.querySelectorAll('pre').forEach(pre => { const button = document.createElement('button'); button.type = 'button'; button.className = 'copy-code'; button.textContent = 'Copy code'; button.addEventListener('click', async () => { try {
+        await navigator.clipboard.writeText(pre.querySelector('code')?.textContent || pre.textContent || '');
+        button.textContent = 'Copied!';
+        setTimeout(() => button.textContent = 'Copy code', 2000);
+    }
+    catch {
+        button.textContent = 'Select code to copy';
+    } }); pre.before(button); });
+    const progress = document.querySelector<HTMLElement>('.reading-progress')!;
+    let ticking = false;
+    const update = () => { const rect = prose.getBoundingClientRect(); const distance = Math.max(1, prose.offsetHeight - innerHeight); progress.style.transform = `scaleX(${Math.max(0, Math.min(1, -rect.top / distance))})`; ticking = false; };
+    addEventListener('scroll', () => { if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+    } }, { passive: true });
+    addEventListener('resize', update);
+    update();
+}
+</script>
+<style>
+	.reading-progress {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		z-index: 60;
+		background: var(--accent);
+		transform: scaleX(0);
+		transform-origin: left
+	}
+	.reading-tools {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin: 1rem 0 2rem;
+		font-size: .75rem
+	}
+	.reading-tools button {
+		background: none;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 20px;
+		padding: .6rem 1rem;
+		color: var(--ink-blue);
+		cursor: pointer
+	}
+	.reading-tools details {
+		width: 100%;
+		border-block: 1px solid rgb(var(--gray-light));
+		padding: 1rem 0
+	}
+	.reading-tools summary {
+		cursor: pointer
+	}
+	.reading-tools nav {
+		display: grid;
+		gap: .6rem;
+		padding: 1rem 0
+	}
+	.reading-tools nav a {
+		max-width: 65ch
+	}
+	.copy-status {
+		font-size: .7rem
+	}
+
+</style>
+<style is:global>
+	.copy-code {
+		display: block;
+		margin: 1rem 0 -.5rem auto;
+		border: 1px solid rgb(var(--gray-light));
+		background: var(--surface);
+		color: var(--ink-blue);
+		padding: .5rem .8rem;
+		cursor: pointer;
+		font-size: .7rem
+	}
+</style>

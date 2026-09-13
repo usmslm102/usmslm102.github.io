@@ -3,6 +3,7 @@ import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
 
+<a class="skip-link" href="#main-content">Skip to content</a>
 <header>
 	<nav aria-label="Primary">
 		<a class="brand" href="/">{SITE_TITLE}</a>
@@ -20,6 +21,10 @@ import HeaderLink from './HeaderLink.astro';
 		</div>
 	</nav>
 </header>
+
+
+
+
 <style>
 	header {
 		margin: 0;
@@ -87,8 +92,7 @@ import HeaderLink from './HeaderLink.astro';
 		text-transform: uppercase;
 		font-size: 0.78rem;
 		letter-spacing: 0.055em;
-		transition:
-			background-color 180ms var(--ease-out-quart),
+		transition: background-color 180ms var(--ease-out-quart),
 			color 180ms var(--ease-out-quart),
 			box-shadow 180ms var(--ease-out-quart);
 	}
@@ -155,4 +159,44 @@ import HeaderLink from './HeaderLink.astro';
 			letter-spacing: 0.045em;
 		}
 	}
+	header {
+		background: var(--surface);
+		backdrop-filter: none;
+		border-bottom: 1px solid rgb(var(--gray-light))
+	}
+	header::after {
+		display: none
+	}
+	.brand {
+		font-family: var(--font-body);
+		text-transform: none;
+		font-weight: 700;
+		letter-spacing: -.04em;
+		font-size: 1.1rem
+	}
+	nav {
+		min-height: 5rem
+	}
+	.internal-links a {
+		text-transform: none;
+		letter-spacing: 0;
+		font-size: .8rem
+	}
+	.social-links a {
+		font-size: .65rem
+	}
+	@media(max-width:720px) {
+		nav {
+			min-height: 0
+		}
+		.internal-links a {
+			min-height: 2.75rem;
+			font-size: .73rem
+		}
+		.social-links a {
+			min-height: 2.75rem
+		}
+	}
+
+
 </style>

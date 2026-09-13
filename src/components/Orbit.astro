@@ -1,0 +1,159 @@
+<div class="orbit-art">
+  <div class="orbit-caption"><span>IDEAS INTO SYSTEMS</span><span>FIG. 01</span></div>
+  <div class="orbital" aria-hidden="true">
+    <div class="orbit-plane"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="orbit-core">u<span>.</span></div>
+    <span class="orbit-label label-one">build</span><span class="orbit-label label-two">learn</span><span class="orbit-label label-three">share</span>
+  </div>
+  <div class="orbit-bottom"><span>A little curiosity. A lot of iteration.</span><button type="button" aria-pressed="false">Pause motion</button></div>
+</div>
+<script>
+const art = document.querySelector<HTMLElement>('.orbit-art');
+const button = art?.querySelector('button');
+button?.addEventListener('click', () => {
+    const paused = art!.classList.toggle('paused');
+    button.setAttribute('aria-pressed', String(paused));
+    button.textContent = paused ? 'Resume motion' : 'Pause motion';
+});
+art?.addEventListener('pointermove', (event) => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || event.pointerType !== 'mouse')
+        return;
+    const rect = art.getBoundingClientRect();
+    art.style.setProperty('--tilt', `${((event.clientX - rect.left) / rect.width - .5) * 12}deg`);
+});
+art?.addEventListener('pointerleave', () => art.style.setProperty('--tilt', '0deg'));
+</script>
+<style>
+	.orbit-art {
+		background: var(--accent-soft);
+		padding: 1.5rem;
+		position: relative;
+		overflow: hidden;
+		border-radius: 50% 50% 0 0 / 5% 5% 0 0;
+		color: var(--ink-blue)
+	}
+	.orbit-caption,.orbit-bottom {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		font-size: .65rem;
+		letter-spacing: .08em
+	}
+	.orbit-caption {
+		padding-top: .5rem
+	}
+	.orbit-bottom {
+		align-items: center;
+		letter-spacing: 0;
+		font-size: .7rem
+	}
+	.orbit-bottom span {
+		max-width: 18ch
+	}
+	.orbit-bottom button {
+		font: inherit;
+		color: inherit;
+		background: transparent;
+		border: 1px solid currentColor;
+		border-radius: 30px;
+		padding: .6rem .8rem;
+		cursor: pointer
+	}
+	.orbital {
+		position: relative;
+		aspect-ratio: 1;
+		display: grid;
+		place-items: center;
+		transform: rotate(var(--tilt,0deg));
+		transition: transform 600ms var(--ease-out-quart)
+	}
+	.orbit-plane {
+		position: absolute;
+		inset: 12%;
+		animation: revolve 32s linear infinite;
+		transform-style: preserve-3d
+	}
+	.orbit-plane i {
+		position: absolute;
+		inset: 0;
+		border: 1px solid color-mix(in oklch,var(--ink-blue) 65%,transparent);
+		border-radius: 50%;
+		transform: rotate(calc(var(--n)*30deg)) scaleX(.42)
+	}
+	.orbit-plane i:nth-child(1) {
+		--n: 0
+	}
+	.orbit-plane i:nth-child(2) {
+		--n: 1
+	}
+	.orbit-plane i:nth-child(3) {
+		--n: 2
+	}
+	.orbit-plane i:nth-child(4) {
+		--n: 3
+	}
+	.orbit-plane i:nth-child(5) {
+		--n: 4
+	}
+	.orbit-plane i:nth-child(6) {
+		--n: 5
+	}
+	.orbit-plane:after {
+		content: '';
+		position: absolute;
+		left: 46%;
+		top: -3%;
+		width: 18px;
+		height: 18px;
+		background: var(--accent);
+		border-radius: 50%;
+		box-shadow: 0 0 0 8px var(--accent-soft)
+	}
+	.orbit-core {
+		font: italic clamp(4rem,8vw,7rem) var(--font-display);
+		line-height: 1;
+		z-index: 1
+	}
+	.orbit-core span {
+		color: var(--accent)
+	}
+	.orbit-label {
+		position: absolute;
+		font-size: .7rem;
+		background: var(--accent-soft);
+		padding: .2rem .5rem
+	}
+	.label-one {
+		top: 20%;
+		left: 9%
+	}
+	.label-two {
+		right: 4%;
+		top: 48%
+	}
+	.label-three {
+		bottom: 13%;
+		left: 25%
+	}
+	.paused .orbit-plane {
+		animation-play-state: paused
+	}
+	@keyframes revolve {
+		to {
+			transform: rotate(360deg)
+		}
+	}
+	@media(prefers-reduced-motion:reduce) {
+		.orbit-plane {
+			animation: none
+		}
+		.orbital {
+			transform: none;
+			transition: none
+		}
+		.orbit-bottom button {
+			display: none
+		}
+	}
+
+</style>

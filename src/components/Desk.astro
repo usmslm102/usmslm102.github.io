@@ -1,0 +1,260 @@
+<section class="workbench" aria-label="Interactive desk tour">
+ <div class="desk-topline"><span>THE WORKBENCH</span><span>SELECT AN OBJECT TO EXPLORE ↓</span></div>
+ <div class="desk-scene">
+  <button class="monitor desk-object" data-detail="editor" aria-label="Explore my editor and terminal" aria-pressed="true"><span class="screen"><span class="window-dots">● ● ●</span><span class="screen-code">const life = &#123;<br />&nbsp; build: 'with care',<br />&nbsp; learn: 'every day',<br />&nbsp; coffee: true<br />&#125;;<br /><span class="cursor">▍</span></span></span><span class="stand"></span><span class="object-label">01 / THE EDITOR</span></button>
+  <button class="mini desk-object" data-detail="hardware" aria-label="Explore my Mac Mini M4" aria-pressed="false"><span class="mini-box">M4<span class="power-dot"></span></span><span class="object-label">02 / THE ENGINE</span></button>
+  <button class="keys desk-object" data-detail="stack" aria-label="Explore my engineering stack" aria-pressed="false"><span class="key-grid" aria-hidden="true">{Array.from({length:30},()=> <i></i>)}</span><span class="object-label">03 / THE STACK</span></button>
+  <button class="app-disc desk-object" data-detail="apps" aria-label="Explore my daily apps" aria-pressed="false"><span class="disc">↗</span><span class="object-label">04 / THE SHORTCUTS</span></button>
+ </div>
+ <div class="desk-detail" aria-live="polite"><span class="detail-kicker">01 / EDITOR & TERMINAL</span><h2 class="detail-title">Where ideas become code.</h2><p class="detail-copy">Visual Studio Code, GitHub Copilot, and Ghostty. A focused workspace, from the first line to the final commit.</p><a class="detail-link" href="#editor">Explore editor & terminal →</a></div>
+</section>
+<script>
+const details = {
+    editor: ['01 / EDITOR & TERMINAL', 'Where ideas become code.', 'Visual Studio Code, GitHub Copilot, and Ghostty. A focused workspace, from the first line to the final commit.', 'Explore editor & terminal'],
+    hardware: ['02 / HARDWARE', 'Small footprint. Big possibility.', 'The Mac Mini M4 anchors my setup, with an external monitor for code and documentation side by side, and AirPods Pro 2.', 'Explore hardware'],
+    stack: ['03 / ENGINEERING STACK', 'Built for the real world.', 'TypeScript and Node.js for web and tooling. .NET for the backend. Docker and Azure to get it out into the world.', 'Explore the stack'],
+    apps: ['04 / DAILY APPS', 'Less friction. More focus.', 'Raycast for shortcuts, Chrome for the web, ChatGPT for research and drafting, and WhatsApp to stay connected.', 'Explore daily apps']
+};
+document.querySelectorAll<HTMLButtonElement>('[data-detail]').forEach(button => button.addEventListener('click', () => {
+    const key = button.dataset.detail as keyof typeof details;
+    const data = details[key];
+    document.querySelectorAll('[data-detail]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    document.querySelector('.detail-kicker')!.textContent = data[0];
+    document.querySelector('.detail-title')!.textContent = data[1];
+    document.querySelector('.detail-copy')!.textContent = data[2];
+    const link = document.querySelector<HTMLAnchorElement>('.detail-link')!;
+    link.href = `#${key}`;
+    link.textContent = `${data[3]} →`;
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches)
+        document.querySelector('.desk-detail')!.animate([{ opacity: .3, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 250, easing: 'ease-out' });
+}));
+</script>
+<style>
+	.workbench {
+		margin: 0 0 4rem;
+		background: var(--accent-soft);
+		padding: 1.5rem 2rem
+	}
+	.desk-topline {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		font-size: .6rem;
+		letter-spacing: .1em;
+		color: var(--ink-blue)
+	}
+	.desk-scene {
+		position: relative;
+		height: 370px;
+		max-width: 720px;
+		margin: auto;
+		background: repeating-linear-gradient(0deg,transparent,transparent 39px,color-mix(in oklch,var(--ink-blue) 7%,transparent) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,color-mix(in oklch,var(--ink-blue) 7%,transparent) 40px)
+	}
+	.desk-object {
+		position: absolute;
+		background: none;
+		border: 0;
+		color: var(--ink-blue);
+		cursor: pointer;
+		transition: transform 350ms var(--ease-out-quart);
+		font: inherit;
+		padding: 0
+	}
+	.desk-object:hover,.desk-object:focus-visible {
+		transform: translateY(-6px)
+	}
+	.object-label {
+		display: block;
+		font-size: .55rem;
+		letter-spacing: .08em;
+		margin-top: .7rem
+	}
+	.desk-object[aria-pressed=true] .object-label {
+		text-decoration: underline;
+		text-underline-offset: 5px
+	}
+	.monitor {
+		width: 52%;
+		top: 30px;
+		left: 16%
+	}
+	.screen {
+		display: block;
+		text-align: left;
+		background: oklch(.25 .04 258);
+		border: 7px solid oklch(.4 .025 258);
+		border-radius: 9px;
+		padding: 10px 15px;
+		color: oklch(.9 .03 250);
+		box-shadow: 8px 12px 0 color-mix(in oklch,var(--ink-blue) 12%,transparent)
+	}
+	.window-dots {
+		display: block;
+		font-size: 8px;
+		letter-spacing: 3px;
+		color: oklch(.8 .09 60)
+	}
+	.screen-code {
+		display: block;
+		font: clamp(.6rem,1.5vw,.8rem)/1.7 var(--font-code);
+		margin-top: 10px
+	}
+	.stand {
+		display: block;
+		width: 60px;
+		height: 25px;
+		background: oklch(.6 .02 258);
+		margin: auto;
+		clip-path: polygon(30% 0,70% 0,75% 75%,100% 85%,100% 100%,0 100%,0 85%,25% 75%)
+	}
+	.mini {
+		right: 4%;
+		top: 150px;
+		width: 20%
+	}
+	.mini-box {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 80px;
+		background: linear-gradient(135deg,oklch(.9 .01 258),oklch(.73 .025 258));
+		border: 1px solid oklch(.65 .02 258);
+		border-radius: 17px;
+		box-shadow: 5px 8px 0 color-mix(in oklch,var(--ink-blue) 12%,transparent);
+		font-size: 1.3rem
+	}
+	.power-dot {
+		width: 4px;
+		height: 4px;
+		background: var(--ink-blue);
+		position: absolute;
+		right: 12px;
+		top: 65px;
+		border-radius: 50%
+	}
+	.keys {
+		bottom: 25px;
+		left: 15%;
+		width: 48%
+	}
+	.key-grid {
+		display: grid;
+		grid-template-columns: repeat(10,1fr);
+		gap: 4px;
+		border: 1px solid rgb(var(--gray));
+		padding: 8px;
+		background: var(--surface);
+		transform: perspective(300px) rotateX(20deg);
+		border-radius: 6px
+	}
+	.key-grid i {
+		height: 13px;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 2px;
+		background: var(--surface-alt)
+	}
+	.app-disc {
+		right: 8%;
+		bottom: 24px
+	}
+	.disc {
+		display: grid;
+		place-items: center;
+		width: 70px;
+		height: 70px;
+		border: 1px solid var(--ink-blue);
+		border-radius: 50%;
+		font-size: 2.5rem;
+		background: var(--surface)
+	}
+	.desk-detail {
+		border-top: 1px solid color-mix(in oklch,var(--ink-blue) 25%,transparent);
+		padding-top: 1.5rem;
+		min-height: 210px
+	}
+	.detail-kicker {
+		font-size: .6rem;
+		letter-spacing: .1em;
+		color: var(--ink-blue)
+	}
+	.detail-title {
+		font-size: 2.1rem;
+		margin: .5rem 0
+	}
+	.detail-copy {
+		font-size: .88rem;
+		max-width: 64ch
+	}
+	.detail-link {
+		font-size: .75rem
+	}
+	.cursor {
+		animation: blink 1.2s steps(2) 4
+	}
+	@keyframes blink {
+		50% {
+			opacity: 0
+		}
+	}
+	@media(max-width:600px) {
+		.workbench {
+			padding: 1rem
+		}
+		.desk-topline {
+			font-size: .5rem
+		}
+		.desk-scene {
+			height: 310px
+		}
+		.monitor {
+			left: 3%;
+			width: 65%
+		}
+		.screen {
+			padding: 7px;
+			border-width: 5px
+		}
+		.mini {
+			right: 0;
+			width: 24%;
+			top: 140px
+		}
+		.mini-box {
+			height: 65px
+		}
+		.power-dot {
+			top: 53px
+		}
+		.keys {
+			left: 3%;
+			width: 62%;
+			bottom: 15px
+		}
+		.app-disc {
+			right: 1%;
+			bottom: 15px
+		}
+		.disc {
+			width: 55px;
+			height: 55px
+		}
+		.detail-title {
+			font-size: 1.8rem
+		}
+		.desk-detail {
+			min-height: 245px
+		}
+	}
+	@media(prefers-reduced-motion:reduce) {
+		.cursor {
+			animation: none
+		}
+		.desk-object {
+			transition: none
+		}
+		.desk-object:hover {
+			transform: none
+		}
+	}
+
+</style>

@@ -5,6 +5,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import ReadingTools from '../components/ReadingTools.astro';
 
 type Props = CollectionEntry<'blog'>['data'] & { id?: string };
 
@@ -157,7 +158,7 @@ const editUrl = id ? `${githubRepoPath}/${id}.md` : null;
 
 	<body>
 		<Header />
-		<main>
+		<main id="main-content" tabindex="-1">
 			<div class="article-shell">
 				<a class="back" href="/blog">&larr; All posts</a>
 				<article>
@@ -187,6 +188,7 @@ const editUrl = id ? `${githubRepoPath}/${id}.md` : null;
 							<Image width={1020} height={510} src={heroImage} alt="" />
 						</div>
 					)}
+					<ReadingTools />
 					<div class="prose">
 						<slot />
 					</div>
