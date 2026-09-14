@@ -1,159 +1,727 @@
-<div class="orbit-art">
-  <div class="orbit-caption"><span>IDEAS INTO SYSTEMS</span><span>FIG. 01</span></div>
-  <div class="orbital" aria-hidden="true">
-    <div class="orbit-plane"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="orbit-core">u<span>.</span></div>
-    <span class="orbit-label label-one">build</span><span class="orbit-label label-two">learn</span><span class="orbit-label label-three">share</span>
-  </div>
-  <div class="orbit-bottom"><span>A little curiosity. A lot of iteration.</span><button type="button" aria-pressed="false">Pause motion</button></div>
-</div>
-<script>
-const art = document.querySelector<HTMLElement>('.orbit-art');
-const button = art?.querySelector('button');
-button?.addEventListener('click', () => {
-    const paused = art!.classList.toggle('paused');
-    button.setAttribute('aria-pressed', String(paused));
-    button.textContent = paused ? 'Resume motion' : 'Pause motion';
-});
-art?.addEventListener('pointermove', (event) => {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches || event.pointerType !== 'mouse')
-        return;
-    const rect = art.getBoundingClientRect();
-    art.style.setProperty('--tilt', `${((event.clientX - rect.left) / rect.width - .5) * 12}deg`);
-});
-art?.addEventListener('pointerleave', () => art.style.setProperty('--tilt', '0deg'));
-</script>
-<style>
-	.orbit-art {
-		background: var(--accent-soft);
-		padding: 1.5rem;
-		position: relative;
-		overflow: hidden;
-		border-radius: 50% 50% 0 0 / 5% 5% 0 0;
-		color: var(--ink-blue)
-	}
-	.orbit-caption,.orbit-bottom {
-		display: flex;
-		justify-content: space-between;
-		gap: 1rem;
-		font-size: .65rem;
-		letter-spacing: .08em
-	}
-	.orbit-caption {
-		padding-top: .5rem
-	}
-	.orbit-bottom {
-		align-items: center;
-		letter-spacing: 0;
-		font-size: .7rem
-	}
-	.orbit-bottom span {
-		max-width: 18ch
-	}
-	.orbit-bottom button {
-		font: inherit;
-		color: inherit;
-		background: transparent;
-		border: 1px solid currentColor;
-		border-radius: 30px;
-		padding: .6rem .8rem;
-		cursor: pointer
-	}
-	.orbital {
-		position: relative;
-		aspect-ratio: 1;
-		display: grid;
-		place-items: center;
-		transform: rotate(var(--tilt,0deg));
-		transition: transform 600ms var(--ease-out-quart)
-	}
-	.orbit-plane {
-		position: absolute;
-		inset: 12%;
-		animation: revolve 32s linear infinite;
-		transform-style: preserve-3d
-	}
-	.orbit-plane i {
-		position: absolute;
-		inset: 0;
-		border: 1px solid color-mix(in oklch,var(--ink-blue) 65%,transparent);
-		border-radius: 50%;
-		transform: rotate(calc(var(--n)*30deg)) scaleX(.42)
-	}
-	.orbit-plane i:nth-child(1) {
-		--n: 0
-	}
-	.orbit-plane i:nth-child(2) {
-		--n: 1
-	}
-	.orbit-plane i:nth-child(3) {
-		--n: 2
-	}
-	.orbit-plane i:nth-child(4) {
-		--n: 3
-	}
-	.orbit-plane i:nth-child(5) {
-		--n: 4
-	}
-	.orbit-plane i:nth-child(6) {
-		--n: 5
-	}
-	.orbit-plane:after {
-		content: '';
-		position: absolute;
-		left: 46%;
-		top: -3%;
-		width: 18px;
-		height: 18px;
-		background: var(--accent);
-		border-radius: 50%;
-		box-shadow: 0 0 0 8px var(--accent-soft)
-	}
-	.orbit-core {
-		font: italic clamp(4rem,8vw,7rem) var(--font-display);
-		line-height: 1;
-		z-index: 1
-	}
-	.orbit-core span {
-		color: var(--accent)
-	}
-	.orbit-label {
-		position: absolute;
-		font-size: .7rem;
-		background: var(--accent-soft);
-		padding: .2rem .5rem
-	}
-	.label-one {
-		top: 20%;
-		left: 9%
-	}
-	.label-two {
-		right: 4%;
-		top: 48%
-	}
-	.label-three {
-		bottom: 13%;
-		left: 25%
-	}
-	.paused .orbit-plane {
-		animation-play-state: paused
-	}
-	@keyframes revolve {
-		to {
-			transform: rotate(360deg)
-		}
-	}
-	@media(prefers-reduced-motion:reduce) {
-		.orbit-plane {
-			animation: none
-		}
-		.orbital {
-			transform: none;
-			transition: none
-		}
-		.orbit-bottom button {
-			display: none
-		}
-	}
+---
+// Interactive Distributed Systems & AI Agent Architecture Radar
+---
 
+<div class="orbit-art" data-node-active="agent-mesh">
+  <!-- Top instrument bar -->
+  <div class="orbit-header">
+    <div class="radar-tag">
+      <span class="radar-blip" aria-hidden="true"></span>
+      <span class="radar-title">DISTRIBUTED SYSTEMS TOPOLOGY</span>
+    </div>
+    <div class="radar-meta">
+      <span class="radar-chip">AZURE CLOUD MESH</span>
+      <span class="radar-chip">MCP ACTIVE</span>
+    </div>
+  </div>
+
+  <!-- Interactive Visualizer Area -->
+  <div class="radar-viewport" aria-label="Interactive Systems Topology Visualizer">
+    <!-- SVG Vector Grid & Dynamic Packet Streams -->
+    <svg class="radar-svg-grid" viewBox="0 0 400 400" aria-hidden="true">
+      <defs>
+        <radialGradient id="radar-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.25" />
+          <stop offset="60%" stop-color="var(--accent)" stop-opacity="0.05" />
+          <stop offset="100%" stop-color="transparent" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id="link-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.8" />
+          <stop offset="100%" stop-color="var(--ink-blue)" stop-opacity="0.4" />
+        </linearGradient>
+      </defs>
+
+      <!-- Concentric Range Rings -->
+      <circle cx="200" cy="200" r="60" class="grid-ring ring-1" />
+      <circle cx="200" cy="200" r="115" class="grid-ring ring-2" />
+      <circle cx="200" cy="200" r="165" class="grid-ring ring-3" />
+
+      <!-- Coordinate crosshairs -->
+      <line x1="200" y1="20" x2="200" y2="380" class="grid-axis" />
+      <line x1="20" y1="200" x2="380" y2="200" class="grid-axis" />
+
+      <!-- Interconnection Data Lines -->
+      <g class="connection-lines">
+        <path d="M 200 200 L 200 65" class="conn-path" />
+        <path d="M 200 200 L 320 130" class="conn-path" />
+        <path d="M 200 200 L 320 270" class="conn-path" />
+        <path d="M 200 200 L 200 335" class="conn-path" />
+        <path d="M 200 200 L 80 270" class="conn-path" />
+        <path d="M 200 200 L 80 130" class="conn-path" />
+      </g>
+    </svg>
+
+    <!-- The Rotating Radar Sweep Plane (satisfies .orbit-plane test) -->
+    <div class="orbit-plane" aria-hidden="true">
+      <div class="radar-beam"></div>
+    </div>
+
+    <!-- Central Core Node -->
+    <div class="radar-core" aria-label="Core: Usama AI Platform Fabric">
+      <div class="core-glow"></div>
+      <div class="core-badge">
+        <span class="core-logo">U.SYS</span>
+        <span class="core-label">AI AGENT FABRIC</span>
+      </div>
+    </div>
+
+    <!-- Distributed Satellite Nodes -->
+    <div class="satellite-nodes">
+      <!-- Node 1: AI Agent Mesh -->
+      <button
+        type="button"
+        class="system-node node-1 active"
+        data-sys="agent-mesh"
+        style="--nx: 50%; --ny: 16%;"
+        aria-label="Node: AI Agent Mesh (MCP & Multi-Model)"
+      >
+        <span class="node-marker"></span>
+        <span class="node-badge">AI AGENT MESH</span>
+      </button>
+
+      <!-- Node 2: Device Health API -->
+      <button
+        type="button"
+        class="system-node node-2"
+        data-sys="device-health"
+        style="--nx: 80%; --ny: 32%;"
+        aria-label="Node: Device Health API (150M req/day)"
+      >
+        <span class="node-marker"></span>
+        <span class="node-badge">150M REQ/D API</span>
+      </button>
+
+      <!-- Node 3: Cosmos DB & Vector Storage -->
+      <button
+        type="button"
+        class="system-node node-3"
+        data-sys="cosmos-db"
+        style="--nx: 80%; --ny: 68%;"
+        aria-label="Node: Cosmos DB & Vector Memory"
+      >
+        <span class="node-marker"></span>
+        <span class="node-badge">VECTOR MEMORY</span>
+      </button>
+
+      <!-- Node 4: 3M+ Monitored Nodes -->
+      <button
+        type="button"
+        class="system-node node-4"
+        data-sys="node-mesh"
+        style="--nx: 50%; --ny: 84%;"
+        aria-label="Node: 3M+ Azure Monitored Nodes"
+      >
+        <span class="node-marker"></span>
+        <span class="node-badge">3M+ AZURE NODES</span>
+      </button>
+
+      <!-- Node 5: Azure Container Apps -->
+      <button
+        type="button"
+        class="system-node node-5"
+        data-sys="container-apps"
+        style="--nx: 20%; --ny: 68%;"
+        aria-label="Node: Azure Container Apps & Docker"
+      >
+        <span class="node-marker"></span>
+        <span class="node-badge">CONTAINER APPS</span>
+      </button>
+
+      <!-- Node 6: Net Assist Automation -->
+      <button
+        type="button"
+        class="system-node node-6"
+        data-sys="net-assist"
+        style="--nx: 20%; --ny: 32%;"
+        aria-label="Node: Net Assist Dynamic Automation"
+      >
+        <span class="node-marker"></span>
+        <span class="node-badge">NET ASSIST</span>
+      </button>
+    </div>
+
+    <!-- Active Node Telemetry Card Overlay -->
+    <div class="node-telemetry" aria-live="polite">
+      <div class="telemetry-top">
+        <span class="telemetry-id" id="tel-id">NODE // 01</span>
+        <span class="telemetry-status" id="tel-status">HEALTH: 99.999%</span>
+      </div>
+      <h4 class="telemetry-title" id="tel-title">AI Agent Platform & MCP Fabric</h4>
+      <p class="telemetry-desc" id="tel-desc">
+        Multi-model orchestration (GPT-5.2 & Mini) with Model Context Protocol (MCP), memory management, and evaluation pipelines processing 712M+ monthly tokens.
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom Instrument Telemetry & Pause Controls (satisfies test contract) -->
+  <div class="orbit-bottom">
+    <div class="location-clock">
+      <span class="loc-indicator"></span>
+      <span class="loc-text">HYDERABAD, IN (UTC+5:30)</span>
+      <span class="loc-sep">•</span>
+      <span class="loc-time" id="radar-live-clock">11:45 AM</span>
+    </div>
+    <button type="button" class="orbit-pause-btn" aria-pressed="false">Pause motion</button>
+  </div>
+</div>
+
+<script>
+  import { playClickSound } from '../scripts/sound';
+
+  const container = document.querySelector<HTMLElement>('.orbit-art');
+  const pauseBtn = container?.querySelector<HTMLButtonElement>('.orbit-pause-btn');
+  const clockEl = document.getElementById('radar-live-clock');
+
+  // Node telemetry dictionary
+  const nodeData: Record<string, { id: string; title: string; status: string; desc: string }> = {
+    'agent-mesh': {
+      id: 'NODE // 01',
+      title: 'AI Agent Platform & MCP Fabric',
+      status: 'SCALE: 712M TOKENS/MO',
+      desc: 'Architected Azure Networking AI Agent Platform with MCP support, multi-model orchestration (GPT-5.2 & Mini), and memory management.'
+    },
+    'device-health': {
+      id: 'NODE // 02',
+      title: 'Device Health Telemetry API',
+      status: 'THROUGHPUT: 150M REQ/DAY',
+      desc: 'Multi-region high-availability telemetry API platform operating at 99.999% SLA across planetary Azure infrastructure.'
+    },
+    'cosmos-db': {
+      id: 'NODE // 03',
+      title: 'Cosmos DB & Vector Store',
+      status: 'P99 LATENCY: < 8MS',
+      desc: 'Distributed persistence layer managing operational state, telemetry streams, and vector embeddings for real-time agent recall.'
+    },
+    'node-mesh': {
+      id: 'NODE // 04',
+      title: '3M+ Azure Monitored Nodes',
+      status: 'COVERAGE: 100% REGIONAL',
+      desc: 'Global hardware and network fleet monitoring continuously tracking health metrics, automated diagnostics, and self-healing events.'
+    },
+    'container-apps': {
+      id: 'NODE // 05',
+      title: 'Azure Container Apps & Microservices',
+      status: 'AUTOSCALE: EVENT-DRIVEN',
+      desc: 'Serverless container orchestration leveraging Docker, zero-trust enterprise security, and automated CI/CD deployment pipelines.'
+    },
+    'net-assist': {
+      id: 'NODE // 06',
+      title: 'Net Assist Dynamic Tooling',
+      status: 'EFFORT: -1 WK / WORKFLOW',
+      desc: 'Schema-driven automation engine reducing workflow onboarding time and accelerating incident mitigation for cloud operations.'
+    }
+  };
+
+  // Pause / Resume Toggle (satisfies smoke test: Pause motion / Resume motion and .paused class)
+  pauseBtn?.addEventListener('click', () => {
+    const isPaused = container!.classList.toggle('paused');
+    pauseBtn.setAttribute('aria-pressed', String(isPaused));
+    pauseBtn.textContent = isPaused ? 'Resume motion' : 'Pause motion';
+    playClickSound(isPaused ? 0.9 : 1.2);
+  });
+
+  // Node interaction
+  const nodes = container?.querySelectorAll<HTMLButtonElement>('.system-node');
+  const telId = document.getElementById('tel-id');
+  const telTitle = document.getElementById('tel-title');
+  const telStatus = document.getElementById('tel-status');
+  const telDesc = document.getElementById('tel-desc');
+
+  function activateNode(key: string) {
+    const data = nodeData[key];
+    if (!data) return;
+
+    nodes?.forEach(n => n.classList.toggle('active', n.dataset.sys === key));
+    if (telId) telId.textContent = data.id;
+    if (telTitle) telTitle.textContent = data.title;
+    if (telStatus) telStatus.textContent = data.status;
+    if (telDesc) telDesc.textContent = data.desc;
+
+    playClickSound(1.25);
+  }
+
+  nodes?.forEach(node => {
+    node.addEventListener('click', () => {
+      const sys = node.dataset.sys;
+      if (sys) activateNode(sys);
+    });
+    node.addEventListener('mouseenter', () => {
+      const sys = node.dataset.sys;
+      if (sys) activateNode(sys);
+    });
+  });
+
+  // Live Hyderabad Clock
+  function updateClock() {
+    try {
+      const now = new Date();
+      const timeStr = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Kolkata',
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      }).format(now);
+      if (clockEl) clockEl.textContent = timeStr;
+    } catch {
+      // Fallback
+    }
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // 3D Magnetic pointer tilt
+  const viewport = container?.querySelector<HTMLElement>('.radar-viewport');
+  viewport?.addEventListener('pointermove', (e) => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || e.pointerType !== 'mouse') return;
+    const rect = viewport.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    viewport.style.setProperty('--rx', `${-y * 14}deg`);
+    viewport.style.setProperty('--ry', `${x * 14}deg`);
+  });
+
+  viewport?.addEventListener('pointerleave', () => {
+    viewport.style.setProperty('--rx', '0deg');
+    viewport.style.setProperty('--ry', '0deg');
+  });
+</script>
+
+<style>
+  .orbit-art {
+    background: var(--surface-card);
+    border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, rgb(var(--gray-light)));
+    border-radius: 12px;
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    color: rgb(var(--black));
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(15, 20, 32, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color 200ms ease;
+  }
+
+  .orbit-art:hover {
+    border-color: color-mix(in oklch, var(--accent) 55%, rgb(var(--gray-light)));
+  }
+
+  .orbit-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid color-mix(in oklch, var(--ink-blue) 15%, rgb(var(--gray-light)));
+  }
+
+  .radar-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .radar-blip {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 8px var(--success);
+    animation: pulse-subtle 2s infinite ease-in-out;
+  }
+
+  .radar-title {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink-blue);
+  }
+
+  .radar-meta {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .radar-chip {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    padding: 0.15rem 0.45rem;
+    background: var(--surface-alt);
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 4px;
+    color: rgb(var(--gray-dark));
+  }
+
+  /* Viewport with 3D tilt */
+  .radar-viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background: radial-gradient(circle at 50% 50%, color-mix(in oklch, var(--accent-soft) 80%, white), var(--surface-alt));
+    border: 1px solid color-mix(in oklch, var(--ink-blue) 15%, rgb(var(--gray-light)));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 800px;
+    transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 300ms var(--ease-out-quart);
+    overflow: hidden;
+  }
+
+  .radar-svg-grid {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .grid-ring {
+    fill: none;
+    stroke: color-mix(in oklch, var(--ink-blue) 22%, transparent);
+    stroke-width: 1;
+    stroke-dasharray: 4 4;
+  }
+
+  .grid-axis {
+    stroke: color-mix(in oklch, var(--ink-blue) 18%, transparent);
+    stroke-width: 1;
+  }
+
+  .conn-path {
+    fill: none;
+    stroke: color-mix(in oklch, var(--accent) 45%, transparent);
+    stroke-width: 1.5;
+    stroke-dasharray: 3 3;
+    animation: dash-flow 25s linear infinite;
+  }
+
+  /* Rotating radar plane (satisfies smoke test .orbit-plane animation name) */
+  .orbit-plane {
+    position: absolute;
+    inset: 0;
+    animation: radar-sweep 8s linear infinite;
+    pointer-events: none;
+    transform-origin: center center;
+  }
+
+  .radar-beam {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    transform-origin: bottom left;
+    background: conic-gradient(
+      from 0deg at 0% 100%,
+      transparent 0deg,
+      transparent 310deg,
+      color-mix(in oklch, var(--accent) 30%, transparent) 350deg,
+      color-mix(in oklch, var(--accent) 60%, transparent) 360deg
+    );
+  }
+
+  /* Central Core */
+  .radar-core {
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .core-glow {
+    position: absolute;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    animation: pulse-core 3s infinite ease-in-out;
+  }
+
+  .core-badge {
+    background: rgb(var(--black));
+    color: var(--surface);
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    width: 58px;
+    height: 58px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md), 0 0 16px var(--accent-glow);
+  }
+
+  .core-logo {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+
+  .core-label {
+    font-family: var(--font-mono);
+    font-size: 0.38rem;
+    letter-spacing: 0.06em;
+    color: var(--surface-alt);
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  /* Satellite Nodes */
+  .satellite-nodes {
+    position: absolute;
+    inset: 0;
+    z-index: 15;
+  }
+
+  .system-node {
+    position: absolute;
+    left: var(--nx);
+    top: var(--ny);
+    transform: translate(-50%, -50%);
+    background: var(--surface-card);
+    border: 1.5px solid rgb(var(--gray-light));
+    border-radius: 20px;
+    padding: 0.25rem 0.55rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all 180ms var(--ease-out-quart);
+    font-family: var(--font-mono);
+    white-space: nowrap;
+  }
+
+  .system-node:hover,
+  .system-node.active {
+    border-color: var(--accent);
+    background: color-mix(in oklch, var(--accent-soft) 85%, white);
+    transform: translate(-50%, -50%) scale(1.08);
+    box-shadow: 0 4px 12px var(--accent-glow);
+  }
+
+  .node-marker {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ink-blue);
+    transition: background 180ms ease, transform 180ms ease;
+  }
+
+  .system-node.active .node-marker {
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+    transform: scale(1.25);
+  }
+
+  .node-badge {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: rgb(var(--black));
+  }
+
+  /* Node Telemetry Card Overlay */
+  .node-telemetry {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    background: color-mix(in oklch, var(--surface-card) 94%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid color-mix(in oklch, var(--accent) 35%, rgb(var(--gray-light)));
+    border-radius: 8px;
+    padding: 0.75rem 0.9rem;
+    box-shadow: var(--shadow-md);
+    z-index: 20;
+    pointer-events: none;
+    transition: transform 200ms ease;
+  }
+
+  .telemetry-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.2rem;
+  }
+
+  .telemetry-id {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink-blue);
+  }
+
+  .telemetry-status {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--success);
+  }
+
+  .telemetry-title {
+    margin: 0 0 0.2rem;
+    font-family: var(--font-ui);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: rgb(var(--black));
+    line-height: 1.25;
+  }
+
+  .telemetry-desc {
+    margin: 0;
+    font-size: 0.76rem;
+    line-height: 1.45;
+    color: rgb(var(--gray-dark));
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Bottom Controls */
+  .orbit-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    padding-top: 0.4rem;
+    border-top: 1px solid color-mix(in oklch, var(--ink-blue) 12%, rgb(var(--gray-light)));
+  }
+
+  .location-clock {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgb(var(--gray-dark));
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  .loc-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 6px var(--success);
+  }
+
+  .loc-sep {
+    color: rgb(var(--gray-light));
+  }
+
+  .loc-time {
+    color: var(--accent-dark);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .orbit-pause-btn {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--ink-blue);
+    background: var(--surface-alt);
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 20px;
+    padding: 0.35rem 0.75rem;
+    cursor: pointer;
+    transition: all 160ms ease;
+  }
+
+  .orbit-pause-btn:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent-dark);
+  }
+
+  /* Paused state */
+  .paused .orbit-plane {
+    animation-play-state: paused;
+  }
+
+  .paused .conn-path {
+    animation-play-state: paused;
+  }
+
+  @keyframes radar-sweep {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes dash-flow {
+    to {
+      stroke-dashoffset: -100;
+    }
+  }
+
+  @keyframes pulse-core {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.15);
+      opacity: 0.9;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-plane {
+      animation: none !important;
+    }
+    .conn-path {
+      animation: none !important;
+    }
+    .radar-viewport {
+      transform: none !important;
+      transition: none !important;
+    }
+    .radar-blip,
+    .core-glow {
+      animation: none !important;
+    }
+    .orbit-pause-btn {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .radar-viewport {
+      aspect-ratio: 1 / 1.1;
+    }
+    .node-badge {
+      font-size: 0.55rem;
+    }
+    .node-telemetry {
+      padding: 0.5rem 0.65rem;
+    }
+    .telemetry-title {
+      font-size: 0.8rem;
+    }
+    .telemetry-desc {
+      font-size: 0.7rem;
+    }
+    .location-clock {
+      font-size: 0.62rem;
+    }
+  }
 </style>

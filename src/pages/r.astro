@@ -13,45 +13,70 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Resume | ${SITE_TITLE}`} description="Resume of Usama Ansari in PDF format." />
+		<BaseHead title={`Resume & Curriculum Vitae | ${SITE_TITLE}`} description="Resume of Usama Ansari, Senior Software Engineer with 12.3+ years in distributed systems & AI platforms on Azure." />
 	</head>
 	<body>
 		<Header />
 		<main id="main-content" tabindex="-1" class="resume-page">
 			<section class="intro" data-route-reveal style="--stagger: 0;">
-				<h1>Resume</h1>
-				<p>
-					View the latest PDF resume below or download a copy.
+				<div class="intro-eyebrow">
+					<span class="pulsing-dot" aria-hidden="true"></span>
+					<span>OFFICIAL DOSSIER</span>
+				</div>
+				<h1>Resume & Experience<span style="color:var(--accent)">.</span></h1>
+				<p class="intro-lead">
+					Comprehensive curriculum vitae detailing 12.3+ years in cloud architecture, AI agent systems on Azure, and high-throughput telemetry API engineering.
 				</p>
+
 				<div class="download-actions">
-					<a class="download-btn" href={PDF_URL} download data-resume-download>Download PDF</a>
+					<a class="download-btn" href={PDF_URL} download data-resume-download>
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+							<polyline points="7 10 12 15 17 10"></polyline>
+							<line x1="12" y1="15" x2="12" y2="3"></line>
+						</svg>
+						Download PDF Resume
+					</a>
+					<a class="open-tab-btn" href={PDF_URL} target="_blank" rel="noreferrer">
+						Open in New Tab ↗
+					</a>
 					<span class="download-feedback" data-download-feedback aria-live="polite" role="status"></span>
 				</div>
 			</section>
 
+			<!-- PDF Viewer Container -->
 			<section class="viewer" aria-label="Resume PDF preview" data-route-reveal style="--stagger: 1;">
+				<div class="viewer-top-bar">
+					<span class="viewer-dot red"></span>
+					<span class="viewer-dot yellow"></span>
+					<span class="viewer-dot green"></span>
+					<span class="viewer-title">Resumes_Usama_12yrs.pdf</span>
+				</div>
+
 				<div class="desktop-viewer">
 					<object data={EMBED_PDF_URL} type="application/pdf" class="pdf-frame pdf-frame-desktop">
-						<p>
-							Your browser does not support inline PDF preview.
-							<a href={PDF_URL} target="_blank" rel="noreferrer">Open resume PDF in a new tab</a>.
-						</p>
+						<div class="no-pdf-fallback">
+							<p>Your browser does not support inline PDF preview.</p>
+							<a href={PDF_URL} target="_blank" rel="noreferrer" class="fallback-link">Open resume PDF in a new tab ↗</a>
+						</div>
 					</object>
 				</div>
+
 				<div class="mobile-viewer">
 					<object data={EMBED_PDF_URL_MOBILE} type="application/pdf" class="pdf-frame pdf-frame-mobile">
-						<p>
-							Your browser does not support inline PDF preview.
-							<a href={PDF_URL} target="_blank" rel="noreferrer">Open resume PDF in a new tab</a>.
-						</p>
+						<div class="no-pdf-fallback">
+							<p>Your browser does not support inline PDF preview on mobile.</p>
+							<a href={PDF_URL} target="_blank" rel="noreferrer" class="fallback-link">Open resume PDF in a new tab ↗</a>
+						</div>
 					</object>
 				</div>
 			</section>
 		</main>
+
 		<script is:inline>
 			const downloadButton = document.querySelector('[data-resume-download]');
 			const downloadFeedback = document.querySelector('[data-download-feedback]');
-			const notices = ['Download started.', 'Resume on the way.'];
+			const notices = ['Download initiated.', 'Resume PDF on the way.'];
 
 			downloadButton?.addEventListener('click', () => {
 				if (!downloadFeedback) return;
@@ -60,7 +85,7 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 				window.setTimeout(() => {
 					downloadFeedback.textContent = '';
 					delete downloadFeedback.dataset.state;
-				}, 1800);
+				}, 2200);
 			});
 		</script>
 		<RouteMotion />
@@ -70,80 +95,156 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 
 <style>
 	.resume-page {
-		display: grid;
-		gap: 1.5rem;
+		max-width: 1000px;
+		width: 100%;
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+		padding-top: 3.5rem;
+		box-sizing: border-box;
 	}
 
-	.intro p {
-		margin-bottom: 1rem;
-		max-width: 70ch;
-		font-size: 1.04rem;
-		line-height: 1.72;
+	.intro {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		padding-bottom: 2rem;
+	}
+
+	.intro-eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		color: var(--ink-blue);
+		background: color-mix(in oklch, var(--ink-blue-soft) 85%, white);
+		border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, transparent);
+		padding: 0.25rem 0.6rem;
+		border-radius: 20px;
+		width: fit-content;
+	}
+
+	.resume-page h1 {
+		font-size: clamp(2.8rem, 6vw, 4.4rem);
+		line-height: 1.05;
+		margin: 0;
+	}
+
+	.intro-lead {
+		font-size: 1.08rem;
+		line-height: 1.7;
+		color: rgb(var(--gray-dark));
+		margin: 0;
+		max-width: 65ch;
+	}
+
+	.download-actions {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.85rem;
+		margin-top: 0.5rem;
 	}
 
 	.download-btn {
 		display: inline-flex;
 		align-items: center;
-		justify-content: center;
-		padding: 0.65rem 1rem;
-		border: 1px solid var(--accent-dark);
+		gap: 0.5rem;
+		padding: 0.65rem 1.25rem;
+		border-radius: 8px;
+		background: rgb(var(--black));
+		color: var(--surface);
+		font-family: var(--font-ui);
+		font-size: 0.86rem;
 		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		font-size: 0.76rem;
 		text-decoration: none;
-		min-height: 2.75rem;
-		color: oklch(0.23 0.03 258);
-		background: color-mix(in oklch, var(--accent) 92%, white);
-		transition:
-			transform 220ms var(--ease-out-quart),
-			background-color 220ms var(--ease-out-quart),
-			color 220ms var(--ease-out-quart),
-			box-shadow 220ms var(--ease-out-quart);
-		will-change: transform;
-	}
-	.download-actions {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-	}
-	.download-feedback {
-		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		min-height: 1.2em;
-	}
-	.download-feedback[data-state='active'] {
-		color: var(--success);
+		box-shadow: var(--shadow-sm);
+		transition: all 180ms var(--ease-out-quart);
 	}
 
 	.download-btn:hover {
-		background: color-mix(in oklch, var(--accent) 84%, white);
-		color: oklch(0.19 0.03 258);
-		transform: translateY(-2px) scale(1.02);
-		box-shadow: 3px 3px 0 color-mix(in oklch, var(--accent-dark) 60%, rgb(var(--black)));
+		background: var(--accent-dark);
+		color: var(--surface);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px var(--accent-glow);
 	}
 
-	.viewer {
-		border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, rgb(var(--gray-light)));
-		background: color-mix(in oklch, var(--ink-blue-soft) 58%, var(--surface));
-		padding: 0.5rem;
-		transition:
-			transform 260ms var(--ease-out-quart),
-			box-shadow 260ms var(--ease-out-quart);
-		will-change: transform;
+	.open-tab-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.65rem 1.15rem;
+		border-radius: 8px;
+		background: var(--surface-card);
+		border: 1px solid rgb(var(--gray-light));
+		color: var(--ink-blue);
+		font-family: var(--font-ui);
+		font-size: 0.86rem;
+		font-weight: 600;
+		text-decoration: none;
+		transition: all 180ms ease;
 	}
-	.viewer:hover {
-		transform: translateY(-2px);
-		box-shadow: 4px 4px 0 color-mix(in oklch, var(--ink-blue) 58%, rgb(var(--black)));
+
+	.open-tab-btn:hover {
+		background: var(--accent-soft);
+		border-color: var(--accent);
+		color: var(--accent-dark);
+	}
+
+	.download-feedback {
+		font-family: var(--font-mono);
+		font-size: 0.74rem;
+		font-weight: 700;
+		color: var(--success);
+		letter-spacing: 0.04em;
+	}
+
+	/* Viewer Container */
+	.viewer {
+		background: var(--surface-card);
+		border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, rgb(var(--gray-light)));
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: var(--shadow-md);
+	}
+
+	.viewer-top-bar {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 0.75rem 1.1rem;
+		background: var(--surface-alt);
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+
+	.viewer-dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+	}
+
+	.viewer-dot.red { background: #ff5f56; }
+	.viewer-dot.yellow { background: #ffbd2e; }
+	.viewer-dot.green { background: #27c93f; }
+
+	.viewer-title {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		color: rgb(var(--gray));
+		margin-left: 0.5rem;
 	}
 
 	.pdf-frame {
 		display: block;
 		width: 100%;
-		height: 78vh;
-		min-height: 640px;
+		height: 80vh;
+		min-height: 680px;
+		border: none;
 	}
 
 	.desktop-viewer {
@@ -154,16 +255,27 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		display: none;
 	}
 
-	.pdf-frame-mobile {
-		display: none;
+	.no-pdf-fallback {
+		padding: 3rem 1.5rem;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.75rem;
 	}
 
-	@media (max-width: 720px) {
-		.download-actions {
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 0.5rem;
+	.fallback-link {
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--accent-dark);
+	}
+
+	@media (max-width: 760px) {
+		.resume-page {
+			padding-top: 1.75rem;
 		}
+
 		.desktop-viewer {
 			display: none !important;
 		}
@@ -181,21 +293,8 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		}
 
 		.pdf-frame {
-			height: 75vh;
-			min-height: 520px;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.download-btn,
-		.viewer {
-			transition: none;
-			will-change: auto;
-		}
-		.download-btn:hover,
-		.viewer:hover {
-			transform: none;
-			box-shadow: none;
+			height: 72vh;
+			min-height: 480px;
 		}
 	}
 </style>
