@@ -472,15 +472,21 @@
     gap: 0.75rem;
     cursor: pointer;
     text-align: left;
-    transition: all 180ms var(--ease-out-quart);
+    transition: transform 160ms var(--ease-out), background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
     color: rgb(var(--black));
     font-family: var(--font-ui);
   }
 
-  .station-tab:hover {
-    background: color-mix(in oklch, var(--accent-soft) 80%, white);
-    border-color: var(--accent);
-    transform: translateY(-2px);
+  .station-tab:active {
+    transform: scale(0.98);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .station-tab:hover {
+      background: color-mix(in oklch, var(--accent-soft) 80%, white);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
   }
 
   .station-tab.active,
@@ -658,13 +664,19 @@
     font-size: 0.72rem;
     padding: 0.2rem 0.5rem;
     cursor: pointer;
-    transition: all 140ms ease;
+    transition: transform 120ms var(--ease-out), background-color 120ms var(--ease-out), color 120ms var(--ease-out), border-color 120ms var(--ease-out);
   }
 
-  .term-cmd-btn:hover {
-    background: #38bdf8;
-    color: #0f172a;
-    border-color: #38bdf8;
+  .term-cmd-btn:active {
+    transform: scale(0.97);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .term-cmd-btn:hover {
+      background: #38bdf8;
+      color: #0f172a;
+      border-color: #38bdf8;
+    }
   }
 
   /* Hardware View */
@@ -927,12 +939,18 @@
     letter-spacing: 0.02em;
     border-bottom: 1.5px solid var(--accent);
     padding-bottom: 0.15rem;
-    transition: color 150ms ease, border-color 150ms ease;
+    transition: color 140ms var(--ease-out), border-color 140ms var(--ease-out), transform 140ms var(--ease-out);
   }
 
-  .detail-link:hover {
-    color: var(--accent);
-    background: transparent;
+  .detail-link:active {
+    transform: scale(0.98);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .detail-link:hover {
+      color: var(--accent);
+      background: transparent;
+    }
   }
 
   @keyframes blink {

@@ -26,24 +26,25 @@
 
 <style is:global>
 	:root {
-		--ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-		--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+		--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+		--ease-out-quart: cubic-bezier(0.23, 1, 0.32, 1);
+		--ease-out-expo: cubic-bezier(0.23, 1, 0.32, 1);
 	}
 
 	html.route-motion-ready [data-route-reveal] {
 		opacity: 0;
-		transform: translateY(14px);
+		transform: translateY(8px);
 	}
 
 	html.route-motion-ready [data-route-reveal].route-in-view {
-		animation: route-reveal 520ms var(--ease-out-quart) forwards;
-		animation-delay: calc(var(--stagger, 0) * 90ms);
+		animation: route-reveal 240ms var(--ease-out) forwards;
+		animation-delay: calc(var(--stagger, 0) * 40ms);
 	}
 
 	@keyframes route-reveal {
 		from {
 			opacity: 0;
-			transform: translateY(14px);
+			transform: translateY(8px);
 		}
 		to {
 			opacity: 1;

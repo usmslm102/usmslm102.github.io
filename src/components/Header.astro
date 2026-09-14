@@ -141,7 +141,7 @@ import CommandPalette from './CommandPalette.astro';
 		font-weight: 500;
 		font-size: 0.86rem;
 		border-radius: 6px;
-		transition: color 150ms ease, background-color 150ms ease;
+		transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out), transform 140ms var(--ease-out);
 	}
 
 	.internal-links :global(a.active) {
@@ -150,9 +150,15 @@ import CommandPalette from './CommandPalette.astro';
 		background-color: var(--accent-soft);
 	}
 
-	.internal-links :global(a:hover) {
-		color: rgb(var(--black));
-		background-color: var(--surface-alt);
+	.internal-links :global(a:active) {
+		transform: scale(0.97);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.internal-links :global(a:hover) {
+			color: rgb(var(--black));
+			background-color: var(--surface-alt);
+		}
 	}
 
 	.header-tools {
@@ -173,13 +179,19 @@ import CommandPalette from './CommandPalette.astro';
 		font-family: var(--font-ui);
 		font-size: 0.8rem;
 		cursor: pointer;
-		transition: all 160ms var(--ease-out-quart);
+		transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 	}
 
-	.cmd-trigger-btn:hover {
-		border-color: var(--accent);
-		color: rgb(var(--black));
-		box-shadow: 0 2px 6px var(--accent-glow);
+	.cmd-trigger-btn:active {
+		transform: scale(0.97);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.cmd-trigger-btn:hover {
+			border-color: var(--accent);
+			color: rgb(var(--black));
+			box-shadow: 0 2px 6px var(--accent-glow);
+		}
 	}
 
 	.cmd-kbd {
@@ -204,12 +216,18 @@ import CommandPalette from './CommandPalette.astro';
 		color: rgb(var(--gray));
 		font-size: 0.88rem;
 		cursor: pointer;
-		transition: all 160ms ease;
+		transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out), background-color 140ms var(--ease-out);
 	}
 
-	.sound-toggle-btn:hover {
-		color: rgb(var(--black));
-		border-color: rgb(var(--gray));
+	.sound-toggle-btn:active {
+		transform: scale(0.97);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.sound-toggle-btn:hover {
+			color: rgb(var(--black));
+			border-color: rgb(var(--gray));
+		}
 	}
 
 	.sound-toggle-btn.sound-active {
@@ -234,11 +252,18 @@ import CommandPalette from './CommandPalette.astro';
 		text-decoration: none;
 		padding: 0.35rem 0.5rem;
 		border-radius: 5px;
+		transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out), transform 140ms var(--ease-out);
 	}
 
-	.social-links a:hover {
-		background: var(--accent-soft);
-		color: var(--accent-dark);
+	.social-links a:active {
+		transform: scale(0.97);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.social-links a:hover {
+			background: var(--accent-soft);
+			color: var(--accent-dark);
+		}
 	}
 
 	@media (max-width: 760px) {

@@ -164,14 +164,20 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		font-weight: 600;
 		text-decoration: none;
 		box-shadow: var(--shadow-sm);
-		transition: all 180ms var(--ease-out-quart);
+		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 	}
 
-	.download-btn:hover {
-		background: var(--accent-dark);
-		color: var(--surface);
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px var(--accent-glow);
+	.download-btn:active {
+		transform: scale(0.97);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.download-btn:hover {
+			background: var(--accent-dark);
+			color: var(--surface);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px var(--accent-glow);
+		}
 	}
 
 	.open-tab-btn {
@@ -187,13 +193,19 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		font-size: 0.86rem;
 		font-weight: 600;
 		text-decoration: none;
-		transition: all 180ms ease;
+		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
 	}
 
-	.open-tab-btn:hover {
-		background: var(--accent-soft);
-		border-color: var(--accent);
-		color: var(--accent-dark);
+	.open-tab-btn:active {
+		transform: scale(0.97);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.open-tab-btn:hover {
+			background: var(--accent-soft);
+			border-color: var(--accent);
+			color: var(--accent-dark);
+		}
 	}
 
 	.download-feedback {

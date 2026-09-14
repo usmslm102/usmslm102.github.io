@@ -169,13 +169,19 @@
     padding: 0.35rem 0.75rem;
     color: var(--ink-blue);
     cursor: pointer;
-    transition: all 150ms ease;
+    transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
   }
 
-  .copy-link:hover {
-    background: var(--accent-soft);
-    border-color: var(--accent);
-    color: var(--accent-dark);
+  .copy-link:active {
+    transform: scale(0.97);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .copy-link:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent-dark);
+    }
   }
 
   .copy-status {
@@ -215,13 +221,15 @@
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
     border-left: 2px solid transparent;
-    transition: all 140ms ease;
+    transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out);
   }
 
-  .toc-nav :global(a:hover) {
-    color: var(--accent-dark);
-    background: var(--accent-soft);
-    border-left-color: var(--accent);
+  @media (hover: hover) and (pointer: fine) {
+    .toc-nav :global(a:hover) {
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      border-left-color: var(--accent);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -245,13 +253,19 @@
     font-weight: 600;
     border-radius: 4px;
     box-shadow: var(--shadow-sm);
-    transition: all 140ms ease;
+    transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
   }
 
-  .copy-code:hover {
-    background: var(--accent-soft);
-    border-color: var(--accent);
-    color: var(--accent-dark);
+  .copy-code:active {
+    transform: scale(0.97);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .copy-code:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent-dark);
+    }
   }
 
   .copy-code.copied {

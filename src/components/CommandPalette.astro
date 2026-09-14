@@ -361,7 +361,11 @@ import { CONTACT_EMAIL } from '../consts';
     text-align: left;
     cursor: pointer;
     font-family: var(--font-ui);
-    transition: background-color 140ms ease, transform 140ms ease;
+    transition: background-color 120ms var(--ease-out), color 120ms var(--ease-out), transform 120ms var(--ease-out);
+  }
+
+  .cmd-item:active {
+    transform: scale(0.98);
   }
 
   .cmd-item:hover,

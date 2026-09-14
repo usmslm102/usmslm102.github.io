@@ -257,12 +257,18 @@ const sections = [
 		border-radius: 20px;
 		color: rgb(var(--gray-dark));
 		cursor: pointer;
-		transition: all 150ms ease;
+		transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out), background-color 140ms var(--ease-out);
 	}
 
-	.filter-btn:hover {
-		border-color: var(--accent);
-		color: rgb(var(--black));
+	.filter-btn:active {
+		transform: scale(0.97);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.filter-btn:hover {
+			border-color: var(--accent);
+			color: rgb(var(--black));
+		}
 	}
 
 	.filter-btn.active {
@@ -314,12 +320,18 @@ const sections = [
 		text-decoration: none;
 		color: rgb(var(--gray-dark));
 		border-radius: 4px;
-		transition: all 140ms ease;
+		transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out), transform 140ms var(--ease-out);
 	}
 
-	.toc-link:hover {
-		background: var(--accent-soft);
-		color: var(--accent-dark);
+	.toc-link:active {
+		transform: scale(0.98);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.toc-link:hover {
+			background: var(--accent-soft);
+			color: var(--accent-dark);
+		}
 	}
 
 	.toc-num {
@@ -389,12 +401,14 @@ const sections = [
 		border-radius: 6px;
 		font-size: 0.94rem;
 		line-height: 1.6;
-		transition: transform 160ms var(--ease-out-quart), border-color 160ms ease;
+		transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out);
 	}
 
-	.item:hover {
-		transform: translateX(3px);
-		border-color: var(--accent);
+	@media (hover: hover) and (pointer: fine) {
+		.item:hover {
+			transform: translateX(3px);
+			border-color: var(--accent);
+		}
 	}
 
 	.item-arrow {

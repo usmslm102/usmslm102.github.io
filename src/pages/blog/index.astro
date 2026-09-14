@@ -332,11 +332,18 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 		font-size: 0.72rem;
 		color: rgb(var(--gray));
 		cursor: pointer;
+		transition: transform 120ms var(--ease-out), background-color 120ms var(--ease-out), color 120ms var(--ease-out);
 	}
 
-	.clear-btn:hover {
-		color: rgb(var(--black));
-		background: rgb(var(--gray-light));
+	.clear-btn:active {
+		transform: scale(0.92);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.clear-btn:hover {
+			color: rgb(var(--black));
+			background: rgb(var(--gray-light));
+		}
 	}
 
 	.filter-tags {
@@ -355,12 +362,18 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 		border-radius: 20px;
 		color: rgb(var(--gray-dark));
 		cursor: pointer;
-		transition: all 140ms ease;
+		transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out), background-color 140ms var(--ease-out);
 	}
 
-	.topic-tag:hover {
-		border-color: var(--accent);
-		color: rgb(var(--black));
+	.topic-tag:active {
+		transform: scale(0.97);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.topic-tag:hover {
+			border-color: var(--accent);
+			color: rgb(var(--black));
+		}
 	}
 
 	.topic-tag.active {
@@ -423,6 +436,18 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 		border-radius: 6px;
 		color: var(--accent-dark);
 		cursor: pointer;
+		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
+	}
+
+	.reset-btn:active {
+		transform: scale(0.97);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.reset-btn:hover {
+			background: var(--accent);
+			color: var(--surface);
+		}
 	}
 
 	/* Posts List */
@@ -445,13 +470,15 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 		border-radius: 10px;
 		padding: 1.75rem;
 		box-shadow: var(--shadow-sm);
-		transition: transform 220ms var(--ease-out-quart), box-shadow 220ms var(--ease-out-quart), border-color 220ms ease;
+		transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out), border-color 180ms var(--ease-out);
 	}
 
-	.post-card:hover {
-		transform: translateY(-3px);
-		border-color: var(--accent);
-		box-shadow: var(--shadow-md);
+	@media (hover: hover) and (pointer: fine) {
+		.post-card:hover {
+			transform: translateY(-3px);
+			border-color: var(--accent);
+			box-shadow: var(--shadow-md);
+		}
 	}
 
 	.post-card.with-image {
@@ -546,13 +573,19 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.3rem;
-		transition: gap 150ms ease, color 150ms ease;
+		transition: gap 140ms var(--ease-out), color 140ms var(--ease-out), transform 140ms var(--ease-out);
 	}
 
-	.read-more-link:hover {
-		color: var(--accent-dark);
-		gap: 0.5rem;
-		background: transparent;
+	.read-more-link:active {
+		transform: scale(0.98);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.read-more-link:hover {
+			color: var(--accent-dark);
+			gap: 0.5rem;
+			background: transparent;
+		}
 	}
 
 	/* Responsive */

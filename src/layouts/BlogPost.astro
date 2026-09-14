@@ -128,14 +128,20 @@ const allPosts = (await getCollection('blog'))
 		background: var(--surface-card);
 		border-radius: 6px;
 		padding: 0.4rem 0.85rem;
-		transition: all 160ms ease;
+		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
 	}
 
-	.back:hover {
-		background: var(--accent-soft);
-		border-color: var(--accent);
-		color: var(--accent-dark);
-		transform: translateX(-2px);
+	.back:active {
+		transform: scale(0.97);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.back:hover {
+			background: var(--accent-soft);
+			border-color: var(--accent);
+			color: var(--accent-dark);
+			transform: translateX(-2px);
+		}
 	}
 
 	.title-header {
@@ -187,13 +193,19 @@ const allPosts = (await getCollection('blog'))
 		border: 1px solid rgb(var(--gray-light));
 		border-radius: 4px;
 		background: var(--surface-alt);
-		transition: all 140ms ease;
+		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
 	}
 
-	.github-edit-btn:hover {
-		background: var(--accent-soft);
-		border-color: var(--accent);
-		color: var(--accent-dark);
+	.github-edit-btn:active {
+		transform: scale(0.97);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.github-edit-btn:hover {
+			background: var(--accent-soft);
+			border-color: var(--accent);
+			color: var(--accent-dark);
+		}
 	}
 
 	.post-h1 {
@@ -266,14 +278,20 @@ const allPosts = (await getCollection('blog'))
 		display: flex;
 		flex-direction: column;
 		gap: 0.4rem;
-		transition: all 180ms var(--ease-out-quart);
+		transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
 	}
 
-	.read-next-card:hover {
-		transform: translateY(-2px);
-		border-color: var(--accent);
-		box-shadow: var(--shadow-sm);
-		background: var(--surface-card);
+	.read-next-card:active {
+		transform: scale(0.98);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.read-next-card:hover {
+			transform: translateY(-2px);
+			border-color: var(--accent);
+			box-shadow: var(--shadow-sm);
+			background: var(--surface-card);
+		}
 	}
 
 	.read-next-date {

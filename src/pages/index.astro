@@ -264,7 +264,11 @@ const latestPosts = (await getCollection('blog'))
 		font-weight: 600;
 		text-decoration: none;
 		cursor: pointer;
-		transition: all 180ms var(--ease-out-quart);
+		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
+	}
+
+	.action-btn:active {
+		transform: scale(0.97) !important;
 	}
 
 	.primary-btn {
@@ -274,25 +278,10 @@ const latestPosts = (await getCollection('blog'))
 		box-shadow: var(--shadow-sm);
 	}
 
-	.primary-btn:hover {
-		background: var(--accent-dark);
-		border-color: var(--accent-dark);
-		color: var(--surface);
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px var(--accent-glow);
-	}
-
 	.secondary-btn {
 		background: var(--surface-card);
 		color: rgb(var(--black));
 		border: 1px solid rgb(var(--gray-light));
-	}
-
-	.secondary-btn:hover {
-		background: var(--accent-soft);
-		border-color: var(--accent);
-		color: var(--accent-dark);
-		transform: translateY(-2px);
 	}
 
 	.tertiary-btn {
@@ -301,11 +290,28 @@ const latestPosts = (await getCollection('blog'))
 		border: 1px solid rgb(var(--gray-light));
 	}
 
-	.tertiary-btn:hover {
-		background: var(--surface-card);
-		border-color: var(--accent);
-		color: rgb(var(--black));
-		transform: translateY(-2px);
+	@media (hover: hover) and (pointer: fine) {
+		.primary-btn:hover {
+			background: var(--accent-dark);
+			border-color: var(--accent-dark);
+			color: var(--surface);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px var(--accent-glow);
+		}
+
+		.secondary-btn:hover {
+			background: var(--accent-soft);
+			border-color: var(--accent);
+			color: var(--accent-dark);
+			transform: translateY(-2px);
+		}
+
+		.tertiary-btn:hover {
+			background: var(--surface-card);
+			border-color: var(--accent);
+			color: rgb(var(--black));
+			transform: translateY(-2px);
+		}
 	}
 
 	.hero-kbd {
@@ -337,13 +343,15 @@ const latestPosts = (await getCollection('blog'))
 		border-radius: 10px;
 		padding: 1.75rem;
 		box-shadow: var(--shadow-sm);
-		transition: transform 220ms var(--ease-out-quart), border-color 220ms ease, box-shadow 220ms ease;
+		transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
 	}
 
-	.dossier-block:hover {
-		transform: translateY(-3px);
-		border-color: color-mix(in oklch, var(--accent) 50%, rgb(var(--gray-light)));
-		box-shadow: var(--shadow-md);
+	@media (hover: hover) and (pointer: fine) {
+		.dossier-block:hover {
+			transform: translateY(-3px);
+			border-color: color-mix(in oklch, var(--accent) 50%, rgb(var(--gray-light)));
+			box-shadow: var(--shadow-md);
+		}
 	}
 
 	.dossier-header {
@@ -464,13 +472,15 @@ const latestPosts = (await getCollection('blog'))
 		border: 1px solid rgb(var(--gray-light));
 		border-radius: 8px;
 		padding: 1.5rem 1.75rem;
-		transition: transform 220ms var(--ease-out-quart), box-shadow 220ms var(--ease-out-quart), border-color 220ms ease;
+		transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out), border-color 180ms var(--ease-out);
 	}
 
-	.post-card:hover {
-		transform: translateX(4px);
-		border-color: var(--accent);
-		box-shadow: var(--shadow-md);
+	@media (hover: hover) and (pointer: fine) {
+		.post-card:hover {
+			transform: translateX(4px);
+			border-color: var(--accent);
+			box-shadow: var(--shadow-md);
+		}
 	}
 
 	.post-link {
@@ -509,7 +519,7 @@ const latestPosts = (await getCollection('blog'))
 		font-size: clamp(1.3rem, 2.5vw, 1.7rem);
 		line-height: 1.25;
 		color: rgb(var(--black));
-		transition: color 160ms ease;
+		transition: color 160ms var(--ease-out);
 	}
 
 	.post-card:hover .post-title {
@@ -550,14 +560,20 @@ const latestPosts = (await getCollection('blog'))
 		position: relative;
 		overflow: hidden;
 		box-shadow: var(--shadow-lg);
-		transition: transform 260ms var(--ease-out-quart), box-shadow 260ms var(--ease-out-quart);
+		transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
 	}
 
-	.uses-teaser:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 20px 40px -10px rgba(15, 20, 32, 0.4);
-		background: rgb(var(--black));
-		color: var(--surface);
+	.uses-teaser:active {
+		transform: scale(0.99);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.uses-teaser:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 20px 40px -10px rgba(15, 20, 32, 0.4);
+			background: rgb(var(--black));
+			color: var(--surface);
+		}
 	}
 
 	.teaser-content {
@@ -642,24 +658,24 @@ const latestPosts = (await getCollection('blog'))
 	/* Reveal Keyframes */
 	html.motion-ready .hero-section [data-reveal='hero'] {
 		opacity: 0;
-		animation: hero-reveal 650ms var(--ease-out-expo) forwards;
-		animation-delay: calc(var(--hero-order, 0) * 100ms + 60ms);
+		animation: hero-reveal 260ms var(--ease-out) forwards;
+		animation-delay: calc(var(--hero-order, 0) * 40ms + 30ms);
 	}
 
 	html.motion-ready [data-reveal]:not([data-reveal='hero']) {
 		opacity: 0;
-		transform: translateY(14px);
+		transform: translateY(8px);
 	}
 
 	html.motion-ready [data-reveal].in-view {
-		animation: section-reveal 500ms var(--ease-out-quart) forwards;
-		animation-delay: calc(var(--stagger, 0) * 80ms);
+		animation: section-reveal 240ms var(--ease-out) forwards;
+		animation-delay: calc(var(--stagger, 0) * 40ms);
 	}
 
 	@keyframes hero-reveal {
 		from {
 			opacity: 0;
-			transform: translateY(16px);
+			transform: translateY(8px);
 		}
 		to {
 			opacity: 1;
@@ -670,7 +686,7 @@ const latestPosts = (await getCollection('blog'))
 	@keyframes section-reveal {
 		from {
 			opacity: 0;
-			transform: translateY(14px);
+			transform: translateY(8px);
 		}
 		to {
 			opacity: 1;

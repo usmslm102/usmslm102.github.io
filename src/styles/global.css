@@ -57,10 +57,13 @@
   --shadow-lg: 0 12px 24px -4px rgba(15, 20, 32, 0.1), 0 4px 8px -4px rgba(15, 20, 32, 0.05);
   --shadow-accent: 0 6px 20px var(--accent-glow);
 
-  /* Easing curves */
+  /* Easing curves — Emil Kowalski custom curves */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out-expo: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 * {
@@ -117,7 +120,7 @@ body {
   text-decoration: none;
   border-radius: 6px;
   box-shadow: var(--shadow-lg);
-  transition: top 200ms var(--ease-out-quart);
+  transition: top 180ms var(--ease-out);
 }
 
 .skip-link:focus {
@@ -183,15 +186,17 @@ a {
   text-decoration-thickness: 1.5px;
   text-underline-offset: 4px;
   text-decoration-color: color-mix(in oklch, var(--ink-blue) 40%, transparent);
-  transition: color 180ms var(--ease-out-quart),
-              text-decoration-color 180ms var(--ease-out-quart),
-              background-color 180ms var(--ease-out-quart);
+  transition: color 140ms var(--ease-out),
+              text-decoration-color 140ms var(--ease-out),
+              background-color 140ms var(--ease-out);
 }
 
-a:hover {
-  background-color: var(--accent-soft);
-  color: var(--accent-dark);
-  text-decoration-color: var(--accent);
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    background-color: var(--accent-soft);
+    color: var(--accent-dark);
+    text-decoration-color: var(--accent);
+  }
 }
 
 a:focus-visible,
@@ -205,6 +210,11 @@ select:focus-visible {
 
 button {
   font-family: var(--font-ui);
+  transition: transform 160ms var(--ease-out);
+}
+
+button:active {
+  transform: scale(0.97);
 }
 
 p {
@@ -281,7 +291,7 @@ input {
   background: var(--surface-card);
   border-radius: 6px;
   padding: 0.6rem 0.85rem;
-  transition: border-color 180ms var(--ease-out-quart), box-shadow 180ms var(--ease-out-quart);
+  transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 }
 
 textarea:focus,
