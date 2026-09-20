@@ -38,6 +38,10 @@
       a.href = `#${heading.id}`;
       a.textContent = heading.textContent;
       a.className = 'toc-anchor';
+      const level = parseInt(heading.tagName.replace('H', ''), 10);
+      if (level >= 3) {
+        a.classList.add(`toc-level-${level}`);
+      }
       a.addEventListener('click', () => playClickSound(1.2));
       nav.append(a);
     });
@@ -219,6 +223,20 @@
     padding: 0.35rem 0;
     border-bottom: 1px solid var(--border);
     transition: color 140ms var(--ease-out);
+  }
+
+  .toc-nav :global(a.toc-level-3) {
+    padding-left: 0.85rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .toc-nav :global(a.toc-level-4),
+  .toc-nav :global(a.toc-level-5),
+  .toc-nav :global(a.toc-level-6) {
+    padding-left: 1.5rem;
+    font-size: 0.76rem;
+    color: var(--text-muted);
   }
 
   .toc-nav :global(a:last-child) {

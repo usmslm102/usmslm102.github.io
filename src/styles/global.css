@@ -250,12 +250,28 @@ p {
 .prose ul,
 .prose ol,
 .prose blockquote {
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.5rem;
+  max-width: 65ch;
 }
 
-.prose :where(h2, h3) {
-  margin-top: 2.5rem;
-  scroll-margin-top: 6rem;
+.prose :where(h2, h3, h4, h5, h6) {
+  scroll-margin-top: 5.5rem;
+}
+
+.prose h2 {
+  margin-top: 3.25rem;
+  margin-bottom: 1.15rem;
+  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+  letter-spacing: -0.025em;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.prose h3 {
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+  letter-spacing: -0.02em;
 }
 
 .prose :where(ul, ol) {
@@ -268,7 +284,7 @@ p {
   border-radius: 6px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
 }
 
 .prose pre {
@@ -373,14 +389,22 @@ kbd {
 blockquote {
   border-left: 2px solid #111111;
   background: var(--surface-alt);
-  padding: 1rem 1.4rem;
+  padding: 1rem 1.25rem;
   margin: 1.8rem 0;
   border-radius: 0 4px 4px 0;
   color: #2F3437;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.15rem;
-  line-height: 1.6;
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+blockquote p {
+  margin: 0 0 0.5rem;
+  color: #2F3437;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
 }
 
 hr {
@@ -413,25 +437,36 @@ hr {
   box-shadow: 0 0 0 2px var(--pastel-green);
 }
 
-/* Subtle Scroll Entry Animations (Protocol §7) */
+/* Subtle Scroll Entry Animations (Resilient & Collision-Free) */
 [data-reveal],
 [data-route-reveal] {
   opacity: 1;
 }
 
-html.motion-ready [data-reveal]:not(.in-view):not([data-reveal="hero"]),
-html.motion-ready [data-route-reveal]:not(.in-view) {
+html.motion-ready [data-reveal]:not(.in-view):not([data-reveal="hero"]) {
   opacity: 0;
   transform: translateY(12px);
 }
 
-html.motion-ready [data-reveal].in-view,
-html.motion-ready [data-route-reveal].in-view {
+html.motion-ready [data-reveal].in-view {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--stagger, 0) * 80ms);
+  transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--stagger, 0) * 70ms);
+}
+
+html.route-motion-ready [data-route-reveal]:not(.route-in-view) {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+html.route-motion-ready [data-route-reveal].route-in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 350ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--stagger, 0) * 40ms);
 }
 
 @media (max-width: 720px) {

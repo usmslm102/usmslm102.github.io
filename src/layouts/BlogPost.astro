@@ -44,9 +44,7 @@ const allPosts = (await getCollection('blog'))
 								</p>
 								{
 									updatedDate && (
-										<p class="last-updated-on">
-											(Updated <FormattedDate date={updatedDate} />)
-										</p>
+										<p class="last-updated-on">(Updated <FormattedDate date={updatedDate} />)</p>
 									)
 								}
 							</div>
@@ -58,7 +56,9 @@ const allPosts = (await getCollection('blog'))
 						</div>
 
 						<h1 class="post-h1">{title}</h1>
-						<p class="post-lead">{description}</p>
+						{description && description.trim().toLowerCase() !== title.trim().toLowerCase() && (
+							<p class="post-lead">{description}</p>
+						)}
 					</header>
 
 					{heroImage && (
@@ -110,7 +110,7 @@ const allPosts = (await getCollection('blog'))
 
 	.article-shell {
 		width: 100%;
-		max-width: 740px;
+		max-width: 700px;
 		margin: 0 auto;
 	}
 
