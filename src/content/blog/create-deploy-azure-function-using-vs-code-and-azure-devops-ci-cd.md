@@ -1,11 +1,11 @@
 ---
-title: "Create & Deploy Azure Function ⚡ using VS code and Azure DevOps (CI/CD)"
-description: "Create & Deploy Azure Function ⚡ using VS code and Azure DevOps (CI/CD)"
+title: "Create & Deploy Azure Functions using VS Code and Azure DevOps (CI/CD)"
+description: "A complete step-by-step guide to building C# Azure Functions in VS Code, configuring ARM templates, and automating continuous delivery releases with Azure DevOps."
 pubDate: "2019-03-30"
 updatedDate: "2019-08-19"
 ---
 
-> Azure Function 🚀 is Microsoft faas (function as a service) offering. Where you can build apps without worrying about server and infrastructure that scale to meet demands. You can use your choice of programming language.
+> Azure Functions is Microsoft's Function-as-a-Service (FaaS) offering, enabling event-driven serverless architectures that scale dynamically without infrastructure management.
 
 Let's get started... 
 

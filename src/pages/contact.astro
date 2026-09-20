@@ -20,7 +20,7 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 					<span>INITIATE CONNECTION</span>
 				</div>
 
-				<h1>Let’s talk systems<span style="color:var(--accent)">.</span></h1>
+				<h1>Let’s talk systems.</h1>
 
 				<p class="contact-lead">
 					Always interested in discussing distributed systems, cloud-native telemetry, autonomous AI agent platforms, and software craftsmanship.
@@ -29,7 +29,12 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 				<div class="contact-cards-grid">
 					<!-- Email Card -->
 					<div class="contact-card email-card">
-						<div class="card-icon">✉</div>
+						<div class="card-icon">
+							<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+								<polyline points="22,6 12,13 2,6"></polyline>
+							</svg>
+						</div>
 						<div class="card-info">
 							<span class="card-kicker">DIRECT INBOX</span>
 							<h3 class="card-value">{CONTACT_EMAIL}</h3>
@@ -47,7 +52,13 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 					<!-- Social Networks -->
 					<div class="social-channels">
 						<a href="https://www.linkedin.com/in/usamaansari/" target="_blank" rel="noreferrer" class="social-card">
-							<span class="social-icon">💼</span>
+							<span class="social-icon">
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+									<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+									<rect x="2" y="9" width="4" height="12"></rect>
+									<circle cx="4" cy="4" r="2"></circle>
+								</svg>
+							</span>
 							<div class="social-info">
 								<span class="social-platform">LinkedIn</span>
 								<span class="social-handle">in/usamaansari</span>
@@ -56,7 +67,11 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 						</a>
 
 						<a href="https://github.com/usmslm102" target="_blank" rel="noreferrer" class="social-card">
-							<span class="social-icon">🐙</span>
+							<span class="social-icon">
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+									<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+								</svg>
+							</span>
 							<div class="social-info">
 								<span class="social-platform">GitHub</span>
 								<span class="social-handle">@usmslm102</span>
@@ -65,7 +80,11 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 						</a>
 
 						<a href="https://x.com/usmslm102" target="_blank" rel="noreferrer" class="social-card">
-							<span class="social-icon">𝕏</span>
+							<span class="social-icon">
+								<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+									<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+								</svg>
+							</span>
 							<div class="social-info">
 								<span class="social-platform">X (Twitter)</span>
 								<span class="social-handle">@usmslm102</span>
@@ -80,7 +99,6 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 		<script is:inline>
 			const copyButton = document.querySelector('[data-copy-email]');
 			const copyFeedback = document.querySelector('[data-copy-feedback]');
-			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 			const feedbackMessages = ['Copied to clipboard. Looking forward to connecting!', 'Email address copied.'];
 
 			const setFeedback = (message, success) => {
@@ -98,21 +116,32 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 				if (!email || !copyFeedback) return;
 
 				if (!navigator.clipboard || !window.isSecureContext) {
-					setFeedback(`Copy is unavailable. Email me directly at ${email}.`, false);
+					try {
+						const textArea = document.createElement('textarea');
+						textArea.value = email;
+						textArea.style.position = 'fixed';
+						textArea.style.opacity = '0';
+						document.body.appendChild(textArea);
+						textArea.focus();
+						textArea.select();
+						const successful = document.execCommand('copy');
+						document.body.removeChild(textArea);
+						if (successful) {
+							setFeedback(feedbackMessages[0], true);
+						} else {
+							setFeedback('Copy unavailable. Select email text manually.', false);
+						}
+					} catch {
+						setFeedback('Copy failed. Select email manually.', false);
+					}
 					return;
 				}
 
 				try {
 					await navigator.clipboard.writeText(email);
-					copyButton.classList.add('copied');
 					setFeedback(feedbackMessages[Math.floor(Math.random() * feedbackMessages.length)], true);
-					if (!prefersReducedMotion) {
-						window.setTimeout(() => copyButton.classList.remove('copied'), 300);
-					} else {
-						copyButton.classList.remove('copied');
-					}
 				} catch {
-					setFeedback(`Could not copy right now. Email me at ${email}.`, false);
+					setFeedback('Clipboard access was blocked.', false);
 				}
 			});
 		</script>
@@ -126,7 +155,8 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 		max-width: 860px;
 		width: 100%;
 		margin: auto;
-		padding-top: 3.5rem;
+		padding-top: 3rem;
+		padding-bottom: 5rem;
 		box-sizing: border-box;
 	}
 
@@ -141,27 +171,29 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 		align-items: center;
 		gap: 0.5rem;
 		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		color: var(--ink-blue);
-		background: color-mix(in oklch, var(--ink-blue-soft) 85%, white);
-		border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, transparent);
-		padding: 0.25rem 0.6rem;
-		border-radius: 20px;
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		color: var(--pastel-blue-text);
+		background: var(--pastel-blue);
+		padding: 0.25rem 0.65rem;
+		border-radius: 9999px;
 		width: fit-content;
 	}
 
 	.contact-shell h1 {
-		font-size: clamp(2.8rem, 6vw, 4.4rem);
+		font-family: var(--font-serif);
+		font-size: clamp(2.8rem, 6vw, 4.2rem);
 		line-height: 1.05;
 		margin: 0;
+		font-weight: 500;
+		letter-spacing: -0.035em;
 	}
 
 	.contact-lead {
 		font-size: 1.12rem;
-		line-height: 1.7;
-		color: rgb(var(--gray-dark));
+		line-height: 1.68;
+		color: var(--text-body);
 		margin: 0 0 1rem;
 		max-width: 60ch;
 	}
@@ -169,47 +201,54 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 	.contact-cards-grid {
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
+		gap: 1.25rem;
 	}
 
 	.email-card {
 		background: var(--surface-card);
-		border: 1px solid color-mix(in oklch, var(--ink-blue) 22%, rgb(var(--gray-light)));
-		border-radius: 12px;
-		padding: 2rem;
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		padding: 1.85rem;
 		box-shadow: var(--shadow-sm);
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		transition: border-color 180ms ease, box-shadow 180ms ease;
+		transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 	}
 
 	.email-card:hover {
-		border-color: var(--accent);
-		box-shadow: var(--shadow-md);
+		border-color: var(--border-dark);
+		box-shadow: var(--shadow-hover);
+	}
+
+	.card-icon {
+		color: var(--text-muted);
+		display: flex;
+		align-items: center;
 	}
 
 	.card-kicker {
 		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		font-weight: 700;
+		font-size: 0.65rem;
+		font-weight: 600;
 		letter-spacing: 0.08em;
-		color: var(--accent-dark);
+		color: var(--text-muted);
 		display: block;
 		margin-bottom: 0.35rem;
 	}
 
 	.card-value {
-		font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+		font-size: clamp(1.4rem, 3.5vw, 2rem);
 		font-family: var(--font-ui);
-		font-weight: 700;
-		color: rgb(var(--black));
+		font-weight: 600;
+		color: #111111;
 		margin: 0 0 0.4rem;
+		letter-spacing: -0.01em;
 	}
 
 	.card-sub {
 		font-size: 0.92rem;
-		color: rgb(var(--gray));
+		color: var(--text-muted);
 		margin: 0;
 	}
 
@@ -217,77 +256,74 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: 0.75rem;
+		gap: 0.65rem;
 		margin-top: 0.5rem;
 	}
 
 	.copy-email-btn {
-		background: rgb(var(--black));
-		color: var(--surface);
-		border: 1px solid rgb(var(--black));
-		border-radius: 6px;
-		padding: 0.65rem 1.15rem;
+		background: #111111;
+		color: #FFFFFF;
+		border: 1px solid #111111;
+		border-radius: 4px;
+		padding: 0.6rem 1.15rem;
 		font-family: var(--font-ui);
 		font-size: 0.84rem;
-		font-weight: 600;
+		font-weight: 500;
 		cursor: pointer;
-		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
+		transition: background-color 140ms var(--ease-out), transform 140ms var(--ease-out);
 	}
 
 	.copy-email-btn:active {
-		transform: scale(0.97);
+		transform: scale(0.98);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.copy-email-btn:hover {
-			background: var(--accent-dark);
-			border-color: var(--accent-dark);
-			color: var(--surface);
-			transform: translateY(-2px);
-			box-shadow: 0 4px 12px var(--accent-glow);
+			background: #2F3437;
+			border-color: #2F3437;
 		}
 	}
 
 	.mailto-btn {
 		display: inline-flex;
 		align-items: center;
-		padding: 0.65rem 1.15rem;
-		border-radius: 6px;
+		padding: 0.6rem 1.15rem;
+		border-radius: 4px;
 		background: var(--surface-alt);
-		border: 1px solid rgb(var(--gray-light));
-		color: var(--ink-blue);
+		border: 1px solid var(--border);
+		color: #111111;
 		font-family: var(--font-ui);
 		font-size: 0.84rem;
-		font-weight: 600;
+		font-weight: 500;
 		text-decoration: none;
-		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
+		transition: background-color 140ms var(--ease-out), border-color 140ms var(--ease-out);
 	}
 
 	.mailto-btn:active {
-		transform: scale(0.97);
+		transform: scale(0.98);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.mailto-btn:hover {
-			background: var(--accent-soft);
-			border-color: var(--accent);
-			color: var(--accent-dark);
+			background: var(--surface-card);
+			border-color: #111111;
+			text-decoration: none;
 		}
 	}
 
 	.copy-feedback {
 		font-family: var(--font-mono);
 		font-size: 0.74rem;
-		font-weight: 700;
+		font-weight: 600;
 		letter-spacing: 0.04em;
 	}
 
 	.copy-feedback[data-state='success'] {
-		color: var(--success);
+		color: var(--pastel-green-text);
 	}
 
 	.copy-feedback[data-state='error'] {
-		color: var(--danger);
+		color: var(--pastel-red-text);
 	}
 
 	/* Social Channels */
@@ -299,16 +335,16 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 
 	.social-card {
 		background: var(--surface-card);
-		border: 1px solid rgb(var(--gray-light));
-		border-radius: 10px;
-		padding: 1.25rem;
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		padding: 1.15rem 1.25rem;
 		text-decoration: none;
 		color: inherit;
 		display: flex;
 		align-items: center;
-		gap: 0.85rem;
+		gap: 0.75rem;
 		box-shadow: var(--shadow-sm);
-		transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+		transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 	}
 
 	.social-card:active {
@@ -317,15 +353,21 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 
 	@media (hover: hover) and (pointer: fine) {
 		.social-card:hover {
-			transform: translateY(-3px);
-			border-color: var(--accent);
-			box-shadow: var(--shadow-md);
+			border-color: var(--border-dark);
+			box-shadow: var(--shadow-hover);
 			background: var(--surface-card);
+			text-decoration: none;
 		}
 	}
 
 	.social-icon {
-		font-size: 1.4rem;
+		display: flex;
+		align-items: center;
+		color: var(--text-muted);
+	}
+
+	.social-card:hover .social-icon {
+		color: #111111;
 	}
 
 	.social-info {
@@ -337,21 +379,25 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 
 	.social-platform {
 		font-family: var(--font-ui);
-		font-size: 0.92rem;
-		font-weight: 700;
-		color: rgb(var(--black));
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: #111111;
 	}
 
 	.social-handle {
 		font-family: var(--font-mono);
 		font-size: 0.72rem;
-		color: rgb(var(--gray));
+		color: var(--text-muted);
 	}
 
 	.social-arrow {
 		font-family: var(--font-mono);
-		font-size: 0.95rem;
-		color: var(--accent);
+		font-size: 0.85rem;
+		color: var(--text-muted);
+	}
+
+	.social-card:hover .social-arrow {
+		color: #111111;
 	}
 
 	@media (max-width: 680px) {
@@ -373,10 +419,6 @@ import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 		.social-card,
 		.copy-email-btn {
 			transition: none !important;
-			transform: none !important;
-		}
-		.social-card:hover {
-			transform: none !important;
 		}
 	}
 </style>

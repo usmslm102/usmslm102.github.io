@@ -138,7 +138,13 @@
 
         <div class="hw-card">
           <div class="hw-badge">VISUALS</div>
-          <div class="hw-icon-wrap">🖥️</div>
+          <div class="hw-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </div>
           <h3 class="hw-title">External Display</h3>
           <p class="hw-spec">High-density workspace layout: IDE and Ghostty on primary pane, architecture specs and Azure telemetry side-by-side.</p>
           <div class="hw-tags">
@@ -149,7 +155,12 @@
 
         <div class="hw-card">
           <div class="hw-badge">ACOUSTICS</div>
-          <div class="hw-icon-wrap">🎧</div>
+          <div class="hw-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+              <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+            </svg>
+          </div>
           <h3 class="hw-title">AirPods Pro 2</h3>
           <p class="hw-spec">Active Noise Cancellation (ANC) with USB-C. Essential for entering uninterrupted deep-flow engineering sessions.</p>
           <div class="hw-tags">
@@ -212,7 +223,11 @@
       <div class="apps-matrix">
         <div class="app-card">
           <div class="app-head">
-            <span class="app-icon">⚡</span>
+            <span class="app-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </span>
             <div class="app-title-group">
               <h4>Raycast</h4>
               <span class="app-role">DAILY DRIVER // SHORTCUT HUB</span>
@@ -224,7 +239,15 @@
 
         <div class="app-card">
           <div class="app-head">
-            <span class="app-icon">🤖</span>
+            <span class="app-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                <circle cx="12" cy="5" r="2"></circle>
+                <path d="M12 7v4"></path>
+                <line x1="8" y1="16" x2="8" y2="16"></line>
+                <line x1="16" y1="16" x2="16" y2="16"></line>
+              </svg>
+            </span>
             <div class="app-title-group">
               <h4>ChatGPT & Claude</h4>
               <span class="app-role">ARCHITECTURE SPARRING</span>
@@ -236,7 +259,13 @@
 
         <div class="app-card">
           <div class="app-head">
-            <span class="app-icon">🌐</span>
+            <span class="app-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </span>
             <div class="app-title-group">
               <h4>Google Chrome</h4>
               <span class="app-role">INSPECTOR & RUNTIME</span>
@@ -248,7 +277,11 @@
 
         <div class="app-card">
           <div class="app-head">
-            <span class="app-icon">💬</span>
+            <span class="app-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </span>
             <div class="app-title-group">
               <h4>WhatsApp</h4>
               <span class="app-role">COMMUNICATION</span>
@@ -416,10 +449,10 @@
 <style>
   .workbench {
     background: var(--surface-card);
-    border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, rgb(var(--gray-light)));
-    border-radius: 14px;
-    padding: 2rem;
-    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow-sm);
     margin: 0 0 4rem;
     display: flex;
     flex-direction: column;
@@ -430,7 +463,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgb(var(--gray-light));
+    border-bottom: 1px solid var(--border);
     padding-bottom: 0.85rem;
   }
 
@@ -442,17 +475,17 @@
 
   .topline-title {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--ink-blue);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #111111;
   }
 
   .topline-hint {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    color: rgb(var(--gray));
-    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
   }
 
   /* Station Dock Tabs */
@@ -463,18 +496,19 @@
   }
 
   .station-tab {
-    background: var(--surface-alt);
-    border: 1.5px solid rgb(var(--gray-light));
-    border-radius: 8px;
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
     padding: 0.85rem 1rem;
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
     cursor: pointer;
     text-align: left;
-    transition: transform 160ms var(--ease-out), background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
-    color: rgb(var(--black));
+    transition: background-color 140ms var(--ease-out), border-color 140ms var(--ease-out);
+    color: #111111;
     font-family: var(--font-ui);
+    box-shadow: var(--shadow-sm);
   }
 
   .station-tab:active {
@@ -483,24 +517,27 @@
 
   @media (hover: hover) and (pointer: fine) {
     .station-tab:hover {
-      background: color-mix(in oklch, var(--accent-soft) 80%, white);
-      border-color: var(--accent);
-      transform: translateY(-2px);
+      background: var(--surface-alt);
+      border-color: var(--border-dark);
     }
   }
 
   .station-tab.active,
   .station-tab[aria-pressed="true"] {
-    background: var(--surface-card);
-    border-color: var(--accent-dark);
-    box-shadow: 0 4px 12px var(--accent-glow);
+    background: var(--surface-alt);
+    border-color: #111111;
+    box-shadow: var(--shadow-sm);
   }
 
   .tab-index {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .station-tab.active .tab-index {
+    color: #111111;
   }
 
   .tab-info {
@@ -510,14 +547,14 @@
   }
 
   .tab-name {
-    font-size: 0.85rem;
-    font-weight: 700;
+    font-size: 0.84rem;
+    font-weight: 600;
     line-height: 1.2;
   }
 
   .tab-sub {
     font-size: 0.7rem;
-    color: rgb(var(--gray));
+    color: var(--text-muted);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -526,11 +563,12 @@
   /* Station Display Area */
   .workbench-display {
     min-height: 320px;
-    background: #0e131f;
-    border-radius: 10px;
-    padding: 1.5rem;
-    color: #f1f5f9;
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+    background: #18181B;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    padding: 1.4rem;
+    color: #F4F4F5;
+    box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
   }
@@ -556,7 +594,7 @@
     align-items: center;
     justify-content: space-between;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .term-dots {
@@ -565,14 +603,11 @@
   }
 
   .term-dots i {
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
   }
-
-  .term-dots i:nth-child(1) { background: #ff5f56; }
-  .term-dots i:nth-child(2) { background: #ffbd2e; }
-  .term-dots i:nth-child(3) { background: #27c93f; }
 
   .term-tabs {
     display: flex;
@@ -580,23 +615,23 @@
   }
 
   .term-tab {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     padding: 0.15rem 0.5rem;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.06);
-    color: #94a3b8;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #A1A1AA;
   }
 
   .term-tab.active {
-    background: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
+    font-weight: 500;
   }
 
   .term-tag {
     font-size: 0.65rem;
-    color: #38bdf8;
-    letter-spacing: 0.05em;
+    color: #A1A1AA;
+    letter-spacing: 0.04em;
   }
 
   .terminal-body {
@@ -611,9 +646,9 @@
     margin: 0.2rem 0;
   }
 
-  .t-green { color: #4ade80; font-weight: 600; }
-  .t-blue { color: #60a5fa; }
-  .t-cyan { color: #38bdf8; font-weight: 600; }
+  .t-green { color: #86EFAC; font-weight: 500; }
+  .t-blue { color: #93C5FD; }
+  .t-cyan { color: #E4E4E7; font-weight: 500; }
 
   .fastfetch-box {
     display: flex;
@@ -626,7 +661,7 @@
     font-family: monospace;
     font-size: 0.85rem;
     line-height: 1.1;
-    color: #38bdf8;
+    color: #A1A1AA;
   }
 
   .ff-info {
@@ -638,7 +673,7 @@
 
   .cursor {
     animation: blink 1.2s steps(2) infinite;
-    color: #38bdf8;
+    color: #FAFAFA;
   }
 
   .terminal-quick-actions {
@@ -652,30 +687,30 @@
 
   .t-action-label {
     font-size: 0.7rem;
-    color: #64748b;
+    color: #71717A;
   }
 
   .term-cmd-btn {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 4px;
-    color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 3px;
+    color: #E4E4E7;
     font-family: var(--font-code);
-    font-size: 0.72rem;
-    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+    padding: 0.18rem 0.45rem;
     cursor: pointer;
-    transition: transform 120ms var(--ease-out), background-color 120ms var(--ease-out), color 120ms var(--ease-out), border-color 120ms var(--ease-out);
+    transition: background-color 120ms var(--ease-out), color 120ms var(--ease-out);
   }
 
   .term-cmd-btn:active {
-    transform: scale(0.97);
+    transform: scale(0.98);
   }
 
   @media (hover: hover) and (pointer: fine) {
     .term-cmd-btn:hover {
-      background: #38bdf8;
-      color: #0f172a;
-      border-color: #38bdf8;
+      background: #FFFFFF;
+      color: #111111;
+      border-color: #FFFFFF;
     }
   }
 
@@ -689,9 +724,9 @@
   }
 
   .hw-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
@@ -699,50 +734,52 @@
   }
 
   .primary-hw {
-    background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(255, 255, 255, 0.04));
-    border-color: rgba(56, 189, 248, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.18);
   }
 
   .hw-badge {
     font-family: var(--font-mono);
     font-size: 0.62rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.08em;
-    color: #38bdf8;
+    color: #A1A1AA;
   }
 
   .m4-chip-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    border: 1.5px solid #38bdf8;
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    background: #27272A;
+    border: 1px solid #52525B;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #38bdf8;
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+    font-family: var(--font-ui);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #FFFFFF;
     margin: 0.5rem 0;
   }
 
   .hw-icon-wrap {
-    font-size: 2rem;
+    color: #A1A1AA;
     margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
   }
 
   .hw-title {
+    font-family: var(--font-serif);
     font-size: 1.15rem;
-    font-weight: 700;
-    color: #ffffff;
+    font-weight: 500;
+    color: #FFFFFF;
     margin: 0;
   }
 
   .hw-spec {
     font-size: 0.8rem;
-    color: #94a3b8;
+    color: #A1A1AA;
     line-height: 1.5;
     margin: 0;
   }
@@ -760,8 +797,9 @@
     font-size: 0.65rem;
     padding: 0.15rem 0.4rem;
     background: rgba(255, 255, 255, 0.06);
-    border-radius: 4px;
-    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    color: #D4D4D8;
   }
 
   /* Stack View */
@@ -773,9 +811,9 @@
   }
 
   .stack-layer {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
     padding: 1rem 1.25rem;
     display: flex;
     flex-direction: column;
@@ -784,21 +822,23 @@
 
   .layer-num {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #38bdf8;
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: #A1A1AA;
     letter-spacing: 0.08em;
   }
 
   .layer-content h4 {
+    font-family: var(--font-serif);
     font-size: 0.95rem;
-    color: #ffffff;
+    font-weight: 500;
+    color: #FFFFFF;
     margin: 0 0 0.2rem;
   }
 
   .layer-content p {
     font-size: 0.82rem;
-    color: #94a3b8;
+    color: #A1A1AA;
     margin: 0 0 0.5rem;
     line-height: 1.5;
   }
@@ -806,17 +846,17 @@
   .stack-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
+    gap: 0.35rem;
   }
 
   .stack-chips span {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    padding: 0.15rem 0.45rem;
-    background: rgba(56, 189, 248, 0.1);
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    border-radius: 4px;
-    color: #7dd3fc;
+    padding: 0.12rem 0.4rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 3px;
+    color: #E4E4E7;
   }
 
   /* Apps View */
@@ -828,9 +868,9 @@
   }
 
   .app-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
     padding: 1.1rem;
     display: flex;
     flex-direction: column;
@@ -844,25 +884,29 @@
   }
 
   .app-icon {
-    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    color: #A1A1AA;
   }
 
   .app-title-group h4 {
     margin: 0;
-    font-size: 0.95rem;
-    color: #ffffff;
+    font-family: var(--font-ui);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #FFFFFF;
   }
 
   .app-role {
     font-family: var(--font-mono);
     font-size: 0.6rem;
-    color: #38bdf8;
+    color: #71717A;
     letter-spacing: 0.05em;
   }
 
   .app-card p {
     font-size: 0.8rem;
-    color: #94a3b8;
+    color: #A1A1AA;
     line-height: 1.5;
     margin: 0;
   }
@@ -870,18 +914,18 @@
   .app-hotkey {
     align-self: flex-start;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    padding: 0.15rem 0.4rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    color: #f1f5f9;
+    font-size: 0.65rem;
+    padding: 0.12rem 0.4rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    color: #F4F4F5;
     margin-top: auto;
   }
 
   /* Detail Information Bar */
   .desk-detail {
-    border-top: 1px solid rgb(var(--gray-light));
+    border-top: 1px solid var(--border);
     padding-top: 1.25rem;
     display: flex;
     flex-direction: column;
@@ -896,10 +940,10 @@
 
   .detail-kicker {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--accent-dark);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
   }
 
   .detail-badge {
@@ -907,22 +951,23 @@
     font-size: 0.62rem;
     padding: 0.1rem 0.35rem;
     background: var(--surface-alt);
-    border: 1px solid rgb(var(--gray-light));
+    border: 1px solid var(--border);
     border-radius: 3px;
-    color: rgb(var(--gray));
+    color: var(--text-muted);
   }
 
   .detail-title {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: rgb(var(--black));
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #111111;
     margin: 0;
     line-height: 1.2;
   }
 
   .detail-copy {
     font-size: 0.94rem;
-    color: rgb(var(--gray-dark));
+    color: var(--text-body);
     margin: 0;
     max-width: 65ch;
     line-height: 1.65;
@@ -932,14 +977,14 @@
     align-self: flex-start;
     margin-top: 0.4rem;
     font-family: var(--font-mono);
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--accent-dark);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #111111;
     text-decoration: none;
     letter-spacing: 0.02em;
-    border-bottom: 1.5px solid var(--accent);
+    border-bottom: 1px solid #111111;
     padding-bottom: 0.15rem;
-    transition: color 140ms var(--ease-out), border-color 140ms var(--ease-out), transform 140ms var(--ease-out);
+    transition: opacity 140ms var(--ease-out);
   }
 
   .detail-link:active {
@@ -948,8 +993,7 @@
 
   @media (hover: hover) and (pointer: fine) {
     .detail-link:hover {
-      color: var(--accent);
-      background: transparent;
+      opacity: 0.7;
     }
   }
 

@@ -47,7 +47,7 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 					<span class="pulsing-dot" aria-hidden="true"></span>
 					<span>ENGINEERING ARCHIVES</span>
 				</div>
-				<h1>Notes from the build<span style="color:var(--accent)">.</span></h1>
+				<h1>Notes from the build.</h1>
 				<p class="intro-subtitle">
 					Practical essays, architecture patterns, and battle-tested production guides from 12+ years of shipping cloud systems.
 				</p>
@@ -56,7 +56,7 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 			<!-- Interactive Search & Filter Bar -->
 			<section class="blog-controls" aria-label="Search and filter articles" data-route-reveal style="--stagger: 1;">
 				<div class="search-wrap">
-					<svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<circle cx="11" cy="11" r="8"></circle>
 						<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
 					</svg>
@@ -86,7 +86,12 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 
 			<!-- Empty State -->
 			<div id="no-results" class="no-results-box" hidden aria-live="polite">
-				<span class="no-results-icon">🔍</span>
+				<span class="no-results-icon">
+					<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<circle cx="11" cy="11" r="8"></circle>
+						<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+					</svg>
+				</span>
 				<h3>No matching articles found</h3>
 				<p>Try searching for a different keyword or reset the filter to explore all guides.</p>
 				<button type="button" id="reset-filter-btn" class="reset-btn">Reset search filters</button>
@@ -149,77 +154,88 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 		<script>
 			import { playClickSound } from '../../scripts/sound';
 
-			const searchInput = document.querySelector<HTMLInputElement>('#post-search')!;
-			const clearBtn = document.querySelector<HTMLButtonElement>('#clear-search-btn')!;
-			const resetBtn = document.querySelector<HTMLButtonElement>('#reset-filter-btn')!;
-			const countEl = document.querySelector<HTMLElement>('#search-count')!;
-			const noResultsEl = document.querySelector<HTMLElement>('#no-results')!;
-			const postItems = Array.from(document.querySelectorAll<HTMLElement>('[data-post]'));
-			const topicBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.topic-tag'));
+			const searchInput = document.getElementById('post-search') as HTMLInputElement | null;
+			const clearBtn = document.getElementById('clear-search-btn') as HTMLButtonElement | null;
+			const topicButtons = document.querySelectorAll<HTMLButtonElement>('.topic-tag');
+			const postItems = document.querySelectorAll<HTMLElement>('[data-post]');
+			const countDisplay = document.getElementById('search-count');
+			const noResults = document.getElementById('no-results');
+			const resetBtn = document.getElementById('reset-filter-btn');
 
 			let activeTopic = 'all';
+			let searchQuery = '';
 
-			function runFilter() {
-				const queryWords = searchInput.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
-				clearBtn.hidden = searchInput.value.length === 0;
-
+			function filterArticles() {
 				let visibleCount = 0;
+				const q = searchQuery.toLowerCase().trim();
 
-				postItems.forEach((post) => {
-					const postSearchText = post.dataset.search || '';
-					const postCategory = post.dataset.category || '';
+				postItems.forEach((item) => {
+					const category = (item.dataset.category || '').toLowerCase();
+					const searchText = (item.dataset.search || '').toLowerCase();
 
-					const matchesQuery = queryWords.length === 0 || queryWords.every((word) => postSearchText.includes(word));
-					const matchesTopic = activeTopic === 'all' || postCategory === activeTopic;
+					const matchesTopic = activeTopic === 'all' || category === activeTopic;
+					const matchesSearch = !q || searchText.includes(q);
 
-					const shouldShow = matchesQuery && matchesTopic;
-					post.hidden = !shouldShow;
-
-					if (shouldShow) {
+					if (matchesTopic && matchesSearch) {
+						item.hidden = false;
 						visibleCount++;
+					} else {
+						item.hidden = true;
 					}
 				});
 
-				countEl.textContent = `${visibleCount} ${visibleCount === 1 ? 'post' : 'posts'}`;
-				noResultsEl.hidden = visibleCount !== 0;
+				if (countDisplay) {
+					countDisplay.textContent = `${visibleCount} ${visibleCount === 1 ? 'post' : 'posts'}`;
+				}
+
+				if (noResults) {
+					noResults.hidden = visibleCount > 0;
+				}
+
+				if (clearBtn) {
+					clearBtn.hidden = !q;
+				}
 			}
 
-			searchInput.addEventListener('input', runFilter);
-
-			clearBtn.addEventListener('click', () => {
-				searchInput.value = '';
-				runFilter();
-				searchInput.focus();
-				playClickSound(0.9);
+			// Keyboard shortcut: '/' focuses search input
+			window.addEventListener('keydown', (e) => {
+				if (e.key === '/' && document.activeElement !== searchInput) {
+					e.preventDefault();
+					searchInput?.focus();
+				}
 			});
 
-			resetBtn?.addEventListener('click', () => {
-				searchInput.value = '';
-				activeTopic = 'all';
-				topicBtns.forEach((b) => b.classList.toggle('active', b.dataset.topic === 'all'));
-				runFilter();
+			searchInput?.addEventListener('input', () => {
+				searchQuery = searchInput.value;
+				filterArticles();
+			});
+
+			clearBtn?.addEventListener('click', () => {
+				if (searchInput) searchInput.value = '';
+				searchQuery = '';
+				filterArticles();
+				searchInput?.focus();
 				playClickSound(1.1);
 			});
 
-			topicBtns.forEach((btn) => {
+			topicButtons.forEach((btn) => {
 				btn.addEventListener('click', () => {
-					topicBtns.forEach((b) => b.classList.remove('active'));
+					topicButtons.forEach((b) => b.classList.remove('active'));
 					btn.classList.add('active');
 					activeTopic = btn.dataset.topic || 'all';
-					runFilter();
+					filterArticles();
 					playClickSound(1.2);
 				});
 			});
 
-			// Press '/' to search
-			window.addEventListener('keydown', (e) => {
-				if (e.key === '/' && document.activeElement !== searchInput) {
-					e.preventDefault();
-					searchInput.focus();
-				}
+			resetBtn?.addEventListener('click', () => {
+				if (searchInput) searchInput.value = '';
+				searchQuery = '';
+				activeTopic = 'all';
+				topicButtons.forEach((b) => b.classList.toggle('active', b.dataset.topic === 'all'));
+				filterArticles();
+				playClickSound(1.1);
 			});
-
-			runFilter();
 		</script>
 
 		<RouteMotion />
@@ -229,23 +245,23 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 
 <style>
 	.blog-container {
-		max-width: 1000px;
+		max-width: 900px;
 		width: 100%;
 		margin: auto;
-		padding-top: 3.5rem;
-		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
-		gap: 2.5rem;
+		gap: 3.5rem;
+		padding-top: 3rem;
+		padding-bottom: 5rem;
+		box-sizing: border-box;
 	}
 
-	/* Blog Intro */
 	.blog-intro {
 		display: flex;
 		flex-direction: column;
-		gap: 0.85rem;
-		border-bottom: 1px solid rgb(var(--gray-light));
-		padding-bottom: 2rem;
+		gap: 1rem;
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 2.25rem;
 	}
 
 	.intro-eyebrow {
@@ -253,27 +269,29 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 		align-items: center;
 		gap: 0.5rem;
 		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		color: var(--ink-blue);
-		background: color-mix(in oklch, var(--ink-blue-soft) 85%, white);
-		border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, transparent);
-		padding: 0.25rem 0.6rem;
-		border-radius: 20px;
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		color: var(--pastel-blue-text);
+		background: var(--pastel-blue);
+		padding: 0.25rem 0.65rem;
+		border-radius: 9999px;
 		width: fit-content;
 	}
 
 	.blog-intro h1 {
-		font-size: clamp(2.8rem, 6vw, 4.4rem);
+		font-family: var(--font-serif);
+		font-size: clamp(2.8rem, 6vw, 4.2rem);
 		line-height: 1.05;
 		margin: 0;
+		font-weight: 500;
+		letter-spacing: -0.035em;
 	}
 
 	.intro-subtitle {
 		font-size: 1.08rem;
-		line-height: 1.7;
-		color: rgb(var(--gray-dark));
+		line-height: 1.68;
+		color: var(--text-body);
 		max-width: 60ch;
 		margin: 0;
 	}
@@ -295,26 +313,25 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 	.search-icon {
 		position: absolute;
 		left: 1rem;
-		color: rgb(var(--gray));
+		color: var(--text-muted);
 		pointer-events: none;
 	}
 
 	#post-search {
 		width: 100%;
-		padding: 0.95rem 2.75rem 0.95rem 2.85rem;
+		padding: 0.85rem 2.5rem 0.85rem 2.65rem;
 		background: var(--surface-card);
-		border: 1.5px solid rgb(var(--gray-light));
-		border-radius: 8px;
-		font-size: 0.98rem;
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		font-size: 0.94rem;
 		font-family: var(--font-ui);
-		color: rgb(var(--black));
+		color: #111111;
 		box-shadow: var(--shadow-sm);
-		transition: border-color 160ms ease, box-shadow 160ms ease;
+		transition: border-color 140ms ease;
 	}
 
 	#post-search:focus {
-		border-color: var(--accent);
-		box-shadow: 0 0 0 3px var(--accent-glow);
+		border-color: #111111;
 		outline: none;
 	}
 
@@ -322,17 +339,17 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 		position: absolute;
 		right: 0.85rem;
 		background: var(--surface-alt);
-		border: 1px solid rgb(var(--gray-light));
+		border: 1px solid var(--border);
 		border-radius: 50%;
-		width: 24px;
-		height: 24px;
+		width: 22px;
+		height: 22px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 0.72rem;
-		color: rgb(var(--gray));
+		font-size: 0.68rem;
+		color: var(--text-muted);
 		cursor: pointer;
-		transition: transform 120ms var(--ease-out), background-color 120ms var(--ease-out), color 120ms var(--ease-out);
+		transition: background-color 120ms var(--ease-out), color 120ms var(--ease-out);
 	}
 
 	.clear-btn:active {
@@ -341,45 +358,45 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 
 	@media (hover: hover) and (pointer: fine) {
 		.clear-btn:hover {
-			color: rgb(var(--black));
-			background: rgb(var(--gray-light));
+			color: #111111;
+			background: var(--surface-card);
 		}
 	}
 
 	.filter-tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.4rem;
+		gap: 0.35rem;
 	}
 
 	.topic-tag {
 		font-family: var(--font-mono);
-		font-size: 0.74rem;
-		font-weight: 600;
-		padding: 0.35rem 0.75rem;
+		font-size: 0.7rem;
+		font-weight: 500;
+		padding: 0.25rem 0.65rem;
 		background: var(--surface-card);
-		border: 1px solid rgb(var(--gray-light));
-		border-radius: 20px;
-		color: rgb(var(--gray-dark));
+		border: 1px solid var(--border);
+		border-radius: 4px;
+		color: var(--text-body);
 		cursor: pointer;
-		transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out), background-color 140ms var(--ease-out);
+		transition: border-color 140ms var(--ease-out), color 140ms var(--ease-out), background-color 140ms var(--ease-out);
 	}
 
 	.topic-tag:active {
-		transform: scale(0.97);
+		transform: scale(0.98);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.topic-tag:hover {
-			border-color: var(--accent);
-			color: rgb(var(--black));
+			border-color: #111111;
+			color: #111111;
 		}
 	}
 
 	.topic-tag.active {
-		background: rgb(var(--black));
-		color: var(--surface);
-		border-color: rgb(var(--black));
+		background: #111111;
+		color: #FFFFFF;
+		border-color: #111111;
 	}
 
 	.search-status-bar {
@@ -390,17 +407,17 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 
 	.search-count {
 		font-family: var(--font-mono);
-		font-size: 0.74rem;
-		font-weight: 600;
-		color: var(--ink-blue);
+		font-size: 0.72rem;
+		font-weight: 500;
+		color: var(--text-muted);
 		margin: 0;
 	}
 
 	/* Empty State */
 	.no-results-box {
 		background: var(--surface-card);
-		border: 1px dashed rgb(var(--gray-light));
-		border-radius: 10px;
+		border: 1px dashed var(--border);
+		border-radius: 8px;
 		padding: 3rem 1.5rem;
 		text-align: center;
 		display: flex;
@@ -410,17 +427,22 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 	}
 
 	.no-results-icon {
-		font-size: 2.2rem;
+		color: var(--text-muted);
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.no-results-box h3 {
-		font-size: 1.4rem;
+		font-family: var(--font-serif);
+		font-size: 1.35rem;
+		font-weight: 500;
 		margin: 0;
 	}
 
 	.no-results-box p {
 		font-size: 0.92rem;
-		color: rgb(var(--gray));
+		color: var(--text-muted);
 		margin: 0;
 		max-width: 42ch;
 	}
@@ -428,25 +450,26 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 	.reset-btn {
 		margin-top: 0.5rem;
 		font-family: var(--font-mono);
-		font-size: 0.78rem;
-		font-weight: 600;
-		padding: 0.5rem 1rem;
-		background: var(--accent-soft);
-		border: 1px solid var(--accent);
-		border-radius: 6px;
-		color: var(--accent-dark);
+		font-size: 0.75rem;
+		font-weight: 500;
+		padding: 0.45rem 0.9rem;
+		background: var(--surface-alt);
+		border: 1px solid var(--border);
+		border-radius: 4px;
+		color: #111111;
 		cursor: pointer;
-		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
+		transition: border-color 140ms var(--ease-out), background-color 140ms var(--ease-out);
 	}
 
 	.reset-btn:active {
-		transform: scale(0.97);
+		transform: scale(0.98);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.reset-btn:hover {
-			background: var(--accent);
-			color: var(--surface);
+			background: #111111;
+			color: #FFFFFF;
+			border-color: #111111;
 		}
 	}
 
@@ -457,7 +480,7 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
+		gap: 1.25rem;
 	}
 
 	.post-item {
@@ -466,33 +489,32 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 
 	.post-card {
 		background: var(--surface-card);
-		border: 1px solid color-mix(in oklch, var(--ink-blue) 18%, rgb(var(--gray-light)));
-		border-radius: 10px;
-		padding: 1.75rem;
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		padding: 1.6rem 1.8rem;
 		box-shadow: var(--shadow-sm);
-		transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out), border-color 180ms var(--ease-out);
+		transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.post-card:hover {
-			transform: translateY(-3px);
-			border-color: var(--accent);
-			box-shadow: var(--shadow-md);
+			border-color: var(--border-dark);
+			box-shadow: var(--shadow-hover);
 		}
 	}
 
 	.post-card.with-image {
 		display: grid;
 		grid-template-columns: 240px 1fr;
-		gap: 2rem;
+		gap: 1.75rem;
 		align-items: start;
 	}
 
 	.post-thumb {
 		width: 100%;
 		height: auto;
-		border-radius: 6px;
-		border: 1px solid rgb(var(--gray-light));
+		border-radius: 4px;
+		border: 1px solid var(--border);
 		object-fit: cover;
 		aspect-ratio: 16 / 9;
 	}
@@ -500,7 +522,7 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 	.post-content {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: 0.45rem;
 	}
 
 	.post-header-meta {
@@ -508,72 +530,76 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 		align-items: center;
 		gap: 0.5rem;
 		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		font-weight: 600;
-		color: rgb(var(--gray));
+		font-size: 0.7rem;
+		color: var(--text-muted);
 		flex-wrap: wrap;
 	}
 
 	.category-chip {
-		color: var(--accent-dark);
-		background: var(--accent-soft);
-		padding: 0.15rem 0.45rem;
-		border-radius: 4px;
-		font-weight: 700;
+		color: var(--pastel-blue-text);
+		background: var(--pastel-blue);
+		padding: 0.12rem 0.45rem;
+		border-radius: 9999px;
+		font-weight: 600;
+		font-size: 0.62rem;
+		letter-spacing: 0.04em;
 	}
 
 	.meta-separator {
-		color: rgb(var(--gray-light));
+		color: var(--border);
 	}
 
 	.fresh-pill {
-		border: 1px solid var(--success);
-		color: var(--success);
-		background: var(--success-soft);
+		border: 1px solid var(--pastel-green-text);
+		color: var(--pastel-green-text);
+		background: var(--pastel-green);
 		font-size: 0.6rem;
-		font-weight: 700;
-		padding: 0.1rem 0.35rem;
-		border-radius: 4px;
+		font-weight: 600;
+		padding: 0.08rem 0.35rem;
+		border-radius: 9999px;
 		letter-spacing: 0.05em;
 	}
 
 	.title {
 		margin: 0.2rem 0;
-		font-size: clamp(1.4rem, 2.8vw, 1.95rem);
+		font-family: var(--font-serif);
+		font-size: clamp(1.35rem, 2.5vw, 1.85rem);
 		line-height: 1.22;
+		font-weight: 500;
 	}
 
 	.title a {
 		text-decoration: none;
-		color: rgb(var(--black));
-		transition: color 150ms ease;
+		color: #111111;
+		transition: opacity 140ms ease;
 	}
 
 	.post-card:hover .title a {
-		color: var(--accent-dark);
+		opacity: 0.75;
+		text-decoration: none;
 	}
 
 	.description {
 		margin: 0;
-		font-size: 0.95rem;
+		font-size: 0.94rem;
 		line-height: 1.65;
-		color: rgb(var(--gray-dark));
+		color: var(--text-body);
 	}
 
 	.post-footer {
-		margin-top: 0.5rem;
+		margin-top: 0.4rem;
 	}
 
 	.read-more-link {
 		font-family: var(--font-mono);
-		font-size: 0.78rem;
-		font-weight: 700;
-		color: var(--ink-blue);
+		font-size: 0.76rem;
+		font-weight: 500;
+		color: #111111;
 		text-decoration: none;
 		display: inline-flex;
 		align-items: center;
 		gap: 0.3rem;
-		transition: gap 140ms var(--ease-out), color 140ms var(--ease-out), transform 140ms var(--ease-out);
+		transition: gap 140ms var(--ease-out);
 	}
 
 	.read-more-link:active {
@@ -582,13 +608,13 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 
 	@media (hover: hover) and (pointer: fine) {
 		.read-more-link:hover {
-			color: var(--accent-dark);
 			gap: 0.5rem;
-			background: transparent;
+			text-decoration: underline;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 3px;
 		}
 	}
 
-	/* Responsive */
 	@media (max-width: 760px) {
 		.blog-container {
 			padding-top: 1.75rem;
@@ -607,10 +633,6 @@ const postMeta: Record<string, { category: string; readTime: string }> = {
 	@media (prefers-reduced-motion: reduce) {
 		.post-card {
 			transition: none !important;
-			transform: none !important;
-		}
-		.post-card:hover {
-			transform: none !important;
 		}
 	}
 </style>

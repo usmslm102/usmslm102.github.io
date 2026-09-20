@@ -1,6 +1,6 @@
 ---
 title: "Containerizing Angular application for production using Docker"
-description: "In this post, we will containerize angular application using Docker. Table Of Contents P..."
+description: "Learn how to build optimized multistage Docker containers for production Angular applications using Node.js builders and NGINX."
 pubDate: "2020-03-30"
 updatedDate: "2020-04-01"
 ---

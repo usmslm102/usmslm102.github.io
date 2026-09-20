@@ -23,7 +23,7 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 					<span class="pulsing-dot" aria-hidden="true"></span>
 					<span>OFFICIAL DOSSIER</span>
 				</div>
-				<h1>Resume & Experience<span style="color:var(--accent)">.</span></h1>
+				<h1>Resume & Experience.</h1>
 				<p class="intro-lead">
 					Comprehensive curriculum vitae detailing 12.3+ years in cloud architecture, AI agent systems on Azure, and high-throughput telemetry API engineering.
 				</p>
@@ -44,12 +44,12 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 				</div>
 			</section>
 
-			<!-- PDF Viewer Container -->
+			<!-- PDF Viewer Container (Faux-OS Window Chrome per Protocol §5) -->
 			<section class="viewer" aria-label="Resume PDF preview" data-route-reveal style="--stagger: 1;">
 				<div class="viewer-top-bar">
-					<span class="viewer-dot red"></span>
-					<span class="viewer-dot yellow"></span>
-					<span class="viewer-dot green"></span>
+					<span class="viewer-dot"></span>
+					<span class="viewer-dot"></span>
+					<span class="viewer-dot"></span>
 					<span class="viewer-title">Resumes_Usama_12yrs.pdf</span>
 				</div>
 
@@ -101,16 +101,16 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		display: flex;
 		flex-direction: column;
 		gap: 2.5rem;
-		padding-top: 3.5rem;
+		padding-top: 3rem;
 		box-sizing: border-box;
 	}
 
 	.intro {
 		display: flex;
 		flex-direction: column;
-		gap: 0.85rem;
-		border-bottom: 1px solid rgb(var(--gray-light));
-		padding-bottom: 2rem;
+		gap: 1rem;
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 2.25rem;
 	}
 
 	.intro-eyebrow {
@@ -118,27 +118,29 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		align-items: center;
 		gap: 0.5rem;
 		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		color: var(--ink-blue);
-		background: color-mix(in oklch, var(--ink-blue-soft) 85%, white);
-		border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, transparent);
-		padding: 0.25rem 0.6rem;
-		border-radius: 20px;
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		color: var(--pastel-blue-text);
+		background: var(--pastel-blue);
+		padding: 0.25rem 0.65rem;
+		border-radius: 9999px;
 		width: fit-content;
 	}
 
 	.resume-page h1 {
-		font-size: clamp(2.8rem, 6vw, 4.4rem);
+		font-family: var(--font-serif);
+		font-size: clamp(2.8rem, 6vw, 4.2rem);
 		line-height: 1.05;
 		margin: 0;
+		font-weight: 500;
+		letter-spacing: -0.035em;
 	}
 
 	.intro-lead {
 		font-size: 1.08rem;
-		line-height: 1.7;
-		color: rgb(var(--gray-dark));
+		line-height: 1.68;
+		color: var(--text-body);
 		margin: 0;
 		max-width: 65ch;
 	}
@@ -147,7 +149,7 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: 0.85rem;
+		gap: 0.75rem;
 		margin-top: 0.5rem;
 	}
 
@@ -155,28 +157,25 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
-		padding: 0.65rem 1.25rem;
-		border-radius: 8px;
-		background: rgb(var(--black));
-		color: var(--surface);
+		padding: 0.6rem 1.25rem;
+		border-radius: 4px;
+		background: #111111;
+		color: #FFFFFF;
 		font-family: var(--font-ui);
 		font-size: 0.86rem;
-		font-weight: 600;
+		font-weight: 500;
 		text-decoration: none;
-		box-shadow: var(--shadow-sm);
-		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
+		transition: background-color 140ms var(--ease-out), transform 140ms var(--ease-out);
 	}
 
 	.download-btn:active {
-		transform: scale(0.97);
+		transform: scale(0.98);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.download-btn:hover {
-			background: var(--accent-dark);
-			color: var(--surface);
-			transform: translateY(-2px);
-			box-shadow: 0 4px 12px var(--accent-glow);
+			background: #2F3437;
+			text-decoration: none;
 		}
 	}
 
@@ -184,45 +183,45 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4rem;
-		padding: 0.65rem 1.15rem;
-		border-radius: 8px;
+		padding: 0.6rem 1.15rem;
+		border-radius: 4px;
 		background: var(--surface-card);
-		border: 1px solid rgb(var(--gray-light));
-		color: var(--ink-blue);
+		border: 1px solid var(--border);
+		color: #111111;
 		font-family: var(--font-ui);
 		font-size: 0.86rem;
-		font-weight: 600;
+		font-weight: 500;
 		text-decoration: none;
-		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
+		transition: background-color 140ms var(--ease-out), border-color 140ms var(--ease-out);
 	}
 
 	.open-tab-btn:active {
-		transform: scale(0.97);
+		transform: scale(0.98);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.open-tab-btn:hover {
-			background: var(--accent-soft);
-			border-color: var(--accent);
-			color: var(--accent-dark);
+			background: var(--surface-alt);
+			border-color: #111111;
+			text-decoration: none;
 		}
 	}
 
 	.download-feedback {
 		font-family: var(--font-mono);
 		font-size: 0.74rem;
-		font-weight: 700;
-		color: var(--success);
+		font-weight: 600;
+		color: var(--pastel-green-text);
 		letter-spacing: 0.04em;
 	}
 
 	/* Viewer Container */
 	.viewer {
 		background: var(--surface-card);
-		border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, rgb(var(--gray-light)));
-		border-radius: 12px;
+		border: 1px solid var(--border);
+		border-radius: 8px;
 		overflow: hidden;
-		box-shadow: var(--shadow-md);
+		box-shadow: var(--shadow-sm);
 	}
 
 	.viewer-top-bar {
@@ -231,23 +230,20 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		gap: 6px;
 		padding: 0.75rem 1.1rem;
 		background: var(--surface-alt);
-		border-bottom: 1px solid rgb(var(--gray-light));
+		border-bottom: 1px solid var(--border);
 	}
 
 	.viewer-dot {
-		width: 10px;
-		height: 10px;
+		width: 9px;
+		height: 9px;
 		border-radius: 50%;
+		background: #D4D4D0;
 	}
-
-	.viewer-dot.red { background: #ff5f56; }
-	.viewer-dot.yellow { background: #ffbd2e; }
-	.viewer-dot.green { background: #27c93f; }
 
 	.viewer-title {
 		font-family: var(--font-mono);
 		font-size: 0.72rem;
-		color: rgb(var(--gray));
+		color: var(--text-muted);
 		margin-left: 0.5rem;
 	}
 
@@ -280,7 +276,7 @@ const EMBED_PDF_URL_MOBILE = `${PDF_URL}#view=FitH&zoom=page-width&navpanes=0`;
 		font-family: var(--font-mono);
 		font-size: 0.85rem;
 		font-weight: 600;
-		color: var(--accent-dark);
+		color: #111111;
 	}
 
 	@media (max-width: 760px) {
