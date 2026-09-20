@@ -19,7 +19,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 					<span class="pulsing-dot" aria-hidden="true"></span>
 					<span>ARCHITECT & BUILDER</span>
 				</div>
-				<h1>About Usama<span style="color:var(--accent)">.</span></h1>
+				<h1>About Usama.</h1>
 				<p class="lead-bio">
 					Senior Software Engineer with 12.3+ years of experience designing and delivering planetary-scale distributed systems on Microsoft Azure.
 				</p>
@@ -85,7 +85,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 									<h3>Capgemini — Software Engineer</h3>
 									<p class="meta">Enterprise Web Solutions • Mumbai, India</p>
 								</div>
-								<span class="role-tag">2.5 YRS</span>
+								<span class="role-tag neutral">2.5 YRS</span>
 							</div>
 							<ul class="role-bullets">
 								<li>
@@ -123,16 +123,16 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		display: flex;
 		flex-direction: column;
 		gap: 3.5rem;
-		padding-top: 3.5rem;
+		padding-top: 3rem;
 		box-sizing: border-box;
 	}
 
 	.intro {
 		display: flex;
 		flex-direction: column;
-		gap: 0.85rem;
-		border-bottom: 1px solid rgb(var(--gray-light));
-		padding-bottom: 2rem;
+		gap: 1rem;
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 2.25rem;
 	}
 
 	.intro-eyebrow {
@@ -140,35 +140,37 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		align-items: center;
 		gap: 0.5rem;
 		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		color: var(--ink-blue);
-		background: color-mix(in oklch, var(--ink-blue-soft) 85%, white);
-		border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, transparent);
-		padding: 0.25rem 0.6rem;
-		border-radius: 20px;
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		color: var(--pastel-blue-text);
+		background: var(--pastel-blue);
+		padding: 0.25rem 0.65rem;
+		border-radius: 9999px;
 		width: fit-content;
 	}
 
 	.about-page h1 {
-		font-size: clamp(2.8rem, 6vw, 4.4rem);
+		font-family: var(--font-serif);
+		font-size: clamp(2.8rem, 6vw, 4.2rem);
 		line-height: 1.05;
 		margin: 0;
+		font-weight: 500;
+		letter-spacing: -0.035em;
 	}
 
 	.lead-bio {
-		font-size: 1.18rem;
-		line-height: 1.7;
-		color: rgb(var(--black));
+		font-size: 1.15rem;
+		line-height: 1.68;
+		color: #111111;
 		margin: 0;
 		max-width: 65ch;
 	}
 
 	.sub-bio {
-		font-size: 1.02rem;
-		line-height: 1.7;
-		color: rgb(var(--gray-dark));
+		font-size: 1rem;
+		line-height: 1.68;
+		color: var(--text-body);
 		margin: 0;
 		max-width: 65ch;
 	}
@@ -181,33 +183,34 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	}
 
 	.timeline-head {
-		border-bottom: 1px solid rgb(var(--black));
+		border-bottom: 1px solid var(--border);
 		padding-bottom: 0.75rem;
 	}
 
 	.timeline-eyebrow {
 		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		font-weight: 700;
-		letter-spacing: 0.1em;
-		color: var(--ink-blue);
+		font-size: 0.65rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		color: var(--text-muted);
 		display: block;
 		margin-bottom: 0.2rem;
 	}
 
 	.timeline-head h2 {
 		margin: 0;
-		font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+		font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+		font-weight: 500;
 	}
 
 	.timeline {
 		list-style: none;
 		margin: 0;
 		padding: 0 0 0 1.25rem;
-		border-left: 2px solid color-mix(in oklch, var(--accent) 35%, rgb(var(--gray-light)));
+		border-left: 1px solid var(--border);
 		display: flex;
 		flex-direction: column;
-		gap: 2.25rem;
+		gap: 2rem;
 	}
 
 	.timeline-item {
@@ -218,24 +221,18 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	.timeline-item::before {
 		content: '';
 		position: absolute;
-		left: -1.75rem;
-		top: 0.45rem;
-		width: 14px;
-		height: 14px;
+		left: -1.6rem;
+		top: 0.55rem;
+		width: 10px;
+		height: 10px;
 		border-radius: 50%;
 		background: var(--surface);
-		border: 3px solid var(--accent);
-		box-shadow: 0 0 0 4px var(--accent-glow);
+		border: 2px solid #111111;
 	}
 
-	.timeline-item:nth-child(2)::before {
-		border-color: var(--ink-blue);
-		box-shadow: none;
-	}
-
+	.timeline-item:nth-child(2)::before,
 	.timeline-item:nth-child(3)::before {
-		border-color: var(--success);
-		box-shadow: none;
+		border-color: var(--text-muted);
 	}
 
 	.period {
@@ -244,35 +241,34 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 	.period-badge {
 		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		color: var(--ink-blue);
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		color: var(--text-muted);
 		background: var(--surface-card);
-		border: 1px solid rgb(var(--gray-light));
-		border-radius: 4px;
+		border: 1px solid var(--border);
+		border-radius: 3px;
 		padding: 0.2rem 0.5rem;
 	}
 
 	.card {
 		background: var(--surface-card);
-		border: 1px solid color-mix(in oklch, var(--ink-blue) 20%, rgb(var(--gray-light)));
-		border-radius: 10px;
+		border: 1px solid var(--border);
+		border-radius: 8px;
 		padding: 1.75rem;
 		box-shadow: var(--shadow-sm);
-		transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+		transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.card:hover {
-			transform: translateY(-2px);
-			border-color: var(--accent);
-			box-shadow: var(--shadow-md);
+			border-color: var(--border-dark);
+			box-shadow: var(--shadow-hover);
 		}
 	}
 
 	.current-role-card {
-		border-left: 4px solid var(--accent);
+		border-left: 3px solid #111111;
 	}
 
 	.role-header {
@@ -280,7 +276,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		justify-content: space-between;
 		align-items: flex-start;
 		gap: 1rem;
-		border-bottom: 1px solid rgb(var(--gray-light));
+		border-bottom: 1px solid var(--border);
 		padding-bottom: 0.85rem;
 		margin-bottom: 1.25rem;
 		flex-wrap: wrap;
@@ -288,26 +284,33 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 	.card h3 {
 		margin: 0 0 0.25rem;
-		font-size: clamp(1.3rem, 2.5vw, 1.65rem);
-		color: rgb(var(--black));
+		font-family: var(--font-serif);
+		font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+		font-weight: 500;
+		color: #111111;
 	}
 
 	.meta {
 		margin: 0;
-		font-size: 0.88rem;
-		color: rgb(var(--gray));
+		font-size: 0.85rem;
+		color: var(--text-muted);
 		font-family: var(--font-mono);
 	}
 
 	.role-tag {
 		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		font-weight: 700;
-		color: var(--accent-dark);
-		background: var(--accent-soft);
-		border: 1px solid color-mix(in oklch, var(--accent) 30%, transparent);
-		padding: 0.2rem 0.55rem;
-		border-radius: 4px;
+		font-size: 0.62rem;
+		font-weight: 600;
+		color: var(--pastel-blue-text);
+		background: var(--pastel-blue);
+		padding: 0.15rem 0.5rem;
+		border-radius: 9999px;
+	}
+
+	.role-tag.neutral {
+		color: var(--text-muted);
+		background: var(--surface-alt);
+		border: 1px solid var(--border);
 	}
 
 	.role-bullets {
@@ -317,9 +320,9 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
-		font-size: 0.94rem;
+		font-size: 0.92rem;
 		line-height: 1.65;
-		color: rgb(var(--gray-dark));
+		color: var(--text-body);
 	}
 
 	.role-bullets li {
@@ -328,19 +331,18 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	}
 
 	.role-bullets li::before {
-		content: '▹';
+		content: '–';
 		position: absolute;
 		left: 0;
-		color: var(--accent);
-		font-weight: 700;
+		color: var(--text-muted);
 	}
 
 	.role-bullets strong {
-		color: rgb(var(--black));
+		color: #111111;
 	}
 
 	.education-card h3 {
-		font-size: 1.2rem;
+		font-size: 1.15rem;
 		margin-bottom: 0.35rem;
 	}
 
@@ -358,17 +360,13 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		}
 
 		.timeline-item::before {
-			left: -1.25rem;
+			left: -1.15rem;
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.card {
 			transition: none !important;
-			transform: none !important;
-		}
-		.card:hover {
-			transform: none !important;
 		}
 	}
 </style>

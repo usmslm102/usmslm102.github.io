@@ -290,21 +290,21 @@
 <style>
   .orbit-art {
     background: var(--surface-card);
-    border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, rgb(var(--gray-light)));
-    border-radius: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
     padding: 1.25rem;
     position: relative;
     overflow: hidden;
     color: rgb(var(--black));
-    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(15, 20, 32, 0.04);
+    box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    transition: border-color 200ms ease;
+    transition: border-color 140ms ease;
   }
 
   .orbit-art:hover {
-    border-color: color-mix(in oklch, var(--accent) 55%, rgb(var(--gray-light)));
+    border-color: var(--border-dark);
   }
 
   .orbit-header {
@@ -313,7 +313,7 @@
     justify-content: space-between;
     gap: 0.75rem;
     padding-bottom: 0.65rem;
-    border-bottom: 1px solid color-mix(in oklch, var(--ink-blue) 15%, rgb(var(--gray-light)));
+    border-bottom: 1px solid var(--border);
   }
 
   .radar-tag {
@@ -323,20 +323,19 @@
   }
 
   .radar-blip {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--success);
-    box-shadow: 0 0 8px var(--success);
-    animation: pulse-subtle 2s infinite ease-in-out;
+    background: var(--pastel-green-text);
+    box-shadow: 0 0 0 2px var(--pastel-green);
   }
 
   .radar-title {
     font-family: var(--font-mono);
     font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--ink-blue);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #111111;
   }
 
   .radar-meta {
@@ -347,24 +346,24 @@
   .radar-chip {
     font-family: var(--font-mono);
     font-size: 0.62rem;
-    font-weight: 600;
-    padding: 0.15rem 0.45rem;
+    font-weight: 500;
+    padding: 0.12rem 0.4rem;
     background: var(--surface-alt);
-    border: 1px solid rgb(var(--gray-light));
-    border-radius: 4px;
-    color: rgb(var(--gray-dark));
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text-muted);
   }
 
-  /* Viewport with 3D tilt */
+  /* Viewport with subtle tilt */
   .radar-viewport {
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
-    max-width: 440px;
+    max-width: 420px;
     margin: 0 auto;
-    border-radius: 10px;
-    background: radial-gradient(circle at 50% 50%, color-mix(in oklch, var(--accent-soft) 80%, white), var(--surface-alt));
-    border: 1px solid color-mix(in oklch, var(--ink-blue) 15%, rgb(var(--gray-light)));
+    border-radius: 6px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -383,25 +382,25 @@
 
   .grid-ring {
     fill: none;
-    stroke: color-mix(in oklch, var(--ink-blue) 22%, transparent);
+    stroke: #EAEAEA;
     stroke-width: 1;
     stroke-dasharray: 4 4;
   }
 
   .grid-axis {
-    stroke: color-mix(in oklch, var(--ink-blue) 18%, transparent);
+    stroke: #EAEAEA;
     stroke-width: 1;
   }
 
   .conn-path {
     fill: none;
-    stroke: color-mix(in oklch, var(--accent) 45%, transparent);
-    stroke-width: 1.5;
+    stroke: #D4D4D0;
+    stroke-width: 1;
     stroke-dasharray: 3 3;
     animation: dash-flow 25s linear infinite;
   }
 
-  /* Rotating radar plane (satisfies smoke test .orbit-plane animation name) */
+  /* Rotating radar sweep plane (satisfies smoke test .orbit-plane animation name) */
   .orbit-plane {
     position: absolute;
     inset: 0;
@@ -420,9 +419,9 @@
     background: conic-gradient(
       from 0deg at 0% 100%,
       transparent 0deg,
-      transparent 310deg,
-      color-mix(in oklch, var(--accent) 30%, transparent) 350deg,
-      color-mix(in oklch, var(--accent) 60%, transparent) 360deg
+      transparent 320deg,
+      rgba(0, 0, 0, 0.02) 350deg,
+      rgba(0, 0, 0, 0.05) 360deg
     );
   }
 
@@ -437,41 +436,40 @@
 
   .core-glow {
     position: absolute;
-    width: 76px;
-    height: 76px;
+    width: 68px;
+    height: 68px;
     border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-    animation: pulse-core 3s infinite ease-in-out;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.04) 0%, transparent 70%);
   }
 
   .core-badge {
-    background: rgb(var(--black));
-    color: var(--surface);
-    border: 1.5px solid var(--accent);
+    background: #111111;
+    color: #FFFFFF;
+    border: 1px solid #111111;
     border-radius: 50%;
-    width: 58px;
-    height: 58px;
+    width: 56px;
+    height: 56px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-md), 0 0 16px var(--accent-glow);
+    box-shadow: var(--shadow-sm);
   }
 
   .core-logo {
-    font-family: var(--font-display);
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--accent);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
   }
 
   .core-label {
     font-family: var(--font-mono);
-    font-size: 0.38rem;
+    font-size: 0.36rem;
     letter-spacing: 0.06em;
-    color: var(--surface-alt);
-    font-weight: 600;
+    color: #A1A1AA;
+    font-weight: 500;
     text-align: center;
     line-height: 1.1;
   }
@@ -489,76 +487,71 @@
     top: var(--ny);
     transform: translate(-50%, -50%);
     background: var(--surface-card);
-    border: 1.5px solid rgb(var(--gray-light));
-    border-radius: 20px;
-    padding: 0.25rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    padding: 0.22rem 0.55rem;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.35rem;
     cursor: pointer;
     box-shadow: var(--shadow-sm);
-    transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), background-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+    transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out), background-color 140ms var(--ease-out);
     font-family: var(--font-mono);
     white-space: nowrap;
   }
 
   .system-node:active {
-    transform: translate(-50%, -50%) scale(1.02);
+    transform: translate(-50%, -50%) scale(0.98);
   }
 
   .system-node.active {
-    border-color: var(--accent);
-    background: color-mix(in oklch, var(--accent-soft) 85%, white);
-    transform: translate(-50%, -50%) scale(1.08);
-    box-shadow: 0 4px 12px var(--accent-glow);
+    border-color: var(--pastel-blue-text);
+    background: var(--pastel-blue);
+    color: var(--pastel-blue-text);
+    transform: translate(-50%, -50%) scale(1.04);
   }
 
   @media (hover: hover) and (pointer: fine) {
     .system-node:hover {
-      border-color: var(--accent);
-      background: color-mix(in oklch, var(--accent-soft) 85%, white);
-      transform: translate(-50%, -50%) scale(1.08);
-      box-shadow: 0 4px 12px var(--accent-glow);
+      border-color: #111111;
+      transform: translate(-50%, -50%) scale(1.04);
     }
   }
 
   .node-marker {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--ink-blue);
-    transition: background 160ms var(--ease-out), transform 160ms var(--ease-out);
+    background: #787774;
+    transition: background 140ms var(--ease-out);
   }
 
   .system-node.active .node-marker {
-    background: var(--accent);
-    box-shadow: 0 0 6px var(--accent);
-    transform: scale(1.25);
+    background: var(--pastel-blue-text);
   }
 
   .node-badge {
     font-size: 0.62rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.04em;
-    color: rgb(var(--black));
+    color: inherit;
   }
 
   /* Node Telemetry Card Overlay */
   .node-telemetry {
     position: absolute;
-    bottom: 0.75rem;
-    left: 0.75rem;
-    right: 0.75rem;
-    background: color-mix(in oklch, var(--surface-card) 94%, transparent);
+    bottom: 0.65rem;
+    left: 0.65rem;
+    right: 0.65rem;
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid color-mix(in oklch, var(--accent) 35%, rgb(var(--gray-light)));
-    border-radius: 8px;
-    padding: 0.75rem 0.9rem;
-    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.7rem 0.85rem;
+    box-shadow: var(--shadow-sm);
     z-index: 20;
     pointer-events: none;
-    transition: transform 200ms ease;
   }
 
   .telemetry-top {
@@ -571,32 +564,32 @@
   .telemetry-id {
     font-family: var(--font-mono);
     font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--ink-blue);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
   }
 
   .telemetry-status {
     font-family: var(--font-mono);
     font-size: 0.62rem;
-    font-weight: 700;
-    color: var(--success);
+    font-weight: 600;
+    color: var(--pastel-green-text);
   }
 
   .telemetry-title {
     margin: 0 0 0.2rem;
-    font-family: var(--font-ui);
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: rgb(var(--black));
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: #111111;
     line-height: 1.25;
   }
 
   .telemetry-desc {
     margin: 0;
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     line-height: 1.45;
-    color: rgb(var(--gray-dark));
+    color: var(--text-muted);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -612,58 +605,57 @@
     font-size: 0.72rem;
     font-family: var(--font-mono);
     padding-top: 0.4rem;
-    border-top: 1px solid color-mix(in oklch, var(--ink-blue) 12%, rgb(var(--gray-light)));
+    border-top: 1px solid var(--border);
   }
 
   .location-clock {
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    color: rgb(var(--gray-dark));
+    color: var(--text-muted);
     font-size: 0.7rem;
-    font-weight: 500;
+    font-weight: 450;
   }
 
   .loc-indicator {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--success);
-    box-shadow: 0 0 6px var(--success);
+    background: var(--pastel-green-text);
+    box-shadow: 0 0 0 2px var(--pastel-green);
   }
 
   .loc-sep {
-    color: rgb(var(--gray-light));
+    color: var(--border);
   }
 
   .loc-time {
-    color: var(--accent-dark);
-    font-weight: 700;
+    color: #111111;
+    font-weight: 600;
     font-variant-numeric: tabular-nums;
   }
 
   .orbit-pause-btn {
     font-family: var(--font-mono);
     font-size: 0.68rem;
-    font-weight: 600;
-    color: var(--ink-blue);
+    font-weight: 500;
+    color: #111111;
     background: var(--surface-alt);
-    border: 1px solid rgb(var(--gray-light));
-    border-radius: 20px;
-    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.3rem 0.65rem;
     cursor: pointer;
-    transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
+    transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out);
   }
 
   .orbit-pause-btn:active {
-    transform: scale(0.97);
+    transform: scale(0.98);
   }
 
   @media (hover: hover) and (pointer: fine) {
     .orbit-pause-btn:hover {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-      color: var(--accent-dark);
+      background: var(--surface-card);
+      border-color: #111111;
     }
   }
 
@@ -688,17 +680,6 @@
   @keyframes dash-flow {
     to {
       stroke-dashoffset: -100;
-    }
-  }
-
-  @keyframes pulse-core {
-    0%, 100% {
-      transform: scale(1);
-      opacity: 0.5;
-    }
-    50% {
-      transform: scale(1.15);
-      opacity: 0.9;
     }
   }
 

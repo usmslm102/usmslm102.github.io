@@ -30,7 +30,7 @@ const latestPosts = (await getCollection('blog'))
 
 					<h1 class="hero-title" data-reveal="hero" style="--hero-order: 1;">
 						Hi, I’m Usama.<br />
-						<em>I build systems<br />that scale & last.</em>
+						<em>I build systems that scale &amp; last.</em>
 					</h1>
 
 					<p class="hero-bio" data-reveal="hero" style="--hero-order: 2;">
@@ -55,22 +55,22 @@ const latestPosts = (await getCollection('blog'))
 				</div>
 			</section>
 
-			<!-- Engineering Dossier -->
+			<!-- Engineering Dossier (Asymmetrical Bento Grid per Minimalist-UI Protocol) -->
 			<section class="about-dossier" aria-label="Engineering Dossier" data-reveal>
 				<div class="dossier-grid">
-					<div class="dossier-block" data-reveal style="--stagger: 0;">
+					<div class="dossier-block dossier-featured" data-reveal style="--stagger: 0;">
 						<div class="dossier-header">
-							<span class="dossier-tag">01 // FOCUS</span>
+							<span class="dossier-tag tag-blue">01 // FOCUS</span>
 							<h3>AI Agent Platforms</h3>
 						</div>
 						<p>
-							Architecting the Azure Networking AI Agent Platform with MCP (Model Context Protocol), multi-model orchestration (GPT-5.2 & Mini), vector memory persistence on Cosmos DB, and enterprise security governance.
+							Architecting the Azure Networking AI Agent Platform with MCP (Model Context Protocol), multi-model orchestration (GPT-5.2 &amp; Mini), vector memory persistence on Cosmos DB, and enterprise security governance.
 						</p>
 					</div>
 
 					<div class="dossier-block" data-reveal style="--stagger: 1;">
 						<div class="dossier-header">
-							<span class="dossier-tag">02 // SCALE</span>
+							<span class="dossier-tag tag-green">02 // SCALE</span>
 							<h3>High-Throughput APIs</h3>
 						</div>
 						<p>
@@ -80,7 +80,7 @@ const latestPosts = (await getCollection('blog'))
 
 					<div class="dossier-block" data-reveal style="--stagger: 2;">
 						<div class="dossier-header">
-							<span class="dossier-tag">03 // STACK</span>
+							<span class="dossier-tag tag-yellow">03 // STACK</span>
 							<h3>Core Tooling</h3>
 						</div>
 						<ul class="mono-list">
@@ -93,7 +93,7 @@ const latestPosts = (await getCollection('blog'))
 				</div>
 			</section>
 
-			<!-- Latest Writing Section (retains #writing for anchor compatibility) -->
+			<!-- Latest Writing Section -->
 			<section class="latest-section" id="writing" aria-label="Latest writing" data-reveal>
 				<div class="section-head" data-reveal>
 					<div class="section-title-group">
@@ -123,7 +123,7 @@ const latestPosts = (await getCollection('blog'))
 				</ul>
 			</section>
 
-			<!-- The Workbench /uses Teaser -->
+			<!-- The Workbench /uses Teaser (Faux-OS Window Chrome) -->
 			<section class="uses-teaser-wrap" data-reveal>
 				<a class="uses-teaser" href="/uses">
 					<div class="teaser-content">
@@ -185,10 +185,10 @@ const latestPosts = (await getCollection('blog'))
 	.home-container {
 		display: flex;
 		flex-direction: column;
-		gap: 4.5rem;
-		max-width: 1100px;
+		gap: 5.5rem;
+		max-width: 1060px;
 		width: 100%;
-		padding-top: 3.5rem;
+		padding-top: 3rem;
 		box-sizing: border-box;
 	}
 
@@ -209,38 +209,38 @@ const latestPosts = (await getCollection('blog'))
 	.hero-eyebrow {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.55rem;
+		gap: 0.5rem;
 		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.1em;
-		color: var(--ink-blue);
-		background: color-mix(in oklch, var(--ink-blue-soft) 85%, white);
-		border: 1px solid color-mix(in oklch, var(--ink-blue) 25%, transparent);
-		padding: 0.3rem 0.65rem;
-		border-radius: 20px;
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		color: var(--pastel-blue-text);
+		background: var(--pastel-blue);
+		padding: 0.25rem 0.65rem;
+		border-radius: 9999px;
 		width: fit-content;
 	}
 
 	.hero-title {
-		font-family: var(--font-display);
-		font-size: clamp(2.8rem, 6vw, 4.4rem);
-		line-height: 1.04;
+		font-family: var(--font-serif);
+		font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+		line-height: 1.05;
 		letter-spacing: -0.035em;
-		color: rgb(var(--black));
+		color: #111111;
 		margin: 0;
+		font-weight: 500;
 	}
 
 	.hero-title em {
-		font-style: normal;
-		font-weight: 700;
-		color: var(--accent-dark);
+		font-style: italic;
+		font-weight: 400;
+		color: #111111;
 	}
 
 	.hero-bio {
-		font-size: 1.06rem;
-		line-height: 1.72;
-		color: rgb(var(--gray-dark));
+		font-size: 1.05rem;
+		line-height: 1.68;
+		color: var(--text-body);
 		max-width: 52ch;
 		margin: 0;
 	}
@@ -248,7 +248,7 @@ const latestPosts = (await getCollection('blog'))
 	.hero-actions {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.75rem;
+		gap: 0.65rem;
 		margin-top: 0.5rem;
 	}
 
@@ -257,74 +257,71 @@ const latestPosts = (await getCollection('blog'))
 		align-items: center;
 		justify-content: center;
 		gap: 0.4rem;
-		padding: 0.65rem 1.15rem;
-		border-radius: 8px;
+		padding: 0.6rem 1.15rem;
+		border-radius: 5px;
 		font-family: var(--font-ui);
 		font-size: 0.84rem;
-		font-weight: 600;
+		font-weight: 500;
 		text-decoration: none;
 		cursor: pointer;
-		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
+		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
 	}
 
 	.action-btn:active {
-		transform: scale(0.97) !important;
+		transform: scale(0.98) !important;
 	}
 
 	.primary-btn {
-		background: rgb(var(--black));
-		color: var(--surface);
-		border: 1px solid rgb(var(--black));
-		box-shadow: var(--shadow-sm);
+		background: #111111;
+		color: #FFFFFF;
+		border: 1px solid #111111;
 	}
 
 	.secondary-btn {
 		background: var(--surface-card);
-		color: rgb(var(--black));
-		border: 1px solid rgb(var(--gray-light));
+		color: #111111;
+		border: 1px solid var(--border);
 	}
 
 	.tertiary-btn {
 		background: var(--surface-alt);
-		color: rgb(var(--gray-dark));
-		border: 1px solid rgb(var(--gray-light));
+		color: var(--text-body);
+		border: 1px solid var(--border);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.primary-btn:hover {
-			background: var(--accent-dark);
-			border-color: var(--accent-dark);
-			color: var(--surface);
-			transform: translateY(-2px);
-			box-shadow: 0 4px 12px var(--accent-glow);
+			background: #2F3437;
+			border-color: #2F3437;
+			color: #FFFFFF;
+			text-decoration: none;
 		}
 
 		.secondary-btn:hover {
-			background: var(--accent-soft);
-			border-color: var(--accent);
-			color: var(--accent-dark);
-			transform: translateY(-2px);
+			background: var(--surface-alt);
+			border-color: #111111;
+			color: #111111;
+			text-decoration: none;
 		}
 
 		.tertiary-btn:hover {
 			background: var(--surface-card);
-			border-color: var(--accent);
-			color: rgb(var(--black));
-			transform: translateY(-2px);
+			border-color: #111111;
+			color: #111111;
 		}
 	}
 
 	.hero-kbd {
 		font-family: var(--font-mono);
 		font-size: 0.68rem;
-		padding: 0.1rem 0.35rem;
+		padding: 0.08rem 0.3rem;
 		background: var(--surface-card);
-		border: 1px solid rgb(var(--gray-light));
-		border-radius: 4px;
-		color: rgb(var(--black));
+		border: 1px solid var(--border);
+		border-radius: 3px;
+		color: #111111;
 	}
 
-	/* Dossier Grid */
+	/* Bento Dossier Grid */
 	.about-dossier {
 		display: flex;
 		flex-direction: column;
@@ -333,55 +330,75 @@ const latestPosts = (await getCollection('blog'))
 
 	.dossier-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 1.5rem;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.25rem;
 	}
 
 	.dossier-block {
 		background: var(--surface-card);
-		border: 1px solid color-mix(in oklch, var(--ink-blue) 20%, rgb(var(--gray-light)));
-		border-radius: 10px;
+		border: 1px solid var(--border);
+		border-radius: 8px;
 		padding: 1.75rem;
 		box-shadow: var(--shadow-sm);
-		transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.dossier-block:hover {
-			transform: translateY(-3px);
-			border-color: color-mix(in oklch, var(--accent) 50%, rgb(var(--gray-light)));
-			box-shadow: var(--shadow-md);
+			border-color: var(--border-dark);
+			box-shadow: var(--shadow-hover);
 		}
 	}
 
 	.dossier-header {
-		margin-bottom: 0.85rem;
-		border-bottom: 1px solid rgb(var(--gray-light));
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+		border-bottom: 1px solid var(--border);
 		padding-bottom: 0.75rem;
 	}
 
 	.dossier-tag {
 		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		color: var(--accent-dark);
-		display: block;
-		margin-bottom: 0.25rem;
+		font-size: 0.62rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		display: inline-block;
+		width: fit-content;
+		padding: 0.15rem 0.5rem;
+		border-radius: 9999px;
+	}
+
+	.tag-blue {
+		background: var(--pastel-blue);
+		color: var(--pastel-blue-text);
+	}
+
+	.tag-green {
+		background: var(--pastel-green);
+		color: var(--pastel-green-text);
+	}
+
+	.tag-yellow {
+		background: var(--pastel-yellow);
+		color: var(--pastel-yellow-text);
 	}
 
 	.dossier-block h3 {
-		font-family: var(--font-ui);
+		font-family: var(--font-serif);
 		font-size: 1.25rem;
-		font-weight: 700;
-		color: rgb(var(--black));
+		font-weight: 500;
+		color: #111111;
 		margin: 0;
 	}
 
 	.dossier-block p {
 		font-size: 0.92rem;
 		line-height: 1.65;
-		color: rgb(var(--gray-dark));
+		color: var(--text-body);
 		margin: 0;
 	}
 
@@ -391,10 +408,10 @@ const latestPosts = (await getCollection('blog'))
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: 0.45rem;
 		font-family: var(--font-mono);
-		font-size: 0.82rem;
-		color: rgb(var(--black));
+		font-size: 0.8rem;
+		color: #111111;
 	}
 
 	.mono-list li {
@@ -404,9 +421,8 @@ const latestPosts = (await getCollection('blog'))
 	}
 
 	.mono-list li::before {
-		content: '▹';
-		color: var(--accent);
-		font-size: 0.85rem;
+		content: '–';
+		color: var(--text-muted);
 	}
 
 	/* Latest Writing */
@@ -420,7 +436,7 @@ const latestPosts = (await getCollection('blog'))
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-end;
-		border-bottom: 1px solid rgb(var(--black));
+		border-bottom: 1px solid var(--border);
 		padding-bottom: 0.75rem;
 	}
 
@@ -432,30 +448,32 @@ const latestPosts = (await getCollection('blog'))
 
 	.section-eyebrow {
 		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		font-weight: 700;
-		letter-spacing: 0.1em;
-		color: var(--ink-blue);
+		font-size: 0.65rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		color: var(--text-muted);
 	}
 
 	.section-head h2 {
 		margin: 0;
-		font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+		font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+		font-weight: 500;
 	}
 
 	.view-all-link {
 		font-family: var(--font-mono);
 		font-size: 0.78rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
+		font-weight: 500;
 		text-decoration: none;
-		color: var(--ink-blue);
+		color: var(--text-muted);
+		transition: color 140ms var(--ease-out);
 	}
 
 	.view-all-link:hover {
-		background: transparent;
-		color: var(--accent);
+		color: #111111;
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 3px;
 	}
 
 	.posts-list {
@@ -464,22 +482,22 @@ const latestPosts = (await getCollection('blog'))
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: 0.85rem;
 	}
 
 	.post-card {
 		background: var(--surface-card);
-		border: 1px solid rgb(var(--gray-light));
+		border: 1px solid var(--border);
 		border-radius: 8px;
-		padding: 1.5rem 1.75rem;
-		transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out), border-color 180ms var(--ease-out);
+		padding: 1.4rem 1.6rem;
+		box-shadow: var(--shadow-sm);
+		transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.post-card:hover {
-			transform: translateX(4px);
-			border-color: var(--accent);
-			box-shadow: var(--shadow-md);
+			border-color: var(--border-dark);
+			box-shadow: var(--shadow-hover);
 		}
 	}
 
@@ -488,11 +506,11 @@ const latestPosts = (await getCollection('blog'))
 		color: inherit;
 		display: flex;
 		flex-direction: column;
-		gap: 0.4rem;
+		gap: 0.35rem;
 	}
 
 	.post-link:hover {
-		background: transparent;
+		text-decoration: none;
 	}
 
 	.post-meta {
@@ -500,67 +518,68 @@ const latestPosts = (await getCollection('blog'))
 		align-items: center;
 		gap: 0.5rem;
 		font-family: var(--font-mono);
-		font-size: 0.74rem;
-		font-weight: 600;
-		color: var(--ink-blue);
+		font-size: 0.72rem;
+		color: var(--text-muted);
 	}
 
 	.meta-dot {
-		color: rgb(var(--gray-light));
+		color: var(--border);
 	}
 
 	.read-estimate {
-		color: rgb(var(--gray));
-		font-weight: 500;
+		color: var(--text-muted);
+		font-weight: 450;
 	}
 
 	.post-title {
 		margin: 0.15rem 0 0;
-		font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+		font-family: var(--font-serif);
+		font-size: clamp(1.25rem, 2.2vw, 1.6rem);
 		line-height: 1.25;
-		color: rgb(var(--black));
-		transition: color 160ms var(--ease-out);
+		color: #111111;
+		font-weight: 500;
 	}
 
 	.post-card:hover .post-title {
-		color: var(--accent-dark);
+		color: #111111;
 	}
 
 	.post-desc {
 		margin: 0;
-		font-size: 0.94rem;
+		font-size: 0.92rem;
 		line-height: 1.6;
-		color: rgb(var(--gray-dark));
+		color: var(--text-body);
 	}
 
 	.post-arrow {
 		font-family: var(--font-mono);
-		font-size: 0.76rem;
-		font-weight: 600;
-		color: var(--accent-dark);
-		margin-top: 0.4rem;
+		font-size: 0.74rem;
+		font-weight: 500;
+		color: #111111;
+		margin-top: 0.35rem;
 		display: inline-block;
 	}
 
 	/* Uses Teaser */
 	.uses-teaser-wrap {
-		margin-top: 1rem;
+		margin-top: 0.5rem;
 	}
 
 	.uses-teaser {
 		display: grid;
-		grid-template-columns: 1.4fr 1fr;
+		grid-template-columns: 1.3fr 1fr;
 		gap: 2.5rem;
 		align-items: center;
-		background: rgb(var(--black));
-		color: var(--surface);
-		padding: 3rem;
-		border-radius: 14px;
+		background: #FFFFFF;
+		color: #111111;
+		padding: 2.75rem;
+		border-radius: 8px;
+		border: 1px solid var(--border);
 		text-decoration: none;
 		position: relative;
 		overflow: hidden;
-		box-shadow: var(--shadow-lg);
-		transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+		box-shadow: var(--shadow-sm);
+		transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 	}
 
 	.uses-teaser:active {
@@ -569,10 +588,9 @@ const latestPosts = (await getCollection('blog'))
 
 	@media (hover: hover) and (pointer: fine) {
 		.uses-teaser:hover {
-			transform: translateY(-4px);
-			box-shadow: 0 20px 40px -10px rgba(15, 20, 32, 0.4);
-			background: rgb(var(--black));
-			color: var(--surface);
+			border-color: var(--border-dark);
+			box-shadow: var(--shadow-hover);
+			text-decoration: none;
 		}
 	}
 
@@ -584,49 +602,50 @@ const latestPosts = (await getCollection('blog'))
 
 	.teaser-eyebrow {
 		font-family: var(--font-mono);
-		font-size: 0.7rem;
-		font-weight: 700;
-		letter-spacing: 0.12em;
-		color: var(--accent);
+		font-size: 0.65rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		color: var(--text-muted);
 	}
 
 	.teaser-title {
-		font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+		font-family: var(--font-serif);
+		font-size: clamp(2rem, 4vw, 3rem);
 		line-height: 1.05;
-		color: var(--surface);
+		color: #111111;
 		margin: 0;
+		font-weight: 500;
 	}
 
 	.teaser-title em {
-		font-style: normal;
-		font-weight: 700;
-		color: var(--accent);
+		font-style: italic;
+		font-weight: 400;
 	}
 
 	.teaser-desc {
-		font-size: 0.95rem;
+		font-size: 0.94rem;
 		line-height: 1.65;
-		color: color-mix(in oklch, var(--surface) 75%, transparent);
+		color: var(--text-body);
 		margin: 0;
 		max-width: 48ch;
 	}
 
 	.teaser-action {
 		font-family: var(--font-mono);
-		font-size: 0.82rem;
-		font-weight: 700;
-		letter-spacing: 0.05em;
-		color: var(--accent);
-		margin-top: 0.5rem;
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		color: #111111;
+		margin-top: 0.4rem;
 	}
 
 	.terminal-mini-preview {
-		background: #0d1117;
-		border: 1px solid rgba(255, 255, 255, 0.15);
-		border-radius: 8px;
-		padding: 1.25rem;
+		background: #18181B;
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		padding: 1.15rem;
 		font-family: var(--font-code);
-		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+		box-shadow: var(--shadow-sm);
 	}
 
 	.term-dots {
@@ -636,57 +655,36 @@ const latestPosts = (await getCollection('blog'))
 	}
 
 	.term-dots i {
-		width: 10px;
-		height: 10px;
+		width: 9px;
+		height: 9px;
 		border-radius: 50%;
 		background: rgba(255, 255, 255, 0.2);
 	}
 
-	.term-dots i:nth-child(1) { background: #ff5f56; }
-	.term-dots i:nth-child(2) { background: #ffbd2e; }
-	.term-dots i:nth-child(3) { background: #27c93f; }
+	.term-dots i:nth-child(1) { background: #E4E4E7; opacity: 0.3; }
+	.term-dots i:nth-child(2) { background: #E4E4E7; opacity: 0.3; }
+	.term-dots i:nth-child(3) { background: #E4E4E7; opacity: 0.3; }
 
 	.term-code {
 		font-size: 0.78rem;
 		line-height: 1.7;
-		color: #e6edf3;
+		color: #F4F4F5;
 	}
 
-	.c-dim { color: #8b949e; }
-	.c-acc { color: var(--accent); font-weight: 600; }
+	.c-dim { color: #A1A1AA; }
+	.c-acc { color: #FAFAFA; font-weight: 600; }
 
 	/* Reveal Keyframes */
 	html.motion-ready .hero-section [data-reveal='hero'] {
 		opacity: 0;
-		animation: hero-reveal 260ms var(--ease-out) forwards;
-		animation-delay: calc(var(--hero-order, 0) * 40ms + 30ms);
-	}
-
-	html.motion-ready [data-reveal]:not([data-reveal='hero']) {
-		opacity: 0;
-		transform: translateY(8px);
-	}
-
-	html.motion-ready [data-reveal].in-view {
-		animation: section-reveal 240ms var(--ease-out) forwards;
-		animation-delay: calc(var(--stagger, 0) * 40ms);
+		animation: hero-reveal 400ms var(--ease-out) forwards;
+		animation-delay: calc(var(--hero-order, 0) * 80ms + 40ms);
 	}
 
 	@keyframes hero-reveal {
 		from {
 			opacity: 0;
-			transform: translateY(8px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	@keyframes section-reveal {
-		from {
-			opacity: 0;
-			transform: translateY(8px);
+			transform: translateY(12px);
 		}
 		to {
 			opacity: 1;
@@ -701,6 +699,10 @@ const latestPosts = (await getCollection('blog'))
 			gap: 2.5rem;
 		}
 
+		.dossier-grid {
+			grid-template-columns: 1fr;
+		}
+
 		.uses-teaser {
 			grid-template-columns: 1fr;
 			padding: 2rem;
@@ -710,11 +712,11 @@ const latestPosts = (await getCollection('blog'))
 	@media (max-width: 580px) {
 		.home-container {
 			padding-top: 1.75rem;
-			gap: 3rem;
+			gap: 3.5rem;
 		}
 
 		.hero-title {
-			font-size: clamp(2.4rem, 10vw, 3.4rem);
+			font-size: clamp(2.4rem, 10vw, 3.2rem);
 		}
 
 		.post-card {

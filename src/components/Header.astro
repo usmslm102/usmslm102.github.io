@@ -24,7 +24,7 @@ import CommandPalette from './CommandPalette.astro';
 
 		<div class="header-tools">
 			<button type="button" class="cmd-trigger-btn" data-open-cmd aria-label="Open Command Palette (Press ⌘K)">
-				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<circle cx="11" cy="11" r="8"></circle>
 					<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
 				</svg>
@@ -33,7 +33,11 @@ import CommandPalette from './CommandPalette.astro';
 			</button>
 
 			<button type="button" class="sound-toggle-btn" id="header-sound-btn" aria-label="Toggle Sound Effects" title="Toggle tactile sound effects">
-				<span class="sound-icon" aria-hidden="true">♫</span>
+				<svg class="sound-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+					<path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+					<path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+				</svg>
 				<span class="sound-label sr-only">Sound Effects</span>
 			</button>
 
@@ -83,10 +87,10 @@ import CommandPalette from './CommandPalette.astro';
 		position: sticky;
 		top: 0;
 		z-index: 50;
-		background: color-mix(in oklch, var(--surface) 88%, transparent);
+		background: rgba(251, 251, 250, 0.92);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
-		border-bottom: 1px solid color-mix(in oklch, var(--ink-blue) 14%, rgb(var(--gray-light)));
+		border-bottom: 1px solid var(--border);
 		transition: background-color 200ms ease;
 	}
 
@@ -95,10 +99,10 @@ import CommandPalette from './CommandPalette.astro';
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
-		min-height: 4.25rem;
+		min-height: 4rem;
 		margin: 0 auto;
-		max-width: 1100px;
-		padding: 0 1.25rem;
+		max-width: 1060px;
+		padding: 0 1.5rem;
 		box-sizing: border-box;
 	}
 
@@ -109,98 +113,100 @@ import CommandPalette from './CommandPalette.astro';
 	}
 
 	.brand {
-		font-family: var(--font-display);
-		font-size: 1.25rem;
-		font-weight: 400;
+		font-family: var(--font-body);
+		font-size: 1.05rem;
+		font-weight: 600;
 		letter-spacing: -0.02em;
 		text-decoration: none;
-		color: rgb(var(--black));
+		color: #111111;
 		display: inline-flex;
 		align-items: baseline;
 	}
 
 	.brand:hover {
 		background: transparent;
-		color: var(--accent);
+		color: #111111;
+		text-decoration: none;
 	}
 
 	.internal-links {
 		display: flex;
 		align-items: center;
-		gap: 0.25rem;
+		gap: 0.15rem;
 	}
 
 	.internal-links :global(a) {
 		display: inline-flex;
 		align-items: center;
-		padding: 0.4rem 0.75rem;
-		min-height: 2.25rem;
-		color: rgb(var(--gray-dark));
+		padding: 0.35rem 0.7rem;
+		min-height: 2rem;
+		color: var(--ink-blue);
 		text-decoration: none;
 		font-family: var(--font-ui);
 		font-weight: 500;
 		font-size: 0.86rem;
-		border-radius: 6px;
+		border-radius: 4px;
 		transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out), transform 140ms var(--ease-out);
 	}
 
 	.internal-links :global(a.active) {
-		color: var(--accent-dark);
-		font-weight: 700;
-		background-color: var(--accent-soft);
+		color: #111111;
+		font-weight: 600;
+		background-color: var(--surface-alt);
+		border: 1px solid var(--border);
 	}
 
 	.internal-links :global(a:active) {
-		transform: scale(0.97);
+		transform: scale(0.98);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.internal-links :global(a:hover) {
-			color: rgb(var(--black));
+			color: #111111;
 			background-color: var(--surface-alt);
+			text-decoration: none;
 		}
 	}
 
 	.header-tools {
 		display: flex;
 		align-items: center;
-		gap: 0.6rem;
+		gap: 0.5rem;
 	}
 
 	.cmd-trigger-btn {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
-		padding: 0.35rem 0.65rem;
+		gap: 0.45rem;
+		padding: 0.35rem 0.6rem;
 		background: var(--surface-card);
-		border: 1px solid rgb(var(--gray-light));
-		border-radius: 6px;
+		border: 1px solid var(--border);
+		border-radius: 4px;
 		color: rgb(var(--gray));
 		font-family: var(--font-ui);
 		font-size: 0.8rem;
 		cursor: pointer;
-		transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
+		transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
 	}
 
 	.cmd-trigger-btn:active {
-		transform: scale(0.97);
+		transform: scale(0.98);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.cmd-trigger-btn:hover {
-			border-color: var(--accent);
-			color: rgb(var(--black));
-			box-shadow: 0 2px 6px var(--accent-glow);
+			border-color: #111111;
+			color: #111111;
 		}
 	}
 
 	.cmd-kbd {
 		font-family: var(--font-mono);
 		font-size: 0.68rem;
-		padding: 0.1rem 0.35rem;
+		padding: 0.08rem 0.3rem;
 		background: var(--surface-alt);
-		border: 1px solid rgb(var(--gray-light));
-		border-radius: 4px;
+		border: 1px solid var(--border);
+		border-radius: 3px;
 		color: rgb(var(--gray-dark));
 	}
 
@@ -208,61 +214,63 @@ import CommandPalette from './CommandPalette.astro';
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 32px;
-		height: 32px;
+		width: 30px;
+		height: 30px;
 		background: var(--surface-card);
-		border: 1px solid rgb(var(--gray-light));
-		border-radius: 6px;
+		border: 1px solid var(--border);
+		border-radius: 4px;
 		color: rgb(var(--gray));
-		font-size: 0.88rem;
 		cursor: pointer;
 		transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out), background-color 140ms var(--ease-out);
 	}
 
 	.sound-toggle-btn:active {
-		transform: scale(0.97);
+		transform: scale(0.98);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.sound-toggle-btn:hover {
-			color: rgb(var(--black));
-			border-color: rgb(var(--gray));
+			color: #111111;
+			border-color: #111111;
 		}
 	}
 
 	.sound-toggle-btn.sound-active {
-		background: var(--accent-soft);
-		border-color: var(--accent);
-		color: var(--accent-dark);
+		background: var(--surface-alt);
+		border-color: #111111;
+		color: #111111;
 	}
 
 	.social-links {
 		display: flex;
 		align-items: center;
-		gap: 0.4rem;
+		gap: 0.35rem;
 	}
 
 	.social-links a {
 		display: inline-flex;
 		align-items: center;
 		font-family: var(--font-mono);
-		font-size: 0.75rem;
-		font-weight: 600;
+		font-size: 0.74rem;
+		font-weight: 500;
 		color: var(--ink-blue);
 		text-decoration: none;
-		padding: 0.35rem 0.5rem;
-		border-radius: 5px;
-		transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out), transform 140ms var(--ease-out);
+		padding: 0.3rem 0.5rem;
+		border-radius: 4px;
+		border: 1px solid transparent;
+		transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out);
 	}
 
 	.social-links a:active {
-		transform: scale(0.97);
+		transform: scale(0.98);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.social-links a:hover {
-			background: var(--accent-soft);
-			color: var(--accent-dark);
+			background: var(--surface-alt);
+			border-color: var(--border);
+			color: #111111;
+			text-decoration: none;
 		}
 	}
 
