@@ -1,0 +1,119 @@
+---
+import { Image } from 'astro:assets';
+import localFinance from '../assets/projects/local-finance.png';
+import appOrigins from '../assets/projects/app-origins.png';
+
+const projects = [
+  {
+    name: 'LocalFinance',
+    category: '01 / PERSONAL FINANCE',
+    headline: 'Your money. Your machine.',
+    description: 'Turn Indian bank and credit card statements into a clear picture of your spending. Import, categorize, and explore your finances with your data stored locally in SQLite.',
+    features: ['Offline finance analysis', 'Bank statement imports', 'Go · React · SQLite'],
+    image: localFinance,
+    alt: 'LocalFinance transactions ledger with spending summaries, account filters, and categorized bank transactions.',
+    site: 'https://usamaansari.com/local-finance/',
+    repo: 'https://github.com/usmslm102/local-finance',
+    tone: 'finance',
+  },
+  {
+    name: 'AppOrigins',
+    category: '02 / MACOS UTILITY',
+    headline: 'Know what’s on your Mac.',
+    description: 'A native macOS utility that traces installed apps and CLI tools back to their source. See versions, disk usage, signing status, and duplicate installs in one place.',
+    features: ['Homebrew · App Store · Manual', 'Duplicate & signing checks', 'Swift · SwiftUI'],
+    image: appOrigins,
+    alt: 'AppOrigins showing installed Mac apps and CLI tools, their installation sources, signing status, sizes, and app details.',
+    site: 'https://usamaansari.com/mac-app-origins/',
+    repo: 'https://github.com/usmslm102/mac-app-origins',
+    tone: 'origins',
+  },
+];
+---
+
+<section class="projects-section" id="projects" aria-labelledby="projects-title" data-reveal>
+  <div class="projects-heading">
+    <div>
+      <span class="eyebrow">BUILT OUT OF CURIOSITY</span>
+      <h2 id="projects-title">Personal projects</h2>
+    </div>
+    <p>Everyday problems, thoughtfully built tools.<br />Open source, from the first commit.</p>
+  </div>
+
+  <div class="project-list">
+    {projects.map((project, index) => (
+      <article class={`project project-${project.tone}`} aria-labelledby={`project-${project.tone}`} data-reveal style={`--stagger: ${index};`}>
+        <a class="project-preview" href={project.site} target="_blank" rel="noreferrer" aria-label={`Visit the ${project.name} website (opens in a new tab)`}>
+          <div class="preview-caption" aria-hidden="true">
+            <span class="preview-name">{project.name}</span>
+            <span class="preview-action">Explore project ↗</span>
+          </div>
+          <Image src={project.image} alt={project.alt} widths={[480, 800, 1200, 1600]} sizes="(max-width: 700px) calc(100vw - 64px), (max-width: 1100px) 60vw, 620px" format="webp" quality={85} loading="lazy" />
+        </a>
+        <div class="project-copy">
+          <span class="project-category">{project.category}</span>
+          <h3 id={`project-${project.tone}`}>{project.name}</h3>
+          <p class="project-headline">{project.headline}</p>
+          <p class="project-description">{project.description}</p>
+          <ul class="project-features" aria-label={`${project.name} highlights`}>
+            {project.features.map(feature => <li>{feature}</li>)}
+          </ul>
+          <div class="project-links">
+            <a class="project-site" href={project.site} target="_blank" rel="noreferrer" aria-label={`${project.name} website (opens in a new tab)`}>Visit website <span aria-hidden="true">↗</span></a>
+            <a class="project-source" href={project.repo} target="_blank" rel="noreferrer" aria-label={`${project.name} source on GitHub (opens in a new tab)`}>Source on GitHub <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .projects-section { scroll-margin-top: 7rem; }
+  .projects-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); margin-bottom: 1.75rem; }
+  .eyebrow, .project-category { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; color: var(--text-muted); }
+  .projects-heading h2 { margin: 0.3rem 0 0; font-size: clamp(1.8rem, 3.5vw, 2.3rem); font-weight: 500; }
+  .projects-heading p { margin: 0; font-size: 0.85rem; line-height: 1.6; color: var(--text-body); }
+  .project-list { display: grid; gap: 1.5rem; }
+  .project { --project-ink: #176047; --project-wash: #edf3ee; display: grid; grid-template-columns: 1fr 1.65fr; background: var(--surface-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .project-origins { --project-ink: #295b8e; --project-wash: #edf1f6; }
+  .project-copy { grid-column: 1; grid-row: 1; padding: 2rem; }
+  .project-category { color: var(--project-ink); font-size: 0.6rem; }
+  .project-copy h3 { margin: 0.8rem 0 0.3rem; font-size: 2rem; letter-spacing: -0.035em; font-weight: 500; }
+  .project-headline { margin: 0 0 0.85rem; font-size: 0.94rem; font-weight: 500; color: var(--project-ink); }
+  .project-description { margin: 0; font-size: 0.88rem; line-height: 1.7; color: var(--text-body); }
+  .project-features { list-style: none; padding: 1rem 0; margin: 1rem 0 0; border-top: 1px solid var(--border); display: grid; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.64rem; color: var(--text-body); }
+  .project-features li { display: flex; align-items: center; gap: 0.5rem; }
+  .project-features li::before { content: ''; width: 4px; height: 4px; background: var(--project-ink); border-radius: 50%; flex-shrink: 0; }
+  .project-preview { grid-column: 2; grid-row: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; padding: 1.75rem; background: var(--project-wash); color: var(--project-ink); text-decoration: none; }
+  .preview-caption { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.65rem; }
+  .preview-name { font-weight: 600; }
+  .preview-action { transition: transform 180ms var(--ease-out); }
+  .project-preview img { display: block; width: 100%; height: auto; border: 1px solid rgba(0,0,0,0.1); border-radius: 6px; box-shadow: 0 8px 24px rgba(24,39,30,0.08); transition: transform 240ms var(--ease-out); }
+  .project-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem 1rem; margin-top: 0.5rem; }
+  .project-links a { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; font-size: 0.75rem; font-weight: 500; text-decoration: none; }
+  .project-site { background: var(--project-ink); color: white; border-radius: 4px; padding: 0.55rem 0.8rem; }
+  .project-source { color: var(--text-body); }
+  @media (hover: hover) and (pointer: fine) {
+    .project-preview:hover { text-decoration: none; }
+    .project-preview:hover img { transform: translateY(-3px); }
+    .project-preview:hover .preview-action { transform: translateX(3px); }
+    .project-site:hover { color: white; text-decoration: underline; text-underline-offset: 3px; }
+    .project-source:hover { color: var(--project-ink); text-decoration: underline; text-underline-offset: 3px; }
+  }
+  @media (max-width: 920px) and (min-width: 701px) {
+    .project { grid-template-columns: 1fr 1.2fr; }
+    .project-copy, .project-preview { padding: 1.5rem; }
+  }
+  @media (max-width: 700px) {
+    .projects-heading { align-items: flex-start; flex-direction: column; gap: 0.65rem; }
+    .project { grid-template-columns: 1fr; }
+    .project-preview { grid-column: 1; grid-row: 1; padding: 1rem; }
+    .project-copy { grid-row: 2; padding: 1.5rem; }
+    .project-copy h3 { margin-top: 0.5rem; }
+    .project-features { font-size: 0.66rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .project-preview img, .preview-action { transition: none; transform: none !important; }
+  }
+</style>

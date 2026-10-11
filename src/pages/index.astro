@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import Orbit from '../components/Orbit.astro';
+import PersonalProjects from '../components/PersonalProjects.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 const latestPosts = (await getCollection('blog'))
@@ -92,6 +93,8 @@ const latestPosts = (await getCollection('blog'))
 					</div>
 				</div>
 			</section>
+
+			<PersonalProjects />
 
 			<!-- Latest Writing Section -->
 			<section class="latest-section" id="writing" aria-label="Latest writing" data-reveal>
