@@ -1,501 +1,90 @@
 ---
+import { getCollection } from 'astro:content';
 import { CONTACT_EMAIL } from '../consts';
+const pages = [
+  ['/', 'Home', 'index'], ['/#projects', 'Personal projects', 'open source localfinance apporigins'],
+  ['/blog', 'Blog', 'writing articles'], ['/uses', 'Uses', 'setup hardware tools'],
+  ['/about', 'About', 'career microsoft'], ['/r', 'Resume', 'cv pdf'], ['/contact', 'Contact', 'email connect'],
+];
+const posts = await getCollection('blog');
 ---
-
-<dialog id="command-palette" class="cmd-dialog" aria-label="Command Palette">
-  <div class="cmd-box">
-    <div class="cmd-search-wrap">
-      <svg class="cmd-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <input
-        type="search"
-        id="cmd-input"
-        class="cmd-input"
-        placeholder="Type a command or search (e.g. blog, docker, uses)..."
-        autocomplete="off"
-        spellcheck="false"
-      />
-      <kbd class="cmd-esc-hint">ESC</kbd>
-    </div>
-
-    <div class="cmd-results" role="listbox" id="cmd-listbox">
-      <!-- Section: Navigation -->
-      <div class="cmd-group" data-group="pages">
-        <span class="cmd-group-title">Pages</span>
-        <a href="/" class="cmd-item" role="option" data-keyword="home index main">
-          <span class="cmd-item-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Home</span>
-          <span class="cmd-item-badge">Page</span>
-        </a>
-        <a href="/#projects" class="cmd-item" role="option" data-keyword="projects personal open source github localfinance local finance apporigins app origins mac">
-          <span class="cmd-item-icon" aria-hidden="true">↗</span>
-          <span class="cmd-item-label">Personal Projects</span>
-          <span class="cmd-item-badge">2 Projects</span>
-        </a>
-        <a href="/blog" class="cmd-item" role="option" data-keyword="blog writing posts articles notes essays">
-          <span class="cmd-item-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 20h9"></path>
-              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Blog & Writing</span>
-          <span class="cmd-item-badge">4 Posts</span>
-        </a>
-        <a href="/uses" class="cmd-item" role="option" data-keyword="uses tools hardware software stack setup mac mini ghostty">
-          <span class="cmd-item-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Uses & Toolkit</span>
-          <span class="cmd-item-badge">Setup</span>
-        </a>
-        <a href="/about" class="cmd-item" role="option" data-keyword="about bio career timeline experience microsoft capgemini">
-          <span class="cmd-item-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-          </span>
-          <span class="cmd-item-label">About & Career</span>
-          <span class="cmd-item-badge">12.3+ Yrs</span>
-        </a>
-        <a href="/r" class="cmd-item" role="option" data-keyword="resume cv pdf experience download">
-          <span class="cmd-item-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Resume PDF</span>
-          <span class="cmd-item-badge">Viewer</span>
-        </a>
-        <a href="/contact" class="cmd-item" role="option" data-keyword="contact email hello message social connect">
-          <span class="cmd-item-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Contact</span>
-          <span class="cmd-item-badge">Reach Out</span>
-        </a>
-      </div>
-
-      <!-- Section: Recent Posts -->
-      <div class="cmd-group" data-group="posts">
-        <span class="cmd-group-title">Articles</span>
-        <a href="/blog/top-visual-studio-code-extensions/" class="cmd-item" role="option" data-keyword="vscode visual studio code extensions productivity editor">
-          <span class="cmd-item-icon">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Top Visual Studio Code Extensions</span>
-          <span class="cmd-item-badge">Tooling</span>
-        </a>
-        <a href="/blog/git-cheat-sheet/" class="cmd-item" role="option" data-keyword="git cheat sheet version control rebase commit branch">
-          <span class="cmd-item-icon">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Git Cheat Sheet</span>
-          <span class="cmd-item-badge">Git</span>
-        </a>
-        <a href="/blog/containerizing-angular-application-for-production-using-docker/" class="cmd-item" role="option" data-keyword="docker container angular devops containers production">
-          <span class="cmd-item-icon">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Containerizing Angular with Docker</span>
-          <span class="cmd-item-badge">Docker</span>
-        </a>
-        <a href="/blog/create-deploy-azure-function-using-vs-code-and-azure-devops-ci-cd/" class="cmd-item" role="option" data-keyword="azure functions devops ci cd cloud serverless vscode">
-          <span class="cmd-item-icon">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Deploy Azure Functions with CI/CD</span>
-          <span class="cmd-item-badge">Azure</span>
-        </a>
-      </div>
-
-      <!-- Section: Quick Actions -->
-      <div class="cmd-group" data-group="actions">
-        <span class="cmd-group-title">Actions</span>
-        <button type="button" class="cmd-item" role="option" id="cmd-copy-email" data-keyword="copy email contact address hello" data-email={CONTACT_EMAIL}>
-          <span class="cmd-item-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Copy Email Address ({CONTACT_EMAIL})</span>
-          <span class="cmd-item-badge" id="cmd-email-badge">Copy</span>
-        </button>
-        <button type="button" class="cmd-item" role="option" id="cmd-toggle-sound" data-keyword="toggle sound audio effects clicks mute">
-          <span class="cmd-item-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Toggle Tactile Sound FX</span>
-          <span class="cmd-item-badge" id="cmd-sound-badge">Off</span>
-        </button>
-        <a href="/Resumes_Usama_12yrs.pdf" download class="cmd-item" role="option" data-keyword="download resume pdf cv">
-          <span class="cmd-item-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-          </span>
-          <span class="cmd-item-label">Download Resume (PDF)</span>
-          <span class="cmd-item-badge">PDF</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="cmd-footer">
-      <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
-      <span><kbd>↵</kbd> Select</span>
-      <span><kbd>ESC</kbd> Close</span>
+<dialog id="command-palette" aria-label="Quick search">
+  <div class="cmd-head"><label for="cmd-input" class="sr-only">Search pages, articles, and actions</label><input id="cmd-input" type="search" placeholder="Where would you like to go?" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="cmd-results" aria-autocomplete="list" /><button type="button" class="cmd-close" aria-label="Close search">Esc</button></div>
+  <div class="cmd-results" id="cmd-results" role="listbox" aria-label="Search results">
+    <div class="cmd-group" role="group" aria-label="Pages"><span class="cmd-group-title" aria-hidden="true">Explore</span>{pages.map(([href, name, keywords], i) => <a id={`cmd-page-${i}`} class="cmd-item" role="option" aria-selected="false" href={href} data-keyword={keywords}><span>{name}</span><span class="cmd-item-meta" aria-hidden="true">↗</span></a>)}</div>
+    <div class="cmd-group" role="group" aria-label="Articles"><span class="cmd-group-title" aria-hidden="true">Writing</span>{posts.map((post, i) => <a id={`cmd-post-${i}`} class="cmd-item" role="option" aria-selected="false" href={`/blog/${post.id}/`} data-keyword={post.data.description}><span>{post.data.title}</span><span class="cmd-item-meta" aria-hidden="true">↗</span></a>)}</div>
+    <div class="cmd-group" role="group" aria-label="Actions"><span class="cmd-group-title" aria-hidden="true">Quick actions</span>
+      <button type="button" id="cmd-copy-email" class="cmd-item" role="option" aria-selected="false" data-keyword="copy email contact" data-email={CONTACT_EMAIL}><span>Copy email address</span><span id="cmd-email-badge" class="cmd-item-meta">Copy</span></button>
+      <button type="button" id="cmd-toggle-sound" class="cmd-item" role="option" aria-selected="false" data-keyword="sound audio effects mute"><span>Sound effects</span><span id="cmd-sound-badge" class="cmd-item-meta">Off</span></button>
+      <a href="/Resumes_Usama_12yrs.pdf" download id="cmd-resume" class="cmd-item" role="option" aria-selected="false" data-keyword="download resume cv pdf"><span>Download résumé</span><span class="cmd-item-meta">PDF</span></a>
     </div>
   </div>
+  <p class="cmd-empty" hidden>No matches. Try “blog”, “setup”, or “email”.</p>
+  <div class="cmd-footer"><span>↑ ↓ to navigate · Enter to open</span><span class="cmd-status" role="status" aria-live="polite"></span></div>
 </dialog>
-
 <script>
-  import { playClickSound, playSuccessSound, toggleSound, isSoundEnabled } from '../scripts/sound';
-
-  const dialog = document.getElementById('command-palette') as HTMLDialogElement | null;
-  const input = document.getElementById('cmd-input') as HTMLInputElement | null;
-  const items = Array.from(document.querySelectorAll<HTMLElement>('.cmd-item'));
-  const soundBadge = document.getElementById('cmd-sound-badge');
-  const emailButton = document.getElementById('cmd-copy-email') as HTMLButtonElement | null;
-  const emailBadge = document.getElementById('cmd-email-badge');
-  const soundButton = document.getElementById('cmd-toggle-sound') as HTMLButtonElement | null;
-
-  function updateSoundBadge() {
-    if (soundBadge) {
-      soundBadge.textContent = isSoundEnabled() ? 'ON' : 'OFF';
-    }
+  import { toggleSound, isSoundEnabled, playClickSound, playSuccessSound } from '../scripts/sound';
+  const dialog = document.querySelector<HTMLDialogElement>('#command-palette')!;
+  const input = dialog.querySelector<HTMLInputElement>('#cmd-input')!;
+  const items = Array.from(dialog.querySelectorAll<HTMLElement>('.cmd-item'));
+  const status = dialog.querySelector<HTMLElement>('.cmd-status')!;
+  let returnFocus: HTMLElement | null = null;
+  function select(item?: HTMLElement) {
+    items.forEach(el => el.setAttribute('aria-selected', String(el === item)));
+    if (item) input.setAttribute('aria-activedescendant', item.id);
+    else input.removeAttribute('aria-activedescendant');
   }
-
-  function openPalette() {
-    if (!dialog) return;
-    updateSoundBadge();
-    dialog.showModal();
-    input?.focus();
-    if (input) input.value = '';
-    filterItems('');
-    playClickSound(1.2);
+  function filter() {
+    const q = input.value.trim().toLowerCase();
+    items.forEach(item => { item.hidden = !`${item.textContent} ${item.dataset.keyword}`.toLowerCase().includes(q); });
+    dialog.querySelectorAll<HTMLElement>('.cmd-group').forEach(group => { group.hidden = !Array.from(group.querySelectorAll<HTMLElement>('.cmd-item')).some(item => !item.hidden); });
+    const visible = items.filter(item => !item.hidden);
+    dialog.querySelector<HTMLElement>('.cmd-empty')!.hidden = visible.length > 0;
+    select(visible[0]);
+    status.textContent = `${visible.length} results`;
   }
-
-  function closePalette() {
-    if (!dialog) return;
-    dialog.close();
-    playClickSound(0.8);
-  }
-
-  function filterItems(query: string) {
-    const q = query.toLowerCase().trim();
-    let visibleCount = 0;
-
-    items.forEach((item) => {
-      const text = (item.textContent || '').toLowerCase();
-      const keyword = (item.dataset.keyword || '').toLowerCase();
-      const match = !q || text.includes(q) || keyword.includes(q);
-      item.hidden = !match;
-      if (match) {
-        visibleCount++;
-        item.classList.remove('selected');
-      }
-    });
-
-    // Hide empty groups
-    document.querySelectorAll<HTMLElement>('.cmd-group').forEach((group) => {
-      const hasVisible = Array.from(group.querySelectorAll<HTMLElement>('.cmd-item')).some(i => !i.hidden);
-      group.hidden = !hasVisible;
-    });
-
-    // Select first visible
-    const first = items.find(i => !i.hidden);
-    if (first) {
-      first.classList.add('selected');
-    }
-  }
-
-  // Handle global shortcuts
-  window.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-      e.preventDefault();
-      if (dialog?.open) {
-        closePalette();
-      } else {
-        openPalette();
-      }
-    }
+  function open() { if (dialog.open) return; returnFocus = document.activeElement as HTMLElement; input.value = ''; dialog.showModal(); filter(); input.focus(); playClickSound(); }
+  function close() { dialog.close(); }
+  document.querySelectorAll('[data-open-cmd]').forEach(button => button.addEventListener('click', open));
+  dialog.querySelector('.cmd-close')?.addEventListener('click', close);
+  dialog.addEventListener('close', () => returnFocus?.focus());
+  dialog.addEventListener('click', event => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) close(); } });
+  input.addEventListener('input', filter);
+  document.addEventListener('keydown', event => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); dialog.open ? close() : open(); } });
+  input.addEventListener('keydown', event => {
+    const visible = items.filter(item => !item.hidden);
+    const index = visible.findIndex(item => item.getAttribute('aria-selected') === 'true');
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault(); if (!visible.length) return;
+      const next = visible[(index + (event.key === 'ArrowDown' ? 1 : -1) + visible.length) % visible.length];
+      select(next); next.scrollIntoView({ block: 'nearest' });
+    } else if (event.key === 'Enter' && index >= 0) { event.preventDefault(); visible[index].click(); }
   });
-
-  // Open button trigger from Header
-  document.querySelectorAll('[data-open-cmd]').forEach((btn) => {
-    btn.addEventListener('click', openPalette);
+  dialog.querySelectorAll('a.cmd-item').forEach(link => link.addEventListener('click', close));
+  const soundBadge = dialog.querySelector('#cmd-sound-badge')!;
+  const updateSound = () => { soundBadge.textContent = isSoundEnabled() ? 'On' : 'Off'; };
+  dialog.querySelector('#cmd-toggle-sound')?.addEventListener('click', () => { toggleSound(); updateSound(); });
+  window.addEventListener('sound-toggle', updateSound); updateSound();
+  const emailButton = dialog.querySelector<HTMLButtonElement>('#cmd-copy-email')!;
+  emailButton.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(emailButton.dataset.email!); dialog.querySelector('#cmd-email-badge')!.textContent = 'Copied'; status.textContent = 'Email address copied'; playSuccessSound(); }
+    catch { status.textContent = `Email: ${emailButton.dataset.email}`; }
   });
-
-  // Dialog click backdrop to close
-  dialog?.querySelectorAll('a.cmd-item').forEach((link) => {
-    link.addEventListener('click', closePalette);
-  });
-
-  dialog?.addEventListener('click', (e) => {
-    if (e.target === dialog) {
-      closePalette();
-    }
-  });
-
-  // Search input filtering
-  input?.addEventListener('input', () => {
-    filterItems(input.value);
-  });
-
-  // Keyboard navigation within list
-  dialog?.addEventListener('keydown', (e) => {
-    const visible = items.filter(i => !i.hidden);
-    const currentIndex = visible.findIndex(i => i.classList.contains('selected'));
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      const nextIndex = (currentIndex + 1) % visible.length;
-      visible.forEach(i => i.classList.remove('selected'));
-      visible[nextIndex]?.classList.add('selected');
-      visible[nextIndex]?.scrollIntoView({ block: 'nearest' });
-      playClickSound(1.1);
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      const prevIndex = (currentIndex - 1 + visible.length) % visible.length;
-      visible.forEach(i => i.classList.remove('selected'));
-      visible[prevIndex]?.classList.add('selected');
-      visible[prevIndex]?.scrollIntoView({ block: 'nearest' });
-      playClickSound(1.1);
-    } else if (e.key === 'Enter') {
-      const selected = visible[currentIndex];
-      if (selected) {
-        e.preventDefault();
-        selected.click();
-      }
-    }
-  });
-
-  // Actions
-  emailButton?.addEventListener('click', async () => {
-    const email = emailButton.dataset.email;
-    if (email) {
-      try {
-        await navigator.clipboard.writeText(email);
-        if (emailBadge) emailBadge.textContent = 'Copied!';
-        playSuccessSound();
-        setTimeout(() => {
-          if (emailBadge) emailBadge.textContent = 'Copy';
-          closePalette();
-        }, 800);
-      } catch {
-        closePalette();
-      }
-    }
-  });
-
-  soundButton?.addEventListener('click', () => {
-    toggleSound();
-    updateSoundBadge();
-  });
-
-  // Sound sync listener
-  window.addEventListener('sound-toggle', updateSoundBadge);
-  updateSoundBadge();
 </script>
-
 <style>
-  .cmd-dialog {
-    border: none;
-    border-radius: 8px;
-    padding: 0;
-    background: transparent;
-    max-width: 560px;
-    width: calc(100% - 2rem);
-    margin: auto;
-    overflow: hidden;
-  }
-
-  .cmd-dialog::backdrop {
-    background: rgba(17, 17, 17, 0.4);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-  }
-
-  .cmd-box {
-    background: var(--surface-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  }
-
-  .cmd-search-wrap {
-    display: flex;
-    align-items: center;
-    padding: 0.85rem 1rem;
-    gap: 0.75rem;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface-card);
-  }
-
-  .cmd-icon {
-    color: var(--text-muted);
-    flex-shrink: 0;
-  }
-
-  .cmd-input {
-    border: none;
-    background: transparent;
-    padding: 0;
-    font-size: 0.95rem;
-    font-family: var(--font-body);
-    color: #111111;
-    width: 100%;
-    outline: none;
-    box-shadow: none !important;
-  }
-
-  .cmd-esc-hint {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    padding: 0.15rem 0.4rem;
-    background: var(--surface-alt);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    color: var(--text-muted);
-    flex-shrink: 0;
-  }
-
-  .cmd-results {
-    max-height: 360px;
-    overflow-y: auto;
-    padding: 0.4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .cmd-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-  }
-
-  .cmd-group-title {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    padding: 0.4rem 0.6rem 0.2rem;
-  }
-
-  .cmd-item {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    padding: 0.55rem 0.7rem;
-    border-radius: 4px;
-    text-decoration: none;
-    color: #111111;
-    font-size: 0.88rem;
-    background: transparent;
-    border: none;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-    font-family: var(--font-ui);
-    transition: background-color 100ms var(--ease-out);
-  }
-
-  .cmd-item:active {
-    transform: scale(0.99);
-  }
-
-  .cmd-item:hover,
-  .cmd-item.selected {
-    background: var(--surface-alt);
-    color: #111111;
-  }
-
-  .cmd-item-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    flex-shrink: 0;
-    width: 18px;
-  }
-
-  .cmd-item.selected .cmd-item-icon {
-    color: #111111;
-  }
-
-  .cmd-item-label {
-    flex: 1;
-    font-weight: 450;
-  }
-
-  .cmd-item-badge {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    padding: 0.12rem 0.4rem;
-    background: var(--surface-alt);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    color: var(--text-muted);
-  }
-
-  .cmd-footer {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    padding: 0.55rem 1rem;
-    border-top: 1px solid var(--border);
-    background: var(--surface-alt);
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--text-muted);
-  }
-
-  .cmd-footer kbd {
-    background: var(--surface-card);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 0.08rem 0.3rem;
-  }
-
-  @media (max-width: 600px) {
-    .cmd-footer {
-      display: none;
-    }
-  }
+  dialog { width: min(620px, calc(100% - 32px)); max-height: 80dvh; padding: 0; border: 1px solid var(--border); border-radius: 16px; background: var(--surface-card); color: var(--text); box-shadow: 0 32px 100px #11182730; }
+  dialog[open] { animation: enter 260ms var(--ease-out); }
+  dialog::backdrop { background: #11182770; backdrop-filter: blur(6px); }
+  .cmd-head { display: flex; align-items: center; padding: 1.25rem; gap: 1rem; border-bottom: 1px solid var(--border); }
+  input { width: 100%; min-width: 0; border: 0; background: transparent; color: var(--text); font-size: 1rem; min-height: 44px; }
+  input::placeholder { color: var(--text-muted); }
+  input:focus-visible { outline-offset: 2px; }
+  .cmd-close { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 8px; font-size: .7rem; min-height: 44px; min-width: 44px; }
+  .cmd-results { max-height: 52dvh; overflow-y: auto; overscroll-behavior: contain; padding: .75rem; }
+  .cmd-group-title { display: block; padding: .85rem .75rem .4rem; color: var(--text-muted); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; }
+  .cmd-item { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 1rem; text-align: left; border: 0; border-radius: 8px; background: transparent; padding: .75rem; font-size: .86rem; }
+  .cmd-item[aria-selected='true'], .cmd-item:hover { background: var(--accent-soft); color: var(--accent); }
+  .cmd-item-meta { flex-shrink: 0; color: var(--text-muted); font-size: .75rem; }
+  .cmd-footer { padding: 1rem 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; border-top: 1px solid var(--border); font-size: .7rem; color: var(--text-muted); }
+  .cmd-empty { padding: 2rem; font-size: .9rem; color: var(--text-body); }
 </style>

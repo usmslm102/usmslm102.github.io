@@ -26,13 +26,13 @@ function getAudioContext(): AudioContext | null {
 export function isSoundEnabled(): boolean {
   if (typeof window === 'undefined') return false;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
-  return localStorage.getItem('sound_enabled') === 'true';
+  try { return localStorage.getItem('sound_enabled') === 'true'; } catch { return false; }
 }
 
 export function toggleSound(): boolean {
   const current = isSoundEnabled();
   const next = !current;
-  localStorage.setItem('sound_enabled', String(next));
+  try { localStorage.setItem('sound_enabled', String(next)); } catch { return current; }
   window.dispatchEvent(new CustomEvent('sound-toggle', { detail: { enabled: next } }));
   if (next) {
     playSuccessSound();

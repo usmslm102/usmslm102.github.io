@@ -1,746 +1,98 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
-import Orbit from '../components/Orbit.astro';
+import Page from '../layouts/Page.astro';
+import MotionSculpture from '../components/MotionSculpture.astro';
 import PersonalProjects from '../components/PersonalProjects.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-
-const latestPosts = (await getCollection('blog'))
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 4);
+import FormattedDate from '../components/FormattedDate.astro';
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
 ---
-
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={`${SITE_TITLE} — Distributed Systems & AI Platform Architect`} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main id="main-content" tabindex="-1" class="home-container">
-			<!-- Hero Section -->
-			<section class="hero-section" aria-label="Introduction">
-				<div class="hero-copy">
-					<div class="hero-eyebrow" data-reveal="hero" style="--hero-order: 0;">
-						<span class="pulsing-dot" aria-hidden="true"></span>
-						<span>SENIOR SOFTWARE ENGINEER @ MICROSOFT</span>
-					</div>
-
-					<h1 class="hero-title" data-reveal="hero" style="--hero-order: 1;">
-						Hi, I’m Usama.<br />
-						<em>I build systems that scale &amp; last.</em>
-					</h1>
-
-					<p class="hero-bio" data-reveal="hero" style="--hero-order: 2;">
-						Architecting distributed systems and AI platforms at Microsoft Azure. Focused on autonomous agents, MCP tooling, and planetary telemetry.
-					</p>
-
-					<div class="hero-actions" data-reveal="hero" style="--hero-order: 3;">
-						<a href="/blog" class="action-btn primary-btn">
-							Explore Writing ↗
-						</a>
-						<a href="/uses" class="action-btn secondary-btn">
-							Explore Setup →
-						</a>
-						<button type="button" class="action-btn tertiary-btn" data-open-cmd>
-							Quick Switcher <kbd class="hero-kbd">⌘K</kbd>
-						</button>
-					</div>
-				</div>
-
-				<div class="hero-graphic" data-reveal="hero" style="--hero-order: 2;">
-					<Orbit />
-				</div>
-			</section>
-
-			<!-- Engineering Dossier (Asymmetrical Bento Grid per Minimalist-UI Protocol) -->
-			<section class="about-dossier" aria-label="Engineering Dossier" data-reveal>
-				<div class="dossier-grid">
-					<div class="dossier-block dossier-featured" data-reveal style="--stagger: 0;">
-						<div class="dossier-header">
-							<span class="dossier-tag tag-blue">01 // FOCUS</span>
-							<h3>AI Agent Platforms</h3>
-						</div>
-						<p>
-							Architecting the Azure Networking AI Agent Platform with MCP (Model Context Protocol), multi-model orchestration (GPT-5.2 &amp; Mini), vector memory persistence on Cosmos DB, and enterprise security governance.
-						</p>
-					</div>
-
-					<div class="dossier-block" data-reveal style="--stagger: 1;">
-						<div class="dossier-header">
-							<span class="dossier-tag tag-green">02 // SCALE</span>
-							<h3>High-Throughput APIs</h3>
-						</div>
-						<p>
-							Designed and scaled multi-region Device Health APIs processing 150 million daily requests at 99.999% availability, monitoring health state across 3 million planetary Azure nodes.
-						</p>
-					</div>
-
-					<div class="dossier-block" data-reveal style="--stagger: 2;">
-						<div class="dossier-header">
-							<span class="dossier-tag tag-yellow">03 // STACK</span>
-							<h3>Core Tooling</h3>
-						</div>
-						<ul class="mono-list">
-							<li>TypeScript / Node.js / Astro</li>
-							<li>C# / .NET 9 Platform Core</li>
-							<li>Azure Container Apps / Docker</li>
-							<li>Cosmos DB / Redis / Vector Storage</li>
-						</ul>
-					</div>
-				</div>
-			</section>
-
-			<PersonalProjects />
-
-			<!-- Latest Writing Section -->
-			<section class="latest-section" id="writing" aria-label="Latest writing" data-reveal>
-				<div class="section-head" data-reveal>
-					<div class="section-title-group">
-						<span class="section-eyebrow">THE NOTEBOOK</span>
-						<h2>Latest writing</h2>
-					</div>
-					<a href="/blog" class="view-all-link">View all 4 posts →</a>
-				</div>
-
-				<ul class="posts-list">
-					{
-						latestPosts.map((post, index) => (
-							<li class="post-card" data-reveal style={`--stagger: ${index};`}>
-								<a href={`/blog/${post.id}/`} class="post-link">
-									<div class="post-meta">
-										<FormattedDate date={post.data.pubDate} />
-										<span class="meta-dot">•</span>
-										<span class="read-estimate">Practical Guide</span>
-									</div>
-									<h3 class="post-title">{post.data.title}</h3>
-									<p class="post-desc">{post.data.description}</p>
-									<span class="post-arrow" aria-hidden="true">Read article ↗</span>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-
-			<!-- The Workbench /uses Teaser (Faux-OS Window Chrome) -->
-			<section class="uses-teaser-wrap" data-reveal>
-				<a class="uses-teaser" href="/uses">
-					<div class="teaser-content">
-						<span class="teaser-eyebrow">BEHIND THE SCENES // 02</span>
-						<h2 class="teaser-title">
-							Good tools.<br />
-							<em>Better headspace.</em>
-						</h2>
-						<p class="teaser-desc">
-							A detailed breakdown of my hardware (Mac Mini M4), Ghostty terminal configuration, VS Code setup, and engineering stack.
-						</p>
-						<span class="teaser-action">Step inside the workbench ↗</span>
-					</div>
-					<div class="teaser-visual" aria-hidden="true">
-						<div class="terminal-mini-preview">
-							<div class="term-dots"><i></i><i></i><i></i></div>
-							<div class="term-code">
-								<span class="c-dim">$ fastfetch</span><br />
-								<span class="c-acc">OS:</span> macOS Sequoia<br />
-								<span class="c-acc">Host:</span> Mac mini (M4, 2024)<br />
-								<span class="c-acc">Shell:</span> zsh + ghostty<br />
-								<span class="c-acc">Editor:</span> VS Code + Copilot
-							</div>
-						</div>
-					</div>
-				</a>
-			</section>
-		</main>
-
-		<!-- Reveal Animation Script -->
-		<script is:inline>
-			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-			if (!prefersReducedMotion) {
-				document.documentElement.classList.add('motion-ready');
-				const revealElements = document.querySelectorAll('[data-reveal]:not([data-reveal="hero"])');
-				if ('IntersectionObserver' in window) {
-					const observer = new IntersectionObserver(
-						(entries) => {
-							entries.forEach((entry) => {
-								if (entry.isIntersecting) {
-									entry.target.classList.add('in-view');
-									observer.unobserve(entry.target);
-								}
-							});
-						},
-						{ threshold: 0.05, rootMargin: '0px 0px -20px 0px' },
-					);
-					revealElements.forEach((element) => observer.observe(element));
-				} else {
-					revealElements.forEach((element) => element.classList.add('in-view'));
-				}
-			}
-		</script>
-		<Footer />
-	</body>
-</html>
-
+<Page title="Usama Ansari | Distributed Systems & AI Platform Architect" description="I'm Usama, a software engineer at Microsoft. I build distributed systems, AI agent platforms, and thoughtful open-source tools.">
+  <div class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="hero-intro" data-enter>Usama Ansari <span>/</span> Software engineer</p>
+        <h1 id="hero-title"><span class="line-reveal"><span style="--order: 1">Engineering.</span></span> <span class="line-reveal accent"><span style="--order: 2">In motion.</span></span></h1>
+        <p class="hero-description" data-enter style="--order: 3">I turn complex problems into systems that last.<br class="desktop-break" /> Building what’s next at Microsoft Azure.</p>
+        <div class="button-row" data-enter style="--order: 4"><a class="button" href="#projects">Explore my work <span class="arrow" aria-hidden="true">↗</span></a><a class="text-link" href="/about">About me <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="hero-art" data-enter style="--order: 2"><MotionSculpture /></div>
+    </section>
+    <section class="focus-strip" aria-label="Areas of practice" data-enter style="--order: 5">
+      <span>Thinking in systems.<br /><strong>Building for people.</strong></span>
+      <p>Distributed systems</p><p>AI agent platforms</p><p>Open-source tools</p>
+    </section>
+    <PersonalProjects />
+    <section class="practice-section section-space" aria-labelledby="practice-title">
+      <div class="practice-statement" data-reveal>
+        <span class="eyebrow">The bigger picture</span>
+        <h2 id="practice-title">Complexity is inevitable.<br /><span class="accent">Clarity is a choice.</span></h2>
+        <p>From planetary-scale telemetry to tools on your desktop, I care about the same things: thoughtful architecture, reliable foundations, and the people using them.</p>
+        <a class="text-link" href="/about">My experience & approach <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="practice-list">
+        <article data-reveal><span class="practice-index">01</span><div><h3>Intelligent platforms</h3><p>AI agents, MCP tooling, and multi-model orchestration. Designed to work together, built for the real world.</p></div></article>
+        <article data-reveal><span class="practice-index">02</span><div><h3>Systems at scale</h3><p>High-availability APIs processing 150 million requests daily across more than 3 million Azure nodes.</p></div></article>
+        <article data-reveal><span class="practice-index">03</span><div><h3>Software with care</h3><p>Secure integrations, practical developer tools, and a little extra attention to the details that matter.</p></div></article>
+      </div>
+    </section>
+    <section class="writing-section section-space" id="writing" aria-labelledby="writing-title">
+      <div class="section-head" data-reveal><h2 id="writing-title">Notes from<br />the build.</h2><a href="/blog" class="text-link">All writing <span aria-hidden="true">↗</span></a></div>
+      <div class="writing-list">{posts.map((post, index) => <a href={`/blog/${post.id}/`} class="writing-row" data-reveal><span class="writing-number">0{index + 1}</span><div><span class="writing-date"><FormattedDate date={post.data.pubDate} /></span><h3>{post.data.title}</h3></div><span class="writing-arrow arrow" aria-hidden="true">↗</span></a>)}</div>
+    </section>
+    <a href="/uses" class="workbench-link" data-reveal>
+      <div><span class="eyebrow">Behind the work</span><h2>Good tools.<br />Better headspace.</h2><p>The hardware, software, and small preferences that keep me building.</p><span class="text-link">Explore my setup <span aria-hidden="true">↗</span></span></div>
+      <div class="key-composition" aria-hidden="true"><span class="key key-command">⌘</span><span class="key key-k">K</span><span class="key key-arrow">↗</span></div>
+    </a>
+  </div>
+</Page>
 <style>
-	.home-container {
-		display: flex;
-		flex-direction: column;
-		gap: 5.5rem;
-		max-width: 1060px;
-		width: 100%;
-		padding-top: 3rem;
-		box-sizing: border-box;
-	}
-
-	/* Hero Section */
-	.hero-section {
-		display: grid;
-		grid-template-columns: 1.15fr 1fr;
-		gap: 3.5rem;
-		align-items: center;
-	}
-
-	.hero-copy {
-		display: flex;
-		flex-direction: column;
-		gap: 1.25rem;
-	}
-
-	.hero-eyebrow {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		font-weight: 600;
-		letter-spacing: 0.06em;
-		color: var(--pastel-blue-text);
-		background: var(--pastel-blue);
-		padding: 0.25rem 0.65rem;
-		border-radius: 9999px;
-		width: fit-content;
-	}
-
-	.hero-title {
-		font-family: var(--font-serif);
-		font-size: clamp(2.8rem, 5.5vw, 4.2rem);
-		line-height: 1.05;
-		letter-spacing: -0.035em;
-		color: #111111;
-		margin: 0;
-		font-weight: 500;
-	}
-
-	.hero-title em {
-		font-style: italic;
-		font-weight: 400;
-		color: #111111;
-	}
-
-	.hero-bio {
-		font-size: 1.05rem;
-		line-height: 1.68;
-		color: var(--text-body);
-		max-width: 52ch;
-		margin: 0;
-	}
-
-	.hero-actions {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.65rem;
-		margin-top: 0.5rem;
-	}
-
-	.action-btn {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.4rem;
-		padding: 0.6rem 1.15rem;
-		border-radius: 5px;
-		font-family: var(--font-ui);
-		font-size: 0.84rem;
-		font-weight: 500;
-		text-decoration: none;
-		cursor: pointer;
-		transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
-	}
-
-	.action-btn:active {
-		transform: scale(0.98) !important;
-	}
-
-	.primary-btn {
-		background: #111111;
-		color: #FFFFFF;
-		border: 1px solid #111111;
-	}
-
-	.secondary-btn {
-		background: var(--surface-card);
-		color: #111111;
-		border: 1px solid var(--border);
-	}
-
-	.tertiary-btn {
-		background: var(--surface-alt);
-		color: var(--text-body);
-		border: 1px solid var(--border);
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.primary-btn:hover {
-			background: #2F3437;
-			border-color: #2F3437;
-			color: #FFFFFF;
-			text-decoration: none;
-		}
-
-		.secondary-btn:hover {
-			background: var(--surface-alt);
-			border-color: #111111;
-			color: #111111;
-			text-decoration: none;
-		}
-
-		.tertiary-btn:hover {
-			background: var(--surface-card);
-			border-color: #111111;
-			color: #111111;
-		}
-	}
-
-	.hero-kbd {
-		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		padding: 0.08rem 0.3rem;
-		background: var(--surface-card);
-		border: 1px solid var(--border);
-		border-radius: 3px;
-		color: #111111;
-	}
-
-	/* Bento Dossier Grid */
-	.about-dossier {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-	}
-
-	.dossier-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 1.25rem;
-	}
-
-	.dossier-block {
-		background: var(--surface-card);
-		border: 1px solid var(--border);
-		border-radius: 8px;
-		padding: 1.75rem;
-		box-shadow: var(--shadow-sm);
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-		transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.dossier-block:hover {
-			border-color: var(--border-dark);
-			box-shadow: var(--shadow-hover);
-		}
-	}
-
-	.dossier-header {
-		display: flex;
-		flex-direction: column;
-		gap: 0.35rem;
-		border-bottom: 1px solid var(--border);
-		padding-bottom: 0.75rem;
-	}
-
-	.dossier-tag {
-		font-family: var(--font-mono);
-		font-size: 0.62rem;
-		font-weight: 600;
-		letter-spacing: 0.06em;
-		display: inline-block;
-		width: fit-content;
-		padding: 0.15rem 0.5rem;
-		border-radius: 9999px;
-	}
-
-	.tag-blue {
-		background: var(--pastel-blue);
-		color: var(--pastel-blue-text);
-	}
-
-	.tag-green {
-		background: var(--pastel-green);
-		color: var(--pastel-green-text);
-	}
-
-	.tag-yellow {
-		background: var(--pastel-yellow);
-		color: var(--pastel-yellow-text);
-	}
-
-	.dossier-block h3 {
-		font-family: var(--font-serif);
-		font-size: 1.25rem;
-		font-weight: 500;
-		color: #111111;
-		margin: 0;
-	}
-
-	.dossier-block p {
-		font-size: 0.92rem;
-		line-height: 1.65;
-		color: var(--text-body);
-		margin: 0;
-	}
-
-	.mono-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.45rem;
-		font-family: var(--font-mono);
-		font-size: 0.8rem;
-		color: #111111;
-	}
-
-	.mono-list li {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.mono-list li::before {
-		content: '–';
-		color: var(--text-muted);
-	}
-
-	/* Latest Writing */
-	.latest-section {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-	}
-
-	.section-head {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
-		border-bottom: 1px solid var(--border);
-		padding-bottom: 0.75rem;
-	}
-
-	.section-title-group {
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-	}
-
-	.section-eyebrow {
-		font-family: var(--font-mono);
-		font-size: 0.65rem;
-		font-weight: 600;
-		letter-spacing: 0.08em;
-		color: var(--text-muted);
-	}
-
-	.section-head h2 {
-		margin: 0;
-		font-size: clamp(1.8rem, 3.5vw, 2.3rem);
-		font-weight: 500;
-	}
-
-	.view-all-link {
-		font-family: var(--font-mono);
-		font-size: 0.78rem;
-		font-weight: 500;
-		text-decoration: none;
-		color: var(--text-muted);
-		transition: color 140ms var(--ease-out);
-	}
-
-	.view-all-link:hover {
-		color: #111111;
-		text-decoration: underline;
-		text-decoration-thickness: 1px;
-		text-underline-offset: 3px;
-	}
-
-	.posts-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.85rem;
-	}
-
-	.post-card {
-		background: var(--surface-card);
-		border: 1px solid var(--border);
-		border-radius: 8px;
-		padding: 1.4rem 1.6rem;
-		box-shadow: var(--shadow-sm);
-		transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.post-card:hover {
-			border-color: var(--border-dark);
-			box-shadow: var(--shadow-hover);
-		}
-	}
-
-	.post-link {
-		text-decoration: none;
-		color: inherit;
-		display: flex;
-		flex-direction: column;
-		gap: 0.35rem;
-	}
-
-	.post-link:hover {
-		text-decoration: none;
-	}
-
-	.post-meta {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		color: var(--text-muted);
-	}
-
-	.meta-dot {
-		color: var(--border);
-	}
-
-	.read-estimate {
-		color: var(--text-muted);
-		font-weight: 450;
-	}
-
-	.post-title {
-		margin: 0.15rem 0 0;
-		font-family: var(--font-serif);
-		font-size: clamp(1.25rem, 2.2vw, 1.6rem);
-		line-height: 1.25;
-		color: #111111;
-		font-weight: 500;
-	}
-
-	.post-card:hover .post-title {
-		color: #111111;
-	}
-
-	.post-desc {
-		margin: 0;
-		font-size: 0.92rem;
-		line-height: 1.6;
-		color: var(--text-body);
-	}
-
-	.post-arrow {
-		font-family: var(--font-mono);
-		font-size: 0.74rem;
-		font-weight: 500;
-		color: #111111;
-		margin-top: 0.35rem;
-		display: inline-block;
-	}
-
-	/* Uses Teaser */
-	.uses-teaser-wrap {
-		margin-top: 0.5rem;
-	}
-
-	.uses-teaser {
-		display: grid;
-		grid-template-columns: 1.3fr 1fr;
-		gap: 2.5rem;
-		align-items: center;
-		background: #FFFFFF;
-		color: #111111;
-		padding: 2.75rem;
-		border-radius: 8px;
-		border: 1px solid var(--border);
-		text-decoration: none;
-		position: relative;
-		overflow: hidden;
-		box-shadow: var(--shadow-sm);
-		transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
-	}
-
-	.uses-teaser:active {
-		transform: scale(0.99);
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.uses-teaser:hover {
-			border-color: var(--border-dark);
-			box-shadow: var(--shadow-hover);
-			text-decoration: none;
-		}
-	}
-
-	.teaser-content {
-		display: flex;
-		flex-direction: column;
-		gap: 0.85rem;
-	}
-
-	.teaser-eyebrow {
-		font-family: var(--font-mono);
-		font-size: 0.65rem;
-		font-weight: 600;
-		letter-spacing: 0.08em;
-		color: var(--text-muted);
-	}
-
-	.teaser-title {
-		font-family: var(--font-serif);
-		font-size: clamp(2rem, 4vw, 3rem);
-		line-height: 1.05;
-		color: #111111;
-		margin: 0;
-		font-weight: 500;
-	}
-
-	.teaser-title em {
-		font-style: italic;
-		font-weight: 400;
-	}
-
-	.teaser-desc {
-		font-size: 0.94rem;
-		line-height: 1.65;
-		color: var(--text-body);
-		margin: 0;
-		max-width: 48ch;
-	}
-
-	.teaser-action {
-		font-family: var(--font-mono);
-		font-size: 0.78rem;
-		font-weight: 600;
-		letter-spacing: 0.04em;
-		color: #111111;
-		margin-top: 0.4rem;
-	}
-
-	.terminal-mini-preview {
-		background: #18181B;
-		border: 1px solid var(--border);
-		border-radius: 6px;
-		padding: 1.15rem;
-		font-family: var(--font-code);
-		box-shadow: var(--shadow-sm);
-	}
-
-	.term-dots {
-		display: flex;
-		gap: 6px;
-		margin-bottom: 0.85rem;
-	}
-
-	.term-dots i {
-		width: 9px;
-		height: 9px;
-		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.2);
-	}
-
-	.term-dots i:nth-child(1) { background: #E4E4E7; opacity: 0.3; }
-	.term-dots i:nth-child(2) { background: #E4E4E7; opacity: 0.3; }
-	.term-dots i:nth-child(3) { background: #E4E4E7; opacity: 0.3; }
-
-	.term-code {
-		font-size: 0.78rem;
-		line-height: 1.7;
-		color: #F4F4F5;
-	}
-
-	.c-dim { color: #A1A1AA; }
-	.c-acc { color: #FAFAFA; font-weight: 600; }
-
-	/* Reveal Keyframes */
-	html.motion-ready .hero-section [data-reveal='hero'] {
-		opacity: 0;
-		animation: hero-reveal 400ms var(--ease-out) forwards;
-		animation-delay: calc(var(--hero-order, 0) * 80ms + 40ms);
-	}
-
-	@keyframes hero-reveal {
-		from {
-			opacity: 0;
-			transform: translateY(12px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	/* Responsive */
-	@media (max-width: 920px) {
-		.hero-section {
-			grid-template-columns: 1fr;
-			gap: 2.5rem;
-		}
-
-		.dossier-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.uses-teaser {
-			grid-template-columns: 1fr;
-			padding: 2rem;
-		}
-	}
-
-	@media (max-width: 580px) {
-		.home-container {
-			padding-top: 1.75rem;
-			gap: 3.5rem;
-		}
-
-		.hero-title {
-			font-size: clamp(2.4rem, 10vw, 3.2rem);
-		}
-
-		.post-card {
-			padding: 1.2rem;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.action-btn,
-		.dossier-block,
-		.post-card,
-		.uses-teaser {
-			transition: none !important;
-			transform: none !important;
-		}
-		html.motion-ready .hero-section [data-reveal='hero'],
-		html.motion-ready [data-reveal]:not([data-reveal='hero']),
-		html.motion-ready [data-reveal].in-view {
-			opacity: 1 !important;
-			transform: none !important;
-			animation: none !important;
-		}
-	}
+  .hero { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 1rem; padding-block: 5rem 4rem; min-height: 660px; }
+  .hero-copy { position: relative; z-index: 1; }
+  .hero-intro { font-size: .87rem; color: var(--text-body); margin-bottom: 2.5rem; }
+  .hero-intro span { color: var(--accent); padding-inline: .65rem; }
+  h1 { font-size: clamp(4rem, 7.8vw, 7.35rem); line-height: .99; font-weight: 600; letter-spacing: -.06em; }
+  .hero-description { color: var(--text-body); font-size: clamp(1rem, 1.4vw, 1.17rem); line-height: 1.7; margin-block: 2rem; max-width: 43ch; }
+  .hero-art { margin-inline: -1rem; }
+  .focus-strip { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; align-items: center; gap: 2rem; border-block: 1px solid var(--border); padding-block: 1.75rem; font-size: .88rem; }
+  .focus-strip > span { color: var(--text-muted); line-height: 1.5; font-size: .78rem; }
+  .focus-strip strong { font-weight: 400; color: var(--text); }
+  .focus-strip p { text-align: right; }
+  .practice-section { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(3rem, 8vw, 8rem); border-bottom: 1px solid var(--border); }
+  .practice-statement h2 { font-size: clamp(2.5rem, 4.2vw, 4rem); max-width: 18ch; }
+  .practice-statement > p { color: var(--text-body); margin-block: 2rem 1rem; max-width: 43ch; }
+  .practice-list article { display: flex; gap: 1.5rem; padding-block: 2rem; border-bottom: 1px solid var(--border); }
+  .practice-list article:first-child { padding-top: 0; }
+  .practice-list article:last-child { border-bottom: 0; padding-bottom: 0; }
+  .practice-index { color: var(--accent); font-size: .75rem; padding-top: .45rem; }
+  .practice-list h3 { font-size: 1.75rem; margin-bottom: .75rem; }
+  .practice-list p { color: var(--text-body); font-size: .9rem; }
+  .writing-section { padding-bottom: 6rem; }
+  .writing-row { display: grid; grid-template-columns: 56px 1fr 64px; gap: 1.5rem; align-items: center; padding-block: 2rem; border-top: 1px solid var(--border); }
+  .writing-number { color: var(--text-muted); font-size: .75rem; }
+  .writing-date { color: var(--text-muted); font-size: .74rem; }
+  .writing-row h3 { font-size: clamp(1.4rem, 2.6vw, 2.2rem); max-width: 32ch; margin-top: .5rem; transition: color 200ms; }
+  .writing-arrow { justify-self: end; font-size: 2rem; color: var(--accent); }
+  .writing-row:hover h3 { color: var(--accent); }
+  .workbench-link { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; background: var(--surface-alt); padding: clamp(2rem, 5vw, 5rem); border-radius: var(--radius); overflow: hidden; }
+  .workbench-link h2 { font-size: clamp(2.7rem, 4.2vw, 4rem); }
+  .workbench-link p { max-width: 35ch; color: var(--text-body); margin-block: 1.5rem 1rem; }
+  .key-composition { position: relative; height: 270px; perspective: 900px; transform: rotate(-14deg); transition: transform 700ms var(--ease-out); }
+  .key { position: absolute; width: 140px; height: 140px; display: grid; place-items: center; font-size: 5rem; font-weight: 500; line-height: 1; border-radius: 24px; background: var(--surface-card); box-shadow: 0 12px 0 var(--surface-sunken), 0 20px 30px #141d4020, inset 0 0 0 2px var(--border); transform: rotateX(25deg) rotateY(-15deg); }
+  .key-command { top: 70px; left: 10px; }
+  .key-k { top: 20px; left: 160px; background: var(--accent); color: var(--on-accent); box-shadow: 0 12px 0 var(--accent-hover), 0 24px 30px #141d4020; }
+  .key-arrow { top: 160px; left: 210px; width: 100px; height: 100px; font-size: 3.5rem; }
+  .workbench-link:hover .key-composition { transform: rotate(-8deg) translateY(-8px); }
+  @media (max-width: 1024px) { .hero { min-height: 600px; } h1 { font-size: 7.6vw; } .key-composition { transform: rotate(-14deg) scale(.8); transform-origin: center; } }
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding-top: 3.5rem; gap: 1rem; }
+    h1 { font-size: clamp(4rem, 11.8vw, 6.5rem); }
+    .hero-intro { margin-bottom: 2rem; }
+    .hero-art { width: min(100%, 470px); margin: -1rem auto 0; }
+    .focus-strip { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .focus-strip p { text-align: left; }
+    .practice-section { grid-template-columns: 1fr; gap: 3rem; }
+    .workbench-link { grid-template-columns: 1fr; gap: 0; }
+    .key-composition { width: 340px; max-width: 100%; margin-inline: auto; transform: rotate(-14deg) scale(.85); }
+  }
+  @media (max-width: 380px) { h1 { font-size: 11.6vw; } .hero-intro { font-size: .72rem; } .hero-intro span { padding-inline: .3rem; } .writing-row { grid-template-columns: 1fr 32px; gap: 1rem; } .writing-number { display: none; } .key-composition { transform: rotate(-14deg) scale(.7); transform-origin: left center; } }
 </style>

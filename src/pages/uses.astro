@@ -1,20 +1,15 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
+import Page from '../layouts/Page.astro';
 import Desk from '../components/Desk.astro';
-import RouteMotion from '../components/RouteMotion.astro';
-import { SITE_TITLE } from '../consts';
-
 const sections = [
 	{
 		id: 'hardware',
 		num: '01',
 		title: 'Hardware',
 		items: [
-			{ label: 'Mac Mini M4 — 10-core CPU, 16-core Neural Engine, silent desk powerhouse', badge: 'DAILY DRIVER' },
-			{ label: 'External Monitor — IDE, terminals & telemetry dashboards side-by-side', badge: null },
-			{ label: 'AirPods Pro 2 (USB-C) — Active Noise Cancellation for uninterrupted flow state', badge: 'ESSENTIAL' },
+			{ label: 'Mac Mini M4 / 10-core CPU, 16-core Neural Engine, silent desk powerhouse', badge: 'DAILY DRIVER' },
+			{ label: 'External Monitor / IDE, terminals & telemetry dashboards side-by-side', badge: null },
+			{ label: 'AirPods Pro 2 (USB-C) / Active Noise Cancellation for uninterrupted flow state', badge: 'ESSENTIAL' },
 		],
 	},
 	{
@@ -22,12 +17,12 @@ const sections = [
 		num: '02',
 		title: 'Editor & Terminal',
 		items: [
-			{ label: 'Visual Studio Code — primary development environment', badge: 'DAILY DRIVER' },
-			{ label: 'GitHub Copilot — AI-assisted pair programming & inline completions', badge: 'PREFERRED' },
-			{ label: 'Ghostty — ultra-fast GPU-accelerated terminal emulator written in Zig', badge: 'DAILY DRIVER' },
-			{ label: 'OpenCode — terminal AI coding assistant', badge: 'OCCASIONAL' },
-			{ label: 'Git + GitHub CLI (gh) — PR workflows, code reviews, release pipelines', badge: null },
-			{ label: 'GitHub Copilot CLI — AI terminal assistant for complex bash & git pipelines', badge: 'PREFERRED' },
+			{ label: 'Visual Studio Code / primary development environment', badge: 'DAILY DRIVER' },
+			{ label: 'GitHub Copilot / AI-assisted pair programming & inline completions', badge: 'PREFERRED' },
+			{ label: 'Ghostty / ultra-fast GPU-accelerated terminal emulator written in Zig', badge: 'DAILY DRIVER' },
+			{ label: 'OpenCode / terminal AI coding assistant', badge: 'OCCASIONAL' },
+			{ label: 'Git + GitHub CLI (gh) / PR workflows, code reviews, release pipelines', badge: null },
+			{ label: 'GitHub Copilot CLI / AI terminal assistant for complex bash & git pipelines', badge: 'PREFERRED' },
 		],
 	},
 	{
@@ -35,10 +30,10 @@ const sections = [
 		num: '03',
 		title: 'Engineering Stack',
 		items: [
-			{ label: 'TypeScript & Node.js — web platforms, tooling, and AI agent orchestration', badge: 'PREFERRED' },
-			{ label: '.NET 9 / C# — high-throughput backend services and cloud platform engineering', badge: null },
-			{ label: 'Docker — local development parity and microservice containerization', badge: 'ESSENTIAL' },
-			{ label: 'Microsoft Azure — cloud-native architecture, Container Apps, Cosmos DB', badge: 'DAILY DRIVER' },
+			{ label: 'TypeScript & Node.js / web platforms, tooling, and AI agent orchestration', badge: 'PREFERRED' },
+			{ label: '.NET 9 / C# / high-throughput backend services and cloud platform engineering', badge: null },
+			{ label: 'Docker / local development parity and microservice containerization', badge: 'ESSENTIAL' },
+			{ label: 'Microsoft Azure / cloud-native architecture, Container Apps, Cosmos DB', badge: 'DAILY DRIVER' },
 		],
 	},
 	{
@@ -46,454 +41,55 @@ const sections = [
 		num: '04',
 		title: 'Daily Apps',
 		items: [
-			{ label: 'Raycast — launcher, clipboard history, window snapping, and workflow shortcuts', badge: 'FAVOURITE' },
-			{ label: 'Google Chrome — primary browser and DevTools performance profiler', badge: 'DAILY DRIVER' },
-			{ label: 'ChatGPT & Claude — architecture design sparring, drafting, and test generation', badge: 'DAILY DRIVER' },
-			{ label: 'WhatsApp — asynchronous team, peer, and family communication', badge: null },
+			{ label: 'Raycast / launcher, clipboard history, window snapping, and workflow shortcuts', badge: 'FAVOURITE' },
+			{ label: 'Google Chrome / primary browser and DevTools performance profiler', badge: 'DAILY DRIVER' },
+			{ label: 'ChatGPT & Claude / architecture design sparring, drafting, and test generation', badge: 'DAILY DRIVER' },
+			{ label: 'WhatsApp / asynchronous team, peer, and family communication', badge: null },
 		],
 	},
 ];
 ---
-
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={`Uses & Toolkit | ${SITE_TITLE}`} description="Software, hardware, and engineering toolkit used daily by Usama Ansari." />
-	</head>
-	<body>
-		<Header />
-		<main id="main-content" tabindex="-1" class="uses-page">
-
-			<div class="manifest-header" data-route-reveal style="--stagger: 0;">
-				<div class="manifest-meta">
-					<span class="manifest-label highlight">THE PERSONAL TOOLKIT</span>
-					<span class="manifest-label">HARDWARE + SOFTWARE</span>
-					<span class="manifest-label">AUTHOR: USAMA ANSARI</span>
-				</div>
-				<h1>Tools of the trade.</h1>
-				<p class="tagline">
-					A living inventory of the hardware, software, and engineering principles powering my systems work, writing, and daily focus. Refined over 12+ years of shipping software.
-				</p>
-			</div>
-
-			<!-- Interactive Studio Workbench -->
-			<Desk />
-
-			<!-- Filter Bar for Item Manifest -->
-			<div class="filter-strip" data-route-reveal style="--stagger: 1;">
-				<span class="filter-title">Filter by Tier:</span>
-				<div class="filter-buttons">
-					<button type="button" class="filter-btn active" data-filter="all">All Items (17)</button>
-					<button type="button" class="filter-btn" data-filter="daily-driver">Daily Driver</button>
-					<button type="button" class="filter-btn" data-filter="preferred">Preferred</button>
-					<button type="button" class="filter-btn" data-filter="essential">Essential</button>
-					<button type="button" class="filter-btn" data-filter="favourite">Favourite</button>
-				</div>
-			</div>
-
-			<div class="manifest-body">
-				<!-- Sticky TOC Sidebar -->
-				<nav class="manifest-toc" aria-label="Page sections" data-route-reveal style="--stagger: 1;">
-					<p class="toc-heading">// Contents</p>
-					{sections.map((s) => (
-						<a href={`#${s.id}`} class="toc-link">
-							<span class="toc-num">{s.num}</span>
-							<span>{s.title}</span>
-						</a>
-					))}
-				</nav>
-
-				<!-- Manifest Sections -->
-				<div class="manifest-sections">
-					{sections.map((s, index) => (
-						<section class="manifest-section" id={s.id} data-route-reveal style={`--stagger: ${index + 2};`}>
-							<div class="section-label">
-								<span class="section-num">{s.num}</span>
-								<h2 class="section-title">{s.title}</h2>
-							</div>
-							<ul class="item-list">
-								{s.items.map((item) => (
-									<li class="item" data-badge={item.badge ? item.badge.toLowerCase().replace(/\s/g, '-') : 'standard'}>
-										<span class="item-arrow" aria-hidden="true">→</span>
-										<span class="item-label">{item.label}</span>
-										{item.badge && (
-											<span class:list={['badge', `badge--${item.badge.toLowerCase().replace(/\s/g, '-')}`]}>
-												{item.badge}
-											</span>
-										)}
-									</li>
-								))}
-							</ul>
-						</section>
-					))}
-				</div>
-			</div>
-		</main>
-
-		<script>
-			import { playClickSound } from '../scripts/sound';
-
-			const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-			const items = document.querySelectorAll<HTMLElement>('.item');
-
-			filterBtns.forEach(btn => {
-				btn.addEventListener('click', () => {
-					filterBtns.forEach(b => b.classList.remove('active'));
-					btn.classList.add('active');
-					const filter = btn.dataset.filter;
-
-					items.forEach(item => {
-						const badge = item.dataset.badge;
-						if (filter === 'all' || badge === filter) {
-							item.style.display = 'flex';
-						} else {
-							item.style.display = 'none';
-						}
-					});
-
-					playClickSound(1.2);
-				});
-			});
-		</script>
-
-		<RouteMotion />
-		<Footer />
-	</body>
-</html>
-
+<Page title="Uses & Toolkit | Usama Ansari" description="The hardware, software, and engineering tools that power Usama Ansari's everyday work.">
+  <div class="container">
+    <section class="page-intro"><span class="eyebrow" data-enter>Behind the work</span><h1 class="page-title"><span class="line-reveal"><span>A workspace</span></span> <span class="line-reveal accent"><span style="--order: 1">that works.</span></span></h1><p class="page-lead" data-enter style="--order: 2">Good tools get out of the way. Here’s the hardware, software, and everyday setup that helps me stay in the flow.</p></section>
+    <Desk />
+    <div class="toolkit-controls" data-reveal><h2>The everyday kit.</h2><div class="filter-group" role="group" aria-label="Filter tools by usage">{[['all', 'All tools'], ['daily-driver', 'Daily driver'], ['preferred', 'Preferred'], ['essential', 'Essential'], ['favourite', 'Favourite']].map(([filter, label]) => <button type="button" class="filter-button" data-filter={filter} aria-pressed={filter === 'all'}>{label}</button>)}</div></div>
+    <p class="tool-count" role="status">17 tools</p>
+    <div class="toolkit-layout">
+      <nav class="toolkit-nav" aria-label="Page sections">{sections.map(section => <a href={`#${section.id}`}><span>{section.num}</span>{section.title}</a>)}</nav>
+      <div class="toolkit-sections">{sections.map(section => <section class="toolkit-section" id={section.id} data-reveal><h3>{section.title}</h3><ul>{section.items.map(item => <li class="tool-item" data-badge={item.badge ? item.badge.toLowerCase().replace(/\s/g, '-') : 'standard'}><div><h4>{item.label.slice(0, item.label.lastIndexOf(' / '))}</h4><p>{item.label.slice(item.label.lastIndexOf(' / ') + 3)}</p></div>{item.badge && <span class="tool-badge">{item.badge.toLowerCase()}</span>}</li>)}</ul><p class="tool-empty" hidden>No tools in this category match the selected filter.</p></section>)}</div>
+    </div>
+  </div>
+</Page>
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const items = document.querySelectorAll<HTMLElement>('.tool-item');
+  buttons.forEach(button => button.addEventListener('click', () => {
+    const filter = button.dataset.filter; let count = 0;
+    buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    items.forEach(item => { item.hidden = filter !== 'all' && item.dataset.badge !== filter; if (!item.hidden) count++; });
+    document.querySelector('.tool-count')!.textContent = `${count} ${count === 1 ? 'tool' : 'tools'}`;
+    document.querySelectorAll('.toolkit-section').forEach(section => { section.querySelector<HTMLElement>('.tool-empty')!.hidden = Array.from(section.querySelectorAll<HTMLElement>('.tool-item')).some(item => !item.hidden); });
+  }));
+</script>
 <style>
-	.uses-page {
-		width: 100%;
-		max-width: 1060px;
-		margin: auto;
-		padding-bottom: 5rem;
-		box-sizing: border-box;
-		overflow-x: hidden;
-	}
-
-	/* Manifest Header */
-	.manifest-header {
-		border-bottom: 1px solid var(--border);
-		padding-bottom: 2.25rem;
-		margin-bottom: 2.5rem;
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-
-	.manifest-meta {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-
-	.manifest-label {
-		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		font-weight: 500;
-		letter-spacing: 0.05em;
-		padding: 0.2rem 0.55rem;
-		border-radius: 9999px;
-		background: var(--surface-alt);
-		border: 1px solid var(--border);
-		color: var(--text-muted);
-	}
-
-	.manifest-label.highlight {
-		background: var(--pastel-blue);
-		color: var(--pastel-blue-text);
-		border-color: transparent;
-	}
-
-	.manifest-header h1 {
-		font-family: var(--font-serif);
-		font-size: clamp(2.8rem, 6vw, 4.2rem);
-		line-height: 1.05;
-		letter-spacing: -0.03em;
-		margin: 0;
-		font-weight: 500;
-	}
-
-	.tagline {
-		max-width: 62ch;
-		font-size: 1.05rem;
-		line-height: 1.68;
-		color: var(--text-body);
-		margin: 0;
-	}
-
-	/* Filter Strip */
-	.filter-strip {
-		display: flex;
-		align-items: center;
-		gap: 0.85rem;
-		margin-bottom: 2.5rem;
-		padding: 0.75rem 1.15rem;
-		background: var(--surface-card);
-		border: 1px solid var(--border);
-		border-radius: 6px;
-		flex-wrap: wrap;
-	}
-
-	.filter-title {
-		font-family: var(--font-mono);
-		font-size: 0.7rem;
-		font-weight: 600;
-		letter-spacing: 0.05em;
-		color: var(--text-muted);
-	}
-
-	.filter-buttons {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.35rem;
-	}
-
-	.filter-btn {
-		font-family: var(--font-mono);
-		font-size: 0.7rem;
-		font-weight: 500;
-		padding: 0.25rem 0.6rem;
-		background: var(--surface-alt);
-		border: 1px solid var(--border);
-		border-radius: 4px;
-		color: var(--text-body);
-		cursor: pointer;
-		transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out), background-color 140ms var(--ease-out);
-	}
-
-	.filter-btn:active {
-		transform: scale(0.98);
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.filter-btn:hover {
-			border-color: #111111;
-			color: #111111;
-		}
-	}
-
-	.filter-btn.active {
-		background: #111111;
-		color: #FFFFFF;
-		border-color: #111111;
-	}
-
-	/* Body Layout */
-	.manifest-body {
-		display: grid;
-		grid-template-columns: 200px 1fr;
-		gap: 3rem;
-		align-items: start;
-	}
-
-	/* TOC Sidebar */
-	.manifest-toc {
-		position: sticky;
-		top: 6rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-		background: var(--surface-card);
-		border: 1px solid var(--border);
-		border-radius: 6px;
-		padding: 1rem;
-		box-shadow: var(--shadow-sm);
-	}
-
-	.toc-heading {
-		font-family: var(--font-mono);
-		font-size: 0.7rem;
-		font-weight: 600;
-		letter-spacing: 0.06em;
-		margin: 0 0 0.5rem;
-		padding-bottom: 0.5rem;
-		border-bottom: 1px solid var(--border);
-		color: var(--text-muted);
-	}
-
-	.toc-link {
-		display: flex;
-		align-items: baseline;
-		gap: 0.5rem;
-		padding: 0.35rem 0.5rem;
-		font-family: var(--font-ui);
-		font-size: 0.82rem;
-		text-decoration: none;
-		color: var(--text-body);
-		border-radius: 4px;
-		transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out);
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.toc-link:hover {
-			background: var(--surface-alt);
-			color: #111111;
-			text-decoration: none;
-		}
-	}
-
-	.toc-num {
-		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		font-weight: 600;
-		color: var(--text-muted);
-	}
-
-	/* Sections */
-	.manifest-sections {
-		display: flex;
-		flex-direction: column;
-		gap: 2.5rem;
-		min-width: 0;
-	}
-
-	.manifest-section {
-		border-bottom: 1px solid var(--border);
-		padding-bottom: 2.5rem;
-		scroll-margin-top: 6rem;
-	}
-
-	.manifest-section:last-child {
-		border-bottom: none;
-	}
-
-	.section-label {
-		display: flex;
-		align-items: baseline;
-		gap: 0.75rem;
-		margin-bottom: 1.25rem;
-	}
-
-	.section-num {
-		font-family: var(--font-mono);
-		font-size: 0.8rem;
-		font-weight: 600;
-		color: var(--text-muted);
-	}
-
-	.section-title {
-		font-family: var(--font-serif);
-		font-size: clamp(1.7rem, 3.2vw, 2.2rem);
-		font-weight: 500;
-		letter-spacing: -0.025em;
-		margin: 0;
-	}
-
-	/* Item List */
-	.item-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.item {
-		display: flex;
-		align-items: baseline;
-		gap: 0.75rem;
-		padding: 0.75rem 0.95rem;
-		background: var(--surface-card);
-		border: 1px solid var(--border);
-		border-radius: 6px;
-		font-size: 0.92rem;
-		line-height: 1.6;
-		box-shadow: var(--shadow-sm);
-		transition: border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.item:hover {
-			border-color: var(--border-dark);
-			box-shadow: var(--shadow-hover);
-		}
-	}
-
-	.item-arrow {
-		color: var(--text-muted);
-		font-size: 0.8rem;
-		flex-shrink: 0;
-	}
-
-	.item-label {
-		flex: 1;
-		color: #111111;
-	}
-
-	/* Pill Badges with Defined Muted Pastels (Protocol §4 & §5) */
-	.badge {
-		font-family: var(--font-mono);
-		font-size: 0.62rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		padding: 0.15rem 0.5rem;
-		border-radius: 9999px;
-		white-space: nowrap;
-		flex-shrink: 0;
-	}
-
-	.badge--daily-driver {
-		background: var(--pastel-blue);
-		color: var(--pastel-blue-text);
-	}
-
-	.badge--favourite {
-		background: var(--pastel-yellow);
-		color: var(--pastel-yellow-text);
-	}
-
-	.badge--essential {
-		background: var(--pastel-red);
-		color: var(--pastel-red-text);
-	}
-
-	.badge--preferred {
-		background: var(--pastel-green);
-		color: var(--pastel-green-text);
-	}
-
-	.badge--occasional {
-		background: var(--surface-alt);
-		border: 1px solid var(--border);
-		color: var(--text-muted);
-	}
-
-	/* Responsive */
-	@media (max-width: 820px) {
-		.manifest-body {
-			grid-template-columns: 1fr;
-			gap: 2rem;
-		}
-
-		.manifest-toc {
-			position: static;
-			flex-direction: row;
-			flex-wrap: wrap;
-			gap: 0.5rem;
-		}
-
-		.toc-heading {
-			width: 100%;
-		}
-	}
-
-	@media (max-width: 580px) {
-		.manifest-header h1 {
-			font-size: clamp(2.4rem, 10vw, 3.4rem);
-		}
-
-		.item {
-			flex-wrap: wrap;
-			gap: 0.4rem;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.item {
-			transition: none !important;
-		}
-	}
+  .toolkit-controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1.5rem; padding-top: var(--space-section); }
+  .toolkit-controls h2 { font-size: clamp(2rem, 3.5vw, 3rem); }
+  .tool-count { color: var(--text-muted); font-size: .75rem; margin-block: 1.5rem 2rem; }
+  .toolkit-layout { display: grid; grid-template-columns: 1fr 2.5fr; gap: 4rem; }
+  .toolkit-nav { position: sticky; top: 7rem; align-self: start; display: grid; }
+  .toolkit-nav a { display: flex; align-items: center; gap: 1rem; min-height: 48px; font-size: .85rem; }
+  .toolkit-nav a:hover { color: var(--accent); }
+  .toolkit-nav span { color: var(--text-muted); font-size: .65rem; }
+  .toolkit-section { border-top: 1px solid var(--border); padding-top: 2rem; scroll-margin-top: 7rem; }
+  .toolkit-section + .toolkit-section { margin-top: 3rem; }
+  .toolkit-section h3 { font-size: 2rem; }
+  .toolkit-section ul { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; gap: 1.5rem; }
+  .tool-item { display: flex; align-items: start; justify-content: space-between; gap: 2rem; padding: .5rem 0; }
+  .tool-item h4 { font-family: var(--font-body); letter-spacing: -.02em; font-size: 1rem; line-height: 1.4; font-weight: 500; }
+  .tool-item p { color: var(--text-muted); font-size: .85rem; margin-top: .35rem; max-width: 48ch; }
+  .tool-badge { flex-shrink: 0; text-transform: capitalize; color: var(--accent); font-size: .65rem; padding: .25rem .6rem; background: var(--accent-soft); border-radius: 100px; }
+  .tool-empty { padding-top: 1.5rem; color: var(--text-muted); font-size: .9rem; }
+  @media (max-width: 768px) { .toolkit-layout { grid-template-columns: 1fr; gap: 2rem; } .toolkit-nav { position: static; grid-template-columns: 1fr 1fr; } .toolkit-nav a { font-size: .78rem; gap: .7rem; } }
+  @media (max-width: 480px) { .tool-item { flex-direction: column; gap: .5rem; } }
 </style>

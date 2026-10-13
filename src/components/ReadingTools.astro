@@ -1,296 +1,69 @@
 <div class="reading-progress" aria-hidden="true"></div>
-
-<aside class="reading-tools" hidden aria-label="Reading tools">
-  <div class="tools-left">
-    <span class="reading-time"></span>
-    <button class="copy-link" type="button">Copy article link ↗</button>
-    <span class="copy-status" role="status"></span>
-  </div>
-
-  <details class="toc-accordion">
-    <summary>On this page</summary>
-    <nav aria-label="Article sections" class="toc-nav"></nav>
-  </details>
-</aside>
-
+<div class="reading-tools" hidden>
+  <span class="reading-time"></span>
+  <details class="toc-accordion"><summary>On this page</summary><nav class="toc-nav" aria-label="Article sections"></nav></details>
+  <button type="button" class="copy-link">Copy article link ↗</button><span class="copy-status status" role="status" aria-live="polite"></span>
+</div>
 <script>
-  import { playClickSound, playSuccessSound } from '../scripts/sound';
-
+  import { playSuccessSound } from '../scripts/sound';
   const prose = document.querySelector<HTMLElement>('.prose');
-  if (prose) {
-    const tools = document.querySelector<HTMLElement>('.reading-tools')!;
+  const tools = document.querySelector<HTMLElement>('.reading-tools');
+  if (prose && tools) {
     tools.hidden = false;
-
-    // Reading time calculation
-    const wordCount = (prose.textContent || '').trim().split(/\s+/).length;
-    const minutes = Math.max(1, Math.ceil(wordCount / 220));
-    tools.querySelector('.reading-time')!.textContent = `${minutes} min read`;
-
-    // Dynamic TOC generation
-    const headings = prose.querySelectorAll<HTMLHeadingElement>('h1,h2,h3,h4,h5,h6');
+    const count = (prose.textContent || '').trim().split(/\s+/).length;
+    tools.querySelector('.reading-time')!.textContent = `${Math.max(1, Math.ceil(count / 220))} min read`;
+    const headings = prose.querySelectorAll<HTMLHeadingElement>('h2,h3,h4,h5,h6');
     const nav = tools.querySelector('nav')!;
-
     headings.forEach((heading, index) => {
-      if (!heading.id) {
-        heading.id = `section-${index}`;
-      }
-      const a = document.createElement('a');
-      a.href = `#${heading.id}`;
-      a.textContent = heading.textContent;
-      a.className = 'toc-anchor';
-      const level = parseInt(heading.tagName.replace('H', ''), 10);
-      if (level >= 3) {
-        a.classList.add(`toc-level-${level}`);
-      }
-      a.addEventListener('click', () => playClickSound(1.2));
-      nav.append(a);
+      if (!heading.id) heading.id = `section-${index}`;
+      const link = document.createElement('a'); link.href = `#${heading.id}`; link.textContent = heading.textContent;
+      if (Number(heading.tagName[1]) >= 3) link.className = 'toc-nested';
+      nav.append(link);
     });
-
-    if (!headings.length) {
-      tools.querySelector('details')!.hidden = true;
-    }
-
-    // Copy link handler
-    const copyBtn = tools.querySelector<HTMLButtonElement>('.copy-link')!;
-    const status = tools.querySelector<HTMLElement>('.copy-status')!;
-
-    copyBtn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(location.href);
-        status.textContent = 'Link copied';
-        playSuccessSound();
-        setTimeout(() => {
-          if (status.textContent === 'Link copied') status.textContent = '';
-        }, 2200);
-      } catch {
-        status.textContent = 'Copy the URL from your address bar.';
-      }
+    const details = tools.querySelector('details')!;
+    if (!headings.length) details.hidden = true;
+    else details.open = matchMedia('(min-width: 769px)').matches;
+    tools.querySelector('.copy-link')?.addEventListener('click', async () => {
+      const status = tools.querySelector('.copy-status')!;
+      try { await navigator.clipboard.writeText(location.href); status.textContent = 'Link copied'; playSuccessSound(); }
+      catch { status.textContent = 'Copy the URL from your address bar.'; }
     });
-
-    // Copy code button injection for code blocks
-    prose.querySelectorAll('pre').forEach((pre) => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'copy-code';
-      button.textContent = 'Copy code';
-      button.setAttribute('aria-label', 'Copy code snippet to clipboard');
-
+    prose.querySelectorAll('pre').forEach(pre => {
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'copy-code'; button.textContent = 'Copy code'; button.setAttribute('aria-label', 'Copy code snippet to clipboard');
       button.addEventListener('click', async () => {
-        try {
-          const codeText = pre.querySelector('code')?.textContent || pre.textContent || '';
-          await navigator.clipboard.writeText(codeText);
-          button.textContent = 'Copied!';
-          button.classList.add('copied');
-          playSuccessSound();
-          setTimeout(() => {
-            button.textContent = 'Copy code';
-            button.classList.remove('copied');
-          }, 2000);
-        } catch {
-          button.textContent = 'Select code to copy';
-        }
+        try { await navigator.clipboard.writeText(pre.querySelector('code')?.textContent || pre.textContent || ''); button.textContent = 'Copied!'; playSuccessSound(); setTimeout(() => button.textContent = 'Copy code', 2000); }
+        catch { button.textContent = 'Select code to copy'; }
       });
-
       pre.before(button);
     });
-
-    // Scroll Progress bar
-    const progress = document.querySelector<HTMLElement>('.reading-progress')!;
-    let ticking = false;
-
-    const update = () => {
-      const rect = prose.getBoundingClientRect();
-      const totalDistance = Math.max(1, prose.offsetHeight - window.innerHeight);
-      const scrolled = -rect.top;
-      const progressPercent = Math.max(0, Math.min(1, scrolled / totalDistance));
-      progress.style.transform = `scaleX(${progressPercent})`;
-      ticking = false;
-    };
-
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
-    }, { passive: true });
-
-    window.addEventListener('resize', update);
-    update();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        nav.querySelectorAll('a').forEach(link => {
+          if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-100px 0px -65% 0px' });
+    headings.forEach(heading => observer.observe(heading));
+    window.addEventListener('pagehide', () => observer.disconnect(), { once: true });
   }
 </script>
-
 <style>
-  .reading-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    z-index: 100;
-    background: #111111;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 60ms linear;
-  }
-
-  .reading-tools {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin: 1.5rem 0 2.5rem;
-    padding: 1rem 1.25rem;
-    background: var(--surface-card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .tools-left {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .reading-time {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    background: var(--surface-alt);
-    padding: 0.18rem 0.5rem;
-    border-radius: 3px;
-    border: 1px solid var(--border);
-  }
-
-  .copy-link {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    background: var(--surface-alt);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 0.3rem 0.65rem;
-    color: #111111;
-    cursor: pointer;
-    transition: background-color 140ms var(--ease-out), border-color 140ms var(--ease-out);
-  }
-
-  .copy-link:active {
-    transform: scale(0.98);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .copy-link:hover {
-      background: var(--surface-card);
-      border-color: #111111;
-    }
-  }
-
-  .copy-status {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--pastel-green-text);
-  }
-
-  .toc-accordion {
-    border-top: 1px solid var(--border);
-    padding-top: 0.85rem;
-  }
-
-  .toc-accordion summary {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #111111;
-    cursor: pointer;
-    user-select: none;
-    letter-spacing: 0.04em;
-  }
-
-  .toc-nav {
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem 0 0.25rem;
-  }
-
-  .toc-nav :global(a) {
-    font-family: var(--font-ui);
-    font-size: 0.84rem;
-    color: var(--text-body);
-    text-decoration: none;
-    padding: 0.35rem 0;
-    border-bottom: 1px solid var(--border);
-    transition: color 140ms var(--ease-out);
-  }
-
-  .toc-nav :global(a.toc-level-3) {
-    padding-left: 0.85rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  .toc-nav :global(a.toc-level-4),
-  .toc-nav :global(a.toc-level-5),
-  .toc-nav :global(a.toc-level-6) {
-    padding-left: 1.5rem;
-    font-size: 0.76rem;
-    color: var(--text-muted);
-  }
-
-  .toc-nav :global(a:last-child) {
-    border-bottom: none;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .toc-nav :global(a:hover) {
-      color: #111111;
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .reading-progress {
-      transition: none;
-    }
-  }
+  .reading-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); z-index: calc(var(--layer-header) + 1); transform: scaleX(0); transform-origin: left; }
+  @supports (animation-timeline: scroll()) { .reading-progress { animation: progress linear both; animation-timeline: scroll(root); } @keyframes progress { to { transform: scaleX(1); } } }
+  .reading-time { display: block; font-size: .75rem; color: var(--accent); margin-bottom: 1.5rem; }
+  .toc-accordion summary { font-size: .85rem; font-weight: 500; padding-block: .5rem; }
+  .toc-nav { display: grid; padding-block: .75rem; }
+  .toc-nav :global(a) { padding-block: .5rem; font-size: .78rem; color: var(--text-muted); line-height: 1.5; }
+  .toc-nav :global(a.toc-nested) { padding-left: .75rem; font-size: .72rem; }
+  .toc-nav :global(a:hover), .toc-nav :global(a[aria-current]) { color: var(--accent); }
+  .copy-link { display: block; background: transparent; border: 1px solid var(--border); border-radius: 100px; padding: .65rem 1rem; min-height: 44px; font-size: .75rem; margin-block: 1.5rem .5rem; }
+  .copy-link:hover { border-color: var(--accent); color: var(--accent); }
+  .copy-status { display: block; font-size: .7rem; }
 </style>
-
 <style is:global>
-  .copy-code {
-    display: block;
-    margin: 1.25rem 0 -0.5rem auto;
-    border: 1px solid var(--border);
-    background: var(--surface-card);
-    color: var(--text-muted);
-    padding: 0.25rem 0.55rem;
-    cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 500;
-    border-radius: 3px;
-    box-shadow: var(--shadow-sm);
-    transition: background-color 140ms var(--ease-out), color 140ms var(--ease-out), border-color 140ms var(--ease-out);
-  }
-
-  .copy-code:active {
-    transform: scale(0.98);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .copy-code:hover {
-      background: var(--surface-alt);
-      border-color: var(--border-dark);
-      color: #111111;
-    }
-  }
-
-  .copy-code.copied {
-    background: var(--pastel-green);
-    border-color: var(--pastel-green-text);
-    color: var(--pastel-green-text);
-  }
+  .copy-code { display: block; margin: 1.5rem 0 .5rem auto; min-height: 44px; padding: .5rem .9rem; border: 1px solid var(--border); border-radius: 100px; background: var(--surface-card); color: var(--text-body); font-size: .75rem; }
+  .copy-code:hover { color: var(--accent); border-color: var(--accent); }
+  .copy-code + pre { margin-top: .5rem; }
 </style>
