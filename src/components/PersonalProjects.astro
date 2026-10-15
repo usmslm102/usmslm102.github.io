@@ -2,11 +2,12 @@
 import { Image } from 'astro:assets';
 import localFinance from '../assets/projects/local-finance.png';
 import appOrigins from '../assets/projects/app-origins.png';
+import tunnelbar from '../assets/projects/tunnelbar.png';
 
 const projects = [
   {
     name: 'LocalFinance',
-    category: '01 / PERSONAL FINANCE',
+    category: 'Personal finance',
     headline: 'Your money. Your machine.',
     description: 'Turn Indian bank and credit card statements into a clear picture of your spending. Import, categorize, and explore your finances with your data stored locally in SQLite.',
     features: ['Offline finance analysis', 'Bank statement imports', 'Go · React · SQLite'],
@@ -18,7 +19,7 @@ const projects = [
   },
   {
     name: 'AppOrigins',
-    category: '02 / MACOS UTILITY',
+    category: 'macOS utility',
     headline: 'Know what’s on your Mac.',
     description: 'A native macOS utility that traces installed apps and CLI tools back to their source. See versions, disk usage, signing status, and duplicate installs in one place.',
     features: ['Homebrew · App Store · Manual', 'Duplicate & signing checks', 'Swift · SwiftUI'],
@@ -28,6 +29,18 @@ const projects = [
     repo: 'https://github.com/usmslm102/mac-app-origins',
     tone: 'origins',
   },
+  {
+    name: 'TunnelBar',
+    category: 'Developer tool',
+    headline: 'Localhost, a little further.',
+    description: 'Share a local service through an email-protected link from your Mac’s menu bar. Create temporary Cloudflare tunnels without an account, reuse recent shares, and stop sharing when you’re done.',
+    features: ['Email-protected links', 'No account needed', 'Swift · SwiftUI · AppKit'],
+    image: tunnelbar,
+    alt: 'TunnelBar macOS menu bar app showing a local port, email protection, a Create protected link button, and recent shares.',
+    site: 'https://usamaansari.com/tunnelbar/',
+    repo: 'https://github.com/usmslm102/tunnelbar',
+    tone: 'tunnelbar',
+  },
 ];
 ---
 <section class="projects-section section-space" id="projects" aria-labelledby="projects-title">
@@ -36,11 +49,11 @@ const projects = [
     <a href="https://github.com/usmslm102" target="_blank" rel="noreferrer" class="text-link">More on GitHub <span aria-hidden="true">↗</span></a>
   </div>
   <div class="project-list">
-    {projects.map((project, index) => <article class={`project project-${project.tone}`} data-reveal aria-labelledby={`project-${project.tone}`}>
+    {projects.map((project) => <article class={`project project-${project.tone}`} data-reveal aria-labelledby={`project-${project.tone}`}>
       <a class="project-preview" href={project.site} target="_blank" rel="noreferrer" aria-label={`Visit ${project.name} (opens in a new tab)`}>
         <Image src={project.image} alt={project.alt} widths={[400, 640, 800, 1200]} sizes="(max-width: 640px) calc(100vw - 88px), (max-width: 768px) calc(100vw - 112px), (max-width: 1400px) 40vw, 620px" format="webp" quality={85} loading="lazy" />
       </a>
-      <div class="project-meta"><span>{index === 0 ? 'Personal finance' : 'macOS utility'}</span><span>Open source</span></div>
+      <div class="project-meta"><span>{project.category}</span><span>Open source</span></div>
       <div class="project-title"><h3 id={`project-${project.tone}`}>{project.name}</h3><a class="project-visit" href={project.site} target="_blank" rel="noreferrer" aria-label={`Visit ${project.name}`}><span class="arrow" aria-hidden="true">↗</span></a></div>
       <p class="project-headline">{project.headline}</p>
       <p class="project-description">{project.description}</p>
@@ -54,6 +67,8 @@ const projects = [
   .project-origins { margin-top: 9rem; }
   .project-preview { display: flex; align-items: center; justify-content: center; aspect-ratio: 1.22; background: var(--accent-soft); border-radius: var(--radius); padding: 2rem; overflow: hidden; }
   .project-origins .project-preview { background: var(--surface-sunken); aspect-ratio: 1.1; }
+  .project-tunnelbar .project-preview { background: var(--surface-sunken); }
+  .project-tunnelbar .project-preview img { width: auto; height: 100%; max-width: 100%; object-fit: contain; }
   .project-preview img { width: 100%; border-radius: 6px; box-shadow: 0 18px 38px #15204420; transition: transform 650ms var(--ease-out); }
   .project-preview:hover img { transform: scale(1.04) rotate(-1deg); }
   .project-meta { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1.5rem; font-size: .72rem; color: var(--text-muted); }
