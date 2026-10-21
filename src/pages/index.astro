@@ -6,11 +6,11 @@ import PersonalProjects from '../components/PersonalProjects.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
 ---
-<Page title="Usama Ansari | Distributed Systems & AI Platform Architect" description="I'm Usama, a software engineer at Microsoft. I build distributed systems, AI agent platforms, and thoughtful open-source tools.">
+<Page title="Usama Ansari | Distributed Systems & AI Platform Architect" description="I'm Usama, a senior software engineer at Microsoft. I build distributed systems, AI agent platforms, and thoughtful open-source tools.">
   <div class="container">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="hero-intro" data-enter>Usama Ansari <span>/</span> Software engineer</p>
+        <p class="hero-intro" data-enter>Usama Ansari <span>/</span> Senior Software Engineer</p>
         <h1 id="hero-title"><span class="line-reveal"><span style="--order: 1">Engineering.</span></span> <span class="line-reveal accent"><span style="--order: 2">In motion.</span></span></h1>
         <p class="hero-description" data-enter style="--order: 3">I turn complex problems into systems that last.<br class="desktop-break" /> Building what’s next at Microsoft Azure.</p>
         <div class="button-row" data-enter style="--order: 4"><a class="button" href="#projects">Explore my work <span class="arrow" aria-hidden="true">↗</span></a><a class="text-link" href="/about">About me <span aria-hidden="true">↗</span></a></div>
