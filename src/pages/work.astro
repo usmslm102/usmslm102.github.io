@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import Page from '../layouts/Page.astro';
+import localFinance from '../assets/projects/local-finance.png';
+---
+<Page title="Selected Work & Case Studies | Usama Ansari" description="A closer look at Usama Ansari's work on an Azure AI agent platform and the local-first LocalFinance app.">
+  <div class="container work-page">
+    <section class="page-intro">
+      <span class="eyebrow" data-enter>Selected work</span>
+      <h1 class="page-title"><span class="line-reveal"><span>Behind the</span></span> <span class="line-reveal accent"><span style="--order: 1">build.</span></span></h1>
+      <p class="page-lead" data-enter style="--order: 2">A closer look at the problems, choices, and context behind two very different systems.</p>
+      <nav class="case-nav" aria-label="Case studies" data-enter style="--order: 3"><a href="#agent-platform">01 / AI agent platform ↓</a><a href="#localfinance">02 / LocalFinance ↓</a></nav>
+    </section>
+
+    <article class="case-study" id="agent-platform" aria-labelledby="agent-title">
+      <header class="case-header" data-reveal><div><span class="eyebrow">01 / Microsoft Azure</span><h2 id="agent-title">A platform for<br /><span class="accent">intelligent agents.</span></h2></div><p>Bringing shared foundations to AI agents used across Azure Networking teams.</p></header>
+      <div class="case-facts" data-reveal><div><span>My role</span><strong>Platform architecture</strong></div><div><span>Scope</span><strong>10+ production agents</strong></div><div><span>Reach</span><strong>52 internal teams</strong></div></div>
+      <div class="case-body">
+        <div class="case-label">The challenge</div><div><h3>Make the foundations reusable.</h3><p>Teams building agents need more than a model call: they need ways to connect tools, manage context, evaluate behavior, and operate within enterprise security requirements. The Azure Networking AI Agent Platform brings those capabilities together.</p></div>
+        <div class="case-label">The approach</div><div><h3>Shared capabilities, room to evolve.</h3><p>I architected the platform with MCP integration, dynamic memory management, multi-model orchestration, automated evaluation, and enterprise security controls. Azure AI Foundry, Container Apps, and Cosmos DB support the platform, operational state, and vector memory.</p><div class="architecture" aria-label="Platform capabilities"><span>Agent experiences</span><span>Orchestration & evaluation</span><span>Tools, memory & security</span><span>Cloud infrastructure</span></div><p class="diagram-note">A simplified view of the platform’s capabilities.</p></div>
+        <div class="case-label">The trade-off</div><div><h3>Consistency without losing flexibility.</h3><p>Shared infrastructure can reduce repeated work, but it also has to accommodate different agent needs. The platform combines common capabilities with multi-model orchestration and tool integration so teams can build on a consistent foundation.</p></div>
+        <div class="case-label">The outcome</div><div><h3>Built for real use.</h3><p>The platform supported 10+ production agents across 52 internal teams, with 16,000–20,000 monthly API requests and approximately 712 million tokens per month. These are a snapshot of the scale described in my experience, not live metrics.</p><a href="/about" class="text-link">More about my experience <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </article>
+
+    <article class="case-study" id="localfinance" aria-labelledby="finance-title">
+      <header class="case-header" data-reveal><div><span class="eyebrow">02 / Open source</span><h2 id="finance-title">A clearer picture,<br /><span class="accent">kept local.</span></h2></div><p>Making Indian bank and credit card statements easier to understand on your own machine.</p></header>
+      <div class="finance-image" data-reveal><Image src={localFinance} alt="LocalFinance transactions ledger with spending summaries and account filters" widths={[640, 800, 1200]} sizes="(max-width: 768px) 100vw, 1100px" format="webp" loading="lazy" /></div>
+      <div class="case-facts" data-reveal><div><span>Project</span><strong>Personal finance</strong></div><div><span>Data</span><strong>Local SQLite storage</strong></div><div><span>Stack</span><strong>Go · React · SQLite</strong></div></div>
+      <div class="case-body">
+        <div class="case-label">The challenge</div><div><h3>Statements contain data, not clarity.</h3><p>Bank and credit card statements can be hard to bring together into a useful view of spending. LocalFinance turns imported statements into transactions that can be categorized and explored.</p></div>
+        <div class="case-label">The approach</div><div><h3>Keep the data close.</h3><p>The app uses Go, React, and SQLite, with financial data stored locally. Its workflow is built around importing statements, categorizing transactions, and reviewing spending in one place.</p></div>
+        <div class="case-label">The trade-off</div><div><h3>Local ownership comes with responsibility.</h3><p>Local storage gives people direct control over where their financial data lives. It also means that protecting and backing up the machine and its data remain important parts of the experience.</p></div>
+        <div class="case-label">Explore</div><div><h3>See it for yourself.</h3><p>LocalFinance is open source. Explore the product and code for the current feature set and implementation details.</p><div class="button-row"><a href="https://usamaansari.com/local-finance/" class="text-link">Visit LocalFinance <span aria-hidden="true">↗</span></a><a href="https://github.com/usmslm102/local-finance" class="text-link">View source <span aria-hidden="true">↗</span></a></div></div>
+      </div>
+    </article>
+    <div class="work-outro" data-reveal><p>There’s more where that came from.</p><a href="/#projects" class="text-link">Explore all personal projects <span aria-hidden="true">↗</span></a></div>
+  </div>
+</Page>
+<style>
+  .case-nav { display: flex; flex-wrap: wrap; gap: .75rem 2rem; margin-top: 2rem; }
+  .case-nav a { display: inline-flex; align-items: center; min-height: 44px; font-size: .88rem; }
+  .case-nav a:hover { color: var(--accent); }
+  .case-study { padding-block: var(--space-section); border-top: 1px solid var(--border); scroll-margin-top: 6rem; }
+  .case-header { display: grid; grid-template-columns: 1.4fr 1fr; align-items: end; gap: 3rem; }
+  .case-header h2 { font-size: clamp(3rem, 5.5vw, 5.5rem); }
+  .case-header > p { max-width: 38ch; color: var(--text-body); font-size: 1.15rem; }
+  .case-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; border-block: 1px solid var(--border); margin-block: 3rem 4rem; padding-block: 1.5rem; }
+  .case-facts span, .case-label { display: block; color: var(--text-muted); font-size: .78rem; }
+  .case-facts strong { display: block; margin-top: .45rem; font-size: 1rem; font-weight: 500; }
+  .case-body { display: grid; grid-template-columns: 1fr 2fr; column-gap: 4rem; row-gap: 4rem; }
+  .case-label { padding-top: .5rem; text-transform: uppercase; letter-spacing: .08em; }
+  .case-body h3 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 1rem; }
+  .case-body p { color: var(--text-body); max-width: 65ch; }
+  .case-body .text-link { margin-top: .75rem; }
+  .architecture { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; margin-top: 2rem; }
+  .architecture span { display: flex; align-items: center; min-height: 86px; padding: 1rem; background: var(--surface-alt); border-radius: var(--radius); font-size: .8rem; font-weight: 500; }
+  .case-body .diagram-note { margin-top: .75rem; font-size: .78rem; color: var(--text-muted); }
+  .finance-image { padding: clamp(1.5rem, 5vw, 5rem); margin-top: 3rem; background: var(--accent-soft); border-radius: var(--radius); }
+  .finance-image img { width: 100%; border-radius: 6px; }
+  .work-outro { border-top: 1px solid var(--border); padding-top: 2rem; color: var(--text-body); }
+  @media (max-width: 768px) { .case-header, .case-body { grid-template-columns: 1fr; gap: 1.5rem; } .case-body > div:not(.case-label) + .case-label { margin-top: 1.5rem; } .case-facts { grid-template-columns: 1fr; gap: 1.25rem; margin-block: 2rem 3rem; } .architecture { grid-template-columns: 1fr 1fr; } }
+</style>

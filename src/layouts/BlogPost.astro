@@ -7,17 +7,32 @@ import ReadingTools from '../components/ReadingTools.astro';
 type Props = CollectionEntry<'blog'>['data'] & { id?: string };
 const { title, description, pubDate, updatedDate, heroImage, id } = Astro.props;
 const editUrl = id ? `https://github.com/usmslm102/usmslm102.github.io/blob/master/src/content/blog/${id}.md` : null;
-const posts = (await getCollection('blog')).filter(p => p.id !== id).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 2);
+const related: Record<string, string[]> = {
+  'building-foundations-for-ai-agents': ['designing-with-local-data'],
+  'designing-with-local-data': ['building-foundations-for-ai-agents'],
+  'containerizing-angular-application-for-production-using-docker': ['create-deploy-azure-function-using-vs-code-and-azure-devops-ci-cd'],
+  'create-deploy-azure-function-using-vs-code-and-azure-devops-ci-cd': ['containerizing-angular-application-for-production-using-docker'],
+  'git-cheat-sheet': ['top-visual-studio-code-extensions'],
+  'top-visual-studio-code-extensions': ['git-cheat-sheet'],
+};
+const relatedIds = id ? related[id] || [] : [];
+const posts = (await getCollection('blog')).filter(p => p.id !== id).sort((a, b) => {
+  const rank = (postId: string) => relatedIds.includes(postId) ? relatedIds.indexOf(postId) : Number.MAX_SAFE_INTEGER;
+  return rank(a.id) - rank(b.id) || b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+}).slice(0, 2);
+const historical = (updatedDate || pubDate).getUTCFullYear() < 2023;
 ---
 <Page title={`${title} | Usama Ansari`} description={description}>
   <div class="container article-container">
     <header class="article-header"><a href="/blog" class="text-link article-back" data-enter><span aria-hidden="true">←</span> Back to the notebook</a><div class="article-meta" data-enter style="--order: 1"><FormattedDate date={pubDate} /><span>By Usama Ansari</span>{updatedDate && <span>Updated <FormattedDate date={updatedDate} /></span>}</div><h1 class="post-h1" data-enter style="--order: 2">{title}</h1>{description.trim().toLowerCase() !== title.trim().toLowerCase() && <p class="post-lead" data-enter style="--order: 3">{description}</p>}</header>
+    {historical && <p class="article-age-note">This article was {updatedDate ? 'last updated' : 'published'} in {(updatedDate || pubDate).getUTCFullYear()}. Tools and interfaces may have changed since then.</p>}
     {heroImage && <Image src={heroImage} alt="" width={1200} height={600} class="post-hero" />}
     <div class="article-layout"><aside class="article-sidebar"><ReadingTools />{editUrl && <a href={editUrl} target="_blank" rel="noreferrer" class="edit-link">Improve this article ↗</a>}</aside><article class="prose"><slot /></article></div>
     <section class="read-next" aria-labelledby="read-next-title"><div class="section-head" data-reveal><h2 id="read-next-title">Keep exploring.</h2><a href="/blog" class="text-link">All writing <span aria-hidden="true">↗</span></a></div><div class="read-next-grid">{posts.map(post => <a href={`/blog/${post.id}/`} class="read-next-link" data-reveal><span class="read-next-date"><FormattedDate date={post.data.pubDate} /></span><h3>{post.data.title}</h3><span class="text-link">Read article <span aria-hidden="true">↗</span></span></a>)}</div></section>
   </div>
 </Page>
 <style>
+  .article-age-note { max-width: 70ch; margin: -1.5rem 0 3rem; padding: 1rem 1.25rem; border-radius: var(--radius); background: var(--surface-alt); color: var(--text-body); font-size: .9rem; }
   .article-header { padding-block: 3rem 4rem; max-width: 1060px; }
   .article-back { font-size: .8rem; color: var(--text-muted); margin-bottom: 3rem; }
   .article-meta { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; font-size: .78rem; color: var(--text-muted); margin-bottom: 1.5rem; }

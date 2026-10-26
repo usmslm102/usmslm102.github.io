@@ -14,12 +14,12 @@ const categories: Record<string, string> = {
     <section class="page-intro"><span class="eyebrow" data-enter>The notebook</span><h1 class="page-title"><span class="line-reveal"><span>Learn. Build.</span></span> <span class="line-reveal accent"><span style="--order: 1">Write it down.</span></span></h1><p class="page-lead" data-enter style="--order: 2">Notes on the tools, patterns, and lessons that make us better engineers.</p></section>
     <section class="blog-controls" aria-label="Search and filter articles" data-enter style="--order: 3">
       <div class="search-wrap"><label for="post-search" class="sr-only">Search articles</label><input id="post-search" type="search" placeholder="Find something worth reading…" autocomplete="off" /><button id="clear-search-btn" type="button" aria-label="Clear search" hidden>×</button><span class="search-shortcut" aria-hidden="true">/</span></div>
-      <div class="filter-group" role="group" aria-label="Filter by topic">{[['all', 'All topics'], ['docker', 'Docker'], ['azure', 'Azure'], ['tooling', 'VS Code'], ['git', 'Git']].map(([topic, label]) => <button class="filter-button topic-tag" type="button" data-topic={topic} aria-pressed={topic === 'all'}>{label}</button>)}</div>
+      <div class="filter-group" role="group" aria-label="Filter by topic">{[['all', 'All topics'], ['docker', 'Docker'], ['azure', 'Azure'], ['tooling', 'VS Code'], ['git', 'Git'], ['local-first', 'Local-first'], ['ai platforms', 'AI platforms']].map(([topic, label]) => <button class="filter-button topic-tag" type="button" data-topic={topic} aria-pressed={topic === 'all'}>{label}</button>)}</div>
     </section>
     <p id="search-count" class="search-count" role="status">{posts.length} articles</p>
     <div id="no-results" hidden><h2>No matches, yet.</h2><p>Try a different keyword or explore the whole notebook.</p><button id="reset-filter-btn" class="button secondary" type="button">Reset search filters</button></div>
     <section class="posts-list" aria-label="Blog posts">{posts.map((post, i) => {
-      const category = categories[post.id] || 'Engineering';
+      const category = post.data.category || categories[post.id] || 'Engineering';
       const readTime = Math.max(1, Math.ceil((post.body || '').split(/\s+/).length / 220));
       return <article class="post-item" data-post data-category={category.toLowerCase()} data-search={`${post.data.title} ${post.data.description} ${category} ${post.body}`.toLowerCase()} data-reveal>
         <div class="post-number">0{i + 1}</div>

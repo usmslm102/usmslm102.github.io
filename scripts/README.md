@@ -13,6 +13,6 @@ With Playwright available, run in another terminal:
 node scripts/smoke-test.cjs
 ```
 
-The suite checks all ten pages at 1440, 390, and 320 pixels, blog search and empty results, the interactive desk, motion controls, article navigation, clipboard actions, RSS, sitemap, and content without JavaScript. It also fails on browser exceptions and horizontal page overflow.
+The suite checks the main pages and all blog posts at 1440, 390, and 320 pixels, blog search and empty results, the interactive desk, motion controls, article navigation, clipboard actions, RSS, sitemap, and content without JavaScript. It also fails on browser exceptions and horizontal page overflow.
 
 For an externally installed Playwright or Chrome, set `PLAYWRIGHT_PATH` and `CHROME_PATH`. Set `TEST_URL` to use a different preview URL. Screenshots are written to `/tmp/website-{home,uses,mobile}.png`.

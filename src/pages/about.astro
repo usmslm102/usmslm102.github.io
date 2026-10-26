@@ -1,22 +1,31 @@
 ---
 import Page from '../layouts/Page.astro';
 ---
-<Page title="About & Career Timeline | Usama Ansari" description="Meet Usama Ansari, a software engineer building distributed systems and AI platforms at Microsoft Azure.">
+<Page title="About & Career Timeline | Usama Ansari" description="Meet Usama Ansari, a senior software engineer building distributed systems and AI platforms at Microsoft Azure.">
   <div class="container">
     <section class="page-intro">
       <span class="eyebrow" data-enter>A little about me</span>
       <h1 class="page-title"><span class="line-reveal"><span>A builder,</span></span> <span class="line-reveal accent"><span style="--order: 1">by nature.</span></span></h1>
-      <p class="page-lead" data-enter style="--order: 2">I’m Usama, a software engineer with 12+ years of experience turning complex challenges into dependable software.</p>
+      <p class="page-lead" data-enter style="--order: 2">I’m Usama, a senior software engineer with 12+ years of experience turning complex challenges into dependable software.</p>
     </section>
     <section class="about-statement" data-reveal aria-label="My approach">
       <p>I work at the intersection of distributed systems and AI. At Microsoft Azure, that means building platforms that help teams ship intelligent agents, understand infrastructure health, and operate at planetary scale.</p>
       <div><p>I’m drawn to the work beneath the surface: the architecture that makes a service resilient, the integration that makes a tool useful, and the small decisions that make software easier to live with.</p><a href="/r" class="text-link">View my résumé <span aria-hidden="true">↗</span></a></div>
     </section>
+    <section class="at-a-glance" aria-labelledby="glance-title" data-reveal>
+      <div><span class="eyebrow">At a glance</span><h2 id="glance-title">Experience,<br /><span class="accent">in context.</span></h2></div>
+      <div class="glance-list">
+        <div><span>Focus</span><p>Distributed systems, AI agent platforms & developer tools</p></div>
+        <div><span>Experience</span><p>12+ years in software engineering · Microsoft Azure</p></div>
+        <div><span>Based in</span><p>Hyderabad, India</p></div>
+        <div><span>Next step</span><p><a href="/r">View or download my résumé ↗</a></p></div>
+      </div>
+    </section>
     <section class="career section-space" aria-labelledby="career-title">
       <div class="section-head" data-reveal><h2 id="career-title">The journey<br />so far.</h2></div>
       <div class="career-entry" data-reveal>
         <div class="career-date"><span>2016 - Present</span><p>Hyderabad, India</p></div>
-        <article><div class="role-top"><h3>Microsoft</h3><span class="role-current">Current</span></div><p class="role-name">Software Engineer 2 · Azure Networking & Cloud Infrastructure</p><p class="role-intro">Building the platforms behind intelligent agents and reliable cloud infrastructure.</p>
+        <article><div class="role-top"><h3>Microsoft</h3><span class="role-current">Current</span></div><p class="role-name">Senior Software Engineer · Azure Networking & Cloud Infrastructure</p><p class="role-intro">Building the platforms behind intelligent agents and reliable cloud infrastructure.</p>
           <div class="role-details">
             <div><h4>AI agent platforms</h4><p>Architected the Azure Networking AI Agent Platform with MCP integration, dynamic memory management, multi-model orchestration, automated evaluation, and enterprise security controls.</p><p>Built on Azure AI Foundry, Container Apps, and Cosmos DB for operational state and vector memory. Supported 10+ production agents across 52 internal teams, 16K-20K monthly API requests, and approximately 712 million tokens per month.</p></div>
             <div><h4>Planetary-scale telemetry</h4><p>Designed multi-region Device Health APIs processing 150 million requests daily with 99.99%-99.999% reliability, monitoring more than 3 million Azure physical nodes globally.</p></div>
@@ -28,6 +37,7 @@ import Page from '../layouts/Page.astro';
       <div class="career-entry" data-reveal><div class="career-date"><span>Nov 2013 - Apr 2016</span><p>Mumbai, India</p></div><article><h3>Capgemini</h3><p class="role-name">Software Engineer · Enterprise Web Solutions</p><p class="role-intro">Built enterprise web applications for Abbott and SCA using .NET, C#, SQL Server, and Microsoft Azure.</p><p class="role-description">Led delivery from requirements and architecture through unit testing and production support.</p></article></div>
       <div class="career-entry" data-reveal><div class="career-date"><span>July 2013</span><p>Education</p></div><article><h3>Mumbai University</h3><p class="role-name">Bachelor of Science in Information Technology</p><p class="role-description">First Class with Distinction.</p></article></div>
     </section>
+    <section class="personal-story" aria-labelledby="personal-title" data-reveal><div><span class="eyebrow">Away from the day job</span><h2 id="personal-title">Curiosity has a<br /><span class="accent">practical side.</span></h2></div><div><p>I enjoy turning the small frictions I encounter into useful software. That curiosity has taken me from making sense of personal finances to understanding the apps on my Mac and sharing local services more easily.</p><p>These projects are a place to explore new tools, make deliberate choices, and share the results with others.</p></div></section>
     <a class="personal-note" href="/#projects" data-reveal><h2>Still curious.<br /><span class="accent">Still building.</span></h2><div><p>Outside work, I turn everyday problems into open-source tools. Personal finance. The apps on my Mac. There’s always something worth making better.</p><span class="text-link">See my personal projects <span aria-hidden="true">↗</span></span></div></a>
   </div>
 </Page>
@@ -36,6 +46,13 @@ import Page from '../layouts/Page.astro';
   .about-statement > p { font-size: clamp(1.3rem, 2.3vw, 2rem); line-height: 1.55; letter-spacing: -.025em; }
   .about-statement > div { color: var(--text-body); }
   .about-statement .text-link { margin-top: 1.5rem; color: var(--text); }
+  .at-a-glance, .personal-story { display: grid; grid-template-columns: 1fr 1.5fr; gap: clamp(2rem, 7vw, 7rem); padding-block: var(--space-section); border-bottom: 1px solid var(--border); }
+  .at-a-glance h2, .personal-story h2 { font-size: clamp(2.5rem, 4.2vw, 4rem); }
+  .glance-list { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .glance-list span { display: block; color: var(--text-muted); font-size: .78rem; margin-bottom: .5rem; }
+  .glance-list p, .personal-story p { color: var(--text-body); max-width: 52ch; }
+  .glance-list a { color: var(--accent); text-decoration: underline; }
+  .personal-story p + p { margin-top: 1.5rem; }
   .career { padding-bottom: 4rem; }
   .career-entry { display: grid; grid-template-columns: 1fr 2.3fr; gap: 3rem; padding-block: 3rem; border-top: 1px solid var(--border); }
   .career-date { font-size: .85rem; }
@@ -53,6 +70,6 @@ import Page from '../layouts/Page.astro';
   .personal-note { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; padding: clamp(2rem, 5vw, 4rem); background: var(--surface-alt); border-radius: var(--radius); align-items: center; }
   .personal-note p { color: var(--text-body); max-width: 42ch; }
   .personal-note .text-link { margin-top: 1rem; }
-  @media (max-width: 768px) { .about-statement, .personal-note { grid-template-columns: 1fr; gap: 2rem; } .career-entry { grid-template-columns: 1fr; gap: 1.5rem; } .career-date { display: flex; gap: 1rem; align-items: baseline; } .role-details { gap: 2rem; } }
-  @media (max-width: 480px) { .role-details { grid-template-columns: 1fr; } }
+  @media (max-width: 768px) { .at-a-glance, .personal-story { grid-template-columns: 1fr; gap: 2rem; } .about-statement, .personal-note { grid-template-columns: 1fr; gap: 2rem; } .career-entry { grid-template-columns: 1fr; gap: 1.5rem; } .career-date { display: flex; gap: 1rem; align-items: baseline; } .role-details { gap: 2rem; } }
+  @media (max-width: 480px) { .glance-list { grid-template-columns: 1fr; } .role-details { grid-template-columns: 1fr; } }
 </style>

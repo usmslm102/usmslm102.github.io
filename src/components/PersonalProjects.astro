@@ -10,6 +10,7 @@ const projects = [
     category: 'Personal finance',
     headline: 'Your money. Your machine.',
     description: 'Turn Indian bank and credit card statements into a clear picture of your spending. Import, categorize, and explore your finances with your data stored locally in SQLite.',
+    context: 'Built around a practical need: understand spending without handing financial data to a hosted service.',
     features: ['Offline finance analysis', 'Bank statement imports', 'Go · React · SQLite'],
     image: localFinance,
     alt: 'LocalFinance transactions ledger with spending summaries, account filters, and categorized bank transactions.',
@@ -22,6 +23,7 @@ const projects = [
     category: 'macOS utility',
     headline: 'Know what’s on your Mac.',
     description: 'A native macOS utility that traces installed apps and CLI tools back to their source. See versions, disk usage, signing status, and duplicate installs in one place.',
+    context: 'A single view for a Mac setup that can otherwise be scattered across several installation sources.',
     features: ['Homebrew · App Store · Manual', 'Duplicate & signing checks', 'Swift · SwiftUI'],
     image: appOrigins,
     alt: 'AppOrigins showing installed Mac apps and CLI tools, their installation sources, signing status, sizes, and app details.',
@@ -34,6 +36,7 @@ const projects = [
     category: 'Developer tool',
     headline: 'Localhost, a little further.',
     description: 'Share a local service through an email-protected link from your Mac’s menu bar. Create temporary Cloudflare tunnels without an account, reuse recent shares, and stop sharing when you’re done.',
+    context: 'A focused menu bar workflow for sharing a local service while keeping access email-protected.',
     features: ['Email-protected links', 'No account needed', 'Swift · SwiftUI · AppKit'],
     image: tunnelbar,
     alt: 'TunnelBar macOS menu bar app showing a local port, email protection, a Create protected link button, and recent shares.',
@@ -57,6 +60,8 @@ const projects = [
       <div class="project-title"><h3 id={`project-${project.tone}`}>{project.name}</h3><a class="project-visit" href={project.site} target="_blank" rel="noreferrer" aria-label={`Visit ${project.name}`}><span class="arrow" aria-hidden="true">↗</span></a></div>
       <p class="project-headline">{project.headline}</p>
       <p class="project-description">{project.description}</p>
+      <p class="project-context">{project.context}</p>
+      {project.tone === 'finance' && <a class="text-link project-story" href="/work/#localfinance">Explore the case study <span aria-hidden="true">↗</span></a>}
       <div class="project-bottom"><span>{project.features[2]}</span><a href={project.repo} target="_blank" rel="noreferrer">View source ↗</a></div>
     </article>)}
   </div>
@@ -77,6 +82,8 @@ const projects = [
   .project-visit { display: grid; place-items: center; width: 44px; height: 44px; font-size: 1.75rem; color: var(--accent); }
   .project-headline { font-size: 1rem; margin-top: .5rem; }
   .project-description { margin-top: .75rem; font-size: .92rem; color: var(--text-body); max-width: 54ch; }
+  .project-context { margin-top: .75rem; font-size: .9rem; color: var(--text-body); max-width: 54ch; }
+  .project-story { margin-top: .6rem; }
   .project-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: .72rem; color: var(--text-muted); }
   .project-bottom a { min-height: 44px; display: inline-flex; align-items: center; color: var(--text); }
   .project-bottom a:hover { color: var(--accent); }
