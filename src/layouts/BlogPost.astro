@@ -52,5 +52,5 @@ const historical = (updatedDate || pubDate).getUTCFullYear() < 2023;
   .read-next-link .text-link { margin-top: auto; }
   .read-next-link:hover h3 { color: var(--accent); }
   @media (max-width: 1024px) { .article-layout { grid-template-columns: 200px minmax(0, 1fr); gap: 2rem; } }
-  @media (max-width: 768px) { .article-layout { grid-template-columns: 1fr; } .article-sidebar { position: static; max-height: none; } .edit-link { margin-top: .5rem; } .article-header { padding-top: 2rem; } .article-back { margin-bottom: 2rem; } .read-next-grid { grid-template-columns: 1fr; gap: 1rem; } }
+  @media (max-width: 768px) { .article-layout { grid-template-columns: minmax(0, 1fr); } .article-sidebar { position: static; max-height: none; } .edit-link { margin-top: .5rem; } .article-header { padding-top: 2rem; } .article-back { margin-bottom: 2rem; } .read-next-grid { grid-template-columns: 1fr; gap: 1rem; } }
 </style>
