@@ -1,14 +1,16 @@
 ---
+import { AppWindow, ArrowUpRight, Code2, Monitor, Server } from '@lucide/astro';
+const icons = [Monitor, Code2, Server, AppWindow];
 const parts = [
-  { id: 'hardware', key: '⌘', label: 'Hardware', title: 'Small footprint. Serious capability.', description: 'A Mac mini M4, an external display, and AirPods Pro. A quiet, focused foundation for deep work.', link: 'Explore hardware' },
-  { id: 'editor', key: '{ }', label: 'Editor', title: 'From a thought to a working thing.', description: 'VS Code for the big picture. Ghostty for the fast path. GitHub Copilot when an extra pair of hands helps.', link: 'Explore the editor & terminal' },
-  { id: 'stack', key: '>_', label: 'Stack', title: 'The right tool for the system.', description: 'TypeScript and Node.js for orchestration. C# and .NET for services. Docker and Azure to bring it all together.', link: 'Explore the engineering stack' },
-  { id: 'apps', key: '↗', label: 'Apps', title: 'Less friction. More headspace.', description: 'Raycast for the everyday shortcuts, Chrome for the web, and AI assistants for thinking things through.', link: 'Explore daily apps' },
+  { id: 'hardware', label: 'Hardware', title: 'Small footprint. Serious capability.', description: 'A Mac mini M4, an external display, and AirPods Pro. A quiet, focused foundation for deep work.', link: 'Explore hardware' },
+  { id: 'editor', label: 'Editor', title: 'From a thought to a working thing.', description: 'VS Code for the big picture. Ghostty for the fast path. GitHub Copilot when an extra pair of hands helps.', link: 'Explore the editor & terminal' },
+  { id: 'stack', label: 'Stack', title: 'The right tool for the system.', description: 'TypeScript and Node.js for orchestration. C# and .NET for services. Docker and Azure to bring it all together.', link: 'Explore the engineering stack' },
+  { id: 'apps', label: 'Apps', title: 'Less friction. More headspace.', description: 'Raycast for the everyday shortcuts, Chrome for the web, and AI assistants for thinking things through.', link: 'Explore daily apps' },
 ];
 ---
 <section class="desk" data-parts={JSON.stringify(parts)} aria-label="Interactive workspace" data-reveal>
-  <div class="desk-keys" role="group" aria-label="Explore the workspace">{parts.map((part, i) => <button class={`desk-key desk-key-${i}`} type="button" data-detail={part.id} aria-pressed={i === 0} aria-controls="desk-detail"><span class="key-symbol" aria-hidden="true">{part.key}</span><span>{part.label}</span></button>)}</div>
-  <div class="desk-detail" id="desk-detail" aria-live="polite"><span class="desk-label">{parts[0].label}</span><h2 class="detail-title">{parts[0].title}</h2><p class="detail-description">{parts[0].description}</p><a class="text-link detail-link" href="#hardware">{parts[0].link} <span aria-hidden="true">↗</span></a></div>
+  <div class="desk-keys" role="group" aria-label="Explore the workspace">{parts.map((part, i) => { const Icon = icons[i]; return <button class={`desk-key desk-key-${i}`} type="button" data-detail={part.id} aria-pressed={i === 0} aria-controls="desk-detail"><Icon class="desk-icon" aria-hidden="true" /><span>{part.label}</span></button>; })}</div>
+  <div class="desk-detail" id="desk-detail" aria-live="polite"><span class="desk-label">{parts[0].label}</span><h2 class="detail-title">{parts[0].title}</h2><p class="detail-description">{parts[0].description}</p><a class="text-link detail-link" href="#hardware">{parts[0].link} <ArrowUpRight class="icon arrow" aria-hidden="true" /></a></div>
 </section>
 <script>
   const parts: { id: string; label: string; title: string; description: string; link: string }[] = JSON.parse(document.querySelector<HTMLElement>('[data-parts]')?.dataset.parts || '[]');
@@ -31,7 +33,7 @@ const parts = [
   .desk { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; padding: clamp(2rem, 5vw, 5rem); background: var(--surface-alt); border-radius: var(--radius); }
   .desk-keys { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; padding: 1.5rem; perspective: 800px; transform: rotate(-8deg); }
   .desk-key { display: flex; flex-direction: column; align-items: start; justify-content: space-between; aspect-ratio: 1; border: 1px solid var(--border); background: var(--surface-card); border-radius: 18px; padding: 1.5rem; box-shadow: 0 8px 0 var(--surface-sunken), 0 16px 20px #111b3610; transform: rotateX(12deg); font-size: .75rem; transition: transform 300ms var(--ease-out), background 200ms, color 200ms; }
-  .desk-key .key-symbol { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1; }
+  .desk-key :global(.desk-icon) { width: clamp(2rem, 4vw, 3rem); height: clamp(2rem, 4vw, 3rem); stroke-width: 1.6; }
   .desk-key[aria-pressed='true'] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); box-shadow: 0 8px 0 var(--accent-hover), 0 16px 20px #111b3610; }
   .desk-key:hover { transform: rotateX(12deg) translateY(-6px); }
   .desk-key:active { transform: rotateX(12deg) translateY(4px); }

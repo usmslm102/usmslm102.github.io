@@ -1,4 +1,5 @@
 ---
+import { ArrowLeft, ArrowUpRight } from '@lucide/astro';
 import { Image } from 'astro:assets';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Page from './Page.astro';
@@ -24,11 +25,11 @@ const historical = (updatedDate || pubDate).getUTCFullYear() < 2023;
 ---
 <Page title={`${title} | Usama Ansari`} description={description}>
   <div class="container article-container">
-    <header class="article-header"><a href="/blog" class="text-link article-back" data-enter><span aria-hidden="true">←</span> Back to the notebook</a><div class="article-meta" data-enter style="--order: 1"><FormattedDate date={pubDate} /><span>By Usama Ansari</span>{updatedDate && <span>Updated <FormattedDate date={updatedDate} /></span>}</div><h1 class="post-h1" data-enter style="--order: 2">{title}</h1>{description.trim().toLowerCase() !== title.trim().toLowerCase() && <p class="post-lead" data-enter style="--order: 3">{description}</p>}</header>
+    <header class="article-header"><a href="/blog" class="text-link article-back" data-enter><ArrowLeft class="icon" aria-hidden="true" /> Back to the notebook</a><div class="article-meta" data-enter style="--order: 1"><FormattedDate date={pubDate} /><span>By Usama Ansari</span>{updatedDate && <span>Updated <FormattedDate date={updatedDate} /></span>}</div><h1 class="post-h1" data-enter style="--order: 2">{title}</h1>{description.trim().toLowerCase() !== title.trim().toLowerCase() && <p class="post-lead" data-enter style="--order: 3">{description}</p>}</header>
     {historical && <p class="article-age-note">This article was {updatedDate ? 'last updated' : 'published'} in {(updatedDate || pubDate).getUTCFullYear()}. Tools and interfaces may have changed since then.</p>}
     {heroImage && <Image src={heroImage} alt="" width={1200} height={600} class="post-hero" />}
-    <div class="article-layout"><aside class="article-sidebar"><ReadingTools />{editUrl && <a href={editUrl} target="_blank" rel="noreferrer" class="edit-link">Improve this article ↗</a>}</aside><article class="prose"><slot /></article></div>
-    <section class="read-next" aria-labelledby="read-next-title"><div class="section-head" data-reveal><h2 id="read-next-title">Keep exploring.</h2><a href="/blog" class="text-link">All writing <span aria-hidden="true">↗</span></a></div><div class="read-next-grid">{posts.map(post => <a href={`/blog/${post.id}/`} class="read-next-link" data-reveal><span class="read-next-date"><FormattedDate date={post.data.pubDate} /></span><h3>{post.data.title}</h3><span class="text-link">Read article <span aria-hidden="true">↗</span></span></a>)}</div></section>
+    <div class="article-layout"><aside class="article-sidebar"><ReadingTools />{editUrl && <a href={editUrl} target="_blank" rel="noreferrer" class="edit-link">Improve this article <ArrowUpRight class="icon arrow" aria-hidden="true" /></a>}</aside><article class="prose"><slot /></article></div>
+    <section class="read-next" aria-labelledby="read-next-title"><div class="section-head" data-reveal><h2 id="read-next-title">Keep exploring.</h2><a href="/blog" class="text-link">All writing <ArrowUpRight class="icon arrow" aria-hidden="true" /></a></div><div class="read-next-grid">{posts.map(post => <a href={`/blog/${post.id}/`} class="read-next-link" data-reveal><span class="read-next-date"><FormattedDate date={post.data.pubDate} /></span><h3>{post.data.title}</h3><span class="text-link">Read article <ArrowUpRight class="icon arrow" aria-hidden="true" /></span></a>)}</div></section>
   </div>
 </Page>
 <style>

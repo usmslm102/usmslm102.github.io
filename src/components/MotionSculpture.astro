@@ -1,9 +1,12 @@
+---
+import { Pause, Play } from '@lucide/astro';
+---
 <div class="sculpture" data-sculpture>
   <div class="sculpture-stage">
     <div class="sculpture-fallback" aria-hidden="true"></div>
     <canvas aria-label="A sculptural cobalt loop, made of interconnected moving ribbons" role="img"></canvas>
   </div>
-  <div class="sculpture-caption"><span>Independent parts. One system.</span><button type="button" data-motion-toggle aria-label="Pause motion" aria-pressed="false" hidden><span class="motion-glyph" aria-hidden="true"></span><span data-motion-label>Pause</span></button></div>
+  <div class="sculpture-caption"><span>Independent parts. One system.</span><button type="button" data-motion-toggle aria-label="Pause motion" aria-pressed="false" hidden><Pause class="icon motion-pause" aria-hidden="true" /><Play class="icon motion-play" aria-hidden="true" /><span data-motion-label>Pause</span></button></div>
 </div>
 <script>
   const sculpture = document.querySelector<HTMLElement>('[data-sculpture]');
@@ -135,6 +138,6 @@
   [data-motion-toggle] { display: inline-flex; align-items: center; gap: .5rem; background: transparent; border: 0; border-radius: 100px; padding: .5rem; min-height: 44px; font-size: .72rem; white-space: nowrap; }
   [data-motion-toggle]:hover { color: var(--accent); }
   [data-motion-toggle]:disabled { cursor: default; }
-  .motion-glyph { width: 8px; height: 10px; border-inline: 2px solid currentColor; }
-  .paused .motion-glyph { width: 9px; border: 0; background: currentColor; clip-path: polygon(0 0, 100% 50%, 0 100%); }
+  .motion-play, .paused .motion-pause { display: none; }
+  .paused .motion-play { display: inline-block; }
 </style>

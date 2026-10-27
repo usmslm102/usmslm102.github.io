@@ -1,4 +1,5 @@
 ---
+import { ArrowDown, ArrowUpRight } from '@lucide/astro';
 import { Image } from 'astro:assets';
 import Page from '../layouts/Page.astro';
 import localFinance from '../assets/projects/local-finance.png';
@@ -9,7 +10,7 @@ import localFinance from '../assets/projects/local-finance.png';
       <span class="eyebrow" data-enter>Selected work</span>
       <h1 class="page-title"><span class="line-reveal"><span>Behind the</span></span> <span class="line-reveal accent"><span style="--order: 1">build.</span></span></h1>
       <p class="page-lead" data-enter style="--order: 2">A closer look at the problems, choices, and context behind two very different systems.</p>
-      <nav class="case-nav" aria-label="Case studies" data-enter style="--order: 3"><a href="#agent-platform">01 / AI agent platform ↓</a><a href="#localfinance">02 / LocalFinance ↓</a></nav>
+      <nav class="case-nav" aria-label="Case studies" data-enter style="--order: 3"><a href="#agent-platform">01 / AI agent platform <ArrowDown class="icon" aria-hidden="true" /></a><a href="#localfinance">02 / LocalFinance <ArrowDown class="icon" aria-hidden="true" /></a></nav>
     </section>
 
     <article class="case-study" id="agent-platform" aria-labelledby="agent-title">
@@ -19,7 +20,7 @@ import localFinance from '../assets/projects/local-finance.png';
         <div class="case-label">The challenge</div><div><h3>Make the foundations reusable.</h3><p>Teams building agents need more than a model call: they need ways to connect tools, manage context, evaluate behavior, and operate within enterprise security requirements. The Azure Networking AI Agent Platform brings those capabilities together.</p></div>
         <div class="case-label">The approach</div><div><h3>Shared capabilities, room to evolve.</h3><p>I architected the platform with MCP integration, dynamic memory management, multi-model orchestration, automated evaluation, and enterprise security controls. Azure AI Foundry, Container Apps, and Cosmos DB support the platform, operational state, and vector memory.</p><div class="architecture" aria-label="Platform capabilities"><span>Agent experiences</span><span>Orchestration & evaluation</span><span>Tools, memory & security</span><span>Cloud infrastructure</span></div><p class="diagram-note">A simplified view of the platform’s capabilities.</p></div>
         <div class="case-label">The trade-off</div><div><h3>Consistency without losing flexibility.</h3><p>Shared infrastructure can reduce repeated work, but it also has to accommodate different agent needs. The platform combines common capabilities with multi-model orchestration and tool integration so teams can build on a consistent foundation.</p></div>
-        <div class="case-label">The outcome</div><div><h3>Built for real use.</h3><p>The platform supported 10+ production agents across 52 internal teams, with 16,000–20,000 monthly API requests and approximately 712 million tokens per month. These are a snapshot of the scale described in my experience, not live metrics.</p><a href="/about" class="text-link">More about my experience <span aria-hidden="true">↗</span></a></div>
+        <div class="case-label">The outcome</div><div><h3>Built for real use.</h3><p>The platform supported 10+ production agents across 52 internal teams, with 16,000–20,000 monthly API requests and approximately 712 million tokens per month. These are a snapshot of the scale described in my experience, not live metrics.</p><a href="/about" class="text-link">More about my experience <ArrowUpRight class="icon arrow" aria-hidden="true" /></a></div>
       </div>
     </article>
 
@@ -31,10 +32,10 @@ import localFinance from '../assets/projects/local-finance.png';
         <div class="case-label">The challenge</div><div><h3>Statements contain data, not clarity.</h3><p>Bank and credit card statements can be hard to bring together into a useful view of spending. LocalFinance turns imported statements into transactions that can be categorized and explored.</p></div>
         <div class="case-label">The approach</div><div><h3>Keep the data close.</h3><p>The app uses Go, React, and SQLite, with financial data stored locally. Its workflow is built around importing statements, categorizing transactions, and reviewing spending in one place.</p></div>
         <div class="case-label">The trade-off</div><div><h3>Local ownership comes with responsibility.</h3><p>Local storage gives people direct control over where their financial data lives. It also means that protecting and backing up the machine and its data remain important parts of the experience.</p></div>
-        <div class="case-label">Explore</div><div><h3>See it for yourself.</h3><p>LocalFinance is open source. Explore the product and code for the current feature set and implementation details.</p><div class="button-row"><a href="https://usamaansari.com/local-finance/" class="text-link">Visit LocalFinance <span aria-hidden="true">↗</span></a><a href="https://github.com/usmslm102/local-finance" class="text-link">View source <span aria-hidden="true">↗</span></a></div></div>
+        <div class="case-label">Explore</div><div><h3>See it for yourself.</h3><p>LocalFinance is open source. Explore the product and code for the current feature set and implementation details.</p><div class="button-row"><a href="https://usamaansari.com/local-finance/" class="text-link">Visit LocalFinance <ArrowUpRight class="icon arrow" aria-hidden="true" /></a><a href="https://github.com/usmslm102/local-finance" class="text-link">View source <ArrowUpRight class="icon arrow" aria-hidden="true" /></a></div></div>
       </div>
     </article>
-    <div class="work-outro" data-reveal><p>There’s more where that came from.</p><a href="/#projects" class="text-link">Explore all personal projects <span aria-hidden="true">↗</span></a></div>
+    <div class="work-outro" data-reveal><p>There’s more where that came from.</p><a href="/#projects" class="text-link">Explore all personal projects <ArrowUpRight class="icon arrow" aria-hidden="true" /></a></div>
   </div>
 </Page>
 <style>

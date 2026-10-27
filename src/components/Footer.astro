@@ -1,4 +1,5 @@
 ---
+import { ArrowUpRight } from '@lucide/astro';
 import { CONTACT_EMAIL } from '../consts';
 const isContact = Astro.url.pathname.replace(/\/$/, '') === '/contact';
 ---
@@ -6,15 +7,15 @@ const isContact = Astro.url.pathname.replace(/\/$/, '') === '/contact';
   <div class="container">
     {!isContact && <div class="footer-invitation" data-reveal>
       <p>Have something interesting in mind?</p>
-      <a href="/contact" class="footer-hello">Let’s talk.<span aria-hidden="true">↗</span></a>
+      <a href="/contact" class="footer-hello">Let’s talk.<ArrowUpRight class="icon arrow" aria-hidden="true" /></a>
     </div>}
     <div class="footer-bottom">
       <div class="footer-signature"><a href="/">Usama Ansari<span class="accent">*</span></a><p>Thoughtfully built. Always evolving.</p></div>
       <div class="footer-socials">
-        <a href="https://github.com/usmslm102" target="_blank" rel="noreferrer">GitHub ↗</a>
-        <a href="https://www.linkedin.com/in/usamaansari/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-        <a href="https://x.com/usmslm102" target="_blank" rel="noreferrer">X ↗</a>
-        <a href="/rss.xml">RSS ↗</a>
+        <a href="https://github.com/usmslm102" target="_blank" rel="noreferrer">GitHub <ArrowUpRight class="icon arrow" aria-hidden="true" /></a>
+        <a href="https://www.linkedin.com/in/usamaansari/" target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight class="icon arrow" aria-hidden="true" /></a>
+        <a href="https://x.com/usmslm102" target="_blank" rel="noreferrer">X <ArrowUpRight class="icon arrow" aria-hidden="true" /></a>
+        <a href="/rss.xml">RSS <ArrowUpRight class="icon arrow" aria-hidden="true" /></a>
       </div>
       <div class="footer-meta"><span>© {new Date().getFullYear()}</span><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div>
     </div>
@@ -25,8 +26,8 @@ const isContact = Astro.url.pathname.replace(/\/$/, '') === '/contact';
   .footer-invitation { padding-block: clamp(3rem, 7vw, 6rem); }
   .footer-invitation p { color: var(--text-body); font-size: 1rem; }
   .footer-hello { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-display); font-size: clamp(4.5rem, 13vw, 12rem); font-weight: 600; letter-spacing: -.065em; line-height: 1.2; }
-  .footer-hello span { color: var(--accent); font-weight: 400; transition: transform 500ms var(--ease-out); }
-  .footer-hello:hover span { transform: translate(8px, -8px); }
+  .footer-hello :global(.icon) { width: .55em; height: .55em; color: var(--accent); transition: transform 500ms var(--ease-out); }
+  .footer-hello:hover :global(.icon) { transform: translate(8px, -8px); }
   .footer-bottom { border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2rem; padding-block: 2.5rem; font-size: .78rem; }
   .footer-signature > a { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; letter-spacing: -.03em; }
   .footer-signature .accent { margin-left: .2rem; font-size: .65rem; vertical-align: top; }

@@ -1,8 +1,11 @@
+---
+import { Copy } from '@lucide/astro';
+---
 <div class="reading-progress" aria-hidden="true"></div>
 <div class="reading-tools" hidden>
   <span class="reading-time"></span>
   <details class="toc-accordion"><summary>On this page</summary><nav class="toc-nav" aria-label="Article sections"></nav></details>
-  <button type="button" class="copy-link">Copy article link ↗</button><span class="copy-status status" role="status" aria-live="polite"></span>
+  <button type="button" class="copy-link">Copy article link <Copy class="icon" aria-hidden="true" /></button><span class="copy-status status" role="status" aria-live="polite"></span>
 </div>
 <script>
   import { playSuccessSound } from '../scripts/sound';
@@ -58,7 +61,7 @@
   .toc-nav :global(a) { padding-block: .5rem; font-size: .78rem; color: var(--text-muted); line-height: 1.5; }
   .toc-nav :global(a.toc-nested) { padding-left: .75rem; font-size: .72rem; }
   .toc-nav :global(a:hover), .toc-nav :global(a[aria-current]) { color: var(--accent); }
-  .copy-link { display: block; background: transparent; border: 1px solid var(--border); border-radius: 100px; padding: .65rem 1rem; min-height: 44px; font-size: .75rem; margin-block: 1.5rem .5rem; }
+  .copy-link { display: inline-flex; align-items: center; gap: .5rem; background: transparent; border: 1px solid var(--border); border-radius: 100px; padding: .65rem 1rem; min-height: 44px; font-size: .75rem; margin-block: 1.5rem .5rem; }
   .copy-link:hover { border-color: var(--accent); color: var(--accent); }
   .copy-status { display: block; font-size: .7rem; }
 </style>

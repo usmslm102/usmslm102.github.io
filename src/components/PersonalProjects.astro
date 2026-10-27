@@ -1,4 +1,5 @@
 ---
+import { ArrowUpRight } from '@lucide/astro';
 import { Image } from 'astro:assets';
 import localFinance from '../assets/projects/local-finance.png';
 import appOrigins from '../assets/projects/app-origins.png';
@@ -49,7 +50,7 @@ const projects = [
 <section class="projects-section section-space" id="projects" aria-labelledby="projects-title">
   <div class="section-head" data-reveal>
     <div><span class="eyebrow">Built out of curiosity</span><h2 id="projects-title">Small ideas.<br />Useful things.</h2></div>
-    <a href="https://github.com/usmslm102" target="_blank" rel="noreferrer" class="text-link">More on GitHub <span aria-hidden="true">↗</span></a>
+    <a href="https://github.com/usmslm102" target="_blank" rel="noreferrer" class="text-link">More on GitHub <ArrowUpRight class="icon arrow" aria-hidden="true" /></a>
   </div>
   <div class="project-list">
     {projects.map((project) => <article class={`project project-${project.tone}`} data-reveal aria-labelledby={`project-${project.tone}`}>
@@ -57,12 +58,12 @@ const projects = [
         <Image src={project.image} alt={project.alt} widths={[400, 640, 800, 1200]} sizes="(max-width: 640px) calc(100vw - 88px), (max-width: 768px) calc(100vw - 112px), (max-width: 1400px) 40vw, 620px" format="webp" quality={85} loading="lazy" />
       </a>
       <div class="project-meta"><span>{project.category}</span><span>Open source</span></div>
-      <div class="project-title"><h3 id={`project-${project.tone}`}>{project.name}</h3><a class="project-visit" href={project.site} target="_blank" rel="noreferrer" aria-label={`Visit ${project.name}`}><span class="arrow" aria-hidden="true">↗</span></a></div>
+      <div class="project-title"><h3 id={`project-${project.tone}`}>{project.name}</h3><a class="project-visit" href={project.site} target="_blank" rel="noreferrer" aria-label={`Visit ${project.name}`}><ArrowUpRight class="icon arrow" aria-hidden="true" /></a></div>
       <p class="project-headline">{project.headline}</p>
       <p class="project-description">{project.description}</p>
       <p class="project-context">{project.context}</p>
-      {project.tone === 'finance' && <a class="text-link project-story" href="/work/#localfinance">Explore the case study <span aria-hidden="true">↗</span></a>}
-      <div class="project-bottom"><span>{project.features[2]}</span><a href={project.repo} target="_blank" rel="noreferrer">View source ↗</a></div>
+      {project.tone === 'finance' && <a class="text-link project-story" href="/work/#localfinance">Explore the case study <ArrowUpRight class="icon arrow" aria-hidden="true" /></a>}
+      <div class="project-bottom"><span>{project.features[2]}</span><a href={project.repo} target="_blank" rel="noreferrer">View source <ArrowUpRight class="icon arrow" aria-hidden="true" /></a></div>
     </article>)}
   </div>
 </section>

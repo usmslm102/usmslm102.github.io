@@ -1,4 +1,5 @@
 ---
+import { ArrowUpRight, X } from '@lucide/astro';
 import { getCollection } from 'astro:content';
 import Page from '../../layouts/Page.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
@@ -13,7 +14,7 @@ const categories: Record<string, string> = {
   <div class="container">
     <section class="page-intro"><span class="eyebrow" data-enter>The notebook</span><h1 class="page-title"><span class="line-reveal"><span>Learn. Build.</span></span> <span class="line-reveal accent"><span style="--order: 1">Write it down.</span></span></h1><p class="page-lead" data-enter style="--order: 2">Notes on the tools, patterns, and lessons that make us better engineers.</p></section>
     <section class="blog-controls" aria-label="Search and filter articles" data-enter style="--order: 3">
-      <div class="search-wrap"><label for="post-search" class="sr-only">Search articles</label><input id="post-search" type="search" placeholder="Find something worth reading…" autocomplete="off" /><button id="clear-search-btn" type="button" aria-label="Clear search" hidden>×</button><span class="search-shortcut" aria-hidden="true">/</span></div>
+      <div class="search-wrap"><label for="post-search" class="sr-only">Search articles</label><input id="post-search" type="search" placeholder="Find something worth reading…" autocomplete="off" /><button id="clear-search-btn" type="button" aria-label="Clear search" hidden><X class="icon" aria-hidden="true" /></button><span class="search-shortcut" aria-hidden="true">/</span></div>
       <div class="filter-group" role="group" aria-label="Filter by topic">{[['all', 'All topics'], ['docker', 'Docker'], ['azure', 'Azure'], ['tooling', 'VS Code'], ['git', 'Git'], ['local-first', 'Local-first'], ['ai platforms', 'AI platforms']].map(([topic, label]) => <button class="filter-button topic-tag" type="button" data-topic={topic} aria-pressed={topic === 'all'}>{label}</button>)}</div>
     </section>
     <p id="search-count" class="search-count" role="status">{posts.length} articles</p>
@@ -24,10 +25,10 @@ const categories: Record<string, string> = {
       return <article class="post-item" data-post data-category={category.toLowerCase()} data-search={`${post.data.title} ${post.data.description} ${category} ${post.body}`.toLowerCase()} data-reveal>
         <div class="post-number">0{i + 1}</div>
         <div class="post-copy"><div class="post-meta"><span class="post-category">{category}</span><FormattedDate date={post.data.pubDate} /><span>{readTime} min read</span></div><h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>{post.data.description !== post.data.title && <p>{post.data.description}</p>}</div>
-        <a class="post-open" href={`/blog/${post.id}/`} aria-label={`Read ${post.data.title}`}><span class="arrow" aria-hidden="true">↗</span></a>
+        <a class="post-open" href={`/blog/${post.id}/`} aria-label={`Read ${post.data.title}`}><ArrowUpRight class="icon arrow" aria-hidden="true" /></a>
       </article>;
     })}</section>
-    <div class="rss-note" data-reveal><p>A good feed never needs an algorithm.</p><a href="/rss.xml" class="text-link">Subscribe via RSS <span aria-hidden="true">↗</span></a></div>
+    <div class="rss-note" data-reveal><p>A good feed never needs an algorithm.</p><a href="/rss.xml" class="text-link">Subscribe via RSS <ArrowUpRight class="icon arrow" aria-hidden="true" /></a></div>
   </div>
 </Page>
 <script>

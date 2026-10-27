@@ -36,6 +36,7 @@ button { color: inherit; touch-action: manipulation; }
 button, a, input, summary { -webkit-tap-highlight-color: transparent; }
 img, video { max-width: 100%; height: auto; display: block; }
 svg { flex-shrink: 0; }
+.icon { display: inline-block; width: 1em; height: 1em; vertical-align: -.125em; stroke-width: 1.8; }
 [hidden] { display: none !important; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 main:focus { outline: none; }
@@ -47,9 +48,9 @@ main:focus { outline: none; }
 .eyebrow { display: block; color: var(--text-muted); font-size: .76rem; font-weight: 500; letter-spacing: .11em; text-transform: uppercase; margin-bottom: 1.5rem; }
 .accent { color: var(--accent); }
 .text-link { display: inline-flex; align-items: center; gap: .8rem; min-height: 44px; font-size: .9rem; font-weight: 500; }
-.text-link span, .arrow { display: inline-block; transition: transform 300ms var(--ease-out); }
+.text-link .icon, .arrow { display: inline-block; transition: transform 300ms var(--ease-out); }
 .text-link:hover { color: var(--accent); }
-.text-link:hover span, a:hover .arrow { transform: translate(3px, -3px); }
+.text-link:hover .icon, a:hover .arrow { transform: translate(3px, -3px); }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 1.6rem; min-height: 52px; padding: .8rem 1.5rem; border: 1px solid var(--accent); border-radius: 100px; background: var(--accent); color: var(--on-accent); font-size: .9rem; font-weight: 500; line-height: 1.3; white-space: nowrap; transition: transform 220ms var(--ease-out), background 220ms, border-color 220ms; }
 .button:hover { background: var(--accent-hover); border-color: var(--accent-hover); transform: translateY(-3px); }
 .button:active { transform: scale(.98); }
